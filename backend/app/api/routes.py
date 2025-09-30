@@ -1,7 +1,17 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from app.services.ingest_service import ingest_events_from_file
-from app.services import openrouteservice_client, qdrant_client
+from app.services.openroute_service import geocode_address, get_route
+from app.services.qdrant_service import (
+    build_geo_filter,
+    build_date_intersection_filter,
+    build_final_filter,
+    query_events_hybrid,
+)
 from app.models import schemas
+from app.models.schemas import SentenceInput
+from app.services.extraction_service import extract_payload
+from pydantic import ValidationError
+
 from shapely.geometry import LineString, Point
 import numpy as np
 import geopandas as gpd
@@ -11,11 +21,6 @@ from fastembed import TextEmbedding, SparseTextEmbedding
 import os
 import shutil
 
-# Import the extraction function and Pydantic models
-from app.services.extraction_service import extract_payload
-from app.models.schemas import SentenceInput
-from pydantic import ValidationError
-from fastapi import HTTPException
 
 router = APIRouter()
 
@@ -27,11 +32,11 @@ sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME)
 @router.post("/create_map")
 async def create_event_map(request: schemas.RouteRequest):
     try:
-        origin_point = openrouteservice_client.geocode_address(request.origin_address)
-        destination_point = openrouteservice_client.geocode_address(request.destination_address)
+        origin_point = geocode_address(request.origin_address)
+        destination_point = geocode_address(request.destination_address)
         coords = [origin_point, destination_point]
 
-        routes = openrouteservice_client.get_route(coords, profile=request.profile_choice)
+        routes = get_route(coords, profile=request.profile_choice)
         route_geometry = routes['features'][0]['geometry']
         route_coords = route_geometry['coordinates']
         if len(route_coords) < 2:
@@ -41,52 +46,30 @@ async def create_event_map(request: schemas.RouteRequest):
         route_gdf = gpd.GeoDataFrame([{'geometry': route_line}], crs='EPSG:4326')
 
         route_gdf_3857 = route_gdf.to_crs(epsg=3857)
-        buffer_polygon = route_gdf_3857.buffer(request.buffer_distance * 1000).to_crs(epsg=4326).iloc[0]
+        # Ensure buffer_distance is in kilometers; convert to meters for buffering
+        if request.buffer_distance <= 0:
+            raise HTTPException(status_code=400, detail="Buffer distance must be a positive number representing kilometers.")
+        buffer_distance_meters = request.buffer_distance * 1000  # Convert km to meters
+        buffer_polygon = route_gdf_3857.buffer(buffer_distance_meters).to_crs(epsg=4326).iloc[0]
         polygon_coords = np.array(buffer_polygon.exterior.coords).tolist()
         polygon_coords_qdrant = [{"lon": lon, "lat": lat} for lon, lat in polygon_coords]
 
-        geo_filter = qmodels.Filter(
-            must=[
-                qmodels.FieldCondition(
-                    key="location",
-                    geo_polygon=qmodels.GeoPolygon(
-                        exterior=qmodels.GeoLineString(points=polygon_coords_qdrant)
-                    )
-                )
-            ]
-        )
+        geo_filter = build_geo_filter(polygon_coords_qdrant)
+        date_filter = build_date_intersection_filter(request.startinputdate, request.endinputdate)
+        final_filter = build_final_filter(geo_filter, date_filter)
 
-        date_intersection_filter = qmodels.Filter(
-            must=[
-                qmodels.FieldCondition(
-                    key="start_date",
-                    range=qmodels.DatetimeRange(lte=request.endinputdate)
-                ),
-                qmodels.FieldCondition(
-                    key="end_date",
-                    range=qmodels.DatetimeRange(gte=request.startinputdate)
-                )
-            ]
-        )
-
-        final_filter = qmodels.Filter(must=geo_filter.must + date_intersection_filter.must)
-
-        score_treshold = 0.0
-        if request.query_text.strip() == "":
-            score_treshold = 0.0  # No text query, so no score threshold
-        else:
-            score_treshold = 0.34  # Adjust based on desired relevance I found 0.34 to be a good balance
+        score_threshold = 0.0 if request.query_text.strip() == "" else 0.34  # 0.34 is a balanced threshold, 0.0 if no text query
 
         query_dense_vector = list(dense_embedding_model.passage_embed([request.query_text]))[0].tolist()
         query_sparse_embedding = list(sparse_embedding_model.passage_embed([request.query_text]))[0]
 
-        payloads = qdrant_client.query_events_hybrid(
+        payloads = query_events_hybrid(
             dense_vector=query_dense_vector,
             sparse_vector=query_sparse_embedding,
             query_filter=final_filter,
             collection_name=COLLECTION_NAME,
             limit=request.numevents,
-            score_threshold=score_treshold  # Optional: filter out low-score results
+            score_threshold=score_threshold  # Optional: filter out low-score results
         )
 
         if not payloads:
@@ -117,13 +100,13 @@ async def create_event_map(request: schemas.RouteRequest):
 
         return response
 
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
+    except HTTPException as e:
+        # Re-raise HTTPExceptions (client errors)
+        raise e
 
 @router.post("/ingestevents")
 async def ingest_events_endpoint(file: UploadFile = File(...)):
-    if not file.filename.endswith(".json"):
+    if not file.filename.lower().endswith(".json"):
         raise HTTPException(status_code=400, detail="Only .json files are accepted")
 
     save_dir = "/tmp"
@@ -144,7 +127,7 @@ async def ingest_events_endpoint(file: UploadFile = File(...)):
         "inserted": result["inserted"],
         "updated": result["updated"],
         "skipped_unchanged": result["skipped_unchanged"],
-        "collection_info": str(result["collection_info"]),
+        "collection_info": result["collection_info"],
     }
 
 
@@ -154,11 +137,14 @@ async def sentence_to_payload(data: SentenceInput):
     try:
         output = extract_payload(sentence)
         if output:
-            return output.model_dump()
-        else:
-            raise HTTPException(status_code=400, detail="Failed to extract valid payload or validation error")
+            # Ensure output is returned as a dictionary
+            if hasattr(output, "model_dump"):
+                return output.model_dump()
+            elif isinstance(output, dict):
+                return output
+
     except ValidationError as e:
         raise HTTPException(status_code=422, detail=e.errors())
     except Exception as e:
-        # Other unexpected errors
+        # Catch any other unexpected exceptions such as runtime errors, type errors, or unforeseen issues
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")

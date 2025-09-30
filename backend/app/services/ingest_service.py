@@ -11,24 +11,18 @@ from dotenv import load_dotenv
 from tqdm import tqdm
 from fastembed import TextEmbedding, SparseTextEmbedding
 from qdrant_client import QdrantClient, models
-from app.core.config import QDRANT_SERVER, QDRANT_API_KEY, DENSE_MODEL_NAME, SPARSE_MODEL_NAME
+from app.core.config import QDRANT_SERVER, QDRANT_API_KEY, DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME
 
-
-# Initialize logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-
 
 if not QDRANT_SERVER or not QDRANT_API_KEY:
     raise EnvironmentError("QDRANT_SERVER or QDRANT_API_KEY not defined in .env file")
 
-# Initialize embedding models once
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME)
 client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY, timeout=200000)
 
-COLLECTION_NAME = "veneto_events"
 DENSE_VECTOR_NAME = "dense_vector"
 SPARSE_VECTOR_NAME = "sparse_vector"
 
@@ -63,7 +57,6 @@ def calculate_hash(text: str) -> str:
 
 
 def ensure_collection_exists():
-    # Create collection if it does not exist
     example_text = "Test for embedding dimension calculation."
     dense_emb = list(dense_embedding_model.passage_embed([example_text]))[0]
     dense_dim = len(dense_emb)
@@ -78,7 +71,6 @@ def ensure_collection_exists():
                 SPARSE_VECTOR_NAME: models.SparseVectorParams(),
             }
         )
-    # Create payload indexes if they don't exist (safe to call repeatedly)
     payload_indices = {
         "id": "keyword",
         "location": "geo",
@@ -105,8 +97,24 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
 
     semaphore = asyncio.Semaphore(5)
 
+    def is_valid_lat_lon(lat, lon):
+        try:
+            lat = float(lat)
+            lon = float(lon)
+        except (TypeError, ValueError):
+            return False
+        return -90 <= lat <= 90 and -180 <= lon <= 180
+
     async def geocode_event(event):
-        venue = event.get("location", {}).get("venue", "").strip()
+        loc = event.get("location", {})
+        lat = loc.get("latitude")
+        lon = loc.get("longitude")
+        logger.info(f"Checking coordinates for event ID {event.get('id')} lat={lat}, lon={lon}")
+        if lat is not None and lon is not None and is_valid_lat_lon(lat, lon):
+            # Skip geocoding since valid coordinates exist
+            logger.info(f"Skipping geocoding for event ID {event.get('id')}")
+            return
+        venue = loc.get("venue", "").strip()
         city = event.get("city", "").strip()
         if venue and city:
             async with semaphore:
@@ -137,7 +145,7 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
     skipped_unchanged = 0
 
     for start in tqdm(range(0, len(events), BATCH_SIZE)):
-        batch = events[start : start + BATCH_SIZE]
+        batch = events[start: start + BATCH_SIZE]
         texts = [event.get("description", "") for event in batch]
         dense_embeddings = list(dense_embedding_model.passage_embed(texts))
         sparse_embeddings = list(sparse_embedding_model.passage_embed(texts))
@@ -182,7 +190,6 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
             location_payload = {**loc, **loc_geo}  # Merges original location dict with lat/lon keys
 
             payload = {**event, "location": location_payload, "hash": chunk_hash}
-
 
             points.append(
                 models.PointStruct(

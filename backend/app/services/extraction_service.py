@@ -1,12 +1,9 @@
-import json
+#import json
 from typing import Optional, Literal
 from pydantic import BaseModel, ValidationError, model_validator, Field, field_validator
 from datetime import datetime, timedelta
 from crewai import Agent, Task, Crew, Process, LLM
 from app.core.config import OPENAI_API_KEY, OPEN_AI_BASE_URL, OPENAI_MODEL
-
-
-
 
 
 customllm = LLM(
