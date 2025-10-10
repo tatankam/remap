@@ -13,3 +13,4 @@ qdrant_client
 python-multipart
 orjson
 crewai==0.175.0
+beautifulsoup4
