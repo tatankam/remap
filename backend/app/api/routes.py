@@ -7,9 +7,10 @@ from app.services.qdrant_service import (
     build_final_filter,
     query_events_hybrid,
 )
+from app.services.extraction_service import extract_payload
+from app.services import scrape  # new import for the scraper service
 from app.models import schemas
 from app.models.schemas import SentenceInput
-from app.services.extraction_service import extract_payload
 from pydantic import ValidationError
 
 from shapely.geometry import LineString, Point
@@ -18,9 +19,9 @@ import geopandas as gpd
 from qdrant_client.http import models as qmodels
 from app.core.config import DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME
 from fastembed import TextEmbedding, SparseTextEmbedding
-import os
+import os, json
 import shutil
-
+import httpx
 
 router = APIRouter()
 
@@ -87,7 +88,6 @@ async def create_event_map(request: schemas.RouteRequest):
             event['lat'] = loc.get('lat')
             event['lon'] = loc.get('lon')
 
-
         response = {
             "route_coords": route_coords,
             "buffer_polygon": polygon_coords,
@@ -96,13 +96,12 @@ async def create_event_map(request: schemas.RouteRequest):
             "events": sorted_events
         }
 
-
-
         return response
 
     except HTTPException as e:
         # Re-raise HTTPExceptions (client errors)
         raise e
+
 
 @router.post("/ingestevents")
 async def ingest_events_endpoint(file: UploadFile = File(...)):
@@ -148,3 +147,23 @@ async def sentence_to_payload(data: SentenceInput):
     except Exception as e:
         # Catch any other unexpected exceptions such as runtime errors, type errors, or unforeseen issues
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
+
+
+
+
+@router.get("/scrape_unpli_events")
+async def scrape_unpli_events(page_no: int = 1, page_size: int = 10, session_id: str = "G1758362087062"):
+    async with httpx.AsyncClient() as session:
+        events = await scrape.fetch_unpli_events(session, page_no=page_no, page_size=page_size, session_id=session_id)
+        if not events:
+            raise HTTPException(status_code=404, detail="No events found or error fetching data.")
+        transformed_events = await scrape.transform_events_for_json(events, session_id=session_id)
+
+        # Save JSON locally (optional)
+        save_dir = "./dataset"
+        os.makedirs(save_dir, exist_ok=True)
+        save_path = os.path.join(save_dir, f"veneto_unpliveneto_events_{page_no}_{page_size}.json")
+        with open(save_path, "w", encoding="utf-8") as f:
+            json.dump({"events": transformed_events}, f, ensure_ascii=False, indent=4)
+
+        return {"events": transformed_events, "saved_path": save_path}

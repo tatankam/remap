@@ -6,6 +6,7 @@ import logging
 from uuid import uuid4
 from typing import Optional, Dict, Any
 
+import unicodedata
 import httpx
 from dotenv import load_dotenv
 from tqdm import tqdm
@@ -13,15 +14,27 @@ from fastembed import TextEmbedding, SparseTextEmbedding
 from qdrant_client import QdrantClient, models
 from app.core.config import QDRANT_SERVER, QDRANT_API_KEY, DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME
 
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+def normalize_text(text):
+    if not text:
+        return ""
+    text = text.strip()
+    text = unicodedata.normalize("NFKC", text)
+    return text
+
 
 if not QDRANT_SERVER or not QDRANT_API_KEY:
     raise EnvironmentError("QDRANT_SERVER or QDRANT_API_KEY not defined in .env file")
 
+
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME)
 client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY, timeout=200000)
+
 
 DENSE_VECTOR_NAME = "dense_vector"
 SPARSE_VECTOR_NAME = "sparse_vector"
@@ -48,7 +61,7 @@ async def async_geocode_structured(
                     return {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])}
             except (httpx.HTTPError, ValueError) as e:
                 logger.warning(f"Geocoding error with params {params}: {e}")
-            await asyncio.sleep(1)  # Respect Nominatim usage policy
+            await asyncio.sleep(1)
     return None
 
 
@@ -94,7 +107,6 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
         events_data = json.load(f)
 
     events = events_data.get("events", [])
-
     semaphore = asyncio.Semaphore(5)
 
     def is_valid_lat_lon(lat, lon):
@@ -111,7 +123,6 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
         lon = loc.get("longitude")
         logger.info(f"Checking coordinates for event ID {event.get('id')} lat={lat}, lon={lon}")
         if lat is not None and lon is not None and is_valid_lat_lon(lat, lon):
-            # Skip geocoding since valid coordinates exist
             logger.info(f"Skipping geocoding for event ID {event.get('id')}")
             return
         venue = loc.get("venue", "").strip()
@@ -146,7 +157,7 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
 
     for start in tqdm(range(0, len(events), BATCH_SIZE)):
         batch = events[start: start + BATCH_SIZE]
-        texts = [event.get("description", "") for event in batch]
+        texts = [normalize_text(event.get("description", "")) for event in batch]
         dense_embeddings = list(dense_embedding_model.passage_embed(texts))
         sparse_embeddings = list(sparse_embedding_model.passage_embed(texts))
         points = []
@@ -169,31 +180,37 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
 
             if existing_points:
                 existing_point = existing_points[0]
-                existing_hash = existing_point.payload.get("hash", "")
+                existing_hash = existing_point.payload.get("hash", None)
+                logger.debug(f"Event ID: {event_id} - Existing hash: {existing_hash} New hash: {chunk_hash}")
+
                 if existing_hash == chunk_hash:
                     skipped_unchanged += 1
                     continue
                 else:
-                    client.delete(
-                        collection_name=COLLECTION_NAME,
-                        points_selector=models.PointIdsList(points=[existing_point.id]),
-                    )
+                    logger.info(f"Updating event ID: {event_id} due to hash mismatch")
+                    logger.debug(f"Existing hash: {existing_hash}")
+                    logger.debug(f"New hash: {chunk_hash}")
+                    logger.debug(f"Existing description sample: {existing_point.payload.get('description', '')[:50]}")
+                    logger.debug(f"New description sample: {text[:50]}")
+
+                    point_id_to_use = existing_point.id
                     updated += 1
             else:
                 inserted += 1
+                point_id_to_use = str(uuid4())
 
             loc = event.get("location", {})
             loc_geo = {}
             if "latitude" in loc and "longitude" in loc:
                 loc_geo = {"lat": loc["latitude"], "lon": loc["longitude"]}
 
-            location_payload = {**loc, **loc_geo}  # Merges original location dict with lat/lon keys
+            location_payload = {**loc, **loc_geo}
 
             payload = {**event, "location": location_payload, "hash": chunk_hash}
 
             points.append(
                 models.PointStruct(
-                    id=str(uuid4()),
+                    id=point_id_to_use,
                     vector={
                         DENSE_VECTOR_NAME: dense_embeddings[i].tolist(),
                         SPARSE_VECTOR_NAME: models.SparseVector(

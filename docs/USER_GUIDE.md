@@ -150,6 +150,13 @@ All event datasets are maintained in the `dataset/` directory and initially prep
 
 These JSON files can then be uploaded to the system via the backend `/ingestevents` API endpoint. Upon upload, events are processed and indexed in the Qdrant vector database, enabling efficient and fast retrieval during route-based searches and queries.
 
+UPDATE October 2025
+New service scraping scrape.py
+It scrapes veneto sagre and it creates a \backend\dataset\veneto_unpliveneto_events_1_500.json
+See script ingesting.sh
+
+
+
 ---
 
 ## 🛠️ Troubleshooting

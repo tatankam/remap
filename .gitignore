@@ -17,14 +17,14 @@ __pycache__/
 # FastAPI app cache and compiled files
 backend/__pycache__/
 
-
+ingesting.sh
 
 # Jupyter and notebook checkpoints
 .ipynb_checkpoints/
 
 # datasets file too big
-dataset/veneto_events.json
-dataset/veneto_events_geocoded_structured.json
+dataset/*
+
 
 # docs
 docs/old/
