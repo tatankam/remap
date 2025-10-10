@@ -24,7 +24,7 @@ ingesting.sh
 
 # datasets file too big
 dataset/*
-backend/dataset/*
+backend/app/dataset/*
 
 
 # docs
