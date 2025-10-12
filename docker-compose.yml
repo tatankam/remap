@@ -4,6 +4,8 @@ services:
       context: ./backend
     env_file:
       - .env
+    volumes:
+      - ./dataset:/dataset
     ports:
       - "8000:8000"
     container_name: backend

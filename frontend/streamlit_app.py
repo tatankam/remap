@@ -78,7 +78,7 @@ def main():
             destination_address = st.text_input("Destination Address", value="Verona")
             buffer_distance = st.number_input("Buffer Distance (km)", min_value=0, value=5)
 
-            query_text = st.text_input("Search Query Text", value="Sport")
+            query_text = st.text_input("Search Query Text", value="")
             numevents = st.number_input("Number of Events to Retrieve", min_value=1, value=10)
 
             profile_choice_user = st.selectbox(
@@ -91,7 +91,7 @@ def main():
             start_col1, start_col2 = st.columns(2)
             with start_col1:
                 # start_date = st.date_input("Start Date", value=datetime.today())
-                start_date = st.date_input("Start Date", value=date(2025, 9, 1))
+                start_date = st.date_input("Start Date", value=datetime.today())
 
             with start_col2:
                 if 'start_time' not in st.session_state:
@@ -220,6 +220,7 @@ def display_map_and_events(data, origin_address, destination_address):
             "description": event.get("description", ""),
             "start_date": event.get("start_date", "N/A"),
             "end_date": event.get("end_date", "N/A"),
+            "url": event.get("url", "N/A"),
             "coordinates": [lon, lat]
         })
 
@@ -363,7 +364,8 @@ def display_map_and_events(data, origin_address, destination_address):
                     description: marker.description,
                     address: marker.address,
                     start_date: marker.start_date,
-                    end_date: marker.end_date
+                    end_date: marker.end_date,
+                    url: marker.url
                 }});
                 feat.setStyle(iconStyleEvent);
                 return feat;
@@ -421,6 +423,7 @@ def display_map_and_events(data, origin_address, destination_address):
                         container.innerHTML = `<b>${{props.name}}</b><br>
                                                <i>${{props.address}}</i><br>
                                                ${{props.description}}<br>
+                                                <a href="${{props.url}}" target="_blank">link</a><br>
                                                <small>Start: ${{props.start_date}} | End: ${{props.end_date}}</small>`;
                     }}
 
@@ -490,6 +493,8 @@ def display_events(data):
                         st.write(event.get('address', ''))
                         st.write(event.get('description', ''))
                         st.write(f"Start: {event.get('start_date', 'N/A')}  |  End: {event.get('end_date', 'N/A')}")
+                        st.markdown(f"[link]({event.get('url', '')})", unsafe_allow_html=True)
+
         else:
             st.info("No events found for this route in the specified date range.")
 
