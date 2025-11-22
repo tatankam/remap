@@ -221,6 +221,7 @@ def display_map_and_events(data, origin_address, destination_address):
             "start_date": event.get("start_date", "N/A"),
             "end_date": event.get("end_date", "N/A"),
             "url": event.get("url", "N/A"),
+            "credits": event.get("credits", ""),
             "coordinates": [lon, lat]
         })
 
@@ -423,6 +424,7 @@ def display_map_and_events(data, origin_address, destination_address):
                         container.innerHTML = `<b>${{props.name}}</b><br>
                                                <i>${{props.address}}</i><br>
                                                ${{props.description}}<br>
+                                                <small>${{props.credits}}</small><br>
                                                 <a href="${{props.url}}" target="_blank">link</a><br>
                                                <small>Start: ${{props.start_date}} | End: ${{props.end_date}}</small>`;
                     }}
@@ -493,6 +495,8 @@ def display_events(data):
                         st.write(event.get('address', ''))
                         st.write(event.get('description', ''))
                         st.write(f"Start: {event.get('start_date', 'N/A')}  |  End: {event.get('end_date', 'N/A')}")
+                        if event.get('credits'):
+                            st.caption(event.get('credits', ''))
                         st.markdown(f"[link]({event.get('url', '')})", unsafe_allow_html=True)
 
         else:

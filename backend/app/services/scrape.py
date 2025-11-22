@@ -173,6 +173,7 @@ async def transform_events_for_json(events: List[Dict], session_id: str) -> List
                     },
                     "start_date": start_date,
                     "end_date": end_date,
-                    "url": event_url
+                    "url": event_url,
+                    "credits": "Dms Veneto, il Destination Management System di Regione del Veneto"
                 })
     return transformed
