@@ -7,8 +7,8 @@ import os
 
 
 
-API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
-
+#API_BASE_URL = os.getenv("API_URL", "http://localhost:8000")
+API_BASE_URL = "https://bisobiso.ydns.eu/api"
 
 CREATE_MAP_URL = f"{API_BASE_URL}/create_map"
 SENTENCE_TO_PAYLOAD_URL = f"{API_BASE_URL}/sentencetopayload"
@@ -366,6 +366,7 @@ def display_map_and_events(data, origin_address, destination_address):
                     address: marker.address,
                     start_date: marker.start_date,
                     end_date: marker.end_date,
+                    credits: marker.credits,
                     url: marker.url
                 }});
                 feat.setStyle(iconStyleEvent);
@@ -424,9 +425,12 @@ def display_map_and_events(data, origin_address, destination_address):
                         container.innerHTML = `<b>${{props.name}}</b><br>
                                                <i>${{props.address}}</i><br>
                                                ${{props.description}}<br>
-                                                <small>${{props.credits}}</small><br>
-                                                <a href="${{props.url}}" target="_blank">link</a><br>
-                                               <small>Start: ${{props.start_date}} | End: ${{props.end_date}}</small>`;
+                                                <br>
+                                               <small>Start: ${{props.start_date}} | End: ${{props.end_date}}</small><br>
+                                                                                                <a href="${{props.url}}" target="_blank">link</a><br>
+                                                                                                <br>
+                                                                                                <small>Credits:${{props.credits}}</small>`;
+                                        
                     }}
 
                     const mapSize = map.getSize();
@@ -495,9 +499,10 @@ def display_events(data):
                         st.write(event.get('address', ''))
                         st.write(event.get('description', ''))
                         st.write(f"Start: {event.get('start_date', 'N/A')}  |  End: {event.get('end_date', 'N/A')}")
+                        st.write(f"[link]({event.get('url', '')})", unsafe_allow_html=True)
                         if event.get('credits'):
-                            st.caption(event.get('credits', ''))
-                        st.markdown(f"[link]({event.get('url', '')})", unsafe_allow_html=True)
+                            st.write(f"Credits: {event.get('credits', '')}")
+
 
         else:
             st.info("No events found for this route in the specified date range.")
