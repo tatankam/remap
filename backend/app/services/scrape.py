@@ -151,7 +151,7 @@ async def transform_events_for_json(events: List[Dict], session_id: str) -> List
                         dt_end = dt_start.replace(hour=23, minute=59, second=59, microsecond=0)
                     else:
                         dt_end = dt_start + timedelta(hours=duration_hours)
-                    end_date = dt_end.isoformat() + "Z"
+                    end_date = dt_end.isoformat()
                 except Exception:
                     end_date = start_date
 

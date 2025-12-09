@@ -9,11 +9,13 @@ from app.services.qdrant_service import (
 )
 from app.services.extraction_service import extract_payload
 from app.services import scrape  # new import for the scraper service
+from app.services import ticketsqueeze  # new import for the ticketsqueeze service
 from app.models import schemas
 from app.models.schemas import SentenceInput
 from pydantic import ValidationError
 
 from shapely.geometry import LineString, Point
+from pathlib import Path
 import numpy as np
 import geopandas as gpd
 from qdrant_client.http import models as qmodels
@@ -22,6 +24,10 @@ from fastembed import TextEmbedding, SparseTextEmbedding
 import os, json
 import shutil
 import httpx
+import pathlib
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -167,3 +173,204 @@ async def scrape_unpli_events(page_no: int = 1, page_size: int = 10, session_id:
             json.dump({"events": transformed_events}, f, ensure_ascii=False, indent=4)
 
         return {"events": transformed_events, "saved_path": save_path}
+
+
+@router.post("/processticketsqueezedelta")
+async def process_ticketsqueeze_delta(
+    file: UploadFile = File(...),
+    include_removed: bool = False,
+    include_changed: bool = True,
+):
+    """
+    Process TicketSqueeze delta CSV file and transform to ingestible JSON events.
+    
+    Args:
+        file: Delta CSV file from TicketSqueeze (with delta_type column)
+        include_removed: Include removed events in output (default: False)
+        include_changed: Include changed events in output (default: True)
+    
+    Returns:
+        Dictionary with transformed events and processing summary
+    """
+    try:
+        # Get the dataset folder path (remap/dataset, two levels up from backend/app/api)
+        dataset_dir = Path(__file__).parent.parent.parent.parent / "dataset"
+        dataset_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Save uploaded file temporarily
+        temp_csv_path = dataset_dir / f"temp_{file.filename}"
+        
+        with open(temp_csv_path, "wb") as f:
+            content = await file.read()
+            f.write(content)
+        
+        # Process delta CSV
+        result = await ticketsqueeze.process_ticketsqueeze_daily_delta(
+            delta_csv_path=Path(temp_csv_path),
+            include_removed=include_removed,
+            include_changed=include_changed
+        )
+        
+        # Save processed events to JSON in the same dataset folder
+        output_json_path = dataset_dir / f"ticketsqueeze_delta_{file.filename.replace('.csv', '.json')}"
+        ticketsqueeze.save_events_to_json(result["events"], output_json_path)
+        
+        # Clean up temp CSV
+        if temp_csv_path.exists():
+            temp_csv_path.unlink()
+        
+        return {
+            "status": "success",
+            "events": result["events"],
+            "summary": result["summary"],
+            "saved_path": str(output_json_path)
+        }
+    
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Error processing TicketSqueeze delta: {str(e)}")
+
+
+@router.post("/ingestticketsqueezedelta")
+async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
+    """
+    Ingest TicketSqueeze delta JSON file directly into Qdrant without geocoding.
+    Expects JSON with events that already have coordinates.
+    
+    Args:
+        file: Pre-processed JSON file from /processticketsqueezedelta
+    
+    Returns:
+        Dictionary with ingestion status and counts
+    """
+    if not file.filename.lower().endswith(".json"):
+        raise HTTPException(status_code=400, detail="Only .json files are accepted")
+    
+    try:
+        # Get the dataset folder path
+        dataset_dir = Path(__file__).parent.parent.parent.parent / "dataset"
+        dataset_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Save uploaded file
+        save_path = dataset_dir / file.filename
+        
+        with open(save_path, "wb") as f:
+            content = await file.read()
+            f.write(content)
+        
+        # Load events directly (skip geocoding)
+        logger.info(f"Loading TicketSqueeze events from {save_path}")
+        with open(save_path, "r", encoding="utf-8") as f:
+            events_data = json.load(f)
+        
+        events = events_data.get("events", [])
+        logger.info(f"Loaded {len(events)} events from {file.filename}")
+        
+        # Ensure collection exists
+        from app.services.ingest_service import ensure_collection_exists, calculate_hash, DENSE_VECTOR_NAME, SPARSE_VECTOR_NAME, COLLECTION_NAME
+        from app.core.config import QDRANT_SERVER, QDRANT_API_KEY
+        from qdrant_client import QdrantClient, models
+        from uuid import uuid4
+        
+        ensure_collection_exists()
+        
+        client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY, timeout=200000)
+        
+        # Normalize text function
+        def normalize_text(text):
+            if not text:
+                return ""
+            text = text.strip()
+            import unicodedata
+            text = unicodedata.normalize("NFKC", text)
+            return text
+        
+        # Ingest without geocoding
+        BATCH_SIZE = 32
+        inserted = 0
+        updated = 0
+        skipped_unchanged = 0
+        
+        from tqdm import tqdm
+        
+        for start in tqdm(range(0, len(events), BATCH_SIZE)):
+            batch = events[start: start + BATCH_SIZE]
+            texts = [normalize_text(event.get("description", "")) for event in batch]
+            dense_embeddings = list(dense_embedding_model.passage_embed(texts))
+            sparse_embeddings = list(sparse_embedding_model.passage_embed(texts))
+            points = []
+            
+            for i, event in enumerate(batch):
+                event_id = event.get("id")
+                if not event_id:
+                    logger.warning(f"Skipping event without id: {event}")
+                    continue
+                
+                text = texts[i]
+                chunk_hash = calculate_hash(text)
+                
+                existing_points, _ = client.scroll(
+                    collection_name=COLLECTION_NAME,
+                    scroll_filter=models.Filter(
+                        must=[models.FieldCondition(key="id", match=models.MatchValue(value=event_id))]
+                    ),
+                    limit=1,
+                )
+                
+                if existing_points:
+                    existing_point = existing_points[0]
+                    existing_hash = existing_point.payload.get("hash", None)
+                    
+                    if existing_hash == chunk_hash:
+                        skipped_unchanged += 1
+                        continue
+                    else:
+                        logger.info(f"Updating event ID: {event_id}")
+                        point_id_to_use = existing_point.id
+                        updated += 1
+                else:
+                    inserted += 1
+                    point_id_to_use = str(uuid4())
+                
+                loc = event.get("location", {})
+                loc_geo = {}
+                if "latitude" in loc and "longitude" in loc:
+                    loc_geo = {"lat": loc["latitude"], "lon": loc["longitude"]}
+                
+                location_payload = {**loc, **loc_geo}
+                payload = {**event, "location": location_payload, "hash": chunk_hash}
+                
+                points.append(
+                    models.PointStruct(
+                        id=point_id_to_use,
+                        vector={
+                            DENSE_VECTOR_NAME: dense_embeddings[i].tolist(),
+                            SPARSE_VECTOR_NAME: models.SparseVector(
+                                indices=list(sparse_embeddings[i].indices),
+                                values=list(sparse_embeddings[i].values),
+                            ),
+                        },
+                        payload=payload,
+                    )
+                )
+            
+            if points:
+                try:
+                    client.upsert(collection_name=COLLECTION_NAME, points=points, wait=True)
+                except Exception as e:
+                    logger.error(f"Error uploading points batch: {e}")
+        
+        collection_info = client.get_collection(COLLECTION_NAME)
+        logger.info(f"Ingestion complete: inserted={inserted}, updated={updated}, skipped={skipped_unchanged}")
+        
+        return {
+            "status": "success",
+            "filename": file.filename,
+            "inserted": inserted,
+            "updated": updated,
+            "skipped_unchanged": skipped_unchanged,
+            "collection_info": collection_info,
+        }
+    
+    except Exception as e:
+        logger.error(f"Error in ingest_ticketsqueeze_delta: {e}")
+        raise HTTPException(status_code=400, detail=f"Error ingesting TicketSqueeze delta: {str(e)}")

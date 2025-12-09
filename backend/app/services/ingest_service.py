@@ -121,10 +121,20 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
         loc = event.get("location", {})
         lat = loc.get("latitude")
         lon = loc.get("longitude")
-        logger.info(f"Checking coordinates for event ID {event.get('id')} lat={lat}, lon={lon}")
-        if lat is not None and lon is not None and is_valid_lat_lon(lat, lon):
-            logger.info(f"Skipping geocoding for event ID {event.get('id')}")
-            return
+        
+        # Check if we already have valid coordinates
+        if lat is not None and lon is not None:
+            try:
+                lat_float = float(lat)
+                lon_float = float(lon)
+                if -90 <= lat_float <= 90 and -180 <= lon_float <= 180:
+                    logger.info(f"Event ID {event.get('id')} already has valid coordinates: lat={lat_float}, lon={lon_float}. Skipping geocoding.")
+                    return
+            except (TypeError, ValueError):
+                pass
+        
+        # Need to geocode
+        logger.info(f"Geocoding event ID {event.get('id')} - no valid coordinates found")
         venue = loc.get("venue", "").strip()
         city = event.get("city", "").strip()
         if venue and city:
@@ -140,7 +150,7 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
             event["location"]["latitude"] = None
             event["location"]["longitude"] = None
 
-    logger.info("Geocoding events asynchronously")
+    logger.info("Processing events for geocoding (skipping those with valid coordinates)")
     await asyncio.gather(*(geocode_event(event) for event in events))
 
     geocoded_path = os.path.splitext(json_path)[0] + "_geocoded_structured.json"
