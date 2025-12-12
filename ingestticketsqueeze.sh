@@ -4,7 +4,7 @@ set -euo pipefail
 
 # Load variables from .env
 if [ -f .env ]; then
-  export $(cat .env | grep -v '^#' | xargs)
+  export $(grep -v '^#' .env | xargs)
 else
   echo "Error: .env file not found!" >&2
   exit 1
@@ -21,8 +21,12 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DATASET_DIR="$SCRIPT_DIR/dataset"
 BASE_NAME=$(basename "$FTP_FILE" .csv)
-TODAY_FILE="$DATASET_DIR/${BASE_NAME}_$(date +%Y%m%d).csv"
-YESTERDAY_FILE="$DATASET_DIR/${BASE_NAME}_$(date -d 'yesterday' +%Y%m%d).csv"
+
+# Today / yesterday logical names (by date)
+TODAY_DATE=$(date +%Y%m%d)
+YESTERDAY_DATE=$(date -d 'yesterday' +%Y%m%d 2>/dev/null || date -v-1d +%Y%m%d)
+TODAY_FILE="$DATASET_DIR/${BASE_NAME}_${TODAY_DATE}.csv"
+YESTERDAY_FILE="$DATASET_DIR/${BASE_NAME}_${YESTERDAY_DATE}.csv"
 
 # Validate dataset directory
 if [ ! -d "$DATASET_DIR" ]; then
@@ -41,14 +45,23 @@ if ! command -v curl >/dev/null 2>&1; then
   exit 1
 fi
 
-# CLEANUP: Delete CSV files older than 2 days (keeps today + yesterday)
+echo "========================================"
+echo " TicketSqueeze daily ingestion"
+echo " Dataset dir: $DATASET_DIR"
+echo " Base name  : $BASE_NAME"
+echo " Today      : $TODAY_FILE"
+echo " Yesterday  : $YESTERDAY_FILE"
+echo "========================================"
+
+# CLEANUP: Delete CSV files older than 2 days (keeps last two by mtime)
 echo "Cleaning up files older than 2 days..."
 DELETED_COUNT=0
 while read -r file; do
+  [ -z "$file" ] && continue
   rm -f "$file"
   DELETED_COUNT=$((DELETED_COUNT + 1))
   echo "  Deleted: $(basename "$file")"
-done < <(find "$DATASET_DIR" -type f -name "${BASE_NAME}_*.csv" -mtime +2 -print)
+done < <(find "$DATASET_DIR" -type f -name "${BASE_NAME}_*.csv" -mtime +2 -print 2>/dev/null || true)
 
 if [ "$DELETED_COUNT" -eq 0 ]; then
   echo "  No old files to delete"
@@ -56,21 +69,34 @@ fi
 echo "Cleanup complete ($DELETED_COUNT files deleted)"
 echo "----------------------------------------"
 
-# Rotate existing today file to yesterday if it exists
-if [ -f "$TODAY_FILE" ]; then
-  echo "Rotating existing today file to yesterday..."
-  mv "$TODAY_FILE" "$YESTERDAY_FILE"
-  echo "✓ $TODAY_FILE → $YESTERDAY_FILE"
+# ROTATION BY MDATE: keep last two downloads even if there are gaps
+echo "Ensuring at most two latest CSVs are present (by mtime)..."
+EXISTING=()
+while IFS= read -r f; do
+  EXISTING+=("$f")
+done < <(ls -t "$DATASET_DIR"/${BASE_NAME}_*.csv 2>/dev/null || true)
+
+if [ "${#EXISTING[@]}" -gt 2 ]; then
+  # Keep the two newest, delete the rest
+  for ((i=2; i<${#EXISTING[@]}; i++)); do
+    echo "  Removing extra file: $(basename "${EXISTING[$i]}")"
+    rm -f "${EXISTING[$i]}"
+  done
 fi
 
+echo "Current CSV files:"
+ls -1 "$DATASET_DIR"/${BASE_NAME}_*.csv 2>/dev/null || echo "  (none yet)"
+echo "----------------------------------------"
+
 # FTP URL
-FTP_URL="ftp://$FTP_USER:$FTP_PASS@$FTP_HOST:$FTP_PORT/$FTP_FILE"
+FTP_URL="ftp://$FTP_HOST:$FTP_PORT/$FTP_FILE"
 
 echo "Downloading $FTP_FILE from $FTP_HOST:$FTP_PORT..."
-echo "Today file: $TODAY_FILE"
-echo "Yesterday file: $YESTERDAY_FILE"
+echo "Target (today): $TODAY_FILE"
 echo "Timeout: 600 seconds (10 minutes)"
 echo "----------------------------------------"
+
+TMP_FILE="$TODAY_FILE.part"
 
 # Download with timeout, retries, and progress
 if timeout 600 curl -u "$FTP_USER:$FTP_PASS" \
@@ -84,36 +110,38 @@ if timeout 600 curl -u "$FTP_USER:$FTP_PASS" \
      --show-error \
      --progress-bar \
      "$FTP_URL" \
-     -o "$TODAY_FILE"; then
-  
+     -o "$TMP_FILE"; then
+
   # Verify download
-  if [ -f "$TODAY_FILE" ] && [ -s "$TODAY_FILE" ]; then
+  if [ -f "$TMP_FILE" ] && [ -s "$TMP_FILE" ]; then
+    mv "$TMP_FILE" "$TODAY_FILE"
     FILE_SIZE=$(stat -f%z "$TODAY_FILE" 2>/dev/null || stat -c%s "$TODAY_FILE" 2>/dev/null || wc -c < "$TODAY_FILE")
     echo "✓ Successfully downloaded $TODAY_FILE ($FILE_SIZE bytes)"
-    
-    # Show file status
-    if [ -f "$YESTERDAY_FILE" ]; then
-      YEST_SIZE=$(stat -f%z "$YESTERDAY_FILE" 2>/dev/null || stat -c%s "$YESTERDAY_FILE" 2>/dev/null || wc -c < "$YESTERDAY_FILE")
-      echo "✓ Yesterday file exists: $YEST_SIZE bytes"
-    else
-      echo "ℹ No yesterday file available"
-    fi
   else
     echo "Error: Downloaded file is empty or missing!" >&2
-    rm -f "$TODAY_FILE"
+    rm -f "$TMP_FILE"
     exit 1
   fi
-  
 else
   echo "Error: Download failed or timed out after 10 minutes!" >&2
-  # Revert rotation if download failed
-  if [ -f "$YESTERDAY_FILE" ]; then
-    mv "$YESTERDAY_FILE" "$TODAY_FILE"
-    echo "Reverted: restored previous today file"
-  fi
-  rm -f "$TODAY_FILE"
+  rm -f "$TMP_FILE"
   exit 1
 fi
 
+# Re-evaluate the two most recent files for delta calculation
+LATEST_TWO=()
+while IFS= read -r f; do
+  LATEST_TWO+=("$f")
+done < <(ls -t "$DATASET_DIR"/${BASE_NAME}_*.csv 2>/dev/null | head -2 || true)
+
+if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
+  NEW_FILE="${LATEST_TWO[0]}"
+  OLD_FILE="${LATEST_TWO[1]}"
+  echo "Delta will be computed between:"
+  echo "  OLD: $OLD_FILE"
+  echo "  NEW: $NEW_FILE"
+else
+  echo "Warning: Less than 2 CSV files available; delta step will have to wait for another successful run."
+fi
+
 echo "Daily update completed successfully!"
-echo "Pipeline ready: $TODAY_FILE (new) vs $YESTERDAY_FILE (previous)"

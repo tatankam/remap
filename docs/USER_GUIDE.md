@@ -159,9 +159,17 @@ See script ingesting.sh
 
 ### 📥 Downloading the daily TicketSqueeze CSV
 
-To ingest the latest events, use the `ingestticketsqueeze.sh` script, which downloads the daily CSV from the TicketSqueeze FTP and manages the local history.
+To ingest the latest events, use the `ingestticketsqueeze.sh` script, which downloads the daily CSV from the TicketSqueeze FTP, keeps only the two most recent dated files, and prepares them for delta computation.
 
 1. Configure the FTP credentials in a `.env` file (same folder as the script):
+
+   ```bash
+   FTP_HOST=***d***
+   FTP_USER=*******
+   FTP_PASS=***************
+   FTP_PORT=21
+   FTP_FILE=**********.csv
+
 
 
 2. Run the ingestion script from the project root (it writes into `./remap/dataset` and handles rotation/cleanup):
