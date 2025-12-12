@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
+from app.services.csv_delta_service import compute_csv_delta
 from app.services.ingest_service import ingest_events_from_file
 from app.services.openroute_service import geocode_address, get_route
 from app.services.qdrant_service import (
@@ -173,6 +174,57 @@ async def scrape_unpli_events(page_no: int = 1, page_size: int = 10, session_id:
             json.dump({"events": transformed_events}, f, ensure_ascii=False, indent=4)
 
         return {"events": transformed_events, "saved_path": save_path}
+
+
+@router.post("/compute-delta")
+async def compute_csv_delta_endpoint(
+    old_file: UploadFile = File(..., description="Older CSV file (baseline)"),
+    new_file: UploadFile = File(..., description="Newer CSV file"),
+    keys: str = "event_id",
+    save_output: bool = True,
+):
+    try:
+        # Read file contents
+        old_content = await old_file.read()
+        new_content = await new_file.read()
+
+        # Get dataset directory
+        dataset_dir = Path(__file__).parent.parent.parent.parent / "dataset"
+        output_path = dataset_dir / "delta.csv" if save_output else None
+
+        # Compute delta
+        result = compute_csv_delta(
+            old_csv_content=old_content,
+            new_csv_content=new_content,
+            keys=keys,
+            output_path=output_path,
+        )
+
+        # SAFE: Convert DataFrame preview to JSON‑serializable dicts
+        def safe_dicts(df):
+            if df.empty:
+                return []
+            preview = df.head(5)
+            # cast everything to string to avoid numpy types
+            return preview.astype(str).to_dict("records")
+
+        # SAFE: ensure summary values are plain ints (not numpy types)
+        safe_summary = {k: int(v) for k, v in result["summary"].items()}
+
+        return {
+            "status": "success",
+            "old_file": old_file.filename,
+            "new_file": new_file.filename,
+            "summary": safe_summary,
+            "delta_preview": safe_dicts(result["delta_df"]),
+            "csv_path": str(result["csv_path"]) if result["csv_path"] is not None else None,
+            "total_changes": int(safe_summary.get("total", 0)),
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Delta computation failed: {str(e)}")
 
 
 @router.post("/processticketsqueezedelta")
