@@ -347,9 +347,10 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
             if delete_ids:
                 client.delete(
                     collection_name=COLLECTION_NAME,
-                    points=models.PointIdsList(points=[models.PointId(id=pid) for pid in delete_ids]),
+                    points=delete_ids,  # ✅ FIXED: Direct string IDs
                     wait=True,
                 )
+
                 deleted_count = len(delete_ids)
                 logger.info(f"Deleted {deleted_count} removed events")
 
@@ -404,7 +405,7 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
                         updated += 1
                 else:
                     inserted += 1
-                    point_id_to_use = models.PointId(id=str(uuid4()))
+                    point_id_to_use = str(uuid4())  # ✅ FIXED: Direct string UUID
 
                 loc = event.get("location", {})
                 loc_geo = {}
