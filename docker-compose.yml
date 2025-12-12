@@ -5,7 +5,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./dataset:/dataset
+      # ✅ FIXED: host:container
+      - ./dataset:/app/dataset  # Mount host ./dataset to /app/dataset
     ports:
       - "8000:8000"
     container_name: backend
@@ -19,7 +20,7 @@ services:
       - "8501:8501"
     container_name: frontend
     environment:
-      - API_URL=http://backend:8000/
+      - API_URL=http://backend:8000
     networks:
       - remap
 

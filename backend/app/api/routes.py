@@ -46,8 +46,25 @@ import logging
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-# ---------- DATASET DIRECTORY (PROJECT ROOT) ----------
-DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
+# ❌ OLD (host-only)
+# DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
+
+# ✅ NEW (works everywhere)
+import os
+from pathlib import Path
+
+# Docker volume mount: /dataset
+if Path("/dataset").exists():
+    DATASET_DIR = Path("/dataset")
+    print(f"✅ Docker: Using /dataset volume")
+else:
+    # Fallback for local dev
+    DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
+    print(f"✅ Local: Using {DATASET_DIR}")
+
+DATASET_DIR.mkdir(parents=True, exist_ok=True)
+print(f"📁 DATASET_DIR = {DATASET_DIR.absolute()}")
+
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
 
 # ---------- EMBEDDING MODELS ----------
