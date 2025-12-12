@@ -123,33 +123,44 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
   
   echo "⚡ Computing delta: $OLD_FILE → $NEW_FILE"
   
-  # STEP 1: Compute delta - FIXED JQ PARSING
+  # STEP 1: Compute delta - ROBUST JSON HANDLING
   echo "📤 Uploading CSVs to /compute-delta..."
-  DELTA_RESPONSE=$(curl -s -w "HTTP:%{http_code}" -X POST "http://127.0.0.1:8000/compute-delta" \
+  DELTA_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8000/compute-delta" \
     -F "old_file=@$OLD_FILE" \
     -F "new_file=@$NEW_FILE")
   
-  # Extract HTTP code FIRST (before jq)
-  DELTA_HTTP=$(echo "$DELTA_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ')
-  DELTA_JSON=$(echo "$DELTA_RESPONSE" | sed '/HTTP:/d')
+  # Extract HTTP code and clean JSON
+  DELTA_HTTP=$(echo "$DELTA_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
+  DELTA_JSON=$(echo "$DELTA_RESPONSE" | sed '/HTTP:/d' | sed 's/[[:space:]]*$//')
+  
+  echo "DEBUG HTTP: '$DELTA_HTTP'"
+  echo "DEBUG JSON preview: ${DELTA_JSON:0:200}..."
   
   if [ "$DELTA_HTTP" != "200" ]; then
     echo "❌ Delta failed (HTTP $DELTA_HTTP)" >&2
-    echo "Response: $DELTA_JSON" >&2
+    echo "Full response:" >&2
+    echo "$DELTA_RESPONSE" >&2
     exit 1
   fi
   
-  # Now safe to parse JSON
-  ADDED=$(echo "$DELTA_JSON" | jq -r '.summary.added // 0')
-  REMOVED=$(echo "$DELTA_JSON" | jq -r '.summary.removed // 0')
-  CHANGED=$(echo "$DELTA_JSON" | jq -r '.summary.changed // 0')
-  TOTAL=$(echo "$DELTA_JSON" | jq -r '.summary.total // 0')
-  DELTA_PATH=$(echo "$DELTA_JSON" | jq -r '.csv_path // "unknown"')
+  # SAFE jq with defaults + validation
+  if echo "$DELTA_JSON" | jq . >/dev/null 2>&1; then
+    ADDED=$(echo "$DELTA_JSON" | jq -r '.summary.added // 0' | grep -o '[0-9]*' || echo "0")
+    REMOVED=$(echo "$DELTA_JSON" | jq -r '.summary.removed // 0' | grep -o '[0-9]*' || echo "0")
+    CHANGED=$(echo "$DELTA_JSON" | jq -r '.summary.changed // 0' | grep -o '[0-9]*' || echo "0")
+    TOTAL=$(echo "$DELTA_JSON" | jq -r '.summary.total // 0' | grep -o '[0-9]*' || echo "0")
+    DELTA_PATH=$(echo "$DELTA_JSON" | jq -r '.csv_path // "unknown"' 2>/dev/null || echo "unknown")
+  else
+    echo "❌ Invalid JSON response!" >&2
+    echo "Raw: $DELTA_JSON" >&2
+    ADDED=0 REMOVED=0 CHANGED=0 TOTAL=0 DELTA_PATH="unknown"
+  fi
   
-  echo "📊 Delta summary: ${ADDED} added, ${REMOVED} removed, ${CHANGED} changed (${TOTAL} total)"
+  echo "📊 Delta summary: $ADDED added, $REMOVED removed, $CHANGED changed ($TOTAL total)"
   echo "💾 Delta.csv saved: $DELTA_PATH"
   
-  if [ "$TOTAL" -gt 0 ]; then
+  # ✅ FIXED: String comparison instead of numeric
+  if [ "$TOTAL" != "0" ] && [ -n "$TOTAL" ]; then
     # ⏳ WAIT: Sync delta.csv from container → host
     echo "⏳ Waiting for delta.csv on host ($DATASET_DIR/delta.csv)..."
     for i in {1..15}; do
@@ -166,23 +177,23 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
       exit 1
     fi
     
-    # STEP 2: Process delta.csv → JSON - FIXED JQ
+    # STEP 2: Process delta.csv → JSON
     echo "🔄 Processing delta.csv → JSON..."
-    PROCESS_RESPONSE=$(curl -s -w "HTTP:%{http_code}" -X POST "http://127.0.0.1:8000/processticketsqueezedelta" \
+    PROCESS_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8000/processticketsqueezedelta" \
       -F "file=@$DATASET_DIR/delta.csv" \
       -F "include_removed=true" \
       -F "include_changed=true")
     
-    PROCESS_HTTP=$(echo "$PROCESS_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ')
-    PROCESS_JSON=$(echo "$PROCESS_RESPONSE" | sed '/HTTP:/d')
+    PROCESS_HTTP=$(echo "$PROCESS_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
+    PROCESS_JSON=$(echo "$PROCESS_RESPONSE" | sed '/HTTP:/d' | sed 's/[[:space:]]*$//')
     
     if [ "$PROCESS_HTTP" != "200" ]; then
-      echo "❌ Process failed (HTTP $PROCESS_HTTP): $PROCESS_JSON" >&2
+      echo "❌ Process failed (HTTP $PROCESS_HTTP)" >&2
       exit 1
     fi
     
-    JSON_PATH=$(echo "$PROCESS_JSON" | jq -r '.saved_path // "unknown"')
-    EVENTS_COUNT=$(echo "$PROCESS_JSON" | jq -r '.summary.events // 0')
+    JSON_PATH=$(echo "$PROCESS_JSON" | jq -r '.saved_path // "unknown"' 2>/dev/null || echo "unknown")
+    EVENTS_COUNT=$(echo "$PROCESS_JSON" | jq -r '.summary.events // 0' | grep -o '[0-9]*' || echo "0")
     
     echo "✅ JSON created: $JSON_PATH ($EVENTS_COUNT events)"
     
@@ -198,38 +209,35 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
     done
     
     if [ -f "$DATASET_DIR/$JSON_HOST_PATH" ]; then
-      # STEP 3: Ingest JSON to Qdrant - FIXED JQ
+      # STEP 3: Ingest JSON to Qdrant
       echo "🚀 Ingesting $DATASET_DIR/$JSON_HOST_PATH to Qdrant..."
-      INGEST_RESPONSE=$(curl -s -w "HTTP:%{http_code}" -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta" \
+      INGEST_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta" \
         -F "file=@$DATASET_DIR/$JSON_HOST_PATH")
       
-      INGEST_HTTP=$(echo "$INGEST_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ')
-      INGEST_JSON=$(echo "$INGEST_RESPONSE" | sed '/HTTP:/d')
+      INGEST_HTTP=$(echo "$INGEST_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
+      INGEST_JSON=$(echo "$INGEST_RESPONSE" | sed '/HTTP:/d' | sed 's/[[:space:]]*$//')
       
       if [ "$INGEST_HTTP" != "200" ]; then
-        echo "❌ Ingest failed (HTTP $INGEST_HTTP): $INGEST_JSON" >&2
+        echo "❌ Ingest failed (HTTP $INGEST_HTTP)" >&2
         exit 1
       fi
       
-      DELETED=$(echo "$INGEST_JSON" | jq -r '.deleted // 0')
-      INSERTED=$(echo "$INGEST_JSON" | jq -r '.inserted // 0')
-      UPDATED=$(echo "$INGEST_JSON" | jq -r '.updated // 0')
-      SKIPPED=$(echo "$INGEST_JSON" | jq -r '.skipped_unchanged // 0')
-      POINTS=$(echo "$INGEST_JSON" | jq -r '.points_count // 0')
+      DELETED=$(echo "$INGEST_JSON" | jq -r '.deleted // 0' | grep -o '[0-9]*' || echo "0")
+      INSERTED=$(echo "$INGEST_JSON" | jq -r '.inserted // 0' | grep -o '[0-9]*' || echo "0")
+      UPDATED=$(echo "$INGEST_JSON" | jq -r '.updated // 0' | grep -o '[0-9]*' || echo "0")
+      SKIPPED=$(echo "$INGEST_JSON" | jq -r '.skipped_unchanged // 0' | grep -o '[0-9]*' || echo "0")
       
       echo "🎉 Qdrant ingestion complete!"
       echo "  🗑️  Deleted: $DELETED"
       echo "  ➕ Inserted: $INSERTED"
       echo "  ✏️  Updated: $UPDATED"
       echo "  ⏭️  Skipped: $SKIPPED"
-      echo "  📊 Total points: $POINTS"
     else
-      echo "❌ JSON timeout! Contents:" >&2
-      ls -la "$DATASET_DIR"/*.json
+      echo "❌ JSON timeout!" >&2
       exit 1
     fi
   else
-    echo "ℹ️ No changes detected - skipping processing"
+    echo "ℹ️ No changes detected (TOTAL=$TOTAL) - skipping processing"
   fi
 else
   echo "⚠️ Less than 2 files available - skipping delta (run again tomorrow)"
@@ -239,6 +247,4 @@ echo "========================================"
 echo "🎊 COMPLETE PIPELINE SUCCESS!"
 echo "📁 Files in $DATASET_DIR:"
 ls -la "$DATASET_DIR"/*.csv "$DATASET_DIR"/*.json 2>/dev/null || echo "No pipeline files"
-echo "🔍 Collection status:"
-curl -s "http://127.0.0.1:8000/collection_info" | jq . 2>/dev/null || echo "Service unavailable"
 echo "========================================"
