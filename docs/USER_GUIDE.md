@@ -155,7 +155,31 @@ New service scraping scrape.py
 It scrapes veneto sagre and it creates a \backend\dataset\veneto_unpliveneto_events_1_500.json
 See script ingesting.sh
 
+### 📂 Uploading and Managing Event Data of ticketsqueeze
 
+### 📥 Downloading the daily TicketSqueeze CSV
+
+To ingest the latest events, use the `ingestticketsqueeze.sh` script, which downloads the daily CSV from the TicketSqueeze FTP and manages the local history.
+
+1. Configure the FTP credentials in a `.env` file (same folder as the script):
+
+
+2. Run the ingestion script from the project root (it writes into `./remap/dataset` and handles rotation/cleanup):
+
+
+cd ./remap
+
+./ingestticketsqueeze.sh
+
+
+
+To create the json from the csv:
+curl -X POST "http://127.0.0.1:8000/processticketsqueezedelta"   -F "file=@/home/biso/development/my_projects/remap/dataset/delta.csv"   -F "include_removed=false"   -F "include_changed=false"
+
+
+To load the json:
+
+curl -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta"   -F "file=@/home/biso/development/my_projects/remap/dataset/ticketsqueeze_delta_delta.json"
 
 ---
 
