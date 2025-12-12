@@ -17,3 +17,4 @@ SPARSE_MODEL_NAME = os.getenv("SPARSE_MODEL_NAME")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 #COLLECTION_NAME = "veneto_events"
 #COLLECTION_NAME = "veneto_unpliveneto_events"
+UNPLI_SESSION_ID = os.getenv("UNPLI_SESSION_ID")

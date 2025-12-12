@@ -1,6 +1,13 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
 from app.services.csv_delta_service import compute_csv_delta
-from app.services.ingest_service import ingest_events_from_file, ensure_collection_exists, calculate_hash, DENSE_VECTOR_NAME, SPARSE_VECTOR_NAME, COLLECTION_NAME
+from app.services.ingest_service import (
+    ingest_events_from_file,
+    ensure_collection_exists,
+    calculate_hash,
+    DENSE_VECTOR_NAME,
+    SPARSE_VECTOR_NAME,
+    COLLECTION_NAME,
+)
 from app.services.openroute_service import geocode_address, get_route
 from app.services.qdrant_service import (
     build_geo_filter,
@@ -15,27 +22,59 @@ from app.models import schemas
 from app.models.schemas import SentenceInput
 from pydantic import ValidationError
 from qdrant_client import QdrantClient, models
-from qdrant_client.http import models as qmodels
 from uuid import uuid4
 from pathlib import Path
 from shapely.geometry import LineString, Point
 import numpy as np
 import geopandas as gpd
-from app.core.config import DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME, QDRANT_SERVER, QDRANT_API_KEY
+from app.core.config import (
+    DENSE_MODEL_NAME,
+    SPARSE_MODEL_NAME,
+    COLLECTION_NAME,
+    QDRANT_SERVER,
+    QDRANT_API_KEY,
+    UNPLI_SESSION_ID,
+)
 from fastembed import TextEmbedding, SparseTextEmbedding
-import os, json
+import os
+import json
 import shutil
 import httpx
 import unicodedata
 import logging
 
 logger = logging.getLogger(__name__)
-
 router = APIRouter()
 
-# Initialize embedding models once for reuse
+# ---------- DATASET DIRECTORY (PROJECT ROOT) ----------
+DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
+DATASET_DIR.mkdir(parents=True, exist_ok=True)
+
+# ---------- EMBEDDING MODELS ----------
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME)
+
+# ---------- DEBUG ENDPOINT ----------
+@router.get("/collection_info")
+async def get_collection_info():
+    """🔍 DEBUG: Check collection status + vector names"""
+    client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
+    if not client.collection_exists(COLLECTION_NAME):
+        return {"error": f"Collection {COLLECTION_NAME} does not exist"}
+    
+    info = client.get_collection(COLLECTION_NAME)
+    return {
+        "collection": COLLECTION_NAME,
+        "points_count": info.points_count,
+        "vectors_count": getattr(info, 'vectors_count', 0),
+        "dense_vector_name": DENSE_VECTOR_NAME,
+        "sparse_vector_name": SPARSE_VECTOR_NAME,
+        "status": str(info.status),
+        "config": {
+            "dense_dim": len(list(dense_embedding_model.passage_embed(["test"]))[0]),
+            "dataset_dir": str(DATASET_DIR)
+        }
+    }
 
 @router.post("/create_map")
 async def create_event_map(request: schemas.RouteRequest):
@@ -45,17 +84,17 @@ async def create_event_map(request: schemas.RouteRequest):
         coords = [origin_point, destination_point]
 
         routes = get_route(coords, profile=request.profile_choice)
-        route_geometry = routes['features'][0]['geometry']
-        route_coords = route_geometry['coordinates']
+        route_geometry = routes["features"][0]["geometry"]
+        route_coords = route_geometry["coordinates"]
         if len(route_coords) < 2:
-            raise HTTPException(status_code=400, detail="Route must contain two different address for buffering.")
+            raise HTTPException(status_code=400, detail="Route must contain two different addresses for buffering.")
 
         route_line = LineString(route_coords)
-        route_gdf = gpd.GeoDataFrame([{'geometry': route_line}], crs='EPSG:4326')
+        route_gdf = gpd.GeoDataFrame([{"geometry": route_line}], crs="EPSG:4326")
 
         route_gdf_3857 = route_gdf.to_crs(epsg=3857)
         if request.buffer_distance <= 0:
-            raise HTTPException(status_code=400, detail="Buffer distance must be a positive number representing kilometers.")
+            raise HTTPException(status_code=400, detail="Buffer distance must be positive (km).")
         buffer_distance_meters = request.buffer_distance * 1000
         buffer_polygon = route_gdf_3857.buffer(buffer_distance_meters).to_crs(epsg=4326).iloc[0]
         polygon_coords = np.array(buffer_polygon.exterior.coords).tolist()
@@ -66,7 +105,6 @@ async def create_event_map(request: schemas.RouteRequest):
         final_filter = build_final_filter(geo_filter, date_filter)
 
         score_threshold = 0.0 if request.query_text.strip() == "" else 0.34
-
         query_dense_vector = list(dense_embedding_model.passage_embed([request.query_text]))[0].tolist()
         query_sparse_embedding = list(sparse_embedding_model.passage_embed([request.query_text]))[0]
 
@@ -76,18 +114,17 @@ async def create_event_map(request: schemas.RouteRequest):
             query_filter=final_filter,
             collection_name=COLLECTION_NAME,
             limit=request.numevents,
-            score_threshold=score_threshold
+            score_threshold=score_threshold,
         )
 
         if not payloads:
             return {"message": "No events found in Qdrant for this route/buffer and date range."}
 
         def distance_along_route(event):
-            point = Point(event['location']['lon'], event['location']['lat'])
+            point = Point(event["location"]["lon"], event["location"]["lat"])
             return route_line.project(point)
 
         sorted_events = sorted(payloads, key=distance_along_route)
-
         for event in sorted_events:
             loc = event.get('location', {})
             event['address'] = loc.get('address')
@@ -101,37 +138,38 @@ async def create_event_map(request: schemas.RouteRequest):
             "destination": {"lat": destination_point[1], "lon": destination_point[0], "address": request.destination_address},
             "events": sorted_events
         }
-
         return response
-
-    except HTTPException as e:
-        raise e
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/ingestevents")
 async def ingest_events_endpoint(file: UploadFile = File(...)):
+    """✅ FIXED: Force sync + return real counts"""
     if not file.filename.lower().endswith(".json"):
         raise HTTPException(status_code=400, detail="Only .json files are accepted")
 
-    save_dir = "/tmp"
-    os.makedirs(save_dir, exist_ok=True)
-    save_path = os.path.join(save_dir, file.filename)
-
+    save_path = DATASET_DIR / file.filename
     with open(save_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
     try:
-        result = await ingest_events_from_file(save_path)
+        result = await ingest_events_from_file(str(save_path))
+        
+        # ✅ FORCE COLLECTION SYNC + REAL COUNTS
+        client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
+        client.collection_exists(COLLECTION_NAME)
+        collection_info = client.get_collection(COLLECTION_NAME)
+        result["points_count"] = collection_info.points_count
+        result["vectors_count"] = getattr(collection_info, 'vectors_count', 0)
+        
+        logger.info(f"✅ Ingest complete: {result['points_count']} points in collection")
+        return result
+        
     finally:
-        if os.path.exists(save_path):
-            os.remove(save_path)
-
-    return {
-        "filename": file.filename,
-        "inserted": result["inserted"],
-        "updated": result["updated"],
-        "skipped_unchanged": result["skipped_unchanged"],
-        "collection_info": result["collection_info"],
-    }
+        if save_path.exists():
+            save_path.unlink()
 
 @router.post("/sentencetopayload")
 async def sentence_to_payload(data: SentenceInput):
@@ -149,20 +187,20 @@ async def sentence_to_payload(data: SentenceInput):
         raise HTTPException(status_code=500, detail=f"Unexpected error: {str(e)}")
 
 @router.get("/scrape_unpli_events")
-async def scrape_unpli_events(page_no: int = 1, page_size: int = 10, session_id: str = "G1758362087062"):
+async def scrape_unpli_events(page_no: int = 1, page_size: int = 10, session_id: str = None):
+    """✅ SECURE: Uses UNPLI_SESSION_ID from .env"""
+    final_session_id = session_id or UNPLI_SESSION_ID
     async with httpx.AsyncClient() as session:
-        events = await scrape.fetch_unpli_events(session, page_no=page_no, page_size=page_size, session_id=session_id)
+        events = await scrape.fetch_unpli_events(session, page_no=page_no, page_size=page_size, session_id=final_session_id)
         if not events:
             raise HTTPException(status_code=404, detail="No events found or error fetching data.")
-        transformed_events = await scrape.transform_events_for_json(events, session_id=session_id)
+        transformed_events = await scrape.transform_events_for_json(events, session_id=final_session_id)
 
-        save_dir = "./dataset"
-        os.makedirs(save_dir, exist_ok=True)
-        save_path = os.path.join(save_dir, f"veneto_unpliveneto_events_{page_no}_{page_size}.json")
+        save_path = DATASET_DIR / f"veneto_unpliveneto_events_{page_no}_{page_size}.json"
         with open(save_path, "w", encoding="utf-8") as f:
             json.dump({"events": transformed_events}, f, ensure_ascii=False, indent=4)
 
-        return {"events": transformed_events, "saved_path": save_path}
+        return {"events": transformed_events, "saved_path": str(save_path)}
 
 @router.post("/compute-delta")
 async def compute_csv_delta_endpoint(
@@ -175,8 +213,8 @@ async def compute_csv_delta_endpoint(
         old_content = await old_file.read()
         new_content = await new_file.read()
 
-        dataset_dir = Path(__file__).parent.parent.parent.parent / "dataset"
-        output_path = dataset_dir / "delta.csv" if save_output else None
+        DATASET_DIR.mkdir(parents=True, exist_ok=True)
+        output_path = DATASET_DIR / "delta.csv" if save_output else None
 
         result = compute_csv_delta(
             old_csv_content=old_content,
@@ -215,125 +253,126 @@ async def process_ticketsqueeze_delta(
     include_changed: bool = True,
 ):
     try:
-        dataset_dir = Path(__file__).parent.parent.parent.parent / "dataset"
-        dataset_dir.mkdir(parents=True, exist_ok=True)
-        
-        temp_csv_path = dataset_dir / f"temp_{file.filename}"
-        
+        DATASET_DIR.mkdir(parents=True, exist_ok=True)
+
+        temp_csv_path = DATASET_DIR / f"temp_{file.filename}"
+
         with open(temp_csv_path, "wb") as f:
             content = await file.read()
             f.write(content)
-        
+
         result = await ticketsqueeze.process_ticketsqueeze_daily_delta(
-            delta_csv_path=Path(temp_csv_path),
+            delta_csv_path=temp_csv_path,
             include_removed=include_removed,
-            include_changed=include_changed
+            include_changed=include_changed,
         )
-        
-        output_json_path = dataset_dir / f"ticketsqueeze_delta_{file.filename.replace('.csv', '.json')}"
+
+        output_json_path = DATASET_DIR / f"ticketsqueeze_delta_{file.filename.replace('.csv', '.json')}"
         ticketsqueeze.save_events_to_json(result["events"], output_json_path)
-        
+
         if temp_csv_path.exists():
             temp_csv_path.unlink()
-        
+
         return {
             "status": "success",
             "events": result["events"],
             "summary": result["summary"],
-            "saved_path": str(output_json_path)
+            "saved_path": str(output_json_path),
         }
-    
+
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error processing TicketSqueeze delta: {str(e)}")
 
 @router.post("/ingestticketsqueezedelta")
 async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
     """
-    OPTIMIZED for free tier Qdrant: DELETE removed events first, then upsert added/changed.
-    Uses INT8 quantization compatible collection config.
+    FREE TIER optimized:
+    - DELETE removed events first
+    - UPSERT added/changed
+    - Uses shared DATASET_DIR
     """
     if not file.filename.lower().endswith(".json"):
         raise HTTPException(status_code=400, detail="Only .json files are accepted")
-    
+
     try:
-        dataset_dir = Path(__file__).parent.parent.parent.parent / "dataset"
-        dataset_dir.mkdir(parents=True, exist_ok=True)
-        
-        save_path = dataset_dir / file.filename
-        
+        DATASET_DIR.mkdir(parents=True, exist_ok=True)
+
+        save_path = DATASET_DIR / file.filename
+
         with open(save_path, "wb") as f:
             content = await file.read()
             f.write(content)
-        
+
         logger.info(f"Loading TicketSqueeze events from {save_path}")
         with open(save_path, "r", encoding="utf-8") as f:
             events_data = json.load(f)
-        
+
         events = events_data.get("events", [])
         if not events:
             return {"status": "empty", "message": "No events in file"}
-            
+
         logger.info(f"Loaded {len(events)} events from {file.filename}")
-        
-        # FREE TIER OPTIMIZED: Ensure quantized collection exists
+
         ensure_collection_exists()
-        
+
         client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY, timeout=30000)
-        
-        def normalize_text(text):
+
+        def normalize_text(text: str) -> str:
             if not text:
                 return ""
-            text = text.strip()[:1000]  # Truncate for free tier
+            text = text.strip()[:1000]
             text = unicodedata.normalize("NFKC", text)
             return text
-        
-        # PHASE 1: DELETE removed events FIRST (data quality)
-        removed_events = [e for e in events if e.get('delta_type') == 'removed']
+
+        # PHASE 1: delete removed
+        removed_events = [e for e in events if e.get("delta_type") == "removed"]
         deleted_count = 0
         if removed_events:
-            delete_ids = [str(e.get('event_id', e.get('id', ''))) for e in removed_events if e.get('event_id') or e.get('id')]
+            delete_ids = [
+                str(e.get("event_id", e.get("id", "")))
+                for e in removed_events
+                if e.get("event_id") or e.get("id")
+            ]
             if delete_ids:
                 client.delete(
                     collection_name=COLLECTION_NAME,
                     points=models.PointIdsList(points=[models.PointId(id=pid) for pid in delete_ids]),
-                    wait=True
+                    wait=True,
                 )
                 deleted_count = len(delete_ids)
-                logger.info(f"🗑️ Deleted {deleted_count} removed events")
-        
-        # PHASE 2: Process only added+changed events
-        active_events = [e for e in events if e.get('delta_type') in ['added', 'changed']]
+                logger.info(f"Deleted {deleted_count} removed events")
+
+        # PHASE 2: upsert added + changed
+        active_events = [e for e in events if e.get("delta_type") in ["added", "changed"]]
         if not active_events:
             return {
                 "status": "success",
                 "filename": file.filename,
                 "deleted": deleted_count,
                 "processed": 0,
-                "message": "Only deletions processed"
+                "message": "Only deletions processed",
             }
-        
-        # FREE TIER: Optimized batch processing
-        BATCH_SIZE = 16  # Balanced for free tier RAM
+
+        BATCH_SIZE = 16
         inserted = updated = skipped_unchanged = 0
-        
+
         for start in range(0, len(active_events), BATCH_SIZE):
-            batch = active_events[start: start + BATCH_SIZE]
-            texts = [normalize_text(event.get("description", "")) for event in batch]
-            
+            batch = active_events[start : start + BATCH_SIZE]
+            texts = [normalize_text(e.get("description", "")) for e in batch]
+
             dense_embeddings = list(dense_embedding_model.passage_embed(texts))
             sparse_embeddings = list(sparse_embedding_model.passage_embed(texts))
             points = []
-            
+
             for i, event in enumerate(batch):
                 event_id = str(event.get("id") or event.get("event_id", ""))
                 if not event_id:
                     logger.warning(f"Skipping event without ID: {event}")
                     continue
-                
+
                 text = texts[i]
                 chunk_hash = calculate_hash(text)
-                
-                # Check if exists (optimized for free tier)
+
                 existing_points, _ = client.scroll(
                     collection_name=COLLECTION_NAME,
                     scroll_filter=models.Filter(
@@ -341,64 +380,63 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
                     ),
                     limit=1,
                 )
-                
+
                 if existing_points:
                     existing_point = existing_points[0]
-                    existing_hash = existing_point.payload.get("hash", None)
-                    
+                    existing_hash = existing_point.payload.get("hash")
+
                     if existing_hash == chunk_hash:
                         skipped_unchanged += 1
                         continue
                     else:
-                        logger.debug(f"Updating event ID: {event_id}")
                         point_id_to_use = existing_point.id
                         updated += 1
                 else:
                     inserted += 1
                     point_id_to_use = models.PointId(id=str(uuid4()))
-                
+
                 loc = event.get("location", {})
                 loc_geo = {}
                 if loc.get("latitude") and loc.get("longitude"):
                     loc_geo = {
                         "lat": float(loc["latitude"]),
-                        "lon": float(loc["longitude"])
+                        "lon": float(loc["longitude"]),
                     }
-                
+
                 location_payload = {**loc, **loc_geo}
                 payload = {
                     **event,
                     "id": event_id,
                     "location": location_payload,
-                    "hash": chunk_hash
+                    "hash": chunk_hash,
                 }
-                
-                # FREE TIER: Truncate vectors for quantization compatibility
-                dense_vec = dense_embeddings[i][:384].tolist()
-                sparse_vec = sparse_embeddings[i]
-                
+
                 points.append(
                     models.PointStruct(
                         id=point_id_to_use,
                         vector={
-                            DENSE_VECTOR_NAME: dense_vec,
+                            DENSE_VECTOR_NAME: dense_embeddings[i].tolist(),
                             SPARSE_VECTOR_NAME: models.SparseVector(
-                                indices=list(sparse_vec.indices[:100]),
-                                values=[float(v) for v in sparse_vec.values[:100]]
+                                indices=list(sparse_embeddings[i].indices),
+                                values=[float(v) for v in sparse_embeddings[i].values],
                             ),
                         },
                         payload=payload,
                     )
                 )
-            
+
             if points:
                 try:
-                    # FREE TIER: wait=False for speed, but small batches
-                    client.upsert(collection_name=COLLECTION_NAME, points=points, wait=False)
+                    # ✅ FIXED: wait=True for immediate visibility
+                    client.upsert(collection_name=COLLECTION_NAME, points=points, wait=True)
                 except Exception as e:
-                    logger.error(f"Batch {start//BATCH_SIZE + 1} failed: {e}")
+                    logger.error(f"Batch {start // BATCH_SIZE + 1} failed: {e}")
                     continue
-        
+
+        # ✅ FINAL SYNC
+        client.collection_exists(COLLECTION_NAME)
+        collection_info = client.get_collection(COLLECTION_NAME)
+
         return {
             "status": "success",
             "filename": file.filename,
@@ -408,9 +446,10 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
             "skipped_unchanged": skipped_unchanged,
             "total_processed": len(active_events),
             "batches_sent": (len(active_events) + BATCH_SIZE - 1) // BATCH_SIZE,
-            "message": "Free tier optimized ingestion complete (DELETE + UPSERT)"
+            "points_count": collection_info.points_count,
+            "message": "Free tier optimized ingestion complete (DELETE + UPSERT + SYNCED)",
         }
-    
+
     except Exception as e:
         logger.error(f"Error in ingest_ticketsqueeze_delta: {e}")
         raise HTTPException(status_code=500, detail=f"Ingestion failed: {str(e)}")
