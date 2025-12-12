@@ -46,26 +46,20 @@ import logging
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-# ❌ OLD (host-only)
-# DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
-
-# ✅ NEW (works everywhere)
-import os
-from pathlib import Path
-
-# Docker volume mount: /dataset
-if Path("/dataset").exists():
+# ✅ FIXED: Docker + Local compatible DATASET_DIR
+if Path("/app/dataset").exists():
+    DATASET_DIR = Path("/app/dataset")
+    logger.info("✅ Docker: Using /app/dataset volume")
+elif Path("/dataset").exists():
     DATASET_DIR = Path("/dataset")
-    print(f"✅ Docker: Using /dataset volume")
+    logger.info("✅ Docker: Using /dataset volume")
 else:
-    # Fallback for local dev
+    # Local dev fallback
     DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
-    print(f"✅ Local: Using {DATASET_DIR}")
+    logger.info(f"✅ Local: Using {DATASET_DIR}")
 
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
-print(f"📁 DATASET_DIR = {DATASET_DIR.absolute()}")
-
-DATASET_DIR.mkdir(parents=True, exist_ok=True)
+logger.info(f"📁 DATASET_DIR = {DATASET_DIR.absolute()}")
 
 # ---------- EMBEDDING MODELS ----------
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME)
