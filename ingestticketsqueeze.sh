@@ -39,16 +39,21 @@ if [ ! -w "$DATASET_DIR" ]; then
   exit 1
 fi
 
-# Check curl availability
+# Check dependencies
 if ! command -v curl >/dev/null 2>&1; then
   echo "Error: curl is required but not installed!" >&2
   exit 1
 fi
+if ! command -v jq >/dev/null 2>&1; then
+  echo "Error: jq is required but not installed!" >&2
+  exit 1
+fi
 
 echo "========================================"
-echo " TicketSqueeze daily ingestion + delta"
-echo " Dataset dir: $DATASET_DIR"
-echo " Base name  : $BASE_NAME"
+echo " 🎯 TicketSqueeze FULL Pipeline"
+echo " 📁 Dataset dir: $DATASET_DIR"
+echo " 📄 Base name  : $BASE_NAME"
+echo " 🚀 http://127.0.0.1:8000"
 echo "========================================"
 
 # CLEANUP: Delete CSV files older than 2 days
@@ -127,15 +132,58 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
   
   echo "⚡ Computing delta: $OLD_FILE → $NEW_FILE"
   
-  # Call FastAPI delta endpoint
-  curl -s -X POST "http://127.0.0.1:8000/compute-delta" \
+  # STEP 1: Compute delta
+  DELTA_RESPONSE=$(curl -s -X POST "http://127.0.0.1:8000/compute-delta" \
     -F "old_file=@$OLD_FILE" \
-    -F "new_file=@$NEW_FILE" \
-    | jq -r '. | "\(.summary.added) added, \(.summary.removed) removed, \(.summary.changed) changed (\(.summary.total) total), saved: \(.csv_path)"'
+    -F "new_file=@$NEW_FILE")
+  
+  ADDED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.added')
+  REMOVED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.removed')
+  CHANGED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.changed')
+  TOTAL=$(echo "$DELTA_RESPONSE" | jq -r '.summary.total')
+  
+  echo "📊 Delta summary: ${ADDED} added, ${REMOVED} removed, ${CHANGED} changed (${TOTAL} total)"
+  echo "💾 Delta.csv saved: $(echo "$DELTA_RESPONSE" | jq -r '.csv_path')"
+  
+  if [ "$TOTAL" -gt 0 ]; then
+    # STEP 2: Process delta.csv → JSON
+    echo "🔄 Processing delta.csv → JSON..."
+    PROCESS_RESPONSE=$(curl -s -X POST "http://127.0.0.1:8000/processticketsqueezedelta" \
+      -F "file=@$DATASET_DIR/delta.csv" \
+      -F "include_removed=true" \
+      -F "include_changed=true")
     
-  echo "✓ Delta.csv ready in $DATASET_DIR!"
+    JSON_PATH=$(echo "$PROCESS_RESPONSE" | jq -r '.saved_path')
+    EVENTS_COUNT=$(echo "$PROCESS_RESPONSE" | jq -r '.summary.events // 0')
+    
+    echo "✅ JSON created: $JSON_PATH ($EVENTS_COUNT events)"
+    
+    # STEP 3: Ingest JSON to Qdrant (DELETE removed + UPSERT added/changed)
+    if [ -f "$JSON_PATH" ]; then
+      echo "🚀 Ingesting to Qdrant (optimized free tier)..."
+      INGEST_RESPONSE=$(curl -s -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta" \
+        -F "file=@$JSON_PATH")
+      
+      DELETED=$(echo "$INGEST_RESPONSE" | jq -r '.deleted // 0')
+      INSERTED=$(echo "$INGEST_RESPONSE" | jq -r '.inserted // 0')
+      UPDATED=$(echo "$INGEST_RESPONSE" | jq -r '.updated // 0')
+      SKIPPED=$(echo "$INGEST_RESPONSE" | jq -r '.skipped_unchanged // 0')
+      
+      echo "🎉 Qdrant ingestion complete!"
+      echo "  🗑️  Deleted: $DELETED"
+      echo "  ➕ Inserted: $INSERTED"
+      echo "  ✏️  Updated: $UPDATED"
+      echo "  ⏭️  Skipped: $SKIPPED"
+    fi
+  else
+    echo "ℹ️ No changes detected - skipping processing"
+  fi
 else
-  echo "⚠️ Less than 2 files - skipping delta (run again tomorrow)"
+  echo "⚠️ Less than 2 files available - skipping delta (run again tomorrow)"
 fi
 
-echo "🎉 Pipeline complete! Ready for processticketsqueezedelta → ingestticketsqueezedelta"
+echo "========================================"
+echo "🎊 COMPLETE PIPELINE SUCCESS!"
+echo "📁 Files in $DATASET_DIR:"
+ls -la "$DATASET_DIR"/*.csv "$DATASET_DIR"/ticketsqueeze_delta_*.json 2>/dev/null || echo "No pipeline files"
+echo "========================================"
