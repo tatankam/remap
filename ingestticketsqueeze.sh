@@ -5,6 +5,7 @@ set -euo pipefail
 # Load variables from .env
 if [ -f .env ]; then
   export $(grep -v '^#' .env | xargs)
+  echo "✅ Loaded .env"
 else
   echo "Error: .env file not found!" >&2
   exit 1
@@ -17,7 +18,7 @@ fi
 : ${FTP_PORT:?"FTP_PORT not set"}
 : ${FTP_FILE:?"FTP_FILE not set"}
 
-# Get script directory and dataset folder
+# Get script directory and dataset folder (HOST PATH)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DATASET_DIR="$SCRIPT_DIR/dataset"
 BASE_NAME=$(basename "$FTP_FILE" .csv)
@@ -29,25 +30,15 @@ TODAY_FILE="$DATASET_DIR/${BASE_NAME}_${TODAY_DATE}.csv"
 YESTERDAY_FILE="$DATASET_DIR/${BASE_NAME}_${YESTERDAY_DATE}.csv"
 
 # Validate dataset directory
-if [ ! -d "$DATASET_DIR" ]; then
-  echo "Error: dataset folder not found at $DATASET_DIR!" >&2
-  exit 1
-fi
-
+mkdir -p "$DATASET_DIR"
 if [ ! -w "$DATASET_DIR" ]; then
   echo "Error: dataset folder not writable at $DATASET_DIR!" >&2
   exit 1
 fi
 
 # Check dependencies
-if ! command -v curl >/dev/null 2>&1; then
-  echo "Error: curl is required but not installed!" >&2
-  exit 1
-fi
-if ! command -v jq >/dev/null 2>&1; then
-  echo "Error: jq is required but not installed!" >&2
-  exit 1
-fi
+command -v curl >/dev/null 2>&1 || { echo "Error: curl required!" >&2; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo "Error: jq required!" >&2; exit 1; }
 
 echo "========================================"
 echo " 🎯 TicketSqueeze FULL Pipeline"
@@ -56,7 +47,7 @@ echo " 📄 Base name  : $BASE_NAME"
 echo " 🚀 http://127.0.0.1:8000"
 echo "========================================"
 
-# CLEANUP: Delete CSV files older than 2 days
+# 🧹 CLEANUP: Delete CSV files older than 2 days
 echo "🧹 Cleaning up files older than 2 days..."
 DELETED_COUNT=0
 while read -r file; do
@@ -87,7 +78,7 @@ echo "Current CSV files:"
 ls -1 "$DATASET_DIR"/${BASE_NAME}_*.csv 2>/dev/null || echo "  (none yet)"
 echo "----------------------------------------"
 
-# DOWNLOAD
+# 📥 DOWNLOAD
 FTP_URL="ftp://$FTP_HOST:$FTP_PORT/$FTP_FILE"
 TMP_FILE="$TODAY_FILE.part"
 
@@ -133,47 +124,97 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
   echo "⚡ Computing delta: $OLD_FILE → $NEW_FILE"
   
   # STEP 1: Compute delta
-  DELTA_RESPONSE=$(curl -s -X POST "http://127.0.0.1:8000/compute-delta" \
+  DELTA_RESPONSE=$(curl -s -w "\nHTTP:%{http_code}" -X POST "http://127.0.0.1:8000/compute-delta" \
     -F "old_file=@$OLD_FILE" \
     -F "new_file=@$NEW_FILE")
   
-  ADDED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.added')
-  REMOVED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.removed')
-  CHANGED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.changed')
-  TOTAL=$(echo "$DELTA_RESPONSE" | jq -r '.summary.total')
+  DELTA_HTTP=$(echo "$DELTA_RESPONSE" | grep 'HTTP:' | cut -d: -f2 | tr -d ' ')
+  if [ "$DELTA_HTTP" != "200" ]; then
+    echo "❌ Delta failed (HTTP $DELTA_HTTP): $DELTA_RESPONSE" >&2
+    exit 1
+  fi
+  
+  ADDED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.added // 0')
+  REMOVED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.removed // 0')
+  CHANGED=$(echo "$DELTA_RESPONSE" | jq -r '.summary.changed // 0')
+  TOTAL=$(echo "$DELTA_RESPONSE" | jq -r '.summary.total // 0')
   
   echo "📊 Delta summary: ${ADDED} added, ${REMOVED} removed, ${CHANGED} changed (${TOTAL} total)"
-  echo "💾 Delta.csv saved: $(echo "$DELTA_RESPONSE" | jq -r '.csv_path')"
   
   if [ "$TOTAL" -gt 0 ]; then
+    # ⏳ WAIT: Sync delta.csv from container → host
+    echo "⏳ Waiting for delta.csv on host ($DATASET_DIR/delta.csv)..."
+    for i in {1..15}; do
+      if [ -f "$DATASET_DIR/delta.csv" ] && [ -s "$DATASET_DIR/delta.csv" ]; then
+        echo "✓ delta.csv ready ($(stat -c%s "$DATASET_DIR/delta.csv" 2>/dev/null || echo "?") bytes)"
+        break
+      fi
+      sleep 1
+    done
+    
+    if [ ! -f "$DATASET_DIR/delta.csv" ]; then
+      echo "❌ delta.csv timeout! Contents:" >&2
+      ls -la "$DATASET_DIR"/*.csv
+      exit 1
+    fi
+    
     # STEP 2: Process delta.csv → JSON
     echo "🔄 Processing delta.csv → JSON..."
-    PROCESS_RESPONSE=$(curl -s -X POST "http://127.0.0.1:8000/processticketsqueezedelta" \
+    PROCESS_RESPONSE=$(curl -s -w "\nHTTP:%{http_code}" -X POST "http://127.0.0.1:8000/processticketsqueezedelta" \
       -F "file=@$DATASET_DIR/delta.csv" \
       -F "include_removed=true" \
       -F "include_changed=true")
     
-    JSON_PATH=$(echo "$PROCESS_RESPONSE" | jq -r '.saved_path')
+    PROCESS_HTTP=$(echo "$PROCESS_RESPONSE" | grep 'HTTP:' | cut -d: -f2 | tr -d ' ')
+    if [ "$PROCESS_HTTP" != "200" ]; then
+      echo "❌ Process failed (HTTP $PROCESS_HTTP): $PROCESS_RESPONSE" >&2
+      exit 1
+    fi
+    
+    JSON_PATH=$(echo "$PROCESS_RESPONSE" | jq -r '.saved_path // "unknown"')
     EVENTS_COUNT=$(echo "$PROCESS_RESPONSE" | jq -r '.summary.events // 0')
     
     echo "✅ JSON created: $JSON_PATH ($EVENTS_COUNT events)"
     
-    # STEP 3: Ingest JSON to Qdrant (DELETE removed + UPSERT added/changed)
-    if [ -f "$JSON_PATH" ]; then
-      echo "🚀 Ingesting to Qdrant (optimized free tier)..."
-      INGEST_RESPONSE=$(curl -s -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta" \
-        -F "file=@$JSON_PATH")
+    # ⏳ WAIT: Sync JSON from container → host
+    JSON_HOST_PATH=$(basename "$JSON_PATH")
+    echo "⏳ Waiting for JSON on host ($DATASET_DIR/$JSON_HOST_PATH)..."
+    for i in {1..15}; do
+      if [ -f "$DATASET_DIR/$JSON_HOST_PATH" ] && [ -s "$DATASET_DIR/$JSON_HOST_PATH" ]; then
+        echo "✓ JSON ready ($(stat -c%s "$DATASET_DIR/$JSON_HOST_PATH" 2>/dev/null || echo "?") bytes)"
+        break
+      fi
+      sleep 1
+    done
+    
+    if [ -f "$DATASET_DIR/$JSON_HOST_PATH" ]; then
+      # STEP 3: Ingest JSON to Qdrant
+      echo "🚀 Ingesting $DATASET_DIR/$JSON_HOST_PATH to Qdrant..."
+      INGEST_RESPONSE=$(curl -s -w "\nHTTP:%{http_code}" -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta" \
+        -F "file=@$DATASET_DIR/$JSON_HOST_PATH")
+      
+      INGEST_HTTP=$(echo "$INGEST_RESPONSE" | grep 'HTTP:' | cut -d: -f2 | tr -d ' ')
+      if [ "$INGEST_HTTP" != "200" ]; then
+        echo "❌ Ingest failed (HTTP $INGEST_HTTP): $INGEST_RESPONSE" >&2
+        exit 1
+      fi
       
       DELETED=$(echo "$INGEST_RESPONSE" | jq -r '.deleted // 0')
       INSERTED=$(echo "$INGEST_RESPONSE" | jq -r '.inserted // 0')
       UPDATED=$(echo "$INGEST_RESPONSE" | jq -r '.updated // 0')
       SKIPPED=$(echo "$INGEST_RESPONSE" | jq -r '.skipped_unchanged // 0')
+      POINTS=$(echo "$INGEST_RESPONSE" | jq -r '.points_count // 0')
       
       echo "🎉 Qdrant ingestion complete!"
       echo "  🗑️  Deleted: $DELETED"
       echo "  ➕ Inserted: $INSERTED"
       echo "  ✏️  Updated: $UPDATED"
       echo "  ⏭️  Skipped: $SKIPPED"
+      echo "  📊 Total points: $POINTS"
+    else
+      echo "❌ JSON timeout! Contents:" >&2
+      ls -la "$DATASET_DIR"/*.json
+      exit 1
     fi
   else
     echo "ℹ️ No changes detected - skipping processing"
@@ -185,5 +226,7 @@ fi
 echo "========================================"
 echo "🎊 COMPLETE PIPELINE SUCCESS!"
 echo "📁 Files in $DATASET_DIR:"
-ls -la "$DATASET_DIR"/*.csv "$DATASET_DIR"/ticketsqueeze_delta_*.json 2>/dev/null || echo "No pipeline files"
+ls -la "$DATASET_DIR"/*.csv "$DATASET_DIR"/*.json 2>/dev/null || echo "No pipeline files"
+echo "🔍 Collection status:"
+curl -s "http://127.0.0.1:8000/collection_info" | jq .
 echo "========================================"
