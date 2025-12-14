@@ -175,7 +175,7 @@ def map_ticketsqueeze_to_event(row: Dict[str, str], delta_type: str) -> Dict[str
     
     # Exact schema match for ingest_service.py
     event = {
-        "id": f"{event_id}_{delta_type}" if delta_type != "added" else event_id,
+        "id": event_id,
         "title": title,
         "category": category,
         "description": description,  # Used for embedding in ingest_service
