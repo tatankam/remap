@@ -18,7 +18,7 @@ fi
 : ${FTP_PORT:?"FTP_PORT not set"}
 : ${FTP_FILE:?"FTP_FILE not set"}
 
-# Get script directory and dataset folder (HOST PATH) - MOVED UP
+# Get script directory and dataset folder (HOST PATH)
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DATASET_DIR="$SCRIPT_DIR/dataset"
 BASE_NAME=$(basename "$FTP_FILE" .csv)
@@ -151,17 +151,18 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
   echo "📊 Delta summary: $ADDED added, $REMOVED removed, $CHANGED changed ($TOTAL total)"
   echo "💾 Delta.csv saved: $DELTA_PATH"
   
-  # ✅ KEY FIX: Process if delta.csv exists (ignores buggy JSON numbers)
+  # Process if delta.csv exists
   DELTA_CSV="$DATASET_DIR/delta.csv"
   if [ -f "$DELTA_CSV" ] && [ -s "$DELTA_CSV" ]; then
     echo "⚡ delta.csv exists ($(stat -c%s "$DELTA_CSV" 2>/dev/null || echo "?") bytes) → PROCESSING!"
-    
-    # STEP 2: Process delta.csv → JSON
-    echo "🔄 Processing delta.csv → JSON..."
+
+    # STEP 2: Process delta.csv → JSON with clean ID parameter (NO suffix)
+    echo "🔄 Processing delta.csv → JSON (clean numerical IDs only)..."
     PROCESS_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8000/processticketsqueezedelta" \
       -F "file=@$DELTA_CSV" \
       -F "include_removed=true" \
-      -F "include_changed=true")
+      -F "include_changed=true" \
+      -F "clean_id=true")
     
     PROCESS_HTTP=$(echo "$PROCESS_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
     PROCESS_JSON=$(echo "$PROCESS_RESPONSE" | sed '/HTTP:/d' | sed 's/[[:space:]]*$//')
@@ -171,14 +172,14 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
       exit 1
     fi
     
-    # ✅ FIXED: HARDCODE JSON FILENAME (backend returns empty path)
+    # HARDCODE JSON FILENAME
     JSON_HOST_PATH="ticketsqueeze_delta_delta.json"
     EVENTS_COUNT=$(echo "$PROCESS_JSON" | jq -r '.summary.events // 0' 2>/dev/null || echo "unknown")
     
     echo "✅ JSON processing complete (events: $EVENTS_COUNT)"
     echo "📄 Expecting: $DATASET_DIR/$JSON_HOST_PATH"
     
-    # ⏳ WAIT for JSON file with verbose debug
+    # ⏳ WAIT for JSON file
     echo "⏳ Waiting for $JSON_HOST_PATH (20s max)..."
     for i in {1..20}; do
       if [ -f "$DATASET_DIR/$JSON_HOST_PATH" ] && [ -s "$DATASET_DIR/$JSON_HOST_PATH" ]; then
