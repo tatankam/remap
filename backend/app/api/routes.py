@@ -469,74 +469,145 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
 
 
 
-@router.delete("/cleanup-past_events")
-async def cleanup_past_events(dry_run: bool = True):
+@router.delete("/cleanup-past-events")
+async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000, quick_delete: bool = False):
     """
-    🧹 CRON: Delete points with start_date < today (UTC midnight)
+    🧹 CRON: Delete points with start_date < today
+    ?dry_run=true (default) - scan only
+    ?dry_run=false&quick_delete=true - delete streaming (FAST)
+    ?dry_run=false - delete after full scan
     """
-    from datetime import datetime, timezone
-    
     client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
+    today = datetime.now(timezone.utc).date()
     
-    # Today midnight UTC as Unix timestamp (number)
-    today_midnight = datetime.now(timezone.utc).replace(
-        hour=0, minute=0, second=0, microsecond=0
-    )
-    today_timestamp = today_midnight.timestamp()  # ✅ Converts to float number
+    if quick_delete:
+        # 🚀 FAST: Stream delete (no memory buildup)
+        logger.info("🧹 Quick delete mode: streaming...")
+        deleted = 0
+        offset = None
+        
+        while True:
+            try:
+                result = client.scroll(
+                    collection_name=COLLECTION_NAME,
+                    limit=100,
+                    with_payload=True,
+                    with_vectors=False,
+                    offset=offset
+                )
+                points, next_offset = result
+                offset = next_offset
+                
+                if not points:
+                    break
+                
+                batch_delete = []
+                for point in points:
+                    start_date_str = point.payload.get("start_date")
+                    if start_date_str:
+                        try:
+                            if 'Z' in start_date_str:
+                                event_date = datetime.fromisoformat(start_date_str.replace('Z', '+00:00')).date()
+                            else:
+                                event_date = datetime.fromisoformat(start_date_str).date()
+                            if event_date < today:
+                                batch_delete.append(point.id)
+                        except (ValueError, AttributeError):
+                            continue
+                
+                if batch_delete:
+                    client.delete(collection_name=COLLECTION_NAME, points_selector=models.PointIdsList(points=batch_delete), wait=False)
+                    deleted += len(batch_delete)
+                    logger.info(f"🗑️ Quick-deleted {len(batch_delete)} (total: {deleted})")
+                
+                if not offset:
+                    break
+                    
+            except Exception as e:
+                logger.error(f"❌ Quick-delete batch failed: {e}")
+                break
+        
+        final_count = client.get_collection(COLLECTION_NAME).points_count
+        return {
+            "status": "quick_success",
+            "deleted": deleted,
+            "final_points_count": final_count,
+            "cutoff_date": today.isoformat()
+        }
     
-    logger.info(f"🔍 Deleting events before {today_midnight.isoformat()} (timestamp={today_timestamp})")
+    # 📊 FULL SCAN MODE (dry_run or regular delete)
+    logger.info(f"🧹 Starting cleanup scan (max={max_scan}, dry_run={dry_run})")
+    old_point_ids = []
+    scanned = 0
     
-    # ✅ FIXED: Use timestamp number for datetime range
-    filter_old = models.Filter(
-        must=[
-            models.FieldCondition(
-                key="start_date",
-                range=models.Range(lt=today_timestamp)  # Number, not string
-            )
-        ]
-    )
-    
-    # Rest unchanged...
-    all_old_points = []
     offset = None
-    while True:
-        result = client.scroll(
-            collection_name=COLLECTION_NAME,
-            scroll_filter=filter_old,
-            limit=1000,
-            with_payload=False,
-            offset=offset
-        )
-        old_points = result[0]
-        all_old_points.extend([p.id for p in old_points])
-        offset = result[1]
-        if not offset:
+    while scanned < max_scan:
+        try:
+            result = client.scroll(
+                collection_name=COLLECTION_NAME,
+                limit=500,
+                with_payload=True,
+                with_vectors=False,
+                offset=offset
+            )
+            points, next_offset = result
+            offset = next_offset
+            
+            if not points:
+                break
+            
+            for point in points:
+                start_date_str = point.payload.get("start_date")
+                if start_date_str:
+                    try:
+                        if 'Z' in start_date_str:
+                            event_date = datetime.fromisoformat(start_date_str.replace('Z', '+00:00')).date()
+                        else:
+                            event_date = datetime.fromisoformat(start_date_str).date()
+                        if event_date < today:
+                            old_point_ids.append(point.id)
+                    except:
+                        continue
+            
+            scanned += len(points)
+            logger.info(f"📊 Batch: scanned={scanned}, old={len(old_point_ids)}")
+            
+            if not offset:
+                break
+                
+        except Exception as e:
+            logger.error(f"❌ Scroll batch failed: {e}")
             break
     
-    total_old = len(all_old_points)
-    logger.info(f"📊 Found {total_old} old events")
+    total_old = len(old_point_ids)
+    logger.info(f"✅ Scan complete: {scanned} scanned, {total_old} old events")
     
     if dry_run or total_old == 0:
         return {
-            "status": "dry_run" if dry_run else "success",
-            "deleted": 0,
-            "scanned": total_old,
-            "cutoff_timestamp": today_timestamp,
-            "cutoff_date": today_midnight.isoformat(),
+            "status": "dry_run",
+            "scanned": scanned,
+            "old_events": total_old,
+            "cutoff_date": today.isoformat(),
+            "sample_ids": [str(id) for id in old_point_ids[:5]]
         }
     
-    # Delete in batches
-    BATCH_SIZE = 100
-    deleted_count = 0
-    for i in range(0, len(all_old_points), BATCH_SIZE):
-        batch_ids = all_old_points[i:i+BATCH_SIZE]
-        client.delete(collection_name=COLLECTION_NAME, points=batch_ids, wait=True)
-        deleted_count += len(batch_ids)
+    # 🗑️ REAL DELETE (batched)
+    BATCH_SIZE = 50
+    deleted = 0
+    for i in range(0, total_old, BATCH_SIZE):
+        try:
+            batch = old_point_ids[i:i+BATCH_SIZE]
+            client.delete(collection_name=COLLECTION_NAME, points_selector=models.PointIdsList(points=batch), wait=True)
+            deleted += len(batch)
+            logger.info(f"🗑️ Deleted {len(batch)} (batch {i//BATCH_SIZE+1}/{total_old//BATCH_SIZE+1})")
+        except Exception as e:
+            logger.error(f"❌ Delete batch failed: {e}")
     
-    collection_info = client.get_collection(COLLECTION_NAME)
+    final_info = client.get_collection(COLLECTION_NAME)
     return {
         "status": "success",
-        "deleted": deleted_count,
-        "final_points_count": collection_info.points_count,
-        "cutoff_timestamp": today_timestamp,
+        "deleted": deleted,
+        "scanned": scanned,
+        "final_points_count": final_info.points_count,
+        "cutoff_date": today.isoformat()
     }
