@@ -22,6 +22,7 @@ from app.models import schemas
 from app.models.schemas import SentenceInput
 from pydantic import ValidationError
 from qdrant_client import QdrantClient, models
+from datetime import datetime, timezone
 from uuid import uuid4
 from pathlib import Path
 from shapely.geometry import LineString, Point
@@ -465,3 +466,82 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
     except Exception as e:
         logger.error(f"Error in ingest_ticketsqueeze_delta: {e}")
         raise HTTPException(status_code=500, detail=f"Ingestion failed: {str(e)}")
+
+
+
+@router.delete("/cleanup-past-events")
+async def cleanup_past_events(dry_run: bool = True):
+    """
+    🧹 CRON: Delete points with start_date < today
+    curl -X DELETE "http://localhost:8000/cleanup-past-events?dry_run=false"
+    """
+    client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
+    
+    # Today's date at midnight UTC
+    today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    today_str = today.isoformat()
+    
+    logger.info(f"🔍 Scanning for events before {today_str} (dry_run={dry_run})")
+    
+    # Scroll to find old events
+    filter_old = models.Filter(
+        must=[
+            models.FieldCondition(
+                key="start_date",
+                range=models.Range(lt=today_str)
+            )
+        ]
+    )
+    
+    all_old_points = []
+    offset = None
+    while True:
+        result = client.scroll(
+            collection_name=COLLECTION_NAME,
+            scroll_filter=filter_old,
+            limit=1000,
+            with_payload=False,  # Don't need payload for deletion
+            offset=offset
+        )
+        old_points = result[0]  # points list
+        all_old_points.extend([p.id for p in old_points])
+        offset = result[1]  # next_page
+        if not offset:
+            break
+    
+    total_old = len(all_old_points)
+    logger.info(f"📊 Found {total_old} old events")
+    
+    if dry_run or total_old == 0:
+        return {
+            "status": "dry_run" if dry_run else "success",
+            "deleted": 0,
+            "scanned": total_old,
+            "cutoff_date": today_str,
+            "message": f"Would delete {total_old} events before {today_str}"
+        }
+    
+    # Real deletion in batches
+    BATCH_SIZE = 100
+    deleted_count = 0
+    for i in range(0, len(all_old_points), BATCH_SIZE):
+        batch_ids = all_old_points[i:i+BATCH_SIZE]
+        client.delete(
+            collection_name=COLLECTION_NAME,
+            points=batch_ids,
+            wait=True
+        )
+        deleted_count += len(batch_ids)
+        logger.info(f"🗑️ Deleted batch {i//BATCH_SIZE + 1}: {len(batch_ids)} points")
+    
+    # Final count
+    collection_info = client.get_collection(COLLECTION_NAME)
+    
+    return {
+        "status": "success",
+        "deleted": deleted_count,
+        "scanned": total_old,
+        "final_points_count": collection_info.points_count,
+        "cutoff_date": today_str,
+        "message": f"Deleted {deleted_count} past events"
+    }
