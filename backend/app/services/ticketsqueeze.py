@@ -101,10 +101,11 @@ def map_ticketsqueeze_to_event(row: Dict[str, str], delta_type: str) -> Dict[str
         row.get("venue") or 
         row.get("venue_name", "")
     )
-    address = normalize_text(
-        row.get("address") or 
-        row.get("venue_address", "")
-    )
+
+    # Combine venue_address + venue_city for full address
+    venue_addr = normalize_text(row.get("address") or row.get("venue_address", ""))
+    venue_city_val = normalize_text(row.get("city") or row.get("venue_city", ""))
+    address = f"{venue_addr}, {venue_city_val}".strip(", ")
     
     # Extract latitude/longitude safely
     latitude = None
