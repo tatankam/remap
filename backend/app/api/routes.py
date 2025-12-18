@@ -300,7 +300,7 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
     """
     FREE TIER optimized:
     - DELETE removed events first
-    - UPSERT added/changed
+    - UPSERT added/changed (PRESERVES FULL LOCATION OBJECT)
     - Uses shared DATASET_DIR
     """
     if not file.filename.lower().endswith(".json"):
@@ -348,10 +348,9 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
             if delete_ids:
                 client.delete(
                     collection_name=COLLECTION_NAME,
-                    points=delete_ids,  # ✅ FIXED: Direct string IDs
+                    points=delete_ids,
                     wait=True,
                 )
-
                 deleted_count = len(delete_ids)
                 logger.info(f"Deleted {deleted_count} removed events")
 
@@ -406,23 +405,23 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
                         updated += 1
                 else:
                     inserted += 1
-                    point_id_to_use = str(uuid4())  # ✅ FIXED: Direct string UUID
+                    point_id_to_use = str(uuid4())
 
+                # ✅ FIXED: Preserve FULL original location object + add lat/lon
                 loc = event.get("location", {})
-                loc_geo = {}
-                if loc.get("latitude") and loc.get("longitude"):
-                    loc_geo = {
-                        "lat": float(loc["latitude"]),
-                        "lon": float(loc["longitude"]),
-                    }
+                location_payload = loc.copy() if loc else {}
 
-                location_payload = {**loc, **loc_geo}
-                payload = {
-                    **event,
-                    "id": event_id,
-                    "location": location_payload,
-                    "hash": chunk_hash,
-                }
+                # Safely add lat/lon for Qdrant geo-queries (never overwrite existing)
+                if loc.get("latitude") is not None:
+                    location_payload["lat"] = float(loc["latitude"])
+                if loc.get("longitude") is not None:
+                    location_payload["lon"] = float(loc["longitude"])
+
+                # ✅ FIXED: Preserve ALL original event fields exactly
+                payload = event.copy()
+                payload["id"] = event_id
+                payload["location"] = location_payload
+                payload["hash"] = chunk_hash
 
                 points.append(
                     models.PointStruct(
@@ -440,7 +439,6 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
 
             if points:
                 try:
-                    # ✅ FIXED: wait=True for immediate visibility
                     client.upsert(collection_name=COLLECTION_NAME, points=points, wait=True)
                 except Exception as e:
                     logger.error(f"Batch {start // BATCH_SIZE + 1} failed: {e}")
@@ -460,14 +458,12 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
             "total_processed": len(active_events),
             "batches_sent": (len(active_events) + BATCH_SIZE - 1) // BATCH_SIZE,
             "points_count": collection_info.points_count,
-            "message": "Free tier optimized ingestion complete (DELETE + UPSERT + SYNCED)",
+            "message": "Free tier optimized ingestion complete (FULL LOCATION PRESERVED)",
         }
 
     except Exception as e:
         logger.error(f"Error in ingest_ticketsqueeze_delta: {e}")
         raise HTTPException(status_code=500, detail=f"Ingestion failed: {str(e)}")
-
-
 
 @router.delete("/cleanup-past-events")
 async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000, quick_delete: bool = False):
