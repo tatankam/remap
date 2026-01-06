@@ -140,6 +140,7 @@ async def create_event_map(request: schemas.RouteRequest):
         for event in sorted_events:
             loc = event.get('location', {})
             event['address'] = loc.get('address')
+            event['venue'] = loc.get('venue')
             event['lat'] = loc.get('lat')
             event['lon'] = loc.get('lon')
 
