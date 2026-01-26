@@ -24,7 +24,21 @@ CACHE_DB = DATASET_DIR / "geocode_cache.db"
 
 # Ensure dataset directory exists
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
-logger.info(f"✅ Cache DB: {CACHE_DB.absolute()} | Docker: {os.path.exists('/app')}")
+
+# ✅ CRITICAL FIX: CREATE TABLE IMMEDIATELY ON IMPORT (like local)
+conn = sqlite3.connect(CACHE_DB, check_same_thread=False)
+conn.execute("""
+    CREATE TABLE IF NOT EXISTS geocode_cache (
+        address_hash TEXT PRIMARY KEY,
+        lat REAL,
+        lon REAL,
+        expires INTEGER
+    )
+""")
+conn.commit()
+conn.close()
+
+logger.info(f"✅ Cache DB: {CACHE_DB.absolute()} | Docker: {os.path.exists('/app')} | Table ready")
 
 # Config
 CACHE_TTL = 90 * 86400
