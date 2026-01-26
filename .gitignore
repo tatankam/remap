@@ -25,6 +25,7 @@ backend/__pycache__/
 # datasets file too big
 dataset/*
 backend/app/dataset/*
+backend/dataset
 
 
 # docs
