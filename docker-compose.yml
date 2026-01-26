@@ -4,6 +4,7 @@ services:
       context: ./backend
     env_file:
       - .env
+    user: "1000:1000"  # ← ADD THIS LINE
     volumes:
       # ✅ FIXED: host:container
       - ./dataset:/app/dataset  # Mount host ./dataset to /app/dataset
