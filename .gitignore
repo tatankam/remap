@@ -34,3 +34,5 @@ docs/old/
 # notebooks for local utility
 notebooks/00_utility.ipynb
 notebooks/04_scraping.ipynb
+notebooks/07_analyzeqdrant.ipynb
+notebooks/*.json

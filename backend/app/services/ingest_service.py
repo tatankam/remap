@@ -154,7 +154,15 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
     
     for start in tqdm(range(0, len(events), BATCH_SIZE), desc="Batches"):
         batch = events[start: start + BATCH_SIZE]
-        texts = [normalize_text(event.get("description", "")) for event in batch]
+        # BEFORE (line ~180)
+        #texts = [normalize_text(event.get("description", "")) for event in batch]
+
+        # AFTER (line ~180)  
+        texts = [
+            normalize_text(f"{event.get('category', '')} {event.get('description', '')}")
+            for event in batch
+        ]
+
         
         dense_embeddings = list(dense_embedding_model.passage_embed(texts))
         sparse_embeddings = list(sparse_embedding_model.passage_embed(texts))
