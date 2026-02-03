@@ -28,3 +28,17 @@
 2026-02-03 14:39:11,968 INFO uvicorn.error Waiting for application shutdown.
 2026-02-03 14:39:11,970 INFO uvicorn.error Application shutdown complete.
 2026-02-03 14:39:11,971 INFO uvicorn.error Finished server process [38912]
+2026-02-03 14:46:13,888 INFO uvicorn.error Started server process [40103]
+2026-02-03 14:46:13,888 INFO uvicorn.error Waiting for application startup.
+2026-02-03 14:46:13,889 INFO uvicorn.error Application startup complete.
+2026-02-03 14:46:34,557 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 14:46:34,574 INFO uvicorn.access 127.0.0.1:42678 - "POST /create_map HTTP/1.1" 200
+2026-02-03 14:56:02,565 INFO uvicorn.error Shutting down
+2026-02-03 14:56:02,666 INFO uvicorn.error Waiting for application shutdown.
+2026-02-03 14:56:02,668 INFO uvicorn.error Application shutdown complete.
+2026-02-03 14:56:02,668 INFO uvicorn.error Finished server process [40103]
+2026-02-03 14:56:16,026 INFO uvicorn.error Started server process [41286]
+2026-02-03 14:56:16,027 INFO uvicorn.error Waiting for application startup.
+2026-02-03 14:56:16,027 INFO uvicorn.error Application startup complete.
+2026-02-03 14:57:09,116 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 14:57:09,142 INFO uvicorn.access 127.0.0.1:57832 - "POST /create_map HTTP/1.1" 200
