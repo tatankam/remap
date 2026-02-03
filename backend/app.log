@@ -42,3 +42,7 @@
 2026-02-03 14:56:16,027 INFO uvicorn.error Application startup complete.
 2026-02-03 14:57:09,116 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
 2026-02-03 14:57:09,142 INFO uvicorn.access 127.0.0.1:57832 - "POST /create_map HTTP/1.1" 200
+2026-02-03 15:05:17,498 INFO uvicorn.error Shutting down
+2026-02-03 15:05:17,599 INFO uvicorn.error Waiting for application shutdown.
+2026-02-03 15:05:17,599 INFO uvicorn.error Application shutdown complete.
+2026-02-03 15:05:17,600 INFO uvicorn.error Finished server process [41286]

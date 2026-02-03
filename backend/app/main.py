@@ -6,36 +6,12 @@ from fastapi.responses import ORJSONResponse
 from app.api.routes import router
 from fastapi.middleware.cors import CORSMiddleware
 
-# --- Logging: weekly rotation, overwrite, BOTH console + /app/app.log ---
-log_file = os.path.join(os.getcwd(), "app.log")  # Ensures /app/app.log in Docker
-handler = TimedRotatingFileHandler(
-    log_file, when="W0", interval=1, backupCount=0  # Overwrite every Monday
-)
-handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
-
-# Configure root logger with BOTH handlers
-logging.basicConfig(
-    level=logging.INFO,
-    handlers=[
-        handler,                    # File: /app/app.log
-        logging.StreamHandler()     # Console → docker logs
-    ],
-    force=True  # Override uvicorn's config
-)
-
-# Force ALL loggers to use root handlers
-for logger_name in ("uvicorn", "uvicorn.error", "uvicorn.access", "httpx"):
-    lg = logging.getLogger(logger_name)
-    lg.handlers.clear()
-    lg.propagate = True
-    lg.setLevel(logging.INFO)
+# Create log file path FIRST (don't configure yet)
+log_file = os.path.join(os.getcwd(), "app.log")
 
 app = FastAPI(default_response_class=ORJSONResponse)
-
-# Include your API routes
 app.include_router(router)
 
-# CORS configuration
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -44,3 +20,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# LOGGING CONFIG - AFTER app creation (critical for Docker)
+def configure_logging():
+    handler = TimedRotatingFileHandler(log_file, when="W0", interval=1, backupCount=0)
+    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
+    
+    # Root logger: file + console
+    root = logging.getLogger()
+    root.setLevel(logging.INFO)
+    root.handlers = [handler, logging.StreamHandler()]
+    
+    # Redirect uvicorn loggers AFTER they exist
+    for name in ("uvicorn", "uvicorn.error", "uvicorn.access", "httpx"):
+        lg = logging.getLogger(name)
+        lg.handlers = []
+        lg.propagate = True
+        lg.setLevel(logging.INFO)
+
+# Configure AFTER FastAPI setup
+configure_logging()
+logging.info("🚀 Logging configured - check /app/app.log")
