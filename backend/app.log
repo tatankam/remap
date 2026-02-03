@@ -19,3 +19,6 @@
 2026-02-03 14:37:11,417 INFO uvicorn.error Waiting for application shutdown.
 2026-02-03 14:37:11,418 INFO uvicorn.error Application shutdown complete.
 2026-02-03 14:37:11,419 INFO uvicorn.error Finished server process [38601]
+2026-02-03 14:37:25,224 INFO uvicorn.error Started server process [38912]
+2026-02-03 14:37:25,225 INFO uvicorn.error Waiting for application startup.
+2026-02-03 14:37:25,225 INFO uvicorn.error Application startup complete.
