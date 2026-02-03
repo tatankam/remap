@@ -159,7 +159,7 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
 
         # AFTER (line ~180)  
         texts = [
-            normalize_text(f"{event.get('category', '')} {event.get('description', '')}")
+            normalize_text(f"{event.get('title', '')} {event.get('category', '')}")
             for event in batch
         ]
 
