@@ -7,6 +7,8 @@ services:
     volumes:
       # ✅ FIXED: host:container
       - ./dataset:/app/dataset  # Mount host ./dataset to /app/dataset
+      - ./backend/logs:/app/logs  # ← ADD THIS LINE
+
     ports:
       - "8000:8000"
     container_name: backend
