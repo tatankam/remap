@@ -179,10 +179,9 @@ async def ingest_events_endpoint(file: UploadFile = File(...)):
         
         logger.info(f"✅ Ingest complete: {result['points_count']} points in collection")
         return result
-        
-    finally:
-        if save_path.exists():
-            save_path.unlink()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Ingestion failed: {str(e)}")
+    # File is no longer deleted after ingestion; it remains in DATASET_DIR
 
 @router.post("/sentencetopayload")
 async def sentence_to_payload(data: SentenceInput):
