@@ -46,3 +46,7 @@
 2026-02-03 15:05:17,599 INFO uvicorn.error Waiting for application shutdown.
 2026-02-03 15:05:17,599 INFO uvicorn.error Application shutdown complete.
 2026-02-03 15:05:17,600 INFO uvicorn.error Finished server process [41286]
+2026-02-03 15:05:42,585 INFO root 🚀 Logging configured - check /app/app.log
+2026-02-03 15:05:42,585 INFO uvicorn.error Started server process [42525]
+2026-02-03 15:05:42,586 INFO uvicorn.error Waiting for application startup.
+2026-02-03 15:05:42,586 INFO uvicorn.error Application startup complete.
