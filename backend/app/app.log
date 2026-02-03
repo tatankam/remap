@@ -1,0 +1,4 @@
+2026-02-03 15:18:36,057 INFO root 🚀 Logging to: /home/biso/development/my_projects/remap/backend/app/app.log
+2026-02-03 15:18:36,057 INFO uvicorn.error Started server process [43900]
+2026-02-03 15:18:36,057 INFO uvicorn.error Waiting for application startup.
+2026-02-03 15:18:36,057 INFO uvicorn.error Application startup complete.

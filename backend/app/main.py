@@ -6,8 +6,26 @@ from fastapi.responses import ORJSONResponse
 from app.api.routes import router
 from fastapi.middleware.cors import CORSMiddleware
 
-# Create log file path FIRST (don't configure yet)
-log_file = os.path.join(os.getcwd(), "app.log")
+# --- FORCE /app/app.log (Docker) + ./app.log (Local) ---
+app_dir = os.path.dirname(os.path.abspath(__file__))  # Directory of main.py
+log_file = os.path.join(app_dir, "app.log")          # app/app.log in Docker
+
+handler = TimedRotatingFileHandler(
+    log_file, when="W0", interval=1, backupCount=0
+)
+handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
+
+logging.basicConfig(
+    level=logging.INFO,
+    handlers=[handler, logging.StreamHandler()],
+    force=True
+)
+
+for logger_name in ("uvicorn", "uvicorn.error", "uvicorn.access", "httpx"):
+    lg = logging.getLogger(logger_name)
+    lg.handlers.clear()
+    lg.propagate = True
+    lg.setLevel(logging.INFO)
 
 app = FastAPI(default_response_class=ORJSONResponse)
 app.include_router(router)
@@ -21,23 +39,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# LOGGING CONFIG - AFTER app creation (critical for Docker)
-def configure_logging():
-    handler = TimedRotatingFileHandler(log_file, when="W0", interval=1, backupCount=0)
-    handler.setFormatter(logging.Formatter("%(asctime)s %(levelname)s %(name)s %(message)s"))
-    
-    # Root logger: file + console
-    root = logging.getLogger()
-    root.setLevel(logging.INFO)
-    root.handlers = [handler, logging.StreamHandler()]
-    
-    # Redirect uvicorn loggers AFTER they exist
-    for name in ("uvicorn", "uvicorn.error", "uvicorn.access", "httpx"):
-        lg = logging.getLogger(name)
-        lg.handlers = []
-        lg.propagate = True
-        lg.setLevel(logging.INFO)
-
-# Configure AFTER FastAPI setup
-configure_logging()
-logging.info("🚀 Logging configured - check /app/app.log")
+# Test log
+logging.info(f"🚀 Logging to: {log_file}")

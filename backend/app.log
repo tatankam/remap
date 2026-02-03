@@ -50,3 +50,7 @@
 2026-02-03 15:05:42,585 INFO uvicorn.error Started server process [42525]
 2026-02-03 15:05:42,586 INFO uvicorn.error Waiting for application startup.
 2026-02-03 15:05:42,586 INFO uvicorn.error Application startup complete.
+2026-02-03 15:18:21,428 INFO uvicorn.error Shutting down
+2026-02-03 15:18:21,529 INFO uvicorn.error Waiting for application shutdown.
+2026-02-03 15:18:21,530 INFO uvicorn.error Application shutdown complete.
+2026-02-03 15:18:21,530 INFO uvicorn.error Finished server process [42525]
