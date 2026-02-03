@@ -26,7 +26,7 @@ backend/__pycache__/
 dataset/*
 backend/app/dataset/*
 backend/dataset
-
+backend/app.log
 
 # docs
 docs/old/
