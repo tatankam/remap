@@ -18,6 +18,6 @@ jobs:
           cd ${{ secrets.PROJECT_PATH }}     # ← Now hidden!
           docker compose down
           git -C ${{ secrets.PROJECT_PATH }} pull origin main
-          docker compose up -d
+          docker compose up --build -d
           docker system prune -f
 
