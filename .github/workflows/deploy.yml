@@ -1,0 +1,23 @@
+name: Deploy to Docker Host
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.HOST_NAME }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd ${{ secrets.PROJECT_PATH }}     # ← Now hidden!
+          docker compose down
+          git -C ${{ secrets.PROJECT_PATH }} pull origin main
+          docker compose up -d
+          docker system prune -f
+
