@@ -129,27 +129,29 @@ async def create_event_map(request: schemas.RouteRequest):
             score_threshold=score_threshold,
         )
 
-        if not payloads:
-            return {"message": "No events found in Qdrant for this route/buffer and date range."}
+        # ✅ FIXED: Always return full structure, even with 0 events
+        if payloads:
+            def distance_along_route(event):
+                point = Point(event["location"]["lon"], event["location"]["lat"])
+                return route_line.project(point)
 
-        def distance_along_route(event):
-            point = Point(event["location"]["lon"], event["location"]["lat"])
-            return route_line.project(point)
-
-        sorted_events = sorted(payloads, key=distance_along_route)
-        for event in sorted_events:
-            loc = event.get('location', {})
-            event['address'] = loc.get('address')
-            event['venue'] = loc.get('venue')
-            event['lat'] = loc.get('lat')
-            event['lon'] = loc.get('lon')
+            sorted_events = sorted(payloads, key=distance_along_route)
+            for event in sorted_events:
+                loc = event.get('location', {})
+                event['address'] = loc.get('address')
+                event['venue'] = loc.get('venue')
+                event['lat'] = loc.get('lat')
+                event['lon'] = loc.get('lon')
+        else:
+            sorted_events = []
 
         response = {
             "route_coords": route_coords,
             "buffer_polygon": polygon_coords,
             "origin": {"lat": origin_point[1], "lon": origin_point[0], "address": request.origin_address},
             "destination": {"lat": destination_point[1], "lon": destination_point[0], "address": request.destination_address},
-            "events": sorted_events
+            "events": sorted_events,
+            "message": "No events found along the route" if not payloads else None
         }
         return response
     except HTTPException:
