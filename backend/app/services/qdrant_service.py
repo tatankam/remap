@@ -34,7 +34,7 @@ def build_date_intersection_filter(start_date, end_date):
 def build_final_filter(geo_filter, date_filter):
     return qmodels.Filter(must=geo_filter.must + date_filter.must)
 
-def query_events_hybrid(dense_vector, sparse_vector, query_filter, collection_name=COLLECTION_NAME, limit=100, score_threshold=0.0):
+def query_events_hybrid(dense_vector, sparse_vector, query_filter, collection_name=COLLECTION_NAME, limit=200, score_threshold=0.0):
     results = qdrant_client.query_points(
         collection_name=collection_name,
         prefetch=[
@@ -44,13 +44,13 @@ def query_events_hybrid(dense_vector, sparse_vector, query_filter, collection_na
                     values=list(sparse_vector.values)
                 ),
                 using="sparse_vector",
-                limit=50,
+                limit=100,
                 # score_threshold=score_threshold,  # Optional: filter out low-score results but I don't need for sparse
             ),
             qmodels.Prefetch(
                 query=dense_vector,
                 using="dense_vector",
-                limit=50,
+                limit=100,
                 score_threshold=score_threshold,  # Optional: filter out low-score results
             ),
         ],
