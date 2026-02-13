@@ -15,16 +15,16 @@ services:
     networks:
       - remap
 
-  remap-frontend:
-    build:
-      context: ./frontend
-    ports:
-      - "8501:8501"
-    container_name: frontend
-    environment:
-      - API_URL=http://backend:8000
-    networks:
-      - remap
+#  remap-frontend:
+#    build:
+#      context: ./frontend
+#    ports:
+#      - "8501:8501"
+#    container_name: frontend
+#    environment:
+#      - API_URL=http://backend:8000
+#    networks:
+#      - remap
 
 networks:
   remap:

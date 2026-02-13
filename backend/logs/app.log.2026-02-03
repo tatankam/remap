@@ -1,0 +1,222 @@
+2026-02-03 15:29:45,404 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-03 15:29:45,405 INFO uvicorn.error Started server process [45208]
+2026-02-03 15:29:45,405 INFO uvicorn.error Waiting for application startup.
+2026-02-03 15:29:45,405 INFO uvicorn.error Application startup complete.
+2026-02-03 15:30:32,157 INFO uvicorn.error Shutting down
+2026-02-03 15:30:32,258 INFO uvicorn.error Waiting for application shutdown.
+2026-02-03 15:30:32,258 INFO uvicorn.error Application shutdown complete.
+2026-02-03 15:30:32,259 INFO uvicorn.error Finished server process [45208]
+2026-02-03 15:32:04,333 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-03 15:32:04,334 INFO uvicorn.error Started server process [45869]
+2026-02-03 15:32:04,334 INFO uvicorn.error Waiting for application startup.
+2026-02-03 15:32:04,334 INFO uvicorn.error Application startup complete.
+2026-02-03 15:32:12,752 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 15:32:12,764 INFO uvicorn.access 127.0.0.1:54724 - "POST /create_map HTTP/1.1" 200
+2026-02-03 15:35:14,095 INFO uvicorn.error Shutting down
+2026-02-03 15:35:14,196 INFO uvicorn.error Waiting for application shutdown.
+2026-02-03 15:35:14,196 INFO uvicorn.error Application shutdown complete.
+2026-02-03 15:35:14,196 INFO uvicorn.error Finished server process [45869]
+2026-02-03 15:35:33,232 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-03 15:35:33,232 INFO uvicorn.error Started server process [46569]
+2026-02-03 15:35:33,232 INFO uvicorn.error Waiting for application startup.
+2026-02-03 15:35:33,233 INFO uvicorn.error Application startup complete.
+2026-02-03 15:36:55,825 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 15:36:55,879 INFO uvicorn.access 127.0.0.1:43112 - "POST /create_map HTTP/1.1" 200
+2026-02-03 16:56:49,881 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 404 Not Found"
+2026-02-03 16:56:49,882 INFO uvicorn.access 127.0.0.1:47802 - "POST /create_map HTTP/1.1" 500
+2026-02-03 16:56:52,024 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 404 Not Found"
+2026-02-03 16:56:52,026 INFO uvicorn.access 127.0.0.1:47802 - "POST /create_map HTTP/1.1" 500
+2026-02-03 16:58:43,165 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 16:58:43,183 INFO uvicorn.access 127.0.0.1:41090 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:47:23,755 INFO app.services.openroute_service 🌐 ORS: Dallas...
+2026-02-03 17:47:24,163 INFO app.services.openroute_service ✅ NEW CACHE: Dallas...
+2026-02-03 17:47:27,403 INFO uvicorn.access 127.0.0.1:53816 - "POST /create_map HTTP/1.1" 500
+2026-02-03 17:47:36,649 INFO app.services.openroute_service 🌐 ORS: Newyork...
+2026-02-03 17:47:36,944 INFO app.services.openroute_service ✅ NEW CACHE: Newyork...
+2026-02-03 17:47:37,019 INFO uvicorn.access 127.0.0.1:33614 - "POST /create_map HTTP/1.1" 500
+2026-02-03 17:47:40,954 INFO uvicorn.access 127.0.0.1:33614 - "POST /create_map HTTP/1.1" 500
+2026-02-03 17:47:50,151 INFO uvicorn.access 127.0.0.1:44934 - "POST /create_map HTTP/1.1" 500
+2026-02-03 17:49:08,748 INFO uvicorn.access 127.0.0.1:44256 - "POST /create_map HTTP/1.1" 500
+2026-02-03 17:49:21,293 INFO app.services.openroute_service 🌐 ORS: New york...
+2026-02-03 17:49:21,447 INFO app.services.openroute_service ✅ NEW CACHE: New york...
+2026-02-03 17:49:22,225 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:49:22,450 INFO uvicorn.access 127.0.0.1:35230 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:49:47,821 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:49:48,044 INFO uvicorn.access 127.0.0.1:52558 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:50:14,381 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:50:14,611 INFO uvicorn.access 127.0.0.1:46662 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:56:03,416 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:56:03,418 INFO uvicorn.access 127.0.0.1:41004 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:56:08,038 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:56:08,058 INFO uvicorn.access 127.0.0.1:41004 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:58:33,191 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:58:33,193 INFO uvicorn.access 127.0.0.1:57744 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:59:08,036 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:59:08,060 INFO uvicorn.access 127.0.0.1:38608 - "POST /create_map HTTP/1.1" 200
+2026-02-03 17:59:49,365 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-03 17:59:49,396 INFO uvicorn.access 127.0.0.1:58840 - "POST /create_map HTTP/1.1" 200
+2026-02-03 18:12:20,514 INFO uvicorn.error Shutting down
+2026-02-03 18:12:20,619 INFO uvicorn.error Waiting for application shutdown.
+2026-02-03 18:12:20,619 INFO uvicorn.error Application shutdown complete.
+2026-02-03 18:12:20,619 INFO uvicorn.error Finished server process [46569]
+2026-02-07 10:46:44,279 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-07 10:46:44,279 INFO uvicorn.error Started server process [6016]
+2026-02-07 10:46:44,279 INFO uvicorn.error Waiting for application startup.
+2026-02-07 10:46:44,280 INFO uvicorn.error Application startup complete.
+2026-02-07 10:48:51,768 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 404 Not Found"
+2026-02-07 10:48:51,776 INFO uvicorn.access 127.0.0.1:48542 - "POST /create_map HTTP/1.1" 500
+2026-02-07 10:49:20,534 INFO uvicorn.error Shutting down
+2026-02-07 10:49:20,636 INFO uvicorn.error Waiting for application shutdown.
+2026-02-07 10:49:20,638 INFO uvicorn.error Application shutdown complete.
+2026-02-07 10:49:20,638 INFO uvicorn.error Finished server process [6016]
+2026-02-07 10:49:40,888 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-07 10:49:40,889 INFO uvicorn.error Started server process [7361]
+2026-02-07 10:49:40,889 INFO uvicorn.error Waiting for application startup.
+2026-02-07 10:49:40,889 INFO uvicorn.error Application startup complete.
+2026-02-07 10:50:39,888 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:50:39,931 INFO uvicorn.access 127.0.0.1:33574 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:52:19,612 INFO uvicorn.error Shutting down
+2026-02-07 10:52:19,713 INFO uvicorn.error Waiting for application shutdown.
+2026-02-07 10:52:19,714 INFO uvicorn.error Application shutdown complete.
+2026-02-07 10:52:19,714 INFO uvicorn.error Finished server process [7361]
+2026-02-07 10:52:38,194 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-07 10:52:38,194 INFO uvicorn.error Started server process [7679]
+2026-02-07 10:52:38,195 INFO uvicorn.error Waiting for application startup.
+2026-02-07 10:52:38,195 INFO uvicorn.error Application startup complete.
+2026-02-07 10:53:20,480 INFO app.services.openroute_service 🌐 GEO: vicenza...
+2026-02-07 10:53:20,936 INFO app.services.openroute_service ✅ GEO CACHED: (11.533929, 45.551136)
+2026-02-07 10:53:20,967 INFO app.services.openroute_service 🌐 GEO: venezia...
+2026-02-07 10:53:21,128 INFO app.services.openroute_service ✅ GEO CACHED: (12.561157, 45.581192)
+2026-02-07 10:53:21,163 INFO app.services.openroute_service 🛣️ ROUTE: (11.533929, 45.551136)→(12.561157, 45.581192) (driving-car)
+2026-02-07 10:53:21,379 INFO app.services.openroute_service ✅ ROUTE CACHED: 821 pts
+2026-02-07 10:53:21,927 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:53:21,955 INFO uvicorn.access 127.0.0.1:39776 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:53:32,166 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:53:32,500 INFO uvicorn.access 127.0.0.1:46710 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:53:53,541 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:53:53,616 INFO uvicorn.access 127.0.0.1:45970 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:53:55,975 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:53:56,035 INFO uvicorn.access 127.0.0.1:45970 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:53:57,749 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:53:57,772 INFO uvicorn.access 127.0.0.1:45970 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:54:16,580 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:54:16,626 INFO uvicorn.access 127.0.0.1:38938 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:54:19,628 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:54:19,672 INFO uvicorn.access 127.0.0.1:38938 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:54:23,184 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:54:23,220 INFO uvicorn.access 127.0.0.1:38938 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:54:42,571 INFO app.services.openroute_service 🛣️ ROUTE: (11.533929, 45.551136)→(12.561157, 45.581192) (cycling-regular)
+2026-02-07 10:54:43,226 INFO app.services.openroute_service ✅ ROUTE CACHED: 1913 pts
+2026-02-07 10:54:44,079 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:54:44,169 INFO uvicorn.access 127.0.0.1:57156 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:55:12,244 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:55:12,429 INFO uvicorn.access 127.0.0.1:46780 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:55:15,635 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:55:15,774 INFO uvicorn.access 127.0.0.1:46780 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:55:34,597 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:55:34,653 INFO uvicorn.access 127.0.0.1:43852 - "POST /create_map HTTP/1.1" 200
+2026-02-07 10:55:56,107 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-07 10:55:56,202 INFO uvicorn.access 127.0.0.1:43248 - "POST /create_map HTTP/1.1" 200
+2026-02-07 11:23:43,407 INFO uvicorn.error Shutting down
+2026-02-07 11:23:43,508 INFO uvicorn.error Waiting for application shutdown.
+2026-02-07 11:23:43,510 INFO uvicorn.error Application shutdown complete.
+2026-02-07 11:23:43,511 INFO uvicorn.error Finished server process [7679]
+2026-02-08 21:58:53,553 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-08 21:58:53,554 INFO uvicorn.error Started server process [5772]
+2026-02-08 21:58:53,554 INFO uvicorn.error Waiting for application startup.
+2026-02-08 21:58:53,555 INFO uvicorn.error Application startup complete.
+2026-02-08 21:59:46,608 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 21:59:46,652 INFO uvicorn.access 127.0.0.1:52504 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:13:22,105 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:13:22,125 INFO uvicorn.access 127.0.0.1:46854 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:15:56,631 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:15:56,656 INFO uvicorn.access 127.0.0.1:46976 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:16:37,821 INFO app.services.openroute_service 🌐 GEO: Verona...
+2026-02-08 22:16:38,350 INFO app.services.openroute_service ✅ GEO CACHED: (10.977656, 45.413277)
+2026-02-08 22:16:38,361 INFO app.services.openroute_service 🛣️ ROUTE: (10.977656, 45.413277)→(12.561157, 45.581192) (driving-car)
+2026-02-08 22:16:38,542 INFO app.services.openroute_service ✅ ROUTE CACHED: 958 pts
+2026-02-08 22:16:38,963 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:16:39,000 INFO uvicorn.access 127.0.0.1:50852 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:18:56,423 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:18:56,448 INFO uvicorn.access 127.0.0.1:45920 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:22:06,859 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:22:06,884 INFO uvicorn.access 127.0.0.1:58522 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:22:24,301 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:22:24,314 INFO uvicorn.access 127.0.0.1:48516 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:23:23,801 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:23:23,816 INFO uvicorn.access 127.0.0.1:33950 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:23:48,543 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:23:48,550 INFO uvicorn.access 127.0.0.1:33762 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:24:29,712 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:24:29,726 INFO uvicorn.access 127.0.0.1:46632 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:24:57,256 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:24:57,272 INFO uvicorn.access 127.0.0.1:54040 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:25:05,946 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:25:05,955 INFO uvicorn.access 127.0.0.1:41670 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:25:48,799 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:25:48,809 INFO uvicorn.access 127.0.0.1:40974 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:26:05,285 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:26:05,315 INFO uvicorn.access 127.0.0.1:43420 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:26:47,807 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:26:47,827 INFO uvicorn.access 127.0.0.1:52030 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:26:56,438 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:26:56,449 INFO uvicorn.access 127.0.0.1:43262 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:31:19,436 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:31:19,450 INFO uvicorn.access 127.0.0.1:60676 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:31:50,787 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:31:50,797 INFO uvicorn.access 127.0.0.1:52940 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:32:02,905 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:32:02,936 INFO uvicorn.access 127.0.0.1:50322 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:34:13,542 INFO app.services.openroute_service 🛣️ ROUTE: (12.561157, 45.581192)→(10.977656, 45.413277) (driving-car)
+2026-02-08 22:34:13,925 INFO app.services.openroute_service ✅ ROUTE CACHED: 891 pts
+2026-02-08 22:34:14,502 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:34:14,526 INFO uvicorn.access 127.0.0.1:51658 - "POST /create_map HTTP/1.1" 200
+2026-02-08 22:34:25,726 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 22:34:25,746 INFO uvicorn.access 127.0.0.1:45624 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:03:40,207 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:03:40,240 INFO uvicorn.access 127.0.0.1:51012 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:03:46,258 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:03:46,300 INFO uvicorn.access 127.0.0.1:32776 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:03:52,368 INFO app.services.openroute_service 🛣️ ROUTE: (10.977656, 45.413277)→(12.561157, 45.581192) (foot-walking)
+2026-02-08 23:03:54,726 INFO app.services.openroute_service ✅ ROUTE CACHED: 3099 pts
+2026-02-08 23:03:55,537 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:03:55,638 INFO uvicorn.access 127.0.0.1:32788 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:04:11,450 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:04:11,459 INFO uvicorn.access 127.0.0.1:36870 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:04:16,418 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:04:16,425 INFO uvicorn.access 127.0.0.1:36870 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:04:24,783 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:04:24,791 INFO uvicorn.access 127.0.0.1:40692 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:10:14,898 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:10:14,931 INFO uvicorn.access 127.0.0.1:54024 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:10:34,886 INFO app.services.openroute_service 🌐 GEO: Verola...
+2026-02-08 23:10:35,306 INFO app.services.openroute_service ✅ GEO CACHED: (7.193102, 43.710668)
+2026-02-08 23:10:35,313 INFO app.services.openroute_service 🛣️ ROUTE: (7.193102, 43.710668)→(12.561157, 45.581192) (driving-car)
+2026-02-08 23:10:35,531 INFO app.services.openroute_service ✅ ROUTE CACHED: 4300 pts
+2026-02-08 23:10:36,315 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:10:36,401 INFO uvicorn.access 127.0.0.1:42168 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:10:49,948 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:10:50,033 INFO uvicorn.access 127.0.0.1:54646 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:11:20,206 INFO app.services.openroute_service 🌐 GEO: Vershusomdd...
+2026-02-08 23:11:20,283 ERROR app.services.openroute_service ❌ GEO FAILED: No geocoding results
+2026-02-08 23:11:20,286 INFO uvicorn.access 127.0.0.1:52730 - "POST /create_map HTTP/1.1" 500
+2026-02-08 23:11:27,425 INFO app.services.openroute_service 🌐 GEO: Vershusomdd...
+2026-02-08 23:11:27,499 ERROR app.services.openroute_service ❌ GEO FAILED: No geocoding results
+2026-02-08 23:11:27,504 INFO uvicorn.access 127.0.0.1:56868 - "POST /create_map HTTP/1.1" 500
+2026-02-08 23:11:32,160 INFO app.services.openroute_service 🌐 GEO: Vershusomdd...
+2026-02-08 23:11:32,240 ERROR app.services.openroute_service ❌ GEO FAILED: No geocoding results
+2026-02-08 23:11:32,242 INFO uvicorn.access 127.0.0.1:56868 - "POST /create_map HTTP/1.1" 500
+2026-02-08 23:12:13,505 INFO app.services.openroute_service 🌐 GEO: 77676...
+2026-02-08 23:12:13,595 ERROR app.services.openroute_service ❌ GEO FAILED: No geocoding results
+2026-02-08 23:12:13,597 INFO uvicorn.access 127.0.0.1:45514 - "POST /create_map HTTP/1.1" 500
+2026-02-08 23:12:29,294 INFO app.services.openroute_service 🌐 GEO: 77676...
+2026-02-08 23:12:29,379 ERROR app.services.openroute_service ❌ GEO FAILED: No geocoding results
+2026-02-08 23:12:29,380 INFO uvicorn.access 127.0.0.1:46070 - "POST /create_map HTTP/1.1" 500
+2026-02-08 23:12:44,843 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:12:44,878 INFO uvicorn.access 127.0.0.1:51060 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:12:52,486 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:12:52,525 INFO uvicorn.access 127.0.0.1:51074 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:13:14,796 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:13:14,806 INFO uvicorn.access 127.0.0.1:53978 - "POST /create_map HTTP/1.1" 200
+2026-02-08 23:13:26,314 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-08 23:13:26,318 INFO uvicorn.access 127.0.0.1:39042 - "POST /create_map HTTP/1.1" 200

@@ -1,4 +1,5 @@
 import openrouteservice
+import requests
 import sqlite3
 import hashlib
 import time
@@ -9,9 +10,13 @@ from pathlib import Path
 from app.core.config import OPENROUTE_API_KEY
 from typing import Tuple, Dict, Any, List
 from contextlib import contextmanager
+from app.core import config
+
 
 logger = logging.getLogger(__name__)
 ors_client = openrouteservice.Client(key=OPENROUTE_API_KEY)
+
+
 
 # PATH DETECTION
 if os.path.exists("/app"):
@@ -19,8 +24,10 @@ if os.path.exists("/app"):
 else:
     DATASET_DIR = Path("dataset")
 
+
 CACHE_DB = DATASET_DIR / "cache.db"
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
+
 
 def init_db():
     """Production DB setup - bulletproof"""
@@ -66,10 +73,13 @@ def init_db():
     finally:
         conn.close()
 
+
 init_db()
+
 
 CACHE_TTL = 90 * 86400
 MAX_CACHE_SIZE = 20000
+
 
 @contextmanager
 def get_db_connection():
@@ -78,6 +88,7 @@ def get_db_connection():
         yield conn
     finally:
         conn.close()
+
 
 def cleanup_cache(table: str):
     """Atomic cleanup - race-condition proof"""
@@ -111,8 +122,47 @@ def cleanup_cache(table: str):
             conn.commit()
             logger.debug(f"🧹 {table}: expired={expired}")
 
+
+
+# def photon_geocode(address: str) -> Tuple[float, float]:
+#     """🚨 SIMULATED FAILURE - Forces ORS fallback"""
+#     logger.info(f"💥 PHOTON SIMULATED FAILURE for: {address}")
+#     raise Exception("FORCE FALLBACK TEST")
+
+def photon_geocode(address: str) -> Tuple[float, float]:
+    """Primary: Use Photon (Komoot) for geocoding, focused on places"""
+    headers = {
+        'User-Agent': f'{config.PHOTON_USER_AGENT} ({config.PHOTON_CONTACT_EMAIL})',
+        'Accept': 'application/json',
+    }
+    
+    try:
+        params = {
+            'q': address,
+            'limit': '1',
+            'osm_tag': ['place:city', 'place:town', 'place:village'],
+        }
+        response = requests.get(config.PHOTON_BASE_URL, params=params, headers=headers, timeout=10)
+
+        response.raise_for_status()
+        
+        data = response.json()
+        if data.get('features') and data['features']:
+            feature = data['features'][0]
+            coords = feature['geometry']['coordinates']
+            logger.info(f"✅ PHOTON RAW: {feature['properties'].get('name', 'N/A')}")
+            return coords[0], coords[1]  # lon, lat
+        
+        logger.debug("Photon: No results")
+        return None, None
+        
+    except Exception as e:
+        logger.debug(f"Photon failed (fallback): {e}")
+        return None, None
+
+
 def geocode_address(address: str) -> Tuple[float, float]:
-    """PERFECT - ZERO BUGS"""
+    """PRIMARY: Photon first, fallback to ORS - FULLY CACHED"""
     if len(address := address.strip()) < 3:
         raise ValueError("Address too short")
     
@@ -127,33 +177,52 @@ def geocode_address(address: str) -> Tuple[float, float]:
         
         if result:
             logger.debug(f"✅ GEO HIT: {address[:30]}")
-            return result[0], result[1]  # lon, lat ✅
+            return result[0], result[1]
     
     cleanup_cache("geocode_cache")
     
     logger.info(f"🌐 GEO: {address[:50]}...")
+    
+    # 1️⃣ PRIMARY: Try Photon (Komoot)
+    lon, lat = None, None
+    source = "None"
+    
     try:
-        result = ors_client.pelias_search(text=address)
-        if not (result and result.get('features') and result['features']):
-            raise ValueError("No geocoding results")
-        
-        coords = result['features'][0]['geometry']['coordinates']
-        lon, lat = coords[0], coords[1]
-        
-        with get_db_connection() as conn:
-            conn.execute("""
-                INSERT OR REPLACE INTO geocode_cache 
-                (address_hash, address, lon, lat, expires) 
-                VALUES (?, ?, ?, ?, ?)
-            """, (addr_hash, address, lon, lat, now + CACHE_TTL))
-            conn.commit()
-        
-        logger.info(f"✅ GEO CACHED: ({lon:.6f}, {lat:.6f})")
-        return lon, lat
-        
-    except Exception as e:
-        logger.error(f"❌ GEO FAILED: {e}")
-        raise ValueError(f"Geocoding failed: {e}")
+        lon, lat = photon_geocode(address)
+        if lon is not None and lat is not None:
+            source = "Photon"
+        else:
+            source = "Empty"
+    except Exception as photon_error:
+        logger.info(f"💥 PHOTON FAILED: {photon_error}")
+        source = "Exception"
+    
+    # 2️⃣ FALLBACK: ORS Pelias if needed
+    if lon is None or lat is None:
+        try:
+            result = ors_client.pelias_search(text=address)
+            if result and result.get('features') and result['features']:
+                coords = result['features'][0]['geometry']['coordinates']
+                lon, lat = coords[0], coords[1]
+                source = "ORS"
+            else:
+                raise ValueError("No geocoding results from ORS")
+        except Exception as e:
+            logger.error(f"❌ ORS GEO FAILED: {e}")
+            raise ValueError(f"Geocoding failed: {e}")
+    
+    # Cache result (works for both sources)
+    with get_db_connection() as conn:
+        conn.execute("""
+            INSERT OR REPLACE INTO geocode_cache 
+            (address_hash, address, lon, lat, expires) 
+            VALUES (?, ?, ?, ?, ?)
+        """, (addr_hash, address, lon, lat, now + CACHE_TTL))
+        conn.commit()
+    
+    logger.info(f"✅ GEO CACHED ({source}): ({lon:.6f}, {lat:.6f})")
+    return lon, lat
+
 
 def get_route(coords: List[List[float]], profile: str = 'driving-car',
               radiuses: List[float] = None) -> Dict[str, Any]:
@@ -210,5 +279,6 @@ def get_route(coords: List[List[float]], profile: str = 'driving-car',
     except Exception as e:
         logger.error(f"❌ ROUTE FAILED: {e}")
         raise ValueError(f"Routing failed: {e}")
+
 
 get_route_uncached = ors_client.directions
