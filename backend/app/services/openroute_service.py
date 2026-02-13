@@ -8,14 +8,21 @@ import os
 import json
 from pathlib import Path
 from app.core.config import OPENROUTE_API_KEY
+from app.core import config  # FIXED: Added missing import
 from typing import Tuple, Dict, Any, List
 from contextlib import contextmanager
-from app.core import config
+import atexit
 
 
 logger = logging.getLogger(__name__)
 ors_client = openrouteservice.Client(key=OPENROUTE_API_KEY)
 
+# GLOBAL HTTP SESSION - Production perf boost (TCP reuse)
+_photon_session = requests.Session()
+_photon_session.headers.update({
+    'User-Agent': f'{config.PHOTON_USER_AGENT} ({config.PHOTON_CONTACT_EMAIL})',
+    'Accept': 'application/json',
+})
 
 
 # PATH DETECTION
@@ -23,7 +30,6 @@ if os.path.exists("/app"):
     DATASET_DIR = Path("/app") / "dataset"
 else:
     DATASET_DIR = Path("dataset")
-
 
 CACHE_DB = DATASET_DIR / "cache.db"
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
@@ -37,6 +43,8 @@ def init_db():
         conn.execute("PRAGMA synchronous=NORMAL")
         conn.execute("PRAGMA cache_size=10000")
         conn.execute("PRAGMA wal_autocheckpoint=100")
+        conn.execute("PRAGMA temp_store=MEMORY")  # RAM temp tables
+        conn.execute("PRAGMA optimize")  # Auto-optimize
         
         # GEOCODE CACHE
         conn.execute("""
@@ -83,9 +91,14 @@ MAX_CACHE_SIZE = 20000
 
 @contextmanager
 def get_db_connection():
+    """Production: Timeout + thread-safe"""
     conn = sqlite3.connect(CACHE_DB, timeout=30.0, check_same_thread=False)
     try:
         yield conn
+        conn.commit()
+    except Exception:
+        conn.rollback()
+        raise
     finally:
         conn.close()
 
@@ -94,12 +107,10 @@ def cleanup_cache(table: str):
     """Atomic cleanup - race-condition proof"""
     now = int(time.time())
     with get_db_connection() as conn:
-        # Atomic expired cleanup
         expired = conn.execute(
             f"DELETE FROM {table} WHERE expires <= ?", (now,)
         ).rowcount
         
-        # Count only active entries
         size = conn.execute(
             f"SELECT COUNT(*) FROM {table} WHERE expires > ?", (now,)
         ).fetchone()[0]
@@ -116,53 +127,42 @@ def cleanup_cache(table: str):
                 )
                 """, (now, excess)
             ).rowcount
-            conn.commit()
             logger.info(f"🧹 {table}: exp={expired}, old={oldest}, active={size}")
         elif expired > 0:
-            conn.commit()
             logger.debug(f"🧹 {table}: expired={expired}")
 
 
-
-# def photon_geocode(address: str) -> Tuple[float, float]:
-#     """🚨 SIMULATED FAILURE - Forces ORS fallback"""
-#     logger.info(f"💥 PHOTON SIMULATED FAILURE for: {address}")
-#     raise Exception("FORCE FALLBACK TEST")
-
 def photon_geocode(address: str) -> Tuple[float, float]:
-    """Primary: Use Photon (Komoot) for geocoding, focused on places"""
-    headers = {
-        'User-Agent': f'{config.PHOTON_USER_AGENT} ({config.PHOTON_CONTACT_EMAIL})',
-        'Accept': 'application/json',
-    }
-    
+    """Primary: Photon w/ connection pooling"""
     try:
         params = {
             'q': address,
             'limit': '1',
             'osm_tag': ['place:city', 'place:town', 'place:village'],
         }
-        response = requests.get(config.PHOTON_BASE_URL, params=params, headers=headers, timeout=10)
-
+        response = _photon_session.get(config.PHOTON_BASE_URL, params=params, timeout=10)
         response.raise_for_status()
         
         data = response.json()
         if data.get('features') and data['features']:
             feature = data['features'][0]
             coords = feature['geometry']['coordinates']
-            logger.info(f"✅ PHOTON RAW: {feature['properties'].get('name', 'N/A')}")
-            return coords[0], coords[1]  # lon, lat
+            logger.debug(f"✅ PHOTON RAW: {feature['properties'].get('name', 'N/A')}")
+            return coords[0], coords[1]
         
         logger.debug("Photon: No results")
         return None, None
         
+    except requests.RequestException as e:
+        logger.debug(f"Photon network error: {e}")
+        return None, None
     except Exception as e:
-        logger.debug(f"Photon failed (fallback): {e}")
+        logger.debug(f"Photon failed: {e}")
         return None, None
 
 
 def geocode_address(address: str) -> Tuple[float, float]:
-    """PRIMARY: Photon first, fallback to ORS - FULLY CACHED"""
+    """PRIMARY: Photon → ORS fallback - FULLY CACHED"""
     if len(address := address.strip()) < 3:
         raise ValueError("Address too short")
     
@@ -180,45 +180,40 @@ def geocode_address(address: str) -> Tuple[float, float]:
             return result[0], result[1]
     
     cleanup_cache("geocode_cache")
-    
     logger.info(f"🌐 GEO: {address[:50]}...")
     
-    # 1️⃣ PRIMARY: Try Photon (Komoot)
+    # 1️⃣ Photon first
     lon, lat = None, None
     source = "None"
     
     try:
         lon, lat = photon_geocode(address)
-        if lon is not None and lat is not None:
-            source = "Photon"
-        else:
-            source = "Empty"
-    except Exception as photon_error:
-        logger.info(f"💥 PHOTON FAILED: {photon_error}")
+        source = "Photon" if lon else "Empty"
+    except Exception as e:
+        logger.info(f"💥 PHOTON FAILED: {e}")
         source = "Exception"
     
-    # 2️⃣ FALLBACK: ORS Pelias if needed
+    # 2️⃣ ORS fallback
     if lon is None or lat is None:
         try:
             result = ors_client.pelias_search(text=address)
-            if result and result.get('features') and result['features']:
+            if result and result.get('features'):
                 coords = result['features'][0]['geometry']['coordinates']
                 lon, lat = coords[0], coords[1]
                 source = "ORS"
             else:
-                raise ValueError("No geocoding results from ORS")
+                raise ValueError("No geocoding results")
         except Exception as e:
-            logger.error(f"❌ ORS GEO FAILED: {e}")
+            logger.error(f"❌ ORS FAILED: {e}")
             raise ValueError(f"Geocoding failed: {e}")
     
-    # Cache result (works for both sources)
+    # Cache success
     with get_db_connection() as conn:
         conn.execute("""
             INSERT OR REPLACE INTO geocode_cache 
             (address_hash, address, lon, lat, expires) 
             VALUES (?, ?, ?, ?, ?)
         """, (addr_hash, address, lon, lat, now + CACHE_TTL))
-        conn.commit()
     
     logger.info(f"✅ GEO CACHED ({source}): ({lon:.6f}, {lat:.6f})")
     return lon, lat
@@ -245,20 +240,19 @@ def get_route(coords: List[List[float]], profile: str = 'driving-car',
         ).fetchone()
         
         if result:
-            logger.debug(f"🛤️ ROUTE HIT: {coords[0]}→{coords[1]}")
+            logger.debug(f"🛤️ ROUTE HIT: {coords[0][:2]}→{coords[1][:2]}")
             return json.loads(result[0])
     
     cleanup_cache("route_cache")
+    logger.info(f"🛣️ ROUTE: {coords[0][:2]}→{coords[1][:2]} ({profile})")
     
-    logger.info(f"🛣️ ROUTE: {coords[0]}→{coords[1]} ({profile})")
     try:
         route_data = ors_client.directions(
             coordinates=coords, profile=profile, radiuses=radiuses, format='geojson'
         )
         
-        if (not isinstance(route_data, dict) or 
-            not route_data.get('features') or 
-            not route_data['features'][0].get('geometry')):
+        if not (isinstance(route_data, dict) and route_data.get('features') and 
+                route_data['features'][0].get('geometry')):
             raise ValueError("Invalid route response")
         
         with get_db_connection() as conn:
@@ -271,7 +265,6 @@ def get_route(coords: List[List[float]], profile: str = 'driving-car',
                 coords[1][0], coords[1][1], profile,
                 json.dumps(route_data), now + CACHE_TTL
             ))
-            conn.commit()
         
         logger.info(f"✅ ROUTE CACHED: {len(route_data['features'][0]['geometry']['coordinates'])} pts")
         return route_data
@@ -280,5 +273,10 @@ def get_route(coords: List[List[float]], profile: str = 'driving-car',
         logger.error(f"❌ ROUTE FAILED: {e}")
         raise ValueError(f"Routing failed: {e}")
 
+
+# Cleanup on shutdown
+def cleanup_session():
+    _photon_session.close()
+atexit.register(cleanup_session)
 
 get_route_uncached = ors_client.directions
