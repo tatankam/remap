@@ -47,71 +47,78 @@ import logging
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-# ✅ FIXED: Docker + Local compatible DATASET_DIR
+# ---------- SETUP ----------
 if Path("/app/dataset").exists():
     DATASET_DIR = Path("/app/dataset")
-    logger.info("✅ Docker: Using /app/dataset volume")
 elif Path("/dataset").exists():
     DATASET_DIR = Path("/dataset")
-    logger.info("✅ Docker: Using /dataset volume")
 else:
-    # Local dev fallback
     DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
-    logger.info(f"✅ Local: Using {DATASET_DIR}")
 
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
-logger.info(f"📁 DATASET_DIR = {DATASET_DIR.absolute()}")
 
-# ---------- EMBEDDING MODELS ----------
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME)
 
-# ---------- DEBUG ENDPOINT ----------
+# ---------- ENDPOINTS ----------
+
 @router.get("/collection_info")
 async def get_collection_info():
-    """🔍 DEBUG: Check collection status + vector names"""
     client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
     if not client.collection_exists(COLLECTION_NAME):
         return {"error": f"Collection {COLLECTION_NAME} does not exist"}
-    
     info = client.get_collection(COLLECTION_NAME)
     return {
         "collection": COLLECTION_NAME,
         "points_count": info.points_count,
-        "vectors_count": getattr(info, 'vectors_count', 0),
-        "dense_vector_name": DENSE_VECTOR_NAME,
-        "sparse_vector_name": SPARSE_VECTOR_NAME,
-        "status": str(info.status),
-        "config": {
-            "dense_dim": len(list(dense_embedding_model.passage_embed(["test"]))[0]),
-            "dataset_dir": str(DATASET_DIR)
-        }
+        "status": str(info.status)
     }
 
 @router.post("/create_map")
 async def create_event_map(request: schemas.RouteRequest):
     try:
-        origin_point = geocode_address(request.origin_address)
-        destination_point = geocode_address(request.destination_address)
-        coords = [origin_point, destination_point]
+        # 1. Always geocode the Origin
+        origin_lon, origin_lat = geocode_address(request.origin_address)
+        origin_point_sh = Point(origin_lon, origin_lat)
+        
+        route_coords = []
+        destination_data = None
+        
+        # 2. Determine Mode: Route vs Point
+        if request.destination_address:
+            # --- ROUTE MODE ---
+            dest_lon, dest_lat = geocode_address(request.destination_address)
+            destination_data = {"lat": dest_lat, "lon": dest_lon, "address": request.destination_address}
+            
+            coords = [[origin_lon, origin_lat], [dest_lon, dest_lat]]
+            routes = get_route(coords, profile=request.profile_choice)
+            
+            route_geometry = routes["features"][0]["geometry"]
+            route_coords = route_geometry["coordinates"]
+            
+            if len(route_coords) < 2:
+                raise HTTPException(status_code=400, detail="Route must contain two different addresses.")
+            
+            base_geometry = LineString(route_coords)
+        else:
+            # --- POINT MODE ---
+            # Just use the origin point as the base for buffering
+            base_geometry = origin_point_sh
+            logger.info(f"📍 Point Mode enabled for: {request.origin_address}")
 
-        routes = get_route(coords, profile=request.profile_choice)
-        route_geometry = routes["features"][0]["geometry"]
-        route_coords = route_geometry["coordinates"]
-        if len(route_coords) < 2:
-            raise HTTPException(status_code=400, detail="Route must contain two different addresses for buffering.")
-
-        route_line = LineString(route_coords)
-        route_gdf = gpd.GeoDataFrame([{"geometry": route_line}], crs="EPSG:4326")
-
-        route_gdf_3857 = route_gdf.to_crs(epsg=3857)
-        if request.buffer_distance <= 0:
-            raise HTTPException(status_code=400, detail="Buffer distance must be positive (km).")
+        # 3. Create Buffer Polygon
+        # Convert to EPSG:3857 (meters) for accurate buffering
+        gdf = gpd.GeoDataFrame([{"geometry": base_geometry}], crs="EPSG:4326")
+        gdf_3857 = gdf.to_crs(epsg=3857)
+        
         buffer_distance_meters = request.buffer_distance * 1000
-        buffer_polygon = route_gdf_3857.buffer(buffer_distance_meters).to_crs(epsg=4326).iloc[0]
+        buffer_polygon = gdf_3857.buffer(buffer_distance_meters).to_crs(epsg=4326).iloc[0]
+        
+        # Convert exterior coordinates for Qdrant and Response
         polygon_coords = np.array(buffer_polygon.exterior.coords).tolist()
         polygon_coords_qdrant = [{"lon": lon, "lat": lat} for lon, lat in polygon_coords]
 
+        # 4. Search Events in Qdrant
         geo_filter = build_geo_filter(polygon_coords_qdrant)
         date_filter = build_date_intersection_filter(request.startinputdate, request.endinputdate)
         final_filter = build_final_filter(geo_filter, date_filter)
@@ -129,35 +136,42 @@ async def create_event_map(request: schemas.RouteRequest):
             score_threshold=score_threshold,
         )
 
-        # ✅ FIXED: Always return full structure, even with 0 events
+        # 5. Sorting and Formatting
         if payloads:
-            def distance_along_route(event):
-                point = Point(event["location"]["lon"], event["location"]["lat"])
-                return route_line.project(point)
+            def distance_logic(event):
+                event_pt = Point(event["location"]["lon"], event["location"]["lat"])
+                if request.destination_address:
+                    # In Route Mode, sort by progress along the route
+                    return base_geometry.project(event_pt)
+                else:
+                    # In Point Mode, sort by straight-line distance from origin
+                    return origin_point_sh.distance(event_pt)
 
-            sorted_events = sorted(payloads, key=distance_along_route)
+            sorted_events = sorted(payloads, key=distance_logic)
             for event in sorted_events:
                 loc = event.get('location', {})
-                event['address'] = loc.get('address')
-                event['venue'] = loc.get('venue')
                 event['lat'] = loc.get('lat')
                 event['lon'] = loc.get('lon')
+                event['address'] = loc.get('address')
         else:
             sorted_events = []
 
-        response = {
-            "route_coords": route_coords,
+        return {
+            "route_coords": route_coords, # Empty list in point mode
             "buffer_polygon": polygon_coords,
-            "origin": {"lat": origin_point[1], "lon": origin_point[0], "address": request.origin_address},
-            "destination": {"lat": destination_point[1], "lon": destination_point[0], "address": request.destination_address},
+            "origin": {"lat": origin_lat, "lon": origin_lon, "address": request.origin_address},
+            "destination": destination_data, # None in point mode
             "events": sorted_events,
-            "message": "No events found along the route" if not payloads else None
+            "mode": "route" if request.destination_address else "point",
+            "message": "No events found in the specified range" if not payloads else None
         }
-        return response
     except HTTPException:
         raise
     except Exception as e:
+        logger.error(f"Error in create_map: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
 
 @router.post("/ingestevents")
 async def ingest_events_endpoint(file: UploadFile = File(...)):

@@ -8,22 +8,20 @@ import os
 import json
 from pathlib import Path
 from app.core.config import OPENROUTE_API_KEY
-from app.core import config  # FIXED: Added missing import
-from typing import Tuple, Dict, Any, List
+from app.core import config
+from typing import Tuple, Dict, Any, List, Optional
 from contextlib import contextmanager
 import atexit
-
 
 logger = logging.getLogger(__name__)
 ors_client = openrouteservice.Client(key=OPENROUTE_API_KEY)
 
-# GLOBAL HTTP SESSION - Production perf boost (TCP reuse)
+# GLOBAL HTTP SESSION
 _photon_session = requests.Session()
 _photon_session.headers.update({
     'User-Agent': f'{config.PHOTON_USER_AGENT} ({config.PHOTON_CONTACT_EMAIL})',
     'Accept': 'application/json',
 })
-
 
 # PATH DETECTION
 if os.path.exists("/app"):
@@ -34,17 +32,16 @@ else:
 CACHE_DB = DATASET_DIR / "cache.db"
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
 
-
 def init_db():
-    """Production DB setup - bulletproof"""
+    """Production DB setup"""
     conn = sqlite3.connect(CACHE_DB, check_same_thread=False)
     try:
         conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("PRAGMA synchronous=NORMAL")
         conn.execute("PRAGMA cache_size=10000")
         conn.execute("PRAGMA wal_autocheckpoint=100")
-        conn.execute("PRAGMA temp_store=MEMORY")  # RAM temp tables
-        conn.execute("PRAGMA optimize")  # Auto-optimize
+        conn.execute("PRAGMA temp_store=MEMORY")
+        conn.execute("PRAGMA optimize")
         
         # GEOCODE CACHE
         conn.execute("""
@@ -73,7 +70,6 @@ def init_db():
             )
         """)
         
-        # INDEXES
         conn.execute("CREATE INDEX IF NOT EXISTS idx_g_expires ON geocode_cache(expires)")
         conn.execute("CREATE INDEX IF NOT EXISTS idx_r_expires ON route_cache(expires)")
         conn.commit()
@@ -81,17 +77,14 @@ def init_db():
     finally:
         conn.close()
 
-
 init_db()
-
 
 CACHE_TTL = 90 * 86400
 MAX_CACHE_SIZE = 20000
 
-
 @contextmanager
 def get_db_connection():
-    """Production: Timeout + thread-safe"""
+    """Thread-safe DB connection"""
     conn = sqlite3.connect(CACHE_DB, timeout=30.0, check_same_thread=False)
     try:
         yield conn
@@ -102,9 +95,8 @@ def get_db_connection():
     finally:
         conn.close()
 
-
 def cleanup_cache(table: str):
-    """Atomic cleanup - race-condition proof"""
+    """Atomic cleanup"""
     now = int(time.time())
     with get_db_connection() as conn:
         expired = conn.execute(
@@ -117,23 +109,24 @@ def cleanup_cache(table: str):
         
         if size >= MAX_CACHE_SIZE:
             excess = max(0, size - MAX_CACHE_SIZE // 2)
-            oldest = conn.execute(
+            # Use appropriate hash column based on table
+            hash_col = "address_hash" if table == "geocode_cache" else "route_hash"
+            conn.execute(
                 f"""
-                DELETE FROM {table} WHERE route_hash IN (
-                    SELECT route_hash FROM {table} 
+                DELETE FROM {table} WHERE {hash_col} IN (
+                    SELECT {hash_col} FROM {table} 
                     WHERE expires > ? 
                     ORDER BY created ASC 
                     LIMIT ?
                 )
                 """, (now, excess)
-            ).rowcount
-            logger.info(f"🧹 {table}: exp={expired}, old={oldest}, active={size}")
+            )
+            logger.info(f"🧹 {table} resized: active={size}")
         elif expired > 0:
             logger.debug(f"🧹 {table}: expired={expired}")
 
-
-def photon_geocode(address: str) -> Tuple[float, float]:
-    """Primary: Photon w/ connection pooling"""
+def photon_geocode(address: str) -> Optional[Tuple[float, float]]:
+    """Photon geocoding with connection pooling"""
     try:
         params = {
             'q': address,
@@ -144,25 +137,18 @@ def photon_geocode(address: str) -> Tuple[float, float]:
         response.raise_for_status()
         
         data = response.json()
-        if data.get('features') and data['features']:
+        if data.get('features'):
             feature = data['features'][0]
             coords = feature['geometry']['coordinates']
-            logger.debug(f"✅ PHOTON RAW: {feature['properties'].get('name', 'N/A')}")
             return coords[0], coords[1]
         
-        logger.debug("Photon: No results")
-        return None, None
-        
-    except requests.RequestException as e:
-        logger.debug(f"Photon network error: {e}")
-        return None, None
+        return None
     except Exception as e:
         logger.debug(f"Photon failed: {e}")
-        return None, None
-
+        return None
 
 def geocode_address(address: str) -> Tuple[float, float]:
-    """PRIMARY: Photon → ORS fallback - FULLY CACHED"""
+    """Photon → ORS fallback - FULLY CACHED"""
     if len(address := address.strip()) < 3:
         raise ValueError("Address too short")
     
@@ -176,25 +162,17 @@ def geocode_address(address: str) -> Tuple[float, float]:
         ).fetchone()
         
         if result:
-            logger.debug(f"✅ GEO HIT: {address[:30]}")
             return result[0], result[1]
     
     cleanup_cache("geocode_cache")
-    logger.info(f"🌐 GEO: {address[:50]}...")
     
-    # 1️⃣ Photon first
-    lon, lat = None, None
-    source = "None"
+    # 1. Photon
+    res = photon_geocode(address)
+    lon, lat = res if res else (None, None)
+    source = "Photon" if lon else "Empty"
     
-    try:
-        lon, lat = photon_geocode(address)
-        source = "Photon" if lon else "Empty"
-    except Exception as e:
-        logger.info(f"💥 PHOTON FAILED: {e}")
-        source = "Exception"
-    
-    # 2️⃣ ORS fallback
-    if lon is None or lat is None:
+    # 2. ORS fallback
+    if lon is None:
         try:
             result = ors_client.pelias_search(text=address)
             if result and result.get('features'):
@@ -204,7 +182,7 @@ def geocode_address(address: str) -> Tuple[float, float]:
             else:
                 raise ValueError("No geocoding results")
         except Exception as e:
-            logger.error(f"❌ ORS FAILED: {e}")
+            logger.error(f"❌ Geocoding failed: {e}")
             raise ValueError(f"Geocoding failed: {e}")
     
     # Cache success
@@ -218,15 +196,14 @@ def geocode_address(address: str) -> Tuple[float, float]:
     logger.info(f"✅ GEO CACHED ({source}): ({lon:.6f}, {lat:.6f})")
     return lon, lat
 
-
 def get_route(coords: List[List[float]], profile: str = 'driving-car',
               radiuses: List[float] = None) -> Dict[str, Any]:
-    """ULTIMATE ROUTE CACHE - PRODUCTION LOCKED"""
+    """ULTIMATE ROUTE CACHE - Supports Route Mode with GeoJSON validation"""
     if radiuses is None:
         radiuses = [1000.0, 1000.0]
     
-    if len(coords) != 2 or any(len(c) != 2 for c in coords):
-        raise ValueError("Exactly 2 coordinates [[lon,lat],[lon,lat]] required")
+    if len(coords) != 2:
+        raise ValueError("Exactly 2 coordinates [[lon,lat],[lon,lat]] required for route")
     
     coords_key = json.dumps(coords, separators=(',', ':'))
     radiuses_key = json.dumps(radiuses, separators=(',', ':'))
@@ -240,20 +217,24 @@ def get_route(coords: List[List[float]], profile: str = 'driving-car',
         ).fetchone()
         
         if result:
-            logger.debug(f"🛤️ ROUTE HIT: {coords[0][:2]}→{coords[1][:2]}")
             return json.loads(result[0])
     
     cleanup_cache("route_cache")
-    logger.info(f"🛣️ ROUTE: {coords[0][:2]}→{coords[1][:2]} ({profile})")
     
     try:
+        # Requesting format='geojson' returns a FeatureCollection
         route_data = ors_client.directions(
-            coordinates=coords, profile=profile, radiuses=radiuses, format='geojson'
+            coordinates=coords, 
+            profile=profile, 
+            radiuses=radiuses, 
+            format='geojson'
         )
         
-        if not (isinstance(route_data, dict) and route_data.get('features') and 
-                route_data['features'][0].get('geometry')):
-            raise ValueError("Invalid route response")
+        # ✅ FIX: Validate for GeoJSON FeatureCollection structure
+        if ('features' not in route_data or 
+            not route_data['features'] or 
+            'geometry' not in route_data['features'][0]):
+            raise ValueError("Invalid GeoJSON route response")
         
         with get_db_connection() as conn:
             conn.execute("""
@@ -266,17 +247,19 @@ def get_route(coords: List[List[float]], profile: str = 'driving-car',
                 json.dumps(route_data), now + CACHE_TTL
             ))
         
-        logger.info(f"✅ ROUTE CACHED: {len(route_data['features'][0]['geometry']['coordinates'])} pts")
+        pts_count = len(route_data['features'][0]['geometry']['coordinates'])
+        logger.info(f"✅ ROUTE CACHED: {pts_count} pts")
         return route_data
         
     except Exception as e:
         logger.error(f"❌ ROUTE FAILED: {e}")
         raise ValueError(f"Routing failed: {e}")
 
-
 # Cleanup on shutdown
 def cleanup_session():
     _photon_session.close()
+
 atexit.register(cleanup_session)
 
+# Allow raw client access if needed
 get_route_uncached = ors_client.directions
