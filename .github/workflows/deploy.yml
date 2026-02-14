@@ -19,6 +19,6 @@ jobs:
           docker compose down
           git fetch origin
           git reset --hard origin/main
-          docker compose up --build -d
+          docker compose up -d --scale remap-backend=4 --build
           docker system prune -f
 
