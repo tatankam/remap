@@ -1,19 +1,30 @@
 services:
-  remap-backend:
-    build:
-      context: ./backend
-    env_file:
-      - .env
+  backend1:
+    build: ./backend
+    env_file: .env
     volumes:
-      # ✅ FIXED: host:container
-      - ./dataset:/app/dataset  # Mount host ./dataset to /app/dataset
-      - ./backend/logs:/logs  # ← ADD THIS LINE
-
+      - ./dataset:/app/dataset
+      - ./backend/logs:/logs
     ports:
       - "8000:8000"
-    container_name: backend
     networks:
       - remap
+
+  backend2:
+    build: ./backend
+    env_file: .env
+    volumes:
+      - ./dataset:/app/dataset
+      - ./backend/logs:/logs
+    ports:
+      - "8001:8000"
+    networks:
+      - remap
+
+networks:
+  remap:
+    driver: bridge
+
 
 #  remap-frontend:
 #    build:
@@ -26,6 +37,3 @@ services:
 #    networks:
 #      - remap
 
-networks:
-  remap:
-    driver: bridge
