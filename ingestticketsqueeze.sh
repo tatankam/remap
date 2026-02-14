@@ -44,7 +44,7 @@ echo "========================================"
 echo " 🎯 TicketSqueeze FULL Pipeline"
 echo " 📁 Dataset dir: $DATASET_DIR"
 echo " 📄 Base name  : $BASE_NAME"
-echo " 🚀 http://127.0.0.1:8000"
+echo " 🚀 http://127.0.0.1:8001"
 echo "========================================"
 
 # 🧹 CLEANUP: Delete CSV files older than 2 days
@@ -125,7 +125,7 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
   
   # STEP 1: Compute delta
   echo "📤 Uploading CSVs to /compute-delta..."
-  DELTA_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8000/compute-delta" \
+  DELTA_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8001/compute-delta" \
     -F "old_file=@$OLD_FILE" \
     -F "new_file=@$NEW_FILE")
   
@@ -158,7 +158,7 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
 
     # STEP 2: Process delta.csv → JSON with clean ID parameter (NO suffix)
     echo "🔄 Processing delta.csv → JSON (clean numerical IDs only)..."
-    PROCESS_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8000/processticketsqueezedelta" \
+    PROCESS_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8001/processticketsqueezedelta" \
       -F "file=@$DELTA_CSV" \
       -F "include_removed=true" \
       -F "include_changed=true" \
@@ -199,7 +199,7 @@ if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
     
     # STEP 3: Ingest JSON to Qdrant
     echo "🚀 Ingesting $DATASET_DIR/$JSON_HOST_PATH to Qdrant..."
-    INGEST_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta" \
+    INGEST_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8001/ingestticketsqueezedelta" \
       -F "file=@$DATASET_DIR/$JSON_HOST_PATH")
     
     INGEST_HTTP=$(echo "$INGEST_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
@@ -233,5 +233,5 @@ echo "🎊 COMPLETE PIPELINE SUCCESS!"
 echo "📁 Files in $DATASET_DIR:"
 ls -la "$DATASET_DIR"/*.csv "$DATASET_DIR"/*.json 2>/dev/null || echo "No pipeline files"
 echo "🔍 Collection status:"
-curl -s "http://127.0.0.1:8000/collection_info" | jq . 2>/dev/null || echo "Service unavailable"
+curl -s "http://127.0.0.1:8001/collection_info" | jq . 2>/dev/null || echo "Service unavailable"
 echo "========================================"

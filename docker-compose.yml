@@ -1,39 +1,28 @@
 services:
   backend1:
     build: ./backend
+    restart: always
     env_file: .env
     volumes:
       - ./dataset:/app/dataset
       - ./backend/logs:/logs
     ports:
-      - "8000:8000"
+      - "127.0.0.1:8000:8000"
     networks:
       - remap
 
   backend2:
     build: ./backend
+    restart: always
     env_file: .env
     volumes:
       - ./dataset:/app/dataset
       - ./backend/logs:/logs
     ports:
-      - "8001:8000"
+      - "127.0.0.1:8001:8000"
     networks:
       - remap
 
 networks:
   remap:
     driver: bridge
-
-
-#  remap-frontend:
-#    build:
-#      context: ./frontend
-#    ports:
-#      - "8501:8501"
-#    container_name: frontend
-#    environment:
-#      - API_URL=http://backend:8000
-#    networks:
-#      - remap
-

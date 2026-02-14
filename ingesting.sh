@@ -10,7 +10,7 @@ mkdir -p ./dataset
 # STEP 1: Scrape WITHOUT -w (SIMPLE)
 echo "📥 Scraping..." | tee -a "$LOG_FILE"
 curl -s -X GET \
-  "http://127.0.0.1:8000/scrape_unpli_events?page_no=1&page_size=500" \
+  "http://127.0.0.1:8001/scrape_unpli_events?page_no=1&page_size=500" \
   "${UNPLI_SESSION_ID:+&session_id=$UNPLI_SESSION_ID}" \
   -H "accept: application/json" | tee -a "$LOG_FILE"
 
@@ -28,7 +28,7 @@ echo "✅ $JSON_FILE ready ($(stat -c%s "$JSON_FILE" 2>/dev/null || echo "?") by
 # STEP 3: Ingest WITHOUT -w (SIMPLE)
 echo "🚀 Ingesting..." | tee -a "$LOG_FILE"
 curl -s -X POST \
-  "http://127.0.0.1:8000/ingestevents" \
+  "http://127.0.0.1:8001/ingestevents" \
   -F "file=@$JSON_FILE" | tee -a "$LOG_FILE"
 
 # STEP 4: Parse results
@@ -39,4 +39,4 @@ if grep -q '"inserted"' "$LOG_FILE"; then
 fi
 
 echo "✅ Done $(date)" | tee -a "$LOG_FILE"
-curl -s http://127.0.0.1:8000/collection_info | tee -a "$LOG_FILE"
+curl -s http://127.0.0.1:8001/collection_info | tee -a "$LOG_FILE"
