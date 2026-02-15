@@ -4,7 +4,7 @@ import asyncio
 import hashlib
 import logging
 from uuid import uuid4
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 import unicodedata
 import httpx
 from fastembed import TextEmbedding, SparseTextEmbedding
@@ -12,17 +12,18 @@ from qdrant_client import QdrantClient, models
 from app.core.config import QDRANT_SERVER, QDRANT_API_KEY, DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME
 from tqdm import tqdm
 
+# Detailed Logging Configuration
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 if not QDRANT_SERVER or not QDRANT_API_KEY:
     raise EnvironmentError("QDRANT_SERVER or QDRANT_API_KEY not defined in .env file")
 
-dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME)
-sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME)
-client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY, timeout=30000)
+# ✅ OPTIMIZATION: threads=1 prevents RAM/CPU spikes on 1GB machine
+dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME, threads=1)
+sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME, threads=1)
+client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY, timeout=300)
 
-# ✅ FIXED: HARDCODE SAME NAMES AS routes.py
 DENSE_VECTOR_NAME = "dense_vector"
 SPARSE_VECTOR_NAME = "sparse_vector"
 
@@ -33,14 +34,17 @@ def normalize_text(text):
     text = unicodedata.normalize("NFKC", text)
     return text
 
+def calculate_hash(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
 def ensure_collection_exists():
-    """✅ FIXED: Multi-vector collection with CORRECT names"""
+    """Restored full collection setup with INT8 Quantization and logging"""
     example_text = "Test for embedding dimension calculation."
     dense_emb = list(dense_embedding_model.passage_embed([example_text]))[0]
     dense_dim = len(dense_emb)
     
     if not client.collection_exists(COLLECTION_NAME):
-        logger.info(f"🚀 Creating collection {COLLECTION_NAME} with dense_vector + sparse_vector")
+        logger.info(f"🚀 Creating collection {COLLECTION_NAME} (Dense: {dense_dim})")
         client.create_collection(
             collection_name=COLLECTION_NAME,
             vectors_config={
@@ -50,7 +54,9 @@ def ensure_collection_exists():
                     on_disk=True),
             },
             sparse_vectors_config={
-                SPARSE_VECTOR_NAME: models.SparseVectorParams(),
+                SPARSE_VECTOR_NAME: models.SparseVectorParams(
+                    index=models.SparseIndexParams(on_disk=True)
+                ),
             },
             quantization_config=models.ScalarQuantization(
                 scalar=models.ScalarQuantizationConfig(
@@ -64,76 +70,42 @@ def ensure_collection_exists():
                 full_scan_threshold=10000
             )
         )
-        logger.info("✅ Collection created!")
+        logger.info("✅ Collection created with INT8 quantization.")
     
     # Payload indices
-    payload_indices = {
-        "id": "keyword",
-        "location": "geo",
-        "start_date": "datetime",
-        "end_date": "datetime"
-    }
-    for field_name, field_schema in payload_indices.items():
+    for field, schema in {"id": "keyword", "location": "geo", "start_date": "datetime", "end_date": "datetime"}.items():
         try:
-            client.create_payload_index(
-                collection_name=COLLECTION_NAME,
-                field_name=field_name,
-                field_schema=field_schema,
-            )
+            client.create_payload_index(COLLECTION_NAME, field_name=field, field_schema=schema)
         except Exception:
             pass
 
-def calculate_hash(text: str) -> str:
-    return hashlib.sha256(text.encode("utf-8")).hexdigest()
-
 async def async_geocode_structured(venue: str, city: str, region: str = "Veneto", country: str = "Italy") -> Optional[Dict[str, float]]:
     base_url = "https://nominatim.openstreetmap.org/search"
-    headers = {"User-Agent": "convert_to_geo/1.0"}
-    params_list = [
-        {"street": venue, "city": city, "state": region, "country": country, "format": "json", "limit": 1},
-        {"city": city, "state": region, "country": country, "format": "json", "limit": 1},
-    ]
+    headers = {"User-Agent": "remap_ingest/1.0"}
+    params = {"street": venue, "city": city, "state": region, "country": country, "format": "json", "limit": 1}
     async with httpx.AsyncClient() as client_http:
-        for params in params_list:
-            try:
-                response = await client_http.get(base_url, params=params, headers=headers, timeout=10)
-                response.raise_for_status()
-                data = response.json()
-                if data:
-                    return {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])}
-            except (httpx.HTTPError, ValueError):
-                pass
-            await asyncio.sleep(1)
+        try:
+            response = await client_http.get(base_url, params=params, headers=headers, timeout=10)
+            data = response.json()
+            if data:
+                logger.info(f"📍 Geocoded: {venue}, {city} -> {data[0]['lat']}, {data[0]['lon']}")
+                return {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])}
+        except Exception as e:
+            logger.warning(f"⚠️ Geocoding failed for {venue}: {str(e)}")
     return None
 
-async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
-    """✅ FIXED: wait=True + FULL vectors + REAL COUNTS"""
-    logger.info(f"🚀 Loading events from {json_path}")
-    with open(json_path, "r", encoding="utf-8") as f:
-        events_data = json.load(f)
-
-    events = events_data.get("events", [])
+async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: int = 32):
     if not events:
-        return {"inserted": 0, "updated": 0, "skipped_unchanged": 0, "message": "No events"}
-    
-    # Geocode
-    semaphore = asyncio.Semaphore(5)
-    def is_valid_lat_lon(lat, lon):
-        try:
-            lat = float(lat)
-            lon = float(lon)
-        except (TypeError, ValueError):
-            return False
-        return -90 <= lat <= 90 and -180 <= lon <= 180
+        logger.warning("Empty events list provided to ingestion.")
+        return {"inserted": 0, "updated": 0, "skipped_unchanged": 0}
 
+    # 1. Geocoding Phase
+    semaphore = asyncio.Semaphore(5)
     async def geocode_event(event):
         loc = event.get("location", {})
-        lat = loc.get("latitude")
-        lon = loc.get("longitude")
-        if lat is not None and lon is not None and is_valid_lat_lon(lat, lon):
+        if loc.get("latitude") and loc.get("longitude"):
             return
-        venue = loc.get("venue", "").strip()
-        city = event.get("city", "").strip()
+        venue, city = loc.get("venue", "").strip(), event.get("city", "").strip()
         if venue and city:
             async with semaphore:
                 coords = await async_geocode_structured(venue, city)
@@ -141,107 +113,86 @@ async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
                 event["location"]["latitude"] = coords["lat"]
                 event["location"]["longitude"] = coords["lon"]
 
-    logger.info("🌍 Geocoding events...")
+    logger.info(f"🌍 Starting geocoding for {len(events)} events...")
     await asyncio.gather(*(geocode_event(event) for event in events))
 
     ensure_collection_exists()
     
-    # ✅ FIXED INGESTION: wait=True + FULL VECTORS
-    BATCH_SIZE = 16
     inserted = updated = skipped_unchanged = 0
-
-    logger.info(f"⚡ Ingesting {len(events)} events (batch_size={BATCH_SIZE})")
+    total = len(events)
     
-    for start in tqdm(range(0, len(events), BATCH_SIZE), desc="Batches"):
-        batch = events[start: start + BATCH_SIZE]
-        # BEFORE (line ~180)
-        #texts = [normalize_text(event.get("description", "")) for event in batch]
+    logger.info(f"⚡ Ingesting {total} events (Batch Size: {batch_size})")
 
-        # AFTER (line ~180)  
-        texts = [
-            normalize_text(f"{event.get('title', '')} {event.get('category', '')}")
-            for event in batch
-        ]
+    for start in tqdm(range(0, total, batch_size), desc="Qdrant Ingestion"):
+        batch = events[start : start + batch_size]
+        batch_ids = [str(e.get("id") or e.get("event_id", "")) for e in batch]
+        batch_texts = [normalize_text(f"{e.get('title', '')} {e.get('category', '')}") for e in batch]
+        local_hashes = [calculate_hash(t) for t in batch_texts]
 
-        
-        dense_embeddings = list(dense_embedding_model.passage_embed(texts))
-        sparse_embeddings = list(sparse_embedding_model.passage_embed(texts))
-        points = []
+        # ✅ BULK CHECK (Efficiency Fix)
+        existing_points = client.retrieve(
+            collection_name=COLLECTION_NAME,
+            ids=[eid for eid in batch_ids if eid],
+            with_payload=True,
+            with_vectors=False
+        )
+        existing_map = {p.payload.get("id"): p for p in existing_points}
 
-        for i, event in enumerate(batch):
-            event_id = event.get("id")
-            if not event_id:
+        points_to_upsert = []
+        to_embed_indices = []
+
+        for i, eid in enumerate(batch_ids):
+            if not eid: continue
+            existing_p = existing_map.get(eid)
+            if existing_p and existing_p.payload.get("hash") == local_hashes[i]:
+                skipped_unchanged += 1
                 continue
-                
-            text = texts[i]
-            chunk_hash = calculate_hash(text)
+            to_embed_indices.append(i)
 
-            existing_points, _ = client.scroll(
-                collection_name=COLLECTION_NAME,
-                scroll_filter=models.Filter(
-                    must=[models.FieldCondition(key="id", match=models.MatchValue(value=event_id))]
-                ),
-                limit=1,
-            )
-            
-            if existing_points:
-                existing_point = existing_points[0]
-                existing_hash = existing_point.payload.get("hash")
-                if existing_hash == chunk_hash:
-                    skipped_unchanged += 1
-                    continue
-                else:
-                    point_id_to_use = existing_point.id
-                    updated += 1
-            else:
-                inserted += 1
-                point_id_to_use = str(uuid4())
+        if not to_embed_indices:
+            continue
+
+        # AI Embedding
+        subset_texts = [batch_texts[i] for i in to_embed_indices]
+        dense_embeddings = list(dense_embedding_model.passage_embed(subset_texts))
+        sparse_embeddings = list(sparse_embedding_model.passage_embed(subset_texts))
+
+        for idx, i in enumerate(to_embed_indices):
+            event = batch[i]
+            existing_p = existing_map.get(batch_ids[i])
+            point_id = existing_p.id if existing_p else str(uuid4())
+            if existing_p: updated += 1
+            else: inserted += 1
 
             loc = event.get("location", {})
-            loc_geo = {}
-            if "latitude" in loc and "longitude" in loc and loc["latitude"] and loc["longitude"]:
-                loc_geo = {
-                    "lat": float(loc["latitude"]),
-                    "lon": float(loc["longitude"])
-                }
+            loc_geo = {"lat": float(loc["latitude"]), "lon": float(loc["longitude"])} if loc.get("latitude") else {}
             
-            location_payload = {**loc, **loc_geo}
-            payload = {
-                **event, 
-                "location": location_payload, 
-                "hash": chunk_hash
-            }
+            payload = {**event, "location": {**loc, **loc_geo}, "hash": local_hashes[i]}
 
-            # ✅ FIXED: FULL VECTORS (no truncation!)
-            points.append(
-                models.PointStruct(
-                    id=point_id_to_use,
-                    vector={
-                        DENSE_VECTOR_NAME: dense_embeddings[i].tolist(),  # ✅ FULL VECTOR
-                        SPARSE_VECTOR_NAME: models.SparseVector(
-                            indices=list(sparse_embeddings[i].indices),      # ✅ FULL SPARSE
-                            values=[float(v) for v in sparse_embeddings[i].values]
-                        ),
-                    },
-                    payload=payload,
-                )
-            )
+            points_to_upsert.append(models.PointStruct(
+                id=point_id,
+                vector={
+                    DENSE_VECTOR_NAME: dense_embeddings[idx].tolist(),
+                    SPARSE_VECTOR_NAME: models.SparseVector(
+                        indices=list(sparse_embeddings[idx].indices),
+                        values=[float(v) for v in sparse_embeddings[idx].values]
+                    ),
+                },
+                payload=payload,
+            ))
 
-        if points:
-            # ✅ CRITICAL FIX: wait=True for IMMEDIATE VISIBILITY
-            client.upsert(collection_name=COLLECTION_NAME, points=points, wait=True)
+        if points_to_upsert:
+            is_last = (start + batch_size >= total)
+            client.upsert(collection_name=COLLECTION_NAME, points=points_to_upsert, wait=is_last)
+            logger.info(f"📤 Batch uploaded: {len(points_to_upsert)} points (wait={is_last})")
 
-    # ✅ FINAL SYNC + COUNTS
-    client.collection_exists(COLLECTION_NAME)
+    # Final stats logging
     collection_info = client.get_collection(COLLECTION_NAME)
+    logger.info(f"🎉 Ingestion finished. Total points in collection: {collection_info.points_count}")
     
-    logger.info(f"🎉 Ingestion complete: {collection_info.points_count} points")
     return {
         "inserted": inserted,
         "updated": updated,
         "skipped_unchanged": skipped_unchanged,
-        "points_count": collection_info.points_count,
-        "vectors_count": getattr(collection_info, 'vectors_count', 0),
-        "collection_info": collection_info.dict(),
-        "batches_processed": (len(events) + BATCH_SIZE - 1) // BATCH_SIZE,
+        "points_count": collection_info.points_count
     }
