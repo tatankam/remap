@@ -14,10 +14,12 @@ curl -s -X GET \
   "${UNPLI_SESSION_ID:+&session_id=$UNPLI_SESSION_ID}" \
   -H "accept: application/json" | tee -a "$LOG_FILE"
 
-# STEP 2: Wait + Find file (20s max)
-echo "⏳ Waiting for JSON..." | tee -a "$LOG_FILE"
+
+# STEP 2: Wait + Find file (Look in the specific dataset directory)
+echo "⏳ Waiting for JSON in $SCRIPT_DIR/dataset..." | tee -a "$LOG_FILE"
 for i in {1..10}; do
-  JSON_FILE=$(find ./dataset -name "*_500.json" -type f -printf '%T@ %p\n' 2>/dev/null | sort -nr | head -1 | cut -d' ' -f2-)
+  # This finds the most recent 500.json file in the dataset folder
+  JSON_FILE=$(find "$SCRIPT_DIR/dataset" -name "unpli_events_*.json" -type f -printf '%T@ %p\n' 2>/dev/null | sort -nr | head -1 | cut -d' ' -f2-)
   [ -n "$JSON_FILE" ] && break
   sleep 2
 done

@@ -38,15 +38,17 @@ import logging
 logger = logging.getLogger(__name__)
 router = APIRouter()
 
-# Dataset Directory Configuration
+# ---------- DATASET DIRECTORY CONFIGURATION ----------
 if Path("/app/dataset").exists():
     DATASET_DIR = Path("/app/dataset")
 elif Path("/dataset").exists():
     DATASET_DIR = Path("/dataset")
 else:
-    DATASET_DIR = Path(__file__).resolve().parents[2] / "dataset"
+    # FIXED: .parents[3] goes from backend/app/api/routes.py up to the remap/ root
+    DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
 
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
+# -----------------------------------------------------
 
 # Shared AI Models (Initialized with 1 thread for memory safety)
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME, threads=1)
@@ -65,6 +67,61 @@ async def get_collection_info():
         "points_count": info.points_count,
         "status": str(info.status)
     }
+
+@router.post("/ingestevents")
+async def ingest_events_endpoint(file: UploadFile = File(...)):
+    """
+    ✅ RESTORED: Standard ingestion for ingest.sh
+    Delegates to service for memory-optimized processing.
+    """
+    if not file.filename.lower().endswith(".json"):
+        raise HTTPException(status_code=400, detail="Only .json files are accepted")
+
+    save_path = DATASET_DIR / file.filename
+    try:
+        with open(save_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        with open(save_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        # Handle different JSON structures (list or object with 'events' key)
+        events = data if isinstance(data, list) else data.get("events", [])
+        
+        # Use the optimized service logic
+        result = await ingest_events_into_qdrant(events)
+        return result
+    except Exception as e:
+        logger.error(f"Ingestion failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/ingestticketsqueezedelta")
+async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
+    """
+    MEMORY OPTIMIZED TICKET SQUEEZE INGESTION
+    """
+    if not file.filename.lower().endswith(".json"):
+        raise HTTPException(status_code=400, detail="Only .json files accepted")
+
+    save_path = DATASET_DIR / file.filename
+    try:
+        with open(save_path, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        with open(save_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        events = data if isinstance(data, list) else data.get("events", [])
+        result = await ingest_events_into_qdrant(events)
+        
+        return {
+            "status": "success",
+            "filename": file.filename,
+            **result
+        }
+    except Exception as e:
+        logger.error(f"❌ TicketSqueeze Ingestion crashed: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/create_map")
 async def create_event_map(request: schemas.RouteRequest):
@@ -136,41 +193,6 @@ async def create_event_map(request: schemas.RouteRequest):
         logger.error(f"Error in create_map: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post("/ingestticketsqueezedelta")
-async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
-    """
-    MEMORY OPTIMIZED INGESTION:
-    Delegates to ingest_service.py which uses bulk checks and hash comparison
-    to prevent system freezes and 499 errors.
-    """
-    if not file.filename.lower().endswith(".json"):
-        raise HTTPException(status_code=400, detail="Only .json files accepted")
-
-    save_path = DATASET_DIR / file.filename
-    try:
-        with open(save_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-
-        logger.info(f"📂 Processing TicketSqueeze delta from {save_path}")
-        with open(save_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        events = data if isinstance(data, list) else data.get("events", [])
-        
-        # Call the optimized ingestion service
-        result = await ingest_events_into_qdrant(events)
-        
-        return {
-            "status": "success",
-            "filename": file.filename,
-            **result
-        }
-    except Exception as e:
-        logger.error(f"❌ Ingestion route crashed: {str(e)}", exc_info=True)
-        raise HTTPException(status_code=500, detail=str(e))
-    finally:
-        await file.close()
-
 @router.post("/sentencetopayload")
 async def sentence_to_payload(data: SentenceInput):
     try:
@@ -219,7 +241,6 @@ async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000, quick
     today = datetime.now(timezone.utc).date()
     deleted = 0
     
-    # Simple streaming cleanup logic
     offset = None
     while True:
         result = client.scroll(collection_name=COLLECTION_NAME, limit=100, with_payload=True, offset=offset)
@@ -239,6 +260,6 @@ async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000, quick
             client.delete(collection_name=COLLECTION_NAME, points_selector=models.PointIdsList(points=batch_to_del))
             deleted += len(batch_to_del)
         
-        if not offset or len(batch_to_del) > max_scan: break
+        if not offset or deleted > max_scan: break
         
     return {"status": "success", "deleted": deleted, "dry_run": dry_run}

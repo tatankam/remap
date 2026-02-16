@@ -1,152 +1,149 @@
 #!/bin/bash
 
+# ==============================================================================
+# 🎯 TicketSqueeze FULL Pipeline (Docker Host Version)
+# Sincronizza i dati tra FTP, Host e Backend Docker su porta 8001
+# ==============================================================================
+
 set -euo pipefail
 
-# Load variables from .env
+# 1. SETUP AMBIENTE E CARICAMENTO .ENV
+# ------------------------------------------------------------------------------
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 if [ -f .env ]; then
+  # Esporta le variabili ignorando i commenti
   export $(grep -v '^#' .env | xargs)
-  echo "✅ Loaded .env"
+  echo "✅ Variabili caricate da .env"
 else
-  echo "Error: .env file not found!" >&2
+  echo "❌ Errore: File .env non trovato in $SCRIPT_DIR!" >&2
   exit 1
 fi
 
-# Check required variables
-: ${FTP_HOST:?"FTP_HOST not set"}
-: ${FTP_USER:?"FTP_USER not set"}
-: ${FTP_PASS:?"FTP_PASS not set"}
-: ${FTP_PORT:?"FTP_PORT not set"}
-: ${FTP_FILE:?"FTP_FILE not set"}
+# Verifica variabili obbligatorie
+: ${FTP_HOST:?"Errore: FTP_HOST non impostato"}
+: ${FTP_USER:?"Errore: FTP_USER non impostato"}
+: ${FTP_PASS:?"Errore: FTP_PASS non impostato"}
+: ${FTP_PORT:?"Errore: FTP_PORT non impostato"}
+: ${FTP_FILE:?"Errore: FTP_FILE non impostato"}
 
-# Path Setup
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Configurazione Percorsi
 DATASET_DIR="$SCRIPT_DIR/dataset"
 BASE_NAME=$(basename "$FTP_FILE" .csv)
 TODAY_DATE=$(date +%Y%m%d)
 TODAY_FILE="$DATASET_DIR/${BASE_NAME}_${TODAY_DATE}.csv"
+JSON_FILENAME="ts_delta_delta.json" # Generato dal backend da delta.csv
 
-# Validate dataset directory
 mkdir -p "$DATASET_DIR"
-if [ ! -w "$DATASET_DIR" ]; then
-  echo "Error: dataset folder not writable at $DATASET_DIR!" >&2
-  exit 1
-fi
 
 echo "========================================"
-echo " 🎯 TicketSqueeze FULL Pipeline (Final Perfected)"
-echo " 🚀 Target: http://127.0.0.1:8001"
+echo " 🚀 Avvio Pipeline: Host -> Backend (:8001)"
 echo "========================================"
 
-# 1. Aggressive Cleanup (Minimize Disk I/O Wait)
-echo "🧹 Cleaning up old files..."
-find "$DATASET_DIR" -type f \( -name "${BASE_NAME}_*.csv" -o -name "*.json" \) -mtime +2 -delete
+# 2. PULIZIA FILE VECCHI
+# ------------------------------------------------------------------------------
+# Rimuove CSV e JSON più vecchi di 2 giorni per risparmiare spazio su disco
+echo "🧹 Pulizia file obsoleti in corso..."
+find "$DATASET_DIR" -type f \( -name "${BASE_NAME}_*.csv" -o -name "ts_delta_*.json" \) -mtime +2 -delete
 
-# 2. Download
-FTP_URL="ftp://$FTP_HOST:$FTP_PORT/$FTP_FILE"
-TMP_FILE="$TODAY_FILE.part"
+# 3. DOWNLOAD DA FTP
+# ------------------------------------------------------------------------------
+echo "📥 Download in corso: $FTP_FILE..."
+TMP_PART="$TODAY_FILE.part"
 
-echo "📥 Downloading $FTP_FILE..."
-if timeout 600 curl -u "$FTP_USER:$FTP_PASS" \
+if curl -u "$FTP_USER:$FTP_PASS" \
      --connect-timeout 30 \
      --max-time 600 \
-     --retry 3 \
-     --retry-delay 5 \
-     --retry-connrefused \
      --fail \
      --silent \
      --show-error \
-     "$FTP_URL" \
-     -o "$TMP_FILE"; then
+     "ftp://$FTP_HOST:$FTP_PORT/$FTP_FILE" \
+     -o "$TMP_PART"; then
 
-  if [ -f "$TMP_FILE" ] && [ -s "$TMP_FILE" ]; then
-    mv "$TMP_FILE" "$TODAY_FILE"
-    echo "✓ Downloaded $(basename "$TODAY_FILE")"
+  if [ -s "$TMP_PART" ]; then
+    mv "$TMP_PART" "$TODAY_FILE"
+    echo "✓ Download completato: $(basename "$TODAY_FILE")"
   else
-    echo "Error: Empty download!" >&2
-    rm -f "$TMP_FILE"
+    echo "❌ Errore: Il file scaricato è vuoto!" >&2
+    rm -f "$TMP_PART"
     exit 1
   fi
 else
-  echo "Error: Download failed!" >&2
-  rm -f "$TMP_FILE"
+  echo "❌ Errore: Download FTP fallito!" >&2
+  rm -f "$TMP_PART"
   exit 1
 fi
 
-# 3. Delta Computation
+# 4. CALCOLO DEL DELTA (CSV)
+# ------------------------------------------------------------------------------
+# Identifica i due file più recenti per confrontarli
 LATEST_TWO=($(ls -t "$DATASET_DIR"/${BASE_NAME}_*.csv 2>/dev/null | head -2 || true))
 
-if [ "${#LATEST_TWO[@]}" -ge 2 ]; then
-  NEW_FILE="${LATEST_TWO[0]}"
-  OLD_FILE="${LATEST_TWO[1]}"
-  
-  echo "⏳ Resting 15s (Clearing RAM/Swap after download)..."
-  sleep 15
+if [ "${#LATEST_TWO[@]}" -lt 2 ]; then
+  echo "⚠️ Sono necessari almeno 2 file CSV per il delta. Pipeline sospesa."
+  exit 0
+fi
 
-  echo "⚡ Computing delta: $(basename "$OLD_FILE") → $(basename "$NEW_FILE")"
-  DELTA_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8001/compute-delta" \
-    -F "old_file=@$OLD_FILE" \
-    -F "new_file=@$NEW_FILE")
-  
-  DELTA_HTTP=$(echo "$DELTA_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
-  
-  if [ "$DELTA_HTTP" != "200" ]; then
-    echo "❌ Delta failed (HTTP $DELTA_HTTP)" >&2
-    exit 1
-  fi
-  
-  DELTA_CSV="$DATASET_DIR/delta.csv"
-  if [ -f "$DELTA_CSV" ] && [ -s "$DELTA_CSV" ]; then
-    
-    # 4. JSON Processing (Crucial RAM Isolation)
-    echo "⏳ Resting 20s (Cooling down CPU & Disk)..."
-    sleep 20
+NEW_FILE="${LATEST_TWO[0]}"
+OLD_FILE="${LATEST_TWO[1]}"
 
-    echo "🔄 Processing delta.csv → JSON..."
-    PROCESS_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8001/processticketsqueezedelta" \
-      -F "file=@$DELTA_CSV" \
-      -F "include_removed=true" \
-      -F "include_changed=true" \
-      -F "clean_id=true")
+echo "⚡ Calcolo Delta tra $(basename "$OLD_FILE") e $(basename "$NEW_FILE")"
+
+# Chiamata al backend per generare delta.csv
+curl -s -X POST "http://127.0.0.1:8001/compute-delta" \
+     -F "old_file=@$OLD_FILE" \
+     -F "new_file=@$NEW_FILE" > /dev/null
+
+# 5. ELABORAZIONE JSON
+# ------------------------------------------------------------------------------
+DELTA_CSV="$DATASET_DIR/delta.csv"
+
+# Verifichiamo se il delta contiene dati (non è solo l'header)
+if [ -f "$DELTA_CSV" ] && [ $(wc -l < "$DELTA_CSV") -gt 1 ]; then
+    echo "🔄 Trasformazione Delta CSV -> JSON..."
     
-    PROCESS_HTTP=$(echo "$PROCESS_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
-    
-    if [ "$PROCESS_HTTP" != "200" ]; then
-      echo "❌ Process failed (HTTP $PROCESS_HTTP)" >&2
-      exit 1
-    fi
-    
-    # Delete delta immediately to free up I/O for the upcoming Qdrant write
+    # Invia delta.csv al container per la trasformazione
+    curl -s -X POST "http://127.0.0.1:8001/processticketsqueezedelta" \
+         -F "file=@$DELTA_CSV" \
+         -F "include_removed=true" \
+         -F "include_changed=true" > /dev/null
+
+    # Pulizia immediata del CSV temporaneo
     rm -f "$DELTA_CSV"
-    
-    JSON_HOST_PATH="ticketsqueeze_delta_delta.json"
-    
-    # 5. Qdrant Ingestion
-    if [ -f "$DATASET_DIR/$JSON_HOST_PATH" ]; then
-      echo "⏳ Final Rest 20s (Ensuring Port 8000 is snappy for users)..."
-      sleep 20
 
-      echo "🚀 Ingesting to Qdrant..."
+    # 6. INGESTIONE FINALE IN QDRANT
+    # --------------------------------------------------------------------------
+    # Attendiamo la sincronizzazione del volume Docker
+    echo "⏳ Attesa sincronizzazione volume (3s)..."
+    sleep 3
+
+    if [ -f "$DATASET_DIR/$JSON_FILENAME" ]; then
+      echo "🚀 Ingestione JSON in Qdrant tramite :8001..."
+      
+      # Invia il JSON generato. La sanitizzazione ID avviene nel service.
       INGEST_RESPONSE=$(curl -s -w "HTTP:%{http_code}\n" -X POST "http://127.0.0.1:8001/ingestticketsqueezedelta" \
-        -F "file=@$DATASET_DIR/$JSON_HOST_PATH")
+        -F "file=@$DATASET_DIR/$JSON_FILENAME")
       
-      INGEST_HTTP=$(echo "$INGEST_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2 | tr -d ' ' | head -1)
+      HTTP_CODE=$(echo "$INGEST_RESPONSE" | grep -o 'HTTP:[0-9]*' | cut -d: -f2)
       
-      if [ "$INGEST_HTTP" == "200" ]; then
-        echo "🎉 COMPLETE PIPELINE SUCCESS!"
-        # Final cleanup to keep the host healthy
-        rm -f "$DATASET_DIR/$JSON_HOST_PATH"
+      if [ "$HTTP_CODE" == "200" ]; then
+        echo "🎉 ECCELLENTE: Ingestione completata con successo!"
+        # Pulizia finale per mantenere il sistema snello
+        rm -f "$DATASET_DIR/$JSON_FILENAME"
       else
-        echo "❌ Ingest failed (HTTP $INGEST_HTTP)" >&2
+        echo "❌ ERRORE: Ingestione fallita (Codice HTTP $HTTP_CODE)"
         exit 1
       fi
+    else
+      echo "❌ ERRORE: Il backend non ha prodotto il file $JSON_FILENAME"
+      exit 1
     fi
-  else
-    echo "ℹ️ No changes found in delta."
-  fi
 else
-  echo "⚠️ Need 2 files for delta - skipping."
+    echo "ℹ️ Nessuna modifica rilevata (Delta vuoto). Fine pipeline."
+    [ -f "$DELTA_CSV" ] && rm -f "$DELTA_CSV"
 fi
 
 echo "========================================"
-echo "🎊 PIPELINE FINISHED"
+echo "🎊 PIPELINE TERMINATA CORRETTAMENTE"
 echo "========================================"
