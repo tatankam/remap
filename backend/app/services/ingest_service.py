@@ -3,7 +3,8 @@ import json
 import asyncio
 import hashlib
 import logging
-from uuid import uuid4, UUID
+import uuid
+from uuid import UUID
 from typing import Optional, Dict, Any, List
 import unicodedata
 import httpx
@@ -17,9 +18,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 if not QDRANT_SERVER or not QDRANT_API_KEY:
-    raise EnvironmentError("QDRANT_SERVER or QDRANT_API_KEY not defined in .env file")
+    raise EnvironmentError("QDRANT_SERVER or QDRANT_API_KEY non definiti")
 
-# Ottimizzazione per RAM limitata
+# Ottimizzazione RAM
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME, threads=1)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME, threads=1)
 client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY, timeout=300)
@@ -28,135 +29,99 @@ DENSE_VECTOR_NAME = "dense_vector"
 SPARSE_VECTOR_NAME = "sparse_vector"
 
 def normalize_text(text):
-    if not text:
-        return ""
-    text = text.strip()[:1000]
-    text = unicodedata.normalize("NFKC", text)
-    return text
+    if not text: return ""
+    return unicodedata.normalize("NFKC", text.strip()[:1000])
 
 def calculate_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 def sanitize_id(raw_id: Any) -> str:
     """
-    ✅ FIX CRITICO: Converte ID non standard (come 'ID_DATA') in UUID validi.
-    Qdrant richiede rigorosamente UUID o Integer per il metodo .retrieve() e .upsert()
+    ✅ SOLUZIONE DEFINITIVA AI DUPLICATI:
+    Genera un UUID v5 DETERMINISTICO basato sulla stringa dell'ID evento.
+    In questo modo 'ID_2026-03-08' produrrà SEMPRE lo stesso identificativo fisico.
     """
     if not raw_id:
-        return str(uuid4())
+        # Se manca l'ID, usiamo un hash del timestamp per evitare collisioni casuali
+        return str(uuid.uuid4())
     
-    str_id = str(raw_id)
-    try:
-        # Se è già un UUID valido, lo restituisce così com'è
-        return str(UUID(str_id))
-    except (ValueError, AttributeError):
-        # Se contiene date o caratteri speciali (es. underscore), crea un UUID deterministico
-        # Usiamo MD5 per mappare la stringa sporca a un UUID standard
-        hash_digest = hashlib.md5(str_id.encode('utf-8')).hexdigest()
-        return str(UUID(hash_digest))
+    str_id = str(raw_id).strip()
+    
+    # Namespace DNS standard per generare UUID v5
+    NAMESPACE = uuid.NAMESPACE_DNS
+    return str(uuid.uuid5(NAMESPACE, str_id))
 
 def ensure_collection_exists():
-    """Configura la collezione con quantizzazione INT8 per risparmiare memoria"""
-    example_text = "Test for embedding dimension calculation."
+    example_text = "Dimension check"
     dense_emb = list(dense_embedding_model.passage_embed([example_text]))[0]
     dense_dim = len(dense_emb)
     
     if not client.collection_exists(COLLECTION_NAME):
-        logger.info(f"🚀 Creazione collezione {COLLECTION_NAME} (Dense: {dense_dim})")
+        logger.info(f"🚀 Creazione collezione {COLLECTION_NAME}")
         client.create_collection(
             collection_name=COLLECTION_NAME,
             vectors_config={
-                DENSE_VECTOR_NAME: models.VectorParams(
-                    size=dense_dim,
-                    distance=models.Distance.COSINE,
-                    on_disk=True),
+                DENSE_VECTOR_NAME: models.VectorParams(size=dense_dim, distance=models.Distance.COSINE, on_disk=True),
             },
             sparse_vectors_config={
-                SPARSE_VECTOR_NAME: models.SparseVectorParams(
-                    index=models.SparseIndexParams(on_disk=True)
-                ),
+                SPARSE_VECTOR_NAME: models.SparseVectorParams(index=models.SparseIndexParams(on_disk=True)),
             },
             quantization_config=models.ScalarQuantization(
-                scalar=models.ScalarQuantizationConfig(
-                    type=models.ScalarType.INT8,
-                    always_ram=True,
-                ),
-            ),
-            hnsw_config=models.HnswConfigDiff(
-                m=16,
-                ef_construct=100,
-                full_scan_threshold=10000
+                scalar=models.ScalarQuantizationConfig(type=models.ScalarType.INT8, always_ram=True)
             )
         )
-        logger.info("✅ Collezione creata con successo.")
     
-    # Indici di ricerca
-    for field, schema in {"id": "keyword", "location": "geo", "start_date": "datetime", "end_date": "datetime"}.items():
+    for field, schema in {"id": "keyword", "location": "geo", "start_date": "datetime"}.items():
         try:
             client.create_payload_index(COLLECTION_NAME, field_name=field, field_schema=schema)
-        except Exception:
-            pass
+        except: pass
 
-async def async_geocode_structured(venue: str, city: str, region: str = "Veneto", country: str = "Italy") -> Optional[Dict[str, float]]:
+async def async_geocode_structured(venue: str, city: str) -> Optional[Dict[str, float]]:
     base_url = "https://nominatim.openstreetmap.org/search"
     headers = {"User-Agent": "remap_ingest/1.0"}
-    params = {"street": venue, "city": city, "state": region, "country": country, "format": "json", "limit": 1}
-    async with httpx.AsyncClient() as client_http:
+    params = {"street": venue, "city": city, "country": "Italy", "format": "json", "limit": 1}
+    async with httpx.AsyncClient() as h_client:
         try:
-            response = await client_http.get(base_url, params=params, headers=headers, timeout=10)
-            data = response.json()
-            if data:
-                return {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])}
-        except Exception:
-            pass
+            resp = await h_client.get(base_url, params=params, headers=headers, timeout=10)
+            data = resp.json()
+            if data: return {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])}
+        except: pass
     return None
 
 async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: int = 32):
-    """
-    Funzione principale di ingestione chiamata da routes.py
-    """
-    if not events:
-        logger.warning("Nessun evento fornito per l'ingestione.")
-        return {"inserted": 0, "updated": 0, "skipped_unchanged": 0}
+    if not events: return {"inserted": 0, "updated": 0, "skipped": 0}
 
-    # 1. Fase Geocodifica
-    semaphore = asyncio.Semaphore(5)
-    async def geocode_event(event):
-        loc = event.get("location", {})
-        if loc.get("latitude") and loc.get("longitude"):
-            return
-        venue, city = loc.get("venue", "").strip(), event.get("city", "").strip()
-        if venue and city:
-            async with semaphore:
-                coords = await async_geocode_structured(venue, city)
-            if coords:
-                event["location"]["latitude"] = coords["lat"]
-                event["location"]["longitude"] = coords["lon"]
+    # 1. Geocodifica asincrona
+    sem = asyncio.Semaphore(5)
+    async def geocode_task(ev):
+        loc = ev.get("location", {})
+        if not loc.get("latitude") or not loc.get("longitude"):
+            v, c = loc.get("venue", ""), ev.get("city", "")
+            if v and c:
+                async with sem:
+                    coords = await async_geocode_structured(v, c)
+                if coords:
+                    ev["location"].update({"latitude": coords["lat"], "longitude": coords["lon"]})
 
-    logger.info(f"🌍 Geocodifica di {len(events)} eventi...")
-    await asyncio.gather(*(geocode_event(event) for event in events))
-
+    await asyncio.gather(*(geocode_task(e) for e in events))
     ensure_collection_exists()
     
-    inserted = updated = skipped_unchanged = 0
+    inserted = updated = skipped = 0
     total = len(events)
-    
-    logger.info(f"⚡ Ingestione in corso (Batch: {batch_size})")
 
-    for start in tqdm(range(0, total, batch_size), desc="Qdrant Ingestion"):
+    for start in tqdm(range(0, total, batch_size), desc="Ingesting to Qdrant"):
         batch = events[start : start + batch_size]
         
-        # ✅ Sanitizzazione ID per il check bulk
-        batch_ids = [sanitize_id(e.get("id") or e.get("event_id", "")) for e in batch]
-        batch_texts = [normalize_text(f"{e.get('title', '')} {e.get('category', '')}") for e in batch]
+        # Generiamo gli ID fisici (point_id) in modo deterministico
+        batch_point_ids = [sanitize_id(e.get("id") or e.get("event_id")) for e in batch]
+        batch_texts = [normalize_text(f"{e.get('title','')} {e.get('category','')}") for e in batch]
         local_hashes = [calculate_hash(t) for t in batch_texts]
 
-        # ✅ Bulk check sicuro (ID sanitizzati)
+        # Verifica esistenza per saltare duplicati identici (hash invariato)
         existing_points = client.retrieve(
             collection_name=COLLECTION_NAME,
-            ids=batch_ids,
-            with_payload=True,
-            with_vectors=False
+            ids=batch_point_ids,
+            with_payload=True
         )
         existing_map = {str(p.id): p for p in existing_points}
 
@@ -164,77 +129,53 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
         to_embed_indices = []
 
         for i, event in enumerate(batch):
-            eid = batch_ids[i]
-            existing_p = existing_map.get(eid)
+            pid = batch_point_ids[i]
+            existing_p = existing_map.get(pid)
             
-            # Se l'hash è uguale, non fare nulla (risparmio AI tokens)
+            # Se l'evento esiste ed è identico (stesso hash), lo saltiamo
             if existing_p and existing_p.payload.get("hash") == local_hashes[i]:
-                skipped_unchanged += 1
+                skipped += 1
                 continue
             
             to_embed_indices.append(i)
 
-        if not to_embed_indices:
-            continue
+        if not to_embed_indices: continue
 
-        # Generazione Embedding (Solo per quelli nuovi o cambiati)
+        # Embedding
         subset_texts = [batch_texts[i] for i in to_embed_indices]
-        dense_embeddings = list(dense_embedding_model.passage_embed(subset_texts))
-        sparse_embeddings = list(sparse_embedding_model.passage_embed(subset_texts))
+        dense_embs = list(dense_embedding_model.passage_embed(subset_texts))
+        sparse_embs = list(sparse_embedding_model.passage_embed(subset_texts))
 
         for idx, i in enumerate(to_embed_indices):
             event = batch[i]
-            eid = batch_ids[i]
-            existing_p = existing_map.get(eid)
+            pid = batch_point_ids[i]
             
-            if existing_p: 
-                updated += 1
-            else: 
-                inserted += 1
+            if pid in existing_map: updated += 1
+            else: inserted += 1
 
             loc = event.get("location", {})
-            # Assicuriamoci che i campi latitudine/longitudine siano numeri validi
             try:
-                lat = float(loc.get("latitude")) if loc.get("latitude") else None
-                lon = float(loc.get("longitude")) if loc.get("longitude") else None
-            except (ValueError, TypeError):
-                lat = lon = None
+                lat = float(loc.get("latitude") or loc.get("lat"))
+                lon = float(loc.get("longitude") or loc.get("lon"))
+                loc_geo = {"lat": lat, "lon": lon}
+            except:
+                loc_geo = {}
 
-            loc_geo = {"lat": lat, "lon": lon} if lat and lon else {}
-            
             payload = {**event, "location": {**loc, **loc_geo}, "hash": local_hashes[i]}
 
             points_to_upsert.append(models.PointStruct(
-                id=eid, # Ora è garantito essere un UUID valido
+                id=pid, # <--- UUID DETERMINISTICO (V5)
                 vector={
-                    DENSE_VECTOR_NAME: dense_embeddings[idx].tolist(),
+                    DENSE_VECTOR_NAME: dense_embs[idx].tolist(),
                     SPARSE_VECTOR_NAME: models.SparseVector(
-                        indices=list(sparse_embeddings[idx].indices),
-                        values=[float(v) for v in sparse_embeddings[idx].values]
+                        indices=list(sparse_embs[idx].indices),
+                        values=[float(v) for v in sparse_embs[idx].values]
                     ),
                 },
                 payload=payload,
             ))
 
         if points_to_upsert:
-            is_last = (start + batch_size >= total)
-            client.upsert(collection_name=COLLECTION_NAME, points=points_to_upsert, wait=is_last)
+            client.upsert(collection_name=COLLECTION_NAME, points=points_to_upsert)
 
-    collection_info = client.get_collection(COLLECTION_NAME)
-    logger.info(f"🎉 Ingestione completata. Punti totali: {collection_info.points_count}")
-    
-    return {
-        "inserted": inserted,
-        "updated": updated,
-        "skipped_unchanged": skipped_unchanged,
-        "points_count": collection_info.points_count
-    }
-
-async def ingest_events_from_file(json_path: str) -> Dict[str, Any]:
-    """Wrapper per caricare eventi da un file JSON locale"""
-    logger.info(f"📂 Caricamento eventi da {json_path}")
-    with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    
-    events = data if isinstance(data, list) else data.get("events", [])
-    return await ingest_events_into_qdrant(events)
+    return {"inserted": inserted, "updated": updated, "skipped_unchanged": skipped}
