@@ -91,17 +91,33 @@ async def async_geocode_structured(venue: str, city: str) -> Optional[Dict[str, 
 async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: int = 32):
     if not events: return {"inserted": 0, "updated": 0, "skipped": 0}
 
-    # 1. Geocodifica asincrona
-    sem = asyncio.Semaphore(5)
+
+# 1. Geocodifica asincrona con limitazione di frequenza
+    sem = asyncio.Semaphore(1) # <--- Ridotto a 1 per garantire l'ordine e il rispetto dei tempi
     async def geocode_task(ev):
         loc = ev.get("location", {})
-        if not loc.get("latitude") or not loc.get("longitude"):
+        # Controllo incrociato per lat/latitude e lon/longitude
+        lat = loc.get("lat") or loc.get("latitude")
+        lon = loc.get("lon") or loc.get("longitude")
+
+        if not lat or not lon:
             v, c = loc.get("venue", ""), ev.get("city", "")
             if v and c:
                 async with sem:
+                    logger.info(f"🌍 Richiesta Nominatim per: {v}, {c}")
                     coords = await async_geocode_structured(v, c)
-                if coords:
-                    ev["location"].update({"latitude": coords["lat"], "longitude": coords["lon"]})
+                    
+                    if coords:
+                        ev["location"].update({
+                            "lat": coords["lat"], 
+                            "lon": coords["lon"],
+                            "latitude": coords["lat"], 
+                            "longitude": coords["lon"]
+                        })
+                    
+                    # ✅ Sleep strategico di 1.5 secondi per non farsi bannare l'IP
+                    await asyncio.sleep(1.5)
+
 
     await asyncio.gather(*(geocode_task(e) for e in events))
     ensure_collection_exists()

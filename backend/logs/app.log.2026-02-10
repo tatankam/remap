@@ -1,0 +1,1187 @@
+2026-02-13 17:33:17,851 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 17:33:17,852 INFO uvicorn.error Started server process [9252]
+2026-02-13 17:33:17,852 INFO uvicorn.error Waiting for application startup.
+2026-02-13 17:33:17,853 INFO uvicorn.error Application startup complete.
+2026-02-13 17:33:56,471 INFO app.services.openroute_service 🌐 GEO: Verona, Italy...
+2026-02-13 17:33:59,047 INFO app.services.openroute_service ✅ GEO CACHED: (10.977656, 45.413277)
+2026-02-13 17:33:59,054 INFO app.services.openroute_service 🌐 GEO: Venice, Italy...
+2026-02-13 17:33:59,466 INFO app.services.openroute_service ✅ GEO CACHED: (12.561157, 45.581192)
+2026-02-13 17:34:00,246 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 17:34:00,512 INFO uvicorn.access 127.0.0.1:55364 - "POST /create_map HTTP/1.1" 200
+2026-02-13 17:34:04,618 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 17:34:04,726 INFO uvicorn.access 127.0.0.1:55364 - "POST /create_map HTTP/1.1" 200
+2026-02-13 17:34:06,846 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 17:34:06,959 INFO uvicorn.access 127.0.0.1:55364 - "POST /create_map HTTP/1.1" 200
+2026-02-13 17:59:10,642 INFO uvicorn.error Shutting down
+2026-02-13 17:59:10,744 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 17:59:10,745 INFO uvicorn.error Application shutdown complete.
+2026-02-13 17:59:10,745 INFO uvicorn.error Finished server process [9252]
+2026-02-13 17:59:25,703 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 17:59:25,703 INFO uvicorn.error Started server process [11703]
+2026-02-13 17:59:25,703 INFO uvicorn.error Waiting for application startup.
+2026-02-13 17:59:25,704 INFO uvicorn.error Application startup complete.
+2026-02-13 17:59:55,909 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 17:59:56,030 INFO uvicorn.access 127.0.0.1:53462 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:00:07,178 INFO app.services.openroute_service 🌐 GEO: Belluno, Italy...
+2026-02-13 18:00:08,150 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (12.218171, 46.137518)
+2026-02-13 18:00:08,158 INFO app.services.openroute_service 🛣️ ROUTE: (12.2181711, 46.1375185)→(12.561157, 45.581192) (driving-car)
+2026-02-13 18:00:13,777 INFO app.services.openroute_service ✅ ROUTE CACHED: 1072 pts
+2026-02-13 18:00:14,120 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:00:14,165 INFO uvicorn.access 127.0.0.1:59828 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:02:42,526 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:02:42,582 INFO uvicorn.access 127.0.0.1:53126 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:07:18,512 INFO uvicorn.error Shutting down
+2026-02-13 18:07:18,615 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:07:18,616 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:07:18,616 INFO uvicorn.error Finished server process [11703]
+2026-02-13 18:10:24,551 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:10:24,552 INFO uvicorn.error Started server process [12510]
+2026-02-13 18:10:24,552 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:10:24,552 INFO uvicorn.error Application startup complete.
+2026-02-13 18:11:42,744 INFO app.services.openroute_service 🌐 GEO: Bari, Italy...
+2026-02-13 18:11:42,744 INFO app.services.openroute_service 💥 PHOTON SIMULATED FAILURE for: Bari, Italy
+2026-02-13 18:11:42,745 INFO uvicorn.access 127.0.0.1:55622 - "POST /create_map HTTP/1.1" 500
+2026-02-13 18:11:59,140 INFO app.services.openroute_service 🌐 GEO: Bari, Italy...
+2026-02-13 18:11:59,140 INFO app.services.openroute_service 💥 PHOTON SIMULATED FAILURE for: Bari, Italy
+2026-02-13 18:11:59,141 INFO uvicorn.access 127.0.0.1:53882 - "POST /create_map HTTP/1.1" 500
+2026-02-13 18:19:19,701 INFO uvicorn.error Shutting down
+2026-02-13 18:19:19,803 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:19:19,804 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:19:19,805 INFO uvicorn.error Finished server process [12510]
+2026-02-13 18:19:33,741 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:19:33,742 INFO uvicorn.error Started server process [13036]
+2026-02-13 18:19:33,742 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:19:33,743 INFO uvicorn.error Application startup complete.
+2026-02-13 18:20:27,073 INFO app.services.openroute_service 🌐 GEO: Bari, Italy...
+2026-02-13 18:20:27,449 INFO app.services.openroute_service ✅ PHOTON RAW: Bari
+2026-02-13 18:20:27,492 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (16.862029, 41.125784)
+2026-02-13 18:20:27,508 INFO app.services.openroute_service 🌐 GEO: Lecce, Italy...
+2026-02-13 18:20:27,836 INFO app.services.openroute_service ✅ PHOTON RAW: Lecce
+2026-02-13 18:20:27,875 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (18.171848, 40.357037)
+2026-02-13 18:20:27,878 INFO app.services.openroute_service 🛣️ ROUTE: (16.8620293, 41.1257843)→(18.1718482, 40.3570373) (driving-car)
+2026-02-13 18:20:28,259 INFO app.services.openroute_service ✅ ROUTE CACHED: 1030 pts
+2026-02-13 18:20:28,803 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:20:28,824 INFO uvicorn.access 127.0.0.1:59158 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:20:34,383 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:20:34,409 INFO uvicorn.access 127.0.0.1:51448 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:20:36,905 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:20:36,922 INFO uvicorn.access 127.0.0.1:51448 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:22:04,022 INFO uvicorn.error Shutting down
+2026-02-13 18:22:04,124 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:22:04,125 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:22:04,125 INFO uvicorn.error Finished server process [13036]
+2026-02-13 18:22:17,396 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:22:17,397 INFO uvicorn.error Started server process [13391]
+2026-02-13 18:22:17,397 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:22:17,397 INFO uvicorn.error Application startup complete.
+2026-02-13 18:23:08,250 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:23:08,277 INFO uvicorn.access 127.0.0.1:40866 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:23:41,245 INFO app.services.openroute_service 🌐 GEO: Foggia, Italy...
+2026-02-13 18:23:41,246 INFO app.services.openroute_service 💥 PHOTON SIMULATED FAILURE for: Foggia, Italy
+2026-02-13 18:23:41,247 INFO app.services.openroute_service 💥 PHOTON FAILED: FORCE FALLBACK TEST
+2026-02-13 18:23:41,598 INFO app.services.openroute_service ✅ GEO CACHED (ORS): (15.552676, 41.460194)
+2026-02-13 18:23:41,601 INFO app.services.openroute_service 🌐 GEO: Otranto, Italy...
+2026-02-13 18:23:41,601 INFO app.services.openroute_service 💥 PHOTON SIMULATED FAILURE for: Otranto, Italy
+2026-02-13 18:23:41,601 INFO app.services.openroute_service 💥 PHOTON FAILED: FORCE FALLBACK TEST
+2026-02-13 18:23:41,738 INFO app.services.openroute_service ✅ GEO CACHED (ORS): (18.490582, 40.143729)
+2026-02-13 18:23:41,745 INFO app.services.openroute_service 🛣️ ROUTE: (15.552676, 41.460194)→(18.490582, 40.143729) (driving-car)
+2026-02-13 18:23:41,955 INFO app.services.openroute_service ✅ ROUTE CACHED: 1823 pts
+2026-02-13 18:23:42,589 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:23:42,617 INFO uvicorn.access 127.0.0.1:59820 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:24:21,163 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:24:21,230 INFO uvicorn.access 127.0.0.1:52888 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:24:45,556 INFO uvicorn.error Shutting down
+2026-02-13 18:24:45,657 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:24:45,660 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:24:45,660 INFO uvicorn.error Finished server process [13391]
+2026-02-13 18:24:59,082 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:24:59,082 INFO uvicorn.error Started server process [13772]
+2026-02-13 18:24:59,082 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:24:59,083 INFO uvicorn.error Application startup complete.
+2026-02-13 18:25:05,165 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:25:05,213 INFO uvicorn.access 127.0.0.1:59908 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:25:39,884 INFO app.services.openroute_service 🌐 GEO: Reggio Calabria, Italy...
+2026-02-13 18:25:40,211 INFO app.services.openroute_service ✅ PHOTON RAW: Reggio Calabria
+2026-02-13 18:25:40,256 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (15.639756, 38.103539)
+2026-02-13 18:25:40,262 INFO app.services.openroute_service 🌐 GEO: Tropea, Italy...
+2026-02-13 18:25:40,574 INFO app.services.openroute_service ✅ PHOTON RAW: Tropea
+2026-02-13 18:25:40,611 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (15.894851, 38.675267)
+2026-02-13 18:25:40,625 INFO app.services.openroute_service 🛣️ ROUTE: (15.6397556, 38.1035389)→(15.8948507, 38.6752674) (driving-car)
+2026-02-13 18:25:41,057 INFO app.services.openroute_service ✅ ROUTE CACHED: 1377 pts
+2026-02-13 18:25:41,412 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:25:41,428 INFO uvicorn.access 127.0.0.1:34578 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:26:11,899 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:26:11,924 INFO uvicorn.access 127.0.0.1:49448 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:35:34,363 INFO uvicorn.error Shutting down
+2026-02-13 18:35:34,467 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:35:34,469 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:35:34,471 INFO uvicorn.error Finished server process [13772]
+2026-02-13 18:35:48,403 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:35:48,403 INFO uvicorn.error Started server process [15707]
+2026-02-13 18:35:48,404 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:35:48,404 INFO uvicorn.error Application startup complete.
+2026-02-13 18:38:13,052 INFO uvicorn.error Shutting down
+2026-02-13 18:38:13,153 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:38:13,155 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:38:13,155 INFO uvicorn.error Finished server process [15707]
+2026-02-13 18:38:27,253 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:38:27,254 INFO uvicorn.error Started server process [15956]
+2026-02-13 18:38:27,254 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:38:27,254 INFO uvicorn.error Application startup complete.
+2026-02-13 18:39:23,400 INFO uvicorn.error Shutting down
+2026-02-13 18:39:23,501 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:39:23,502 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:39:23,504 INFO uvicorn.error Finished server process [15956]
+2026-02-13 18:39:37,628 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:39:37,628 INFO uvicorn.error Started server process [16126]
+2026-02-13 18:39:37,628 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:39:37,629 INFO uvicorn.error Application startup complete.
+2026-02-13 18:40:15,592 INFO uvicorn.error Shutting down
+2026-02-13 18:40:15,693 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:40:15,695 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:40:15,695 INFO uvicorn.error Finished server process [16126]
+2026-02-13 18:40:31,656 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:40:31,657 INFO uvicorn.error Started server process [16289]
+2026-02-13 18:40:31,657 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:40:31,657 INFO uvicorn.error Application startup complete.
+2026-02-13 18:40:57,244 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:40:57,245 INFO uvicorn.error Started server process [16422]
+2026-02-13 18:40:57,245 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:40:57,245 INFO uvicorn.error Application startup complete.
+2026-02-13 18:42:22,098 INFO uvicorn.error Shutting down
+2026-02-13 18:42:22,200 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:42:22,200 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:42:22,200 INFO uvicorn.error Finished server process [16422]
+2026-02-13 18:42:37,302 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:42:37,302 INFO uvicorn.error Started server process [16652]
+2026-02-13 18:42:37,303 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:42:37,303 INFO uvicorn.error Application startup complete.
+2026-02-13 18:43:17,989 INFO app.services.openroute_service 🌐 GEO: Reggio nell'Emilia, Italy...
+2026-02-13 18:43:18,633 INFO app.services.openroute_service ✅ PHOTON RAW: Reggio Emilia
+2026-02-13 18:43:18,680 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (10.630497, 44.697839)
+2026-02-13 18:43:18,692 INFO app.services.openroute_service 🌐 GEO: Parma, Italy...
+2026-02-13 18:43:19,243 INFO app.services.openroute_service ✅ PHOTON RAW: Parma
+2026-02-13 18:43:19,288 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (10.327984, 44.801530)
+2026-02-13 18:43:19,296 INFO app.services.openroute_service 🛣️ ROUTE: (10.6304971, 44.6978389)→(10.3279843, 44.80153) (driving-car)
+2026-02-13 18:43:24,077 INFO app.services.openroute_service ✅ ROUTE CACHED: 393 pts
+2026-02-13 18:43:24,579 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:43:24,598 INFO uvicorn.access 127.0.0.1:33608 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:43:30,528 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:43:30,541 INFO uvicorn.access 127.0.0.1:43604 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:48:23,627 INFO uvicorn.error Shutting down
+2026-02-13 18:48:23,729 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:48:23,730 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:48:23,731 INFO uvicorn.error Finished server process [16652]
+2026-02-13 18:48:38,069 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:48:38,069 INFO uvicorn.error Started server process [17395]
+2026-02-13 18:48:38,069 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:48:38,070 INFO uvicorn.error Application startup complete.
+2026-02-13 18:49:16,120 INFO uvicorn.error Shutting down
+2026-02-13 18:49:16,220 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:49:16,221 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:49:16,222 INFO uvicorn.error Finished server process [17395]
+2026-02-13 18:49:30,692 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:49:30,692 INFO uvicorn.error Started server process [17542]
+2026-02-13 18:49:30,692 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:49:30,693 INFO uvicorn.error Application startup complete.
+2026-02-13 18:49:49,870 INFO uvicorn.error Shutting down
+2026-02-13 18:49:49,971 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 18:49:49,973 INFO uvicorn.error Application shutdown complete.
+2026-02-13 18:49:49,974 INFO uvicorn.error Finished server process [17542]
+2026-02-13 18:50:04,568 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:50:04,569 INFO uvicorn.error Started server process [17769]
+2026-02-13 18:50:04,569 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:50:04,569 INFO uvicorn.error Application startup complete.
+2026-02-13 18:50:21,630 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-13 18:50:21,631 INFO uvicorn.error Started server process [17877]
+2026-02-13 18:50:21,631 INFO uvicorn.error Waiting for application startup.
+2026-02-13 18:50:21,631 INFO uvicorn.error Application startup complete.
+2026-02-13 18:51:29,942 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:51:29,947 INFO uvicorn.access 127.0.0.1:35224 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:52:07,263 INFO app.services.openroute_service 🌐 GEO: Valeggio sul Mincio, Italy...
+2026-02-13 18:52:07,738 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (10.734546, 45.353751)
+2026-02-13 18:52:07,742 INFO app.services.openroute_service 🌐 GEO: Mantua, Italy...
+2026-02-13 18:52:08,125 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (10.791719, 45.156668)
+2026-02-13 18:52:08,133 INFO app.services.openroute_service 🛣️ ROUTE: (10.734546, 45.3537509)→(10.7917191, 45.1566683) (driving-car)
+2026-02-13 18:52:12,053 INFO app.services.openroute_service ✅ ROUTE CACHED: 418 pts
+2026-02-13 18:52:12,528 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:52:12,580 INFO uvicorn.access 127.0.0.1:53030 - "POST /create_map HTTP/1.1" 200
+2026-02-13 18:52:38,107 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-13 18:52:38,127 INFO uvicorn.access 127.0.0.1:48394 - "POST /create_map HTTP/1.1" 200
+2026-02-13 19:02:56,463 INFO uvicorn.error Shutting down
+2026-02-13 19:02:56,566 INFO uvicorn.error Waiting for application shutdown.
+2026-02-13 19:02:56,567 INFO uvicorn.error Application shutdown complete.
+2026-02-13 19:02:56,567 INFO uvicorn.error Finished server process [17877]
+2026-02-14 10:30:43,003 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:30:43,005 INFO uvicorn.error Started server process [5511]
+2026-02-14 10:30:43,006 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:30:43,007 INFO uvicorn.error Application startup complete.
+2026-02-14 10:31:28,820 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:31:28,856 INFO uvicorn.access 127.0.0.1:47122 - "POST /create_map HTTP/1.1" 200
+2026-02-14 10:31:36,687 INFO uvicorn.error Shutting down
+2026-02-14 10:31:36,788 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:31:36,789 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:31:36,790 INFO uvicorn.error Finished server process [5511]
+2026-02-14 10:31:57,514 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:31:57,515 INFO uvicorn.error Started server process [6942]
+2026-02-14 10:31:57,515 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:31:57,515 INFO uvicorn.error Application startup complete.
+2026-02-14 10:33:29,338 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:33:29,390 INFO uvicorn.access 127.0.0.1:50320 - "POST /create_map HTTP/1.1" 200
+2026-02-14 10:35:12,109 INFO uvicorn.error Shutting down
+2026-02-14 10:35:12,211 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:35:12,213 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:35:12,217 INFO uvicorn.error Finished server process [6942]
+2026-02-14 10:35:25,194 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:35:25,195 INFO uvicorn.error Started server process [7366]
+2026-02-14 10:35:25,195 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:35:25,195 INFO uvicorn.error Application startup complete.
+2026-02-14 10:36:08,339 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:36:08,376 INFO uvicorn.access 127.0.0.1:50704 - "POST /create_map HTTP/1.1" 200
+2026-02-14 10:37:53,355 INFO uvicorn.error Shutting down
+2026-02-14 10:37:53,457 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:37:53,458 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:37:53,460 INFO uvicorn.error Finished server process [7366]
+2026-02-14 10:38:08,287 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:38:08,288 INFO uvicorn.error Started server process [7642]
+2026-02-14 10:38:08,288 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:38:08,288 INFO uvicorn.error Application startup complete.
+2026-02-14 10:38:21,148 INFO uvicorn.error Shutting down
+2026-02-14 10:38:21,250 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:38:21,251 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:38:21,252 INFO uvicorn.error Finished server process [7642]
+2026-02-14 10:38:36,131 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:38:36,132 INFO uvicorn.error Started server process [7808]
+2026-02-14 10:38:36,132 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:38:36,132 INFO uvicorn.error Application startup complete.
+2026-02-14 10:38:40,254 ERROR app.api.routes create_map error: 'routes'
+2026-02-14 10:38:40,255 INFO uvicorn.access 127.0.0.1:47206 - "POST /create_map HTTP/1.1" 500
+2026-02-14 10:38:47,278 ERROR app.api.routes create_map error: 'routes'
+2026-02-14 10:38:47,279 INFO uvicorn.access 127.0.0.1:35874 - "POST /create_map HTTP/1.1" 500
+2026-02-14 10:38:51,758 ERROR app.api.routes create_map error: 'routes'
+2026-02-14 10:38:51,758 INFO uvicorn.access 127.0.0.1:35874 - "POST /create_map HTTP/1.1" 500
+2026-02-14 10:39:09,459 ERROR app.api.routes create_map error: 'routes'
+2026-02-14 10:39:09,460 INFO uvicorn.access 127.0.0.1:40210 - "POST /create_map HTTP/1.1" 500
+2026-02-14 10:39:21,445 INFO uvicorn.error Shutting down
+2026-02-14 10:39:21,547 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:39:21,547 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:39:21,547 INFO uvicorn.error Finished server process [7808]
+2026-02-14 10:39:38,714 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:39:38,714 INFO uvicorn.error Started server process [8194]
+2026-02-14 10:39:38,714 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:39:38,715 INFO uvicorn.error Application startup complete.
+2026-02-14 10:39:51,535 ERROR app.api.routes create_map error: 'routes'
+2026-02-14 10:39:51,536 INFO uvicorn.access 127.0.0.1:52296 - "POST /create_map HTTP/1.1" 500
+2026-02-14 10:40:04,306 INFO uvicorn.error Shutting down
+2026-02-14 10:40:04,408 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:40:04,408 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:40:04,408 INFO uvicorn.error Finished server process [8194]
+2026-02-14 10:40:21,026 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:40:21,027 INFO uvicorn.error Started server process [9129]
+2026-02-14 10:40:21,027 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:40:21,028 INFO uvicorn.error Application startup complete.
+2026-02-14 10:40:21,588 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:40:21,627 INFO uvicorn.access 127.0.0.1:54194 - "POST /create_map HTTP/1.1" 200
+2026-02-14 10:41:35,849 INFO uvicorn.error Shutting down
+2026-02-14 10:41:35,950 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:41:35,950 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:41:35,951 INFO uvicorn.error Finished server process [9129]
+2026-02-14 10:41:51,510 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:41:51,511 INFO uvicorn.error Started server process [9929]
+2026-02-14 10:41:51,511 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:41:51,511 INFO uvicorn.error Application startup complete.
+2026-02-14 10:42:43,271 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:42:43,307 INFO uvicorn.access 127.0.0.1:44268 - "POST /create_map HTTP/1.1" 200
+2026-02-14 10:46:48,600 INFO uvicorn.error Shutting down
+2026-02-14 10:46:48,705 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:46:48,706 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:46:48,707 INFO uvicorn.error Finished server process [9929]
+2026-02-14 10:47:03,075 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:47:03,075 INFO uvicorn.error Started server process [10396]
+2026-02-14 10:47:03,075 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:47:03,075 INFO uvicorn.error Application startup complete.
+2026-02-14 10:48:46,390 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:48:46,428 INFO uvicorn.access 127.0.0.1:45106 - "POST /create_map HTTP/1.1" 200
+2026-02-14 10:50:37,906 INFO uvicorn.error Shutting down
+2026-02-14 10:50:38,007 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 10:50:38,008 INFO uvicorn.error Application shutdown complete.
+2026-02-14 10:50:38,010 INFO uvicorn.error Finished server process [10396]
+2026-02-14 10:50:54,114 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 10:50:54,115 INFO uvicorn.error Started server process [10684]
+2026-02-14 10:50:54,115 INFO uvicorn.error Waiting for application startup.
+2026-02-14 10:50:54,115 INFO uvicorn.error Application startup complete.
+2026-02-14 10:51:29,584 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:51:29,646 INFO uvicorn.access 127.0.0.1:52214 - "POST /create_map HTTP/1.1" 200
+2026-02-14 10:51:43,464 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 10:51:43,502 INFO uvicorn.access 127.0.0.1:42682 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:09:53,133 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:09:53,171 INFO uvicorn.access 127.0.0.1:55534 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:09:59,528 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:09:59,568 INFO uvicorn.access 127.0.0.1:49538 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:10:06,536 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:10:06,803 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:10:06,805 INFO uvicorn.access 127.0.0.1:33984 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:11:27,807 INFO app.services.openroute_service 🌐 GEO: Vicenza, Italy...
+2026-02-14 11:11:28,534 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.547883, 45.548831)
+2026-02-14 11:11:28,535 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:11:29,127 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:11:29,133 INFO uvicorn.access 127.0.0.1:36502 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:11:37,549 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:11:37,788 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:11:37,792 INFO uvicorn.access 127.0.0.1:53730 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:11:40,278 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:11:40,415 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:11:40,435 INFO uvicorn.access 127.0.0.1:53730 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:11:49,571 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:11:49,797 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:11:49,810 INFO uvicorn.access 127.0.0.1:41842 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:11:56,752 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:11:57,005 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:11:57,023 INFO uvicorn.access 127.0.0.1:36402 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:12:06,508 INFO app.services.openroute_service 🛣️ ROUTE: [11.5478825, 45.5488306]→[10.977656, 45.413277] (driving-car)
+2026-02-14 11:12:06,919 ERROR app.services.openroute_service ❌ ROUTE FAILED: Invalid route response
+2026-02-14 11:12:06,920 ERROR app.api.routes Error in create_map: Routing failed: Invalid route response
+2026-02-14 11:12:06,920 INFO uvicorn.access 127.0.0.1:34020 - "POST /create_map HTTP/1.1" 500
+2026-02-14 11:12:12,722 INFO app.services.openroute_service 🛣️ ROUTE: [11.5478825, 45.5488306]→[10.977656, 45.413277] (driving-car)
+2026-02-14 11:12:12,826 ERROR app.services.openroute_service ❌ ROUTE FAILED: Invalid route response
+2026-02-14 11:12:12,826 ERROR app.api.routes Error in create_map: Routing failed: Invalid route response
+2026-02-14 11:12:12,826 INFO uvicorn.access 127.0.0.1:34034 - "POST /create_map HTTP/1.1" 500
+2026-02-14 11:12:27,388 INFO app.services.openroute_service 🛣️ ROUTE: [11.5478825, 45.5488306]→[10.977656, 45.413277] (driving-car)
+2026-02-14 11:12:27,496 ERROR app.services.openroute_service ❌ ROUTE FAILED: Invalid route response
+2026-02-14 11:12:27,496 ERROR app.api.routes Error in create_map: Routing failed: Invalid route response
+2026-02-14 11:12:27,497 INFO uvicorn.access 127.0.0.1:57268 - "POST /create_map HTTP/1.1" 500
+2026-02-14 11:12:48,162 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:12:48,406 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:12:48,420 INFO uvicorn.access 127.0.0.1:52396 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:12:58,914 INFO app.services.openroute_service 🛣️ ROUTE: [11.5478825, 45.5488306]→[10.977656, 45.413277] (driving-car)
+2026-02-14 11:12:59,014 ERROR app.services.openroute_service ❌ ROUTE FAILED: Invalid route response
+2026-02-14 11:12:59,014 ERROR app.api.routes Error in create_map: Routing failed: Invalid route response
+2026-02-14 11:12:59,015 INFO uvicorn.access 127.0.0.1:51770 - "POST /create_map HTTP/1.1" 500
+2026-02-14 11:13:36,271 INFO app.services.openroute_service 🌐 GEO: Turin, Italy...
+2026-02-14 11:13:36,601 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (7.682489, 45.067755)
+2026-02-14 11:13:36,606 INFO app.services.openroute_service 🌐 GEO: Vercelli, Italy...
+2026-02-14 11:13:37,116 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (8.422767, 45.325156)
+2026-02-14 11:13:37,125 INFO app.services.openroute_service 🛣️ ROUTE: [7.6824892, 45.0677551]→[8.4227666, 45.3251557] (driving-car)
+2026-02-14 11:13:37,268 ERROR app.services.openroute_service ❌ ROUTE FAILED: Invalid route response
+2026-02-14 11:13:37,269 ERROR app.api.routes Error in create_map: Routing failed: Invalid route response
+2026-02-14 11:13:37,269 INFO uvicorn.access 127.0.0.1:48224 - "POST /create_map HTTP/1.1" 500
+2026-02-14 11:17:57,701 INFO app.services.openroute_service 🛣️ ROUTE: [7.6824892, 45.0677551]→[8.4227666, 45.3251557] (driving-car)
+2026-02-14 11:17:58,033 ERROR app.services.openroute_service ❌ ROUTE FAILED: Invalid route response
+2026-02-14 11:17:58,036 ERROR app.api.routes Error in create_map: Routing failed: Invalid route response
+2026-02-14 11:17:58,036 INFO uvicorn.access 127.0.0.1:54038 - "POST /create_map HTTP/1.1" 500
+2026-02-14 11:20:51,785 INFO uvicorn.error Shutting down
+2026-02-14 11:20:51,887 INFO uvicorn.error Waiting for application shutdown.
+2026-02-14 11:20:51,888 INFO uvicorn.error Application shutdown complete.
+2026-02-14 11:20:51,889 INFO uvicorn.error Finished server process [10684]
+2026-02-14 11:21:05,768 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-14 11:21:05,768 INFO uvicorn.error Started server process [13188]
+2026-02-14 11:21:05,768 INFO uvicorn.error Waiting for application startup.
+2026-02-14 11:21:05,769 INFO uvicorn.error Application startup complete.
+2026-02-14 11:21:07,999 INFO app.services.openroute_service ✅ ROUTE CACHED: 575 pts
+2026-02-14 11:21:08,417 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:21:08,429 INFO uvicorn.access 127.0.0.1:41236 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:21:15,268 INFO app.api.routes 📍 Point Mode enabled for: Turin, Italy
+2026-02-14 11:21:15,510 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:21:15,512 INFO uvicorn.access 127.0.0.1:32842 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:21:28,773 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:21:29,061 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:21:29,069 INFO uvicorn.access 127.0.0.1:54490 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:21:44,326 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:21:44,656 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:21:44,671 INFO uvicorn.access 127.0.0.1:48298 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:22:05,640 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:22:05,926 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:22:05,942 INFO uvicorn.access 127.0.0.1:41684 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:22:12,698 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:22:12,958 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:22:12,967 INFO uvicorn.access 127.0.0.1:41686 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:22:21,898 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:22:22,368 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:22:22,371 INFO uvicorn.access 127.0.0.1:40062 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:22:41,366 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:22:41,624 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:22:41,645 INFO uvicorn.access 127.0.0.1:39738 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:22:43,367 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:22:43,470 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:22:43,475 INFO uvicorn.access 127.0.0.1:39738 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:22:44,535 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:22:44,641 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:22:44,651 INFO uvicorn.access 127.0.0.1:39738 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:22:45,688 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:22:45,798 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:22:45,815 INFO uvicorn.access 127.0.0.1:39738 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:24:12,769 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:24:13,246 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:24:13,249 INFO uvicorn.access 127.0.0.1:43816 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:24:20,632 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:24:20,715 INFO uvicorn.access 127.0.0.1:50620 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:24:28,837 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:24:29,060 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:24:29,067 INFO uvicorn.access 127.0.0.1:58500 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:28:57,579 INFO app.services.openroute_service ✅ ROUTE CACHED: 1 pts
+2026-02-14 11:28:57,579 INFO uvicorn.access 127.0.0.1:60398 - "POST /create_map HTTP/1.1" 400
+2026-02-14 11:29:15,292 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:29:15,323 INFO uvicorn.access 127.0.0.1:43728 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:29:23,181 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:29:23,220 INFO uvicorn.access 127.0.0.1:43738 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:29:29,774 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:29:29,828 INFO uvicorn.access 127.0.0.1:42884 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:29:37,993 INFO app.api.routes 📍 Point Mode enabled for: Venice, Italy
+2026-02-14 11:29:38,241 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:29:38,247 INFO uvicorn.access 127.0.0.1:47256 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:29:51,122 INFO app.api.routes 📍 Point Mode enabled for: Venice, Italy
+2026-02-14 11:29:51,377 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:29:51,387 INFO uvicorn.access 127.0.0.1:60984 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:30:07,850 INFO app.services.openroute_service ✅ ROUTE CACHED: 1 pts
+2026-02-14 11:30:07,851 INFO uvicorn.access 127.0.0.1:51406 - "POST /create_map HTTP/1.1" 400
+2026-02-14 11:30:24,528 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:30:24,555 INFO uvicorn.access 127.0.0.1:41070 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:30:29,587 INFO app.api.routes 📍 Point Mode enabled for: Venice, Italy
+2026-02-14 11:30:29,852 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:30:29,859 INFO uvicorn.access 127.0.0.1:41086 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:33:23,470 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:33:23,486 INFO uvicorn.access 127.0.0.1:50634 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:33:30,760 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:33:30,791 INFO uvicorn.access 127.0.0.1:37910 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:33:35,681 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:33:35,713 INFO uvicorn.access 127.0.0.1:37910 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:34:27,891 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:34:28,376 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:34:28,387 INFO uvicorn.access 127.0.0.1:48476 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:35:19,593 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:35:19,815 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:35:19,820 INFO uvicorn.access 127.0.0.1:39496 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:41:09,138 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:41:09,167 INFO uvicorn.access 127.0.0.1:54422 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:41:22,214 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:41:22,474 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:41:22,488 INFO uvicorn.access 127.0.0.1:60754 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:41:34,641 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:41:34,888 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:41:34,897 INFO uvicorn.access 127.0.0.1:54176 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:41:41,500 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-14 11:41:41,738 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:41:41,750 INFO uvicorn.access 127.0.0.1:54182 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:41:55,724 INFO app.services.openroute_service ✅ ROUTE CACHED: 828 pts
+2026-02-14 11:41:56,247 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:41:56,267 INFO uvicorn.access 127.0.0.1:51478 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:51:02,248 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:51:02,304 INFO uvicorn.access 127.0.0.1:37662 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:51:06,963 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:51:06,989 INFO uvicorn.access 127.0.0.1:37662 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:51:14,449 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:51:14,480 INFO uvicorn.access 127.0.0.1:33428 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:51:25,755 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:51:25,972 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:51:25,983 INFO uvicorn.access 127.0.0.1:57086 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:51:38,051 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:51:38,279 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:51:38,289 INFO uvicorn.access 127.0.0.1:51686 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:51:47,006 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:51:48,638 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:51:48,641 INFO uvicorn.access 127.0.0.1:33936 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:52:03,147 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:52:03,437 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:52:03,443 INFO uvicorn.access 127.0.0.1:52804 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:52:09,458 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:52:09,704 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:52:09,712 INFO uvicorn.access 127.0.0.1:57160 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:52:17,807 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:52:18,055 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:52:18,067 INFO uvicorn.access 127.0.0.1:57196 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:52:23,153 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:52:23,416 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:52:23,429 INFO uvicorn.access 127.0.0.1:57202 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:52:40,006 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:52:40,254 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:52:40,264 INFO uvicorn.access 127.0.0.1:49316 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:52:45,362 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:52:45,600 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:52:45,602 INFO uvicorn.access 127.0.0.1:33526 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:53:18,779 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:53:19,477 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:53:19,479 INFO uvicorn.access 127.0.0.1:55912 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:53:31,309 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:53:31,335 INFO uvicorn.access 127.0.0.1:38496 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:53:35,953 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:53:35,998 INFO uvicorn.access 127.0.0.1:38496 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:54:19,415 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:54:19,680 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:54:19,691 INFO uvicorn.access 127.0.0.1:41814 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:54:28,097 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:54:28,366 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:54:28,382 INFO uvicorn.access 127.0.0.1:44274 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:54:41,030 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:54:41,061 INFO uvicorn.access 127.0.0.1:39374 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:54:45,303 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:54:45,405 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:54:45,412 INFO uvicorn.access 127.0.0.1:39374 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:54:50,333 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:54:50,452 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:54:50,468 INFO uvicorn.access 127.0.0.1:39374 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:58:06,447 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:58:06,735 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:58:06,748 INFO uvicorn.access 127.0.0.1:40308 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:58:17,347 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:58:17,612 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:58:17,621 INFO uvicorn.access 127.0.0.1:41528 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:58:30,636 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:58:31,319 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:58:31,321 INFO uvicorn.access 127.0.0.1:48712 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:58:38,345 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:58:38,591 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:58:38,596 INFO uvicorn.access 127.0.0.1:45382 - "POST /create_map HTTP/1.1" 200
+2026-02-14 11:58:43,504 INFO app.api.routes 📍 Point Mode enabled for: Verona, Italy
+2026-02-14 11:58:43,636 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-14 11:58:43,650 INFO uvicorn.access 127.0.0.1:45382 - "POST /create_map HTTP/1.1" 200
+2026-02-15 11:26:36,434 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-15 11:26:36,438 INFO uvicorn.error Started server process [8525]
+2026-02-15 11:26:36,438 INFO uvicorn.error Waiting for application startup.
+2026-02-15 11:26:36,438 INFO uvicorn.error Application startup complete.
+2026-02-15 11:28:25,930 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-15 11:28:26,001 INFO uvicorn.access 127.0.0.1:59504 - "POST /create_map HTTP/1.1" 200
+2026-02-15 11:29:48,223 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-15 11:29:48,516 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-15 11:29:48,539 INFO uvicorn.access 127.0.0.1:57862 - "POST /create_map HTTP/1.1" 200
+2026-02-15 11:29:54,735 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-15 11:29:54,971 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-15 11:29:54,983 INFO uvicorn.access 127.0.0.1:37988 - "POST /create_map HTTP/1.1" 200
+2026-02-15 11:30:21,962 INFO app.api.routes 📍 Point Mode enabled for: Vicenza, Italy
+2026-02-15 11:30:23,420 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-15 11:30:23,438 INFO uvicorn.access 127.0.0.1:58924 - "POST /create_map HTTP/1.1" 200
+2026-02-15 11:50:52,653 INFO uvicorn.error Shutting down
+2026-02-15 11:50:52,753 INFO uvicorn.error Waiting for application shutdown.
+2026-02-15 11:50:52,755 INFO uvicorn.error Application shutdown complete.
+2026-02-15 11:50:52,756 INFO uvicorn.error Finished server process [8525]
+2026-02-15 11:54:37,079 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-15 11:54:37,079 INFO uvicorn.error Started server process [11090]
+2026-02-15 11:54:37,079 INFO uvicorn.error Waiting for application startup.
+2026-02-15 11:54:37,080 INFO uvicorn.error Application startup complete.
+2026-02-15 11:54:37,384 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-15 11:54:37,400 INFO uvicorn.access 127.0.0.1:41158 - "POST /create_map HTTP/1.1" 200
+2026-02-15 11:54:45,382 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-15 11:54:45,415 INFO uvicorn.access 127.0.0.1:33390 - "POST /create_map HTTP/1.1" 200
+2026-02-15 11:55:01,153 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-15 11:55:01,239 INFO uvicorn.access 127.0.0.1:43984 - "POST /create_map HTTP/1.1" 200
+2026-02-15 12:30:21,125 INFO uvicorn.error Shutting down
+2026-02-15 12:30:21,230 INFO uvicorn.error Waiting for application shutdown.
+2026-02-15 12:30:21,230 INFO uvicorn.error Application shutdown complete.
+2026-02-15 12:30:21,232 INFO uvicorn.error Finished server process [11090]
+2026-02-16 18:13:16,002 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 18:13:16,005 INFO uvicorn.error Started server process [5690]
+2026-02-16 18:13:16,005 INFO uvicorn.error Waiting for application startup.
+2026-02-16 18:13:16,006 INFO uvicorn.error Application startup complete.
+2026-02-16 18:20:07,189 INFO uvicorn.error Shutting down
+2026-02-16 18:20:07,290 INFO uvicorn.error Waiting for application shutdown.
+2026-02-16 18:20:07,291 INFO uvicorn.error Application shutdown complete.
+2026-02-16 18:20:07,292 INFO uvicorn.error Finished server process [5690]
+2026-02-16 18:20:21,840 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 18:20:21,840 INFO uvicorn.error Started server process [7164]
+2026-02-16 18:20:21,840 INFO uvicorn.error Waiting for application startup.
+2026-02-16 18:20:21,841 INFO uvicorn.error Application startup complete.
+2026-02-16 18:23:22,130 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 18:23:22,446 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:23,554 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:24,727 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:25,891 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:27,005 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:29,183 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:30,822 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:32,035 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:33,119 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:34,200 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:35,433 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:36,609 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:37,719 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:38,826 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:39,918 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:41,140 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:42,313 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:43,438 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:44,587 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:23:45,627 INFO uvicorn.access 127.0.0.1:34356 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 18:26:59,270 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 18:26:59,618 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:00,738 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:01,827 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:02,968 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:04,063 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:05,180 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:06,263 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:07,356 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:08,451 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:09,612 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:10,685 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:11,787 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:12,869 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:13,948 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:15,138 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:16,263 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:17,901 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:18,980 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:20,562 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:27:21,607 INFO uvicorn.access 127.0.0.1:46320 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 18:32:09,024 INFO uvicorn.error Shutting down
+2026-02-16 18:32:09,125 INFO uvicorn.error Waiting for application shutdown.
+2026-02-16 18:32:09,126 INFO uvicorn.error Application shutdown complete.
+2026-02-16 18:32:09,127 INFO uvicorn.error Finished server process [7164]
+2026-02-16 18:34:00,613 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 18:34:00,613 INFO uvicorn.error Started server process [11098]
+2026-02-16 18:34:00,613 INFO uvicorn.error Waiting for application startup.
+2026-02-16 18:34:00,614 INFO uvicorn.error Application startup complete.
+2026-02-16 18:35:17,137 INFO uvicorn.error Shutting down
+2026-02-16 18:35:17,238 INFO uvicorn.error Waiting for application shutdown.
+2026-02-16 18:35:17,239 INFO uvicorn.error Application shutdown complete.
+2026-02-16 18:35:17,239 INFO uvicorn.error Finished server process [11098]
+2026-02-16 18:35:31,482 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 18:35:31,483 INFO uvicorn.error Started server process [11265]
+2026-02-16 18:35:31,483 INFO uvicorn.error Waiting for application startup.
+2026-02-16 18:35:31,484 INFO uvicorn.error Application startup complete.
+2026-02-16 18:35:46,034 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 18:35:46,045 INFO uvicorn.access 127.0.0.1:46904 - "POST /create_map HTTP/1.1" 200
+2026-02-16 18:36:02,576 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 18:36:02,879 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:03,973 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:05,044 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:06,141 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:07,211 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:08,316 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:09,407 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:10,507 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:11,583 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:12,765 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:13,910 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:15,156 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:16,270 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:17,359 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:18,450 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:19,526 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:20,596 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:21,685 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:22,757 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 18:36:23,807 INFO uvicorn.access 127.0.0.1:36282 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 18:36:24,022 INFO app.services.ingest_service 🌍 Starting geocoding for 137 events...
+2026-02-16 18:36:24,553 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+centro&city=Motta+di+Livenza&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:24,601 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:24,602 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:25,090 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:25,094 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:25,698 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+paese&city=Pove+del+Grappa&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:26,621 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Strade+del+centro&city=Rossano+Veneto&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:26,765 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:26,766 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:26,767 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:26,919 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Polivalente+coperto%2C+Chiesa&city=Ponte+di+Piave&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,036 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,090 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,091 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,092 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,094 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,536 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Codevigo&city=Codevigo&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,616 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,617 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,618 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,619 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,620 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,621 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,621 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,622 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,812 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,814 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,860 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,861 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,861 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,862 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,884 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,885 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,887 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:36:27,888 INFO app.services.ingest_service 📍 Geocoded: Corso del Popolo, Chioggia -> 45.2232205, 12.2805444
+2026-02-16 18:36:27,925 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 18:36:27,926 WARNING app.services.ingest_service ⚠️ Geocoding failed for Corso del Popolo: Expecting value: line 2 column 1 (char 1)
+2026-02-16 18:36:28,226 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 18:36:28,321 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:36:28,424 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:36:28,531 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:36:28,628 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:36:28,643 INFO app.services.ingest_service ⚡ Ingesting 137 events (Batch Size: 32)
+2026-02-16 18:36:28,697 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 400 Bad Request"
+2026-02-16 18:36:28,712 ERROR app.api.routes Ingestion failed: Unexpected Response: 400 (Bad Request)
+Raw response content:
+b'{"status":{"error":"Format error in JSON body: value 5e8ec08a-163c-42c3-8b62-d6316e018939_2026-02-16 is not a valid point ID, valid values are either an unsigned integer or a UUID at line 1 column  ...'
+2026-02-16 18:36:28,713 INFO uvicorn.access 127.0.0.1:45834 - "POST /ingestevents HTTP/1.1" 500
+2026-02-16 18:36:29,107 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-02-16 18:36:29,353 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 18:36:29,434 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 18:36:29,453 INFO uvicorn.access 127.0.0.1:55320 - "GET /collection_info HTTP/1.1" 200
+2026-02-16 18:48:15,669 INFO uvicorn.error Shutting down
+2026-02-16 18:48:15,770 INFO uvicorn.error Waiting for application shutdown.
+2026-02-16 18:48:15,770 INFO uvicorn.error Application shutdown complete.
+2026-02-16 18:48:15,770 INFO uvicorn.error Finished server process [11265]
+2026-02-16 18:48:28,867 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 18:48:28,867 INFO uvicorn.error Started server process [12318]
+2026-02-16 18:48:28,867 INFO uvicorn.error Waiting for application startup.
+2026-02-16 18:48:28,868 INFO uvicorn.error Application startup complete.
+2026-02-16 18:48:55,899 INFO uvicorn.access 127.0.0.1:32878 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 404
+2026-02-16 18:48:55,955 INFO app.services.ingest_service 🌍 Geocodifica di 137 eventi...
+2026-02-16 18:48:56,433 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:56,530 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+paese&city=Pove+del+Grappa&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:56,531 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+centro&city=Motta+di+Livenza&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:56,532 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:56,533 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Polivalente+coperto%2C+Chiesa&city=Ponte+di+Piave&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:57,587 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:57,591 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Strade+del+centro&city=Rossano+Veneto&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:57,598 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:57,602 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:57,607 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,149 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,152 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,155 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,157 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,160 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,720 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,723 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,829 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,830 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Codevigo&city=Codevigo&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:58,831 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:59,437 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:59,444 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:59,450 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:59,455 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:59,827 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:59,880 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:48:59,897 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&state=Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 18:49:00,884 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 18:49:01,125 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:49:01,300 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:49:01,459 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:49:01,639 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:49:01,642 INFO app.services.ingest_service ⚡ Ingestione in corso (Batch: 32)
+2026-02-16 18:49:01,838 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 18:49:03,566 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=false "HTTP/1.1 200 OK"
+2026-02-16 18:49:03,642 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 18:49:05,433 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=false "HTTP/1.1 200 OK"
+2026-02-16 18:49:05,854 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 18:49:08,804 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=false "HTTP/1.1 200 OK"
+2026-02-16 18:49:08,864 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 18:49:10,233 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=false "HTTP/1.1 200 OK"
+2026-02-16 18:49:10,294 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 18:49:10,618 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 18:49:10,680 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 18:49:10,703 INFO app.services.ingest_service 🎉 Ingestione completata. Punti totali: 150796
+2026-02-16 18:49:10,708 INFO uvicorn.access 127.0.0.1:32892 - "POST /ingestevents HTTP/1.1" 200
+2026-02-16 18:49:11,164 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-02-16 18:49:12,179 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 18:49:12,492 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 18:49:12,497 INFO uvicorn.access 127.0.0.1:52018 - "GET /collection_info HTTP/1.1" 200
+2026-02-16 18:50:43,642 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.362566, 45.660464)
+2026-02-16 18:50:44,560 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 18:50:44,578 INFO uvicorn.access 127.0.0.1:52010 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:00:59,126 INFO app.services.openroute_service ✅ ROUTE CACHED: 596 pts
+2026-02-16 19:00:59,557 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:00:59,572 INFO uvicorn.access 127.0.0.1:59980 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:03:53,240 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:03:53,257 INFO uvicorn.access 127.0.0.1:37216 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:04:20,189 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.387990, 45.388115)
+2026-02-16 19:04:20,424 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:04:20,431 INFO uvicorn.access 127.0.0.1:40198 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:12:10,998 INFO uvicorn.error Shutting down
+2026-02-16 19:12:11,099 INFO uvicorn.error Waiting for application shutdown.
+2026-02-16 19:12:11,100 INFO uvicorn.error Application shutdown complete.
+2026-02-16 19:12:11,101 INFO uvicorn.error Finished server process [12318]
+2026-02-16 19:12:26,092 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 19:12:26,092 INFO uvicorn.error Started server process [14176]
+2026-02-16 19:12:26,093 INFO uvicorn.error Waiting for application startup.
+2026-02-16 19:12:26,093 INFO uvicorn.error Application startup complete.
+2026-02-16 19:17:52,884 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 19:17:53,312 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:17:54,414 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:17:55,542 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:17:56,791 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:17:57,900 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:17:59,028 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:00,140 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:01,220 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:02,345 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:03,485 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:04,566 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:05,842 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:06,970 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:08,225 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:09,329 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:10,609 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:11,836 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:12,944 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:14,060 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:18:15,159 INFO uvicorn.access 127.0.0.1:56938 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 19:18:16,185 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+centro&city=Motta+di+Livenza&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:16,290 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:16,291 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:16,585 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:16,587 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:17,360 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+paese&city=Pove+del+Grappa&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:18,588 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Polivalente+coperto%2C+Chiesa&city=Ponte+di+Piave&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:19,405 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Strade+del+centro&city=Rossano+Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,207 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,208 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,210 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,212 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,214 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,525 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,574 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,575 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:20,643 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Codevigo+&city=Codevigo&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:21,765 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:21,770 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:21,832 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:21,833 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:21,834 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,070 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,080 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,090 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,094 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,107 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,549 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,661 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,756 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,863 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:22,938 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:18:24,213 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:24,281 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:18:26,038 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:26,254 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:18:28,825 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:28,923 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:18:30,216 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:30,298 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:18:30,793 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:18:30,812 INFO uvicorn.access 127.0.0.1:52660 - "POST /ingestevents HTTP/1.1" 200
+2026-02-16 19:18:31,288 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-02-16 19:18:31,514 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:18:31,589 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 19:18:31,613 INFO uvicorn.access 127.0.0.1:49696 - "GET /collection_info HTTP/1.1" 200
+2026-02-16 19:19:58,711 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:19:58,734 INFO uvicorn.access 127.0.0.1:49320 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:20:14,434 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 19:20:14,819 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:15,954 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:17,124 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:18,260 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:19,371 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:20,602 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:21,716 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:22,835 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:23,952 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:25,065 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:26,182 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:27,315 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:28,448 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:29,559 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:30,697 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:31,810 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:32,923 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:34,051 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:35,157 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:20:36,210 INFO uvicorn.access 127.0.0.1:39196 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 19:20:36,949 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,017 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,020 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Polivalente+coperto%2C+Chiesa&city=Ponte+di+Piave&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,023 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+centro&city=Motta+di+Livenza&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,025 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+paese&city=Pove+del+Grappa&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,406 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,444 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,445 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,446 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Strade+del+centro&city=Rossano+Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,447 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,687 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,689 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,691 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,693 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,695 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:20:37,933 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:37,970 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:37,971 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Codevigo+&city=Codevigo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:37,972 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:37,973 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,178 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,180 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,255 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,255 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,256 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,354 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,355 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:20:38,584 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:20:38,681 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:20:38,786 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:20:38,899 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:20:38,979 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:20:39,083 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:20:39,157 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:20:39,230 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:20:39,304 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:20:39,326 INFO uvicorn.access 127.0.0.1:35770 - "POST /ingestevents HTTP/1.1" 200
+2026-02-16 19:20:39,779 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-02-16 19:20:40,004 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:20:40,071 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 19:20:40,089 INFO uvicorn.access 127.0.0.1:57360 - "GET /collection_info HTTP/1.1" 200
+2026-02-16 19:22:13,970 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 19:22:14,388 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:15,546 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:16,669 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:17,872 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:19,002 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:20,155 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:21,276 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:22,413 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:23,560 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:24,802 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:25,912 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:27,022 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:28,134 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:29,313 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:30,435 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:31,559 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:32,690 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:33,814 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:34,944 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:22:35,965 INFO uvicorn.access 127.0.0.1:40320 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 19:22:36,755 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Polivalente+coperto%2C+Chiesa&city=Ponte+di+Piave&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:36,758 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+paese&city=Pove+del+Grappa&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:36,760 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:36,761 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:36,763 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+centro&city=Motta+di+Livenza&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,109 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,110 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Strade+del+centro&city=Rossano+Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,214 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,215 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,216 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,542 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,546 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,550 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,553 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:37,556 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,018 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,021 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,025 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,153 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Codevigo+&city=Codevigo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,154 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,315 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,317 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,319 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,321 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,322 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,490 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,493 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:22:38,804 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:22:38,910 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,017 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,114 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,194 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,266 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,366 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,432 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,509 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:22:39,517 INFO uvicorn.access 127.0.0.1:36392 - "POST /ingestevents HTTP/1.1" 200
+2026-02-16 19:22:39,952 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-02-16 19:22:40,204 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:22:40,276 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 19:22:40,289 INFO uvicorn.access 127.0.0.1:59346 - "GET /collection_info HTTP/1.1" 200
+2026-02-16 19:23:07,740 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:23:07,745 INFO uvicorn.access 127.0.0.1:55792 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:23:09,129 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:23:09,149 INFO uvicorn.access 127.0.0.1:55792 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:28:34,465 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:28:34,468 INFO uvicorn.access 127.0.0.1:59578 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:28:42,372 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 19:28:42,699 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:43,808 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:44,937 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:46,039 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:47,124 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:48,264 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:49,387 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:50,575 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:51,679 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:52,805 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:53,890 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:55,000 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:56,082 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:57,170 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:58,238 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:28:59,317 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:00,392 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:01,535 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:02,651 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:03,758 INFO uvicorn.access 127.0.0.1:57312 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 19:29:04,378 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+centro&city=Motta+di+Livenza&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,385 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,390 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,396 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Polivalente+coperto%2C+Chiesa&city=Ponte+di+Piave&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,404 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+paese&city=Pove+del+Grappa&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,759 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,761 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,763 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,766 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Strade+del+centro&city=Rossano+Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:04,769 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:05,059 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:05,061 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:05,062 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:05,247 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:05,248 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-16 19:29:05,397 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,458 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,460 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,462 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,463 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Codevigo+&city=Codevigo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,689 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,731 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,769 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,770 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,771 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,849 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:05,851 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:06,058 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:29:06,167 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:06,282 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:06,402 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:06,491 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:07,701 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:07,767 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:09,092 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:09,160 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:10,612 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:10,685 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:12,010 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:12,085 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:12,429 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:12,449 INFO uvicorn.access 127.0.0.1:41902 - "POST /ingestevents HTTP/1.1" 200
+2026-02-16 19:29:12,886 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-02-16 19:29:13,131 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:29:13,205 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 19:29:13,226 INFO uvicorn.access 127.0.0.1:52416 - "GET /collection_info HTTP/1.1" 200
+2026-02-16 19:29:25,060 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:29:25,085 INFO uvicorn.access 127.0.0.1:33210 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:29:29,778 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-16 19:29:30,116 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5e8ec08a-163c-42c3-8b62-d6316e018939?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:31,179 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/dd04942d-23de-4332-8538-3b8983c1152a?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:32,297 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2918868e-81d7-40e0-a042-0e9577a6ba5b?fields=nextOccurrences%28fromDate%3A%222026-02-16%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:33,453 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9c1a0cb1-8e8f-4e70-9631-1c0d42a96b2e?fields=nextOccurrences%28fromDate%3A%222026-02-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:34,551 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/51fa854a-3e6f-423d-9af7-eb923e998c7f?fields=nextOccurrences%28fromDate%3A%222026-02-20%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:35,772 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:36,912 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/c048ec38-5c51-4dba-b656-715947a091ce?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:38,053 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:39,163 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/44c64d80-7296-4406-8f27-851ab7e3db7f?fields=nextOccurrences%28fromDate%3A%222026-02-21%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:40,260 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:41,353 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-02-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:42,453 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-02-27%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:43,548 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:44,618 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:45,693 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:46,800 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:47,940 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:49,086 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:50,209 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-16 19:29:51,258 INFO uvicorn.access 127.0.0.1:53890 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-16 19:29:51,732 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:51,773 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Polivalente+coperto%2C+Chiesa&city=Ponte+di+Piave&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:51,774 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+centro&city=Motta+di+Livenza&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:51,775 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centro+storico&city=Malo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:51,776 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Vie+del+paese&city=Pove+del+Grappa&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,004 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,052 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,053 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,054 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+culturale+Bice+Lazzari&city=Setteville&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,055 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Strade+del+centro&city=Rossano+Veneto&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,293 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,338 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,339 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,340 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,341 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,559 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,608 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Codevigo+&city=Codevigo&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,608 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Ballarin&city=Lendinara&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,609 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,610 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,854 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,856 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,993 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,997 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:52,999 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:53,081 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:53,085 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+del+Popolo&city=Chioggia&country=Italy&format=json&limit=1 "HTTP/1.1 429 Too many requests"
+2026-02-16 19:29:53,331 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:29:53,432 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:53,526 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:53,632 INFO httpx HTTP Request: PUT https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/index?wait=true "HTTP/1.1 200 OK"
+2026-02-16 19:29:53,706 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:53,797 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:53,867 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:53,945 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:54,020 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points "HTTP/1.1 200 OK"
+2026-02-16 19:29:54,031 INFO uvicorn.access 127.0.0.1:40356 - "POST /ingestevents HTTP/1.1" 200
+2026-02-16 19:29:54,394 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-02-16 19:29:54,661 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-16 19:29:54,732 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-02-16 19:29:54,748 INFO uvicorn.access 127.0.0.1:40360 - "GET /collection_info HTTP/1.1" 200
+2026-02-16 19:38:30,232 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:38:30,254 INFO uvicorn.access 127.0.0.1:48946 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:41:35,750 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:41:35,771 INFO uvicorn.access 127.0.0.1:50760 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:53:44,378 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 19:53:44,406 INFO uvicorn.access 127.0.0.1:36570 - "POST /create_map HTTP/1.1" 200
+2026-02-16 19:55:17,420 INFO uvicorn.error Shutting down
+2026-02-16 19:55:17,521 INFO uvicorn.error Waiting for application shutdown.
+2026-02-16 19:55:17,524 INFO uvicorn.error Application shutdown complete.
+2026-02-16 19:55:17,526 INFO uvicorn.error Finished server process [14176]
+2026-02-16 23:21:17,693 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 23:21:17,693 INFO uvicorn.error Started server process [5742]
+2026-02-16 23:21:17,694 INFO uvicorn.error Waiting for application startup.
+2026-02-16 23:21:17,694 INFO uvicorn.error Application startup complete.
+2026-02-16 23:22:29,376 INFO app.services.openroute_service ✅ ROUTE CACHED: 1 pts
+2026-02-16 23:22:29,377 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:22:29,379 INFO uvicorn.access 127.0.0.1:40116 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:22:47,823 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:22:47,823 INFO uvicorn.access 127.0.0.1:33682 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:23:18,250 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:23:18,258 INFO uvicorn.access 127.0.0.1:48328 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:25:23,620 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:25:23,629 INFO uvicorn.access 127.0.0.1:35218 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:27:49,180 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:27:49,189 INFO uvicorn.access 127.0.0.1:49184 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:27:55,862 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:27:55,870 INFO uvicorn.access 127.0.0.1:49200 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:28:15,768 INFO uvicorn.error Shutting down
+2026-02-16 23:28:15,868 INFO uvicorn.error Waiting for application shutdown.
+2026-02-16 23:28:15,869 INFO uvicorn.error Application shutdown complete.
+2026-02-16 23:28:15,869 INFO uvicorn.error Finished server process [5742]
+2026-02-16 23:28:38,232 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-16 23:28:38,232 INFO uvicorn.error Started server process [7406]
+2026-02-16 23:28:38,233 INFO uvicorn.error Waiting for application startup.
+2026-02-16 23:28:38,233 INFO uvicorn.error Application startup complete.
+2026-02-16 23:28:40,850 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:28:40,856 INFO uvicorn.access 127.0.0.1:42952 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:28:59,789 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:28:59,793 INFO uvicorn.access 127.0.0.1:56764 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:29:06,992 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:29:06,994 INFO uvicorn.access 127.0.0.1:56766 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:29:21,899 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:29:21,903 INFO uvicorn.access 127.0.0.1:59258 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:29:32,471 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:29:32,471 INFO uvicorn.access 127.0.0.1:51330 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:29:35,286 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:29:35,286 INFO uvicorn.access 127.0.0.1:51330 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:29:56,137 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:29:56,139 INFO uvicorn.access 127.0.0.1:57406 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:30:10,367 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:30:10,370 INFO uvicorn.access 127.0.0.1:39616 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:30:15,040 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:30:15,040 INFO uvicorn.access 127.0.0.1:39616 - "POST /create_map HTTP/1.1" 500
+2026-02-16 23:30:37,734 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:30:37,735 INFO uvicorn.access 127.0.0.1:52448 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:30:45,687 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:30:45,692 INFO uvicorn.access 127.0.0.1:52450 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:30:53,915 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:30:53,918 INFO uvicorn.access 127.0.0.1:47510 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:31:48,099 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-16 23:31:48,103 INFO uvicorn.access 127.0.0.1:51116 - "POST /create_map HTTP/1.1" 200
+2026-02-16 23:31:56,972 ERROR app.api.routes Error in create_map: 400: Route must contain two different addresses.
+2026-02-16 23:31:56,973 INFO uvicorn.access 127.0.0.1:51132 - "POST /create_map HTTP/1.1" 500

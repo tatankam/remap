@@ -19,7 +19,7 @@ rm -f "$DATASET_DIR"/unpli_events_*.json
 # Richiede lo scraping al backend (backend2 su porta 8001)
 echo "📥 Scraping 500 events from UNPLI..." | tee -a "$LOG_FILE"
 curl -s -X GET \
-  "http://127.0.0.1:8001/scrape_unpli_events?page_no=1&page_size=500" \
+  "http://127.0.0.1:8000/scrape_unpli_events?page_no=1&page_size=500" \
   "${UNPLI_SESSION_ID:+&session_id=$UNPLI_SESSION_ID}" \
   -H "accept: application/json" | tee -a "$LOG_FILE"
 echo "" >> "$LOG_FILE"
@@ -50,7 +50,7 @@ echo "✅ $JSON_FILE ready ($(stat -c%s "$JSON_FILE" 2>/dev/null || echo "?") by
 # Invia il file rilevato al backend per l'elaborazione dei vettori e l'upload su Qdrant
 echo "🚀 Ingesting into Qdrant..." | tee -a "$LOG_FILE"
 INGEST_OUTPUT=$(curl -s -X POST \
-  "http://127.0.0.1:8001/ingestevents" \
+  "http://127.0.0.1:8000/ingestevents" \
   -F "file=@$JSON_FILE")
 
 # Registriamo l'output nel log per il parsing
@@ -76,5 +76,5 @@ fi
 
 # STEP 5: CONCLUSIONE E INFO COLLEZIONE
 echo "📊 Final Collection Info:" | tee -a "$LOG_FILE"
-curl -s http://127.0.0.1:8001/collection_info | tee -a "$LOG_FILE"
+curl -s http://127.0.0.1:8000/collection_info | tee -a "$LOG_FILE"
 echo -e "\n✅ Pipeline Done $(date)\n" | tee -a "$LOG_FILE"
