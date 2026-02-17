@@ -36,18 +36,10 @@ def calculate_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 def sanitize_id(raw_id: Any) -> str:
-    """
-    ✅ SOLUZIONE DEFINITIVA AI DUPLICATI:
-    Genera un UUID v5 DETERMINISTICO basato sulla stringa dell'ID evento.
-    In questo modo 'ID_2026-03-08' produrrà SEMPRE lo stesso identificativo fisico.
-    """
+    """Genera un UUID v5 DETERMINISTICO basato sulla stringa dell'ID evento."""
     if not raw_id:
-        # Se manca l'ID, usiamo un hash del timestamp per evitare collisioni casuali
         return str(uuid.uuid4())
-    
     str_id = str(raw_id).strip()
-    
-    # Namespace DNS standard per generare UUID v5
     NAMESPACE = uuid.NAMESPACE_DNS
     return str(uuid.uuid5(NAMESPACE, str_id))
 
@@ -79,66 +71,73 @@ def ensure_collection_exists():
 async def async_geocode_structured(venue: str, city: str) -> Optional[Dict[str, float]]:
     base_url = "https://nominatim.openstreetmap.org/search"
     headers = {"User-Agent": "remap_ingest/1.0"}
-    params = {"street": venue, "city": city, "country": "Italy", "format": "json", "limit": 1}
+    params = {"street": venue, "city": city, "format": "json", "limit": 1}
     async with httpx.AsyncClient() as h_client:
         try:
             resp = await h_client.get(base_url, params=params, headers=headers, timeout=10)
             data = resp.json()
             if data: return {"lat": float(data[0]["lat"]), "lon": float(data[0]["lon"])}
-        except: pass
+        except Exception as e:
+            logger.error(f"❌ Errore Nominatim: {e}")
     return None
 
+async def delete_events_from_qdrant(event_ids: List[str]) -> int:
+    """Rimuove fisicamente i punti da Qdrant usando UUID deterministici."""
+    if not event_ids: return 0
+    point_ids = [sanitize_id(eid) for eid in event_ids]
+    try:
+        client.delete(
+            collection_name=COLLECTION_NAME,
+            points_selector=models.PointIdsList(points=point_ids)
+        )
+        logger.info(f"🗑️ Rimossi {len(point_ids)} punti da Qdrant")
+        return len(point_ids)
+    except Exception as e:
+        logger.error(f"❌ Errore cancellazione: {e}")
+        return 0
+
 async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: int = 32):
-    if not events: return {"inserted": 0, "updated": 0, "skipped": 0}
+    if not events: return {"inserted": 0, "updated": 0, "skipped_unchanged": 0, "deleted": 0}
 
+    # --- GESTIONE CANCELLAZIONI ---
+    to_remove_ids = [e.get("id") or e.get("event_id") for e in events if e.get("delta_type") == "removed"]
+    deleted_count = 0
+    if to_remove_ids:
+        deleted_count = await delete_events_from_qdrant(to_remove_ids)
+    
+    # Filtriamo solo gli eventi da inserire o aggiornare
+    active_events = [e for e in events if e.get("delta_type") in ["added", "changed", None]]
+    if not active_events:
+        return {"inserted": 0, "updated": 0, "skipped_unchanged": 0, "deleted": deleted_count}
 
-# 1. Geocodifica asincrona con limitazione di frequenza
-    sem = asyncio.Semaphore(1) # <--- Ridotto a 1 per garantire l'ordine e il rispetto dei tempi
+    # 1. Geocodifica asincrona (solo per eventi attivi)
+    sem = asyncio.Semaphore(1) 
     async def geocode_task(ev):
         loc = ev.get("location", {})
-        # Controllo incrociato per lat/latitude e lon/longitude
         lat = loc.get("lat") or loc.get("latitude")
         lon = loc.get("lon") or loc.get("longitude")
-
         if not lat or not lon:
             v, c = loc.get("venue", ""), ev.get("city", "")
             if v and c:
                 async with sem:
-                    logger.info(f"🌍 Richiesta Nominatim per: {v}, {c}")
                     coords = await async_geocode_structured(v, c)
-                    
                     if coords:
-                        ev["location"].update({
-                            "lat": coords["lat"], 
-                            "lon": coords["lon"],
-                            "latitude": coords["lat"], 
-                            "longitude": coords["lon"]
-                        })
-                    
-                    # ✅ Sleep strategico di 1.5 secondi per non farsi bannare l'IP
+                        ev["location"].update({"lat": coords["lat"], "lon": coords["lon"]})
                     await asyncio.sleep(1.5)
 
-
-    await asyncio.gather(*(geocode_task(e) for e in events))
+    await asyncio.gather(*(geocode_task(e) for e in active_events))
     ensure_collection_exists()
     
     inserted = updated = skipped = 0
-    total = len(events)
+    total = len(active_events)
 
     for start in tqdm(range(0, total, batch_size), desc="Ingesting to Qdrant"):
-        batch = events[start : start + batch_size]
-        
-        # Generiamo gli ID fisici (point_id) in modo deterministico
+        batch = active_events[start : start + batch_size]
         batch_point_ids = [sanitize_id(e.get("id") or e.get("event_id")) for e in batch]
         batch_texts = [normalize_text(f"{e.get('title','')} {e.get('category','')}") for e in batch]
         local_hashes = [calculate_hash(t) for t in batch_texts]
 
-        # Verifica esistenza per saltare duplicati identici (hash invariato)
-        existing_points = client.retrieve(
-            collection_name=COLLECTION_NAME,
-            ids=batch_point_ids,
-            with_payload=True
-        )
+        existing_points = client.retrieve(collection_name=COLLECTION_NAME, ids=batch_point_ids, with_payload=True)
         existing_map = {str(p.id): p for p in existing_points}
 
         points_to_upsert = []
@@ -147,17 +146,13 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
         for i, event in enumerate(batch):
             pid = batch_point_ids[i]
             existing_p = existing_map.get(pid)
-            
-            # Se l'evento esiste ed è identico (stesso hash), lo saltiamo
             if existing_p and existing_p.payload.get("hash") == local_hashes[i]:
                 skipped += 1
                 continue
-            
             to_embed_indices.append(i)
 
         if not to_embed_indices: continue
 
-        # Embedding
         subset_texts = [batch_texts[i] for i in to_embed_indices]
         dense_embs = list(dense_embedding_model.passage_embed(subset_texts))
         sparse_embs = list(sparse_embedding_model.passage_embed(subset_texts))
@@ -180,7 +175,7 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
             payload = {**event, "location": {**loc, **loc_geo}, "hash": local_hashes[i]}
 
             points_to_upsert.append(models.PointStruct(
-                id=pid, # <--- UUID DETERMINISTICO (V5)
+                id=pid,
                 vector={
                     DENSE_VECTOR_NAME: dense_embs[idx].tolist(),
                     SPARSE_VECTOR_NAME: models.SparseVector(
@@ -194,4 +189,4 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
         if points_to_upsert:
             client.upsert(collection_name=COLLECTION_NAME, points=points_to_upsert)
 
-    return {"inserted": inserted, "updated": updated, "skipped_unchanged": skipped}
+    return {"inserted": inserted, "updated": updated, "skipped_unchanged": skipped, "deleted": deleted_count}

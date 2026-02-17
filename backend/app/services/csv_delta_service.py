@@ -79,6 +79,7 @@ def compute_csv_delta(
         records.append(removed_pref)
 
     # Changed records
+    diff_mask_sum = 0
     if len(common_idx) > 0:
         left = df_old_idx.loc[common_idx].sort_index()
         right = df_new_idx.loc[common_idx].sort_index()
@@ -89,6 +90,7 @@ def compute_csv_delta(
 
         non_key_cols = [c for c in all_cols if c not in key_cols]
         diff_mask = (left[non_key_cols] != right[non_key_cols]).any(axis=1)
+        diff_mask_sum = diff_mask.sum()
         
         if diff_mask.any():
             left_diff = left[diff_mask].reset_index(drop=True)
@@ -116,11 +118,12 @@ def compute_csv_delta(
     ordered = [c for c in ordered if c in df_all.columns]
     df_all = df_all[ordered]
 
+    # ✅ FIX: Forziamo la conversione in int (Python native) per evitare errori di serializzazione JSON
     summary = {
-        "added": len(added_idx),
-        "removed": len(removed_idx),
-        "changed": diff_mask.sum() if 'diff_mask' in locals() else 0,
-        "total": len(df_all)
+        "added": int(len(added_idx)),
+        "removed": int(len(removed_idx)),
+        "changed": int(diff_mask_sum),
+        "total": int(len(df_all))
     }
 
     result = {
