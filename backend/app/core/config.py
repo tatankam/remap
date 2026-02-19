@@ -15,10 +15,12 @@ OPENAI_MODEL = os.getenv("OPENAI_MODEL")
 DENSE_MODEL_NAME = os.getenv("DENSE_MODEL_NAME")
 SPARSE_MODEL_NAME = os.getenv("SPARSE_MODEL_NAME")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
-#COLLECTION_NAME = "veneto_events"
-#COLLECTION_NAME = "veneto_unpliveneto_events"
-UNPLI_SESSION_ID = os.getenv("UNPLI_SESSION_ID")
+
 
 PHOTON_BASE_URL = os.getenv("PHOTON_BASE_URL", "https://photon.komoot.io/api/")
 PHOTON_USER_AGENT = os.getenv("PHOTON_USER_AGENT", "RemapApp/1.0") 
 PHOTON_CONTACT_EMAIL = os.getenv("PHOTON_CONTACT_EMAIL", "contact@remapapp.io")
+
+UNPLI_SESSION_ID = os.getenv("UNPLI_SESSION_ID", "ABCDE")
+UNPLI_API_BASE_URL = os.getenv("UNPLI_API_BASE_URL")
+UNPLI_WEB_BASE_URL = os.getenv("UNPLI_WEB_BASE_URL")

@@ -4,6 +4,8 @@ from datetime import datetime, timedelta
 import asyncio
 from typing import List, Optional, Tuple, Dict, Any
 
+# Importazione configurazioni centralizzate
+from app.core.config import UNPLI_SESSION_ID, UNPLI_API_BASE_URL, UNPLI_WEB_BASE_URL
 
 def clean_html(raw_html: Optional[str]) -> str:
     if not raw_html:
@@ -11,14 +13,15 @@ def clean_html(raw_html: Optional[str]) -> str:
     soup = BeautifulSoup(raw_html, "html.parser")
     return soup.get_text(separator=" ", strip=True)
 
-
 async def fetch_unpli_events(
     session: httpx.AsyncClient,
     page_no: int = 1,
     page_size: int = 5,
-    session_id: str = "G1758362087062"
+    session_id: str = UNPLI_SESSION_ID
 ) -> Optional[List[Dict[str, Any]]]:
-    url = "https://webapi.deskline.net/unpliveneto/it/events"
+    """Recupera la lista eventi principale usando l'URL e la Sessione da config."""
+    
+    url = UNPLI_API_BASE_URL
     params = {
         "filterId": "",
         "fields": (
@@ -42,6 +45,7 @@ async def fetch_unpli_events(
         "Referer": "https://www.unpliveneto.it/",
         "User-Agent": "Mozilla/5.0"
     }
+    
     try:
         response = await session.get(url, headers=headers, params=params)
         response.raise_for_status()
@@ -53,18 +57,23 @@ async def fetch_unpli_events(
         print(f"Error fetching unpli events: {e}")
     return None
 
-
 async def fetch_event_details_dates(
     session: httpx.AsyncClient,
     dbCode: str,
     event_id: str,
-    session_id: str,
+    session_id: str = UNPLI_SESSION_ID,
     from_date: Optional[str] = None,
     max_retries: int = 5
 ) -> List[Tuple[str, int]]:
+    """Recupera le date ricorrenti costruendo l'URL dinamicamente."""
+    
     if from_date is None:
         from_date = "2020-01-01"
-    url = f"https://webapi.deskline.net/unpliveneto/it/events/{dbCode}/{event_id}"
+    
+    # Costruzione URL dettaglio: base_url/dbCode/eventId
+    base_api = UNPLI_API_BASE_URL.rstrip('/')
+    url = f"{base_api}/{dbCode}/{event_id}"
+    
     fields_value = f'nextOccurrences(fromDate:"{from_date}",count:100){{items{{date,dayOfWeek,startTime,duration}},hasMoreItems}}'
     params = {"fields": fields_value}
     headers = {
@@ -74,6 +83,7 @@ async def fetch_event_details_dates(
         "Referer": "https://www.unpliveneto.it/",
         "User-Agent": "Mozilla/5.0"
     }
+    
     backoff = 1
     for attempt in range(max_retries):
         try:
@@ -81,33 +91,40 @@ async def fetch_event_details_dates(
             if response.status_code == 429:
                 retry_after = response.headers.get("Retry-After")
                 wait_time = int(retry_after) if retry_after and retry_after.isdigit() else backoff
-                print(f"Received 429, retrying after {wait_time} seconds (attempt {attempt + 1})...")
+                print(f"Received 429, retrying after {wait_time} (attempt {attempt + 1})...")
                 await asyncio.sleep(wait_time)
                 backoff = min(backoff * 2, 60)
                 continue
+            
             response.raise_for_status()
             data = response.json()
             items = data.get("nextOccurrences", {}).get("items", [])
+            
             dates_with_duration = []
             for item in items:
                 if "date" in item:
                     dates_with_duration.append((f"{item['date'][:10]}T{item.get('startTime', '00:00')}:00", item.get("duration", 0)))
-            await asyncio.sleep(1)  # polite pause
+            
+            await asyncio.sleep(1)  # Gentilezza verso l'API
             return dates_with_duration
+            
         except httpx.RequestError as e:
             print(f"Request error: {e}, attempt {attempt + 1} of {max_retries}")
             await asyncio.sleep(backoff)
             backoff = min(backoff * 2, 60)
+            
     print("Max retries reached for event details, skipping dates.")
     return []
 
-
-async def transform_events_for_json(events: List[Dict], session_id: str) -> List[Dict]:
+async def transform_events_for_json(events: List[Dict], session_id: str = UNPLI_SESSION_ID) -> List[Dict]:
+    """Trasforma i dati grezzi dell'API nel formato JSON per Qdrant."""
     transformed = []
+    
     async with httpx.AsyncClient() as session:
         total_events = len(events)
         for i, event in enumerate(events, 1):
             print(f"Processing event {i} of {total_events}: ID {event.get('id', '')}")
+            
             descriptions = event.get("descriptions") or []
             long_description = ""
             if descriptions and isinstance(descriptions, list):
@@ -116,11 +133,8 @@ async def transform_events_for_json(events: List[Dict], session_id: str) -> List
 
             location = event.get("location") or {}
             coordinate = location.get("coordinate") or {}
-
             venue = location.get("place", "")
             city = location.get("town", "")
-            regions = location.get("regions") or []
-            region_str = ", ".join(regions) if regions else ""
 
             title = event.get("name", "")
 
@@ -129,21 +143,29 @@ async def transform_events_for_json(events: List[Dict], session_id: str) -> List
             if criteria and isinstance(criteria, list) and len(criteria) > 0:
                 category = criteria[0].get("groupName", "") if criteria[0] else ""
 
-            base_url = "https://www.unpliveneto.it/eventi-delle-pro-loco-in-veneto/#/eventi/"
+            # Costruzione URL Web dal config
             db_code = event.get("dbCode", "")
             event_id = event.get("id", "")
             url_friendly = event.get("urlFriendlyName", "")
-            event_url = f"{base_url}{db_code}/{event_id}/{url_friendly}" if db_code and event_id and url_friendly else base_url
+            
+            if db_code and event_id and url_friendly:
+                event_url = f"{UNPLI_WEB_BASE_URL.rstrip('/')}/{db_code}/{event_id}/{url_friendly}"
+            else:
+                event_url = UNPLI_WEB_BASE_URL
 
+            # Gestione Date Multiple
             dates_with_durations = []
             if event.get("hasMoreDates", False):
                 from_date = event.get("date")[:10]
-                dates_with_durations = await fetch_event_details_dates(session, dbCode=db_code, event_id=event_id, session_id=session_id, from_date=from_date)
+                dates_with_durations = await fetch_event_details_dates(
+                    session, dbCode=db_code, event_id=event_id, session_id=session_id, from_date=from_date
+                )
                 if not dates_with_durations:
                     dates_with_durations = [(event.get("date"), 0)]
             else:
                 dates_with_durations = [(event.get("date"), 0)]
 
+            # Generazione record per ogni data trovata
             for start_date, duration_hours in dates_with_durations:
                 try:
                     dt_start = datetime.strptime(start_date[:19], "%Y-%m-%dT%H:%M:%S")
@@ -156,8 +178,9 @@ async def transform_events_for_json(events: List[Dict], session_id: str) -> List
                     end_date = start_date
 
                 address = ", ".join([venue, city]) if venue and city else venue or city
-
-                unique_id = f"{event.get('id', '')}_{start_date[:10]}"  # unique event ID per edition by adding date
+                
+                # ID unico per data (determinista)
+                unique_id = f"{event.get('id', '')}_{start_date[:10]}"
 
                 transformed.append({
                     "id": unique_id,
@@ -176,4 +199,5 @@ async def transform_events_for_json(events: List[Dict], session_id: str) -> List
                     "url": event_url,
                     "credits": "Dms Veneto, il Destination Management System di Regione del Veneto"
                 })
+                
     return transformed
