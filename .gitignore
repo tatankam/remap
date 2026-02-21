@@ -17,7 +17,8 @@ __pycache__/
 # FastAPI app cache and compiled files
 backend/__pycache__/
 
-./ingesting.log
+*.log
+
 
 # Jupyter and notebook checkpoints
 .ipynb_checkpoints/

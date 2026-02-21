@@ -21,16 +21,25 @@ logger = logging.getLogger(__name__)
 
 # --- PATH CONFIGURATION ---
 # Uvicorn starts in /remap/backend. 
-# Your DB is in /remap/backend/dataset/ingest_cache.db
-BASE_DIR = Path(__file__).resolve().parent.parent.parent  # Points to /remap/backend
-DATASET_DIR = BASE_DIR / "dataset"
+# Match the reliable detection used in openroutse_service.py
+if os.path.exists("/app"):
+    DATASET_DIR = Path("/app") / "dataset"
+else:
+    # Fallback for local development outside Docker
+    DATASET_DIR = Path(__file__).resolve().parent.parent.parent / "dataset"
+
 INGEST_CACHE_DB = DATASET_DIR / "ingest_cache.db"
 
 def init_cache_db():
-    """Initializes the SQLite cache if it doesn't exist."""
+    """Initializes the SQLite cache in the mounted volume."""
     DATASET_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Connection with performance optimization (similar to your routing service)
     conn = sqlite3.connect(str(INGEST_CACHE_DB))
     try:
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA synchronous=NORMAL")
+        
         conn.execute("""
             CREATE TABLE IF NOT EXISTS nominatim_cache (
                 geo_hash TEXT PRIMARY KEY,
@@ -41,9 +50,10 @@ def init_cache_db():
             )
         """)
         conn.commit()
-        logger.info(f"📍 CACHE DATABASE PATH: {INGEST_CACHE_DB.absolute()}")
+        logger.info(f"📍 INGEST CACHE DB PATH: {INGEST_CACHE_DB.absolute()}")
     finally:
         conn.close()
+
 
 init_cache_db()
 
