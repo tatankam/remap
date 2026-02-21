@@ -179,7 +179,20 @@ cd ./remap
 
 ./ingestticketsqueeze.sh
 
+### To ingest unpli
+### devlopment
+Initialize
+API_PORT=8000 ./ingestunpli.sh --initialize
 
+Delta
+API_PORT=8000 ./ingestunpli.sh
+
+### production
+Initialize
+./ingestunpli.sh --initialize
+
+Delta
+./ingestunpli.sh
 
 To create the json from the csv:
 curl -X POST "http://127.0.0.1:8000/processticketsqueezedelta"   -F "file=@/home/biso/development/my_projects/remap/dataset/delta.csv"   -F "include_removed=false"   -F "include_changed=false"
