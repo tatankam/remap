@@ -183,7 +183,7 @@ async def transform_events_for_json(events: List[Dict], session_id: str = UNPLI_
                 unique_id = f"{event.get('id', '')}_{start_date[:10]}"
 
                 transformed.append({
-                    "id": unique_id,
+                    "id": event.get('id', ''),
                     "title": title,
                     "category": category,
                     "description": long_description,
@@ -191,8 +191,8 @@ async def transform_events_for_json(events: List[Dict], session_id: str = UNPLI_
                     "location": {
                         "venue": venue,
                         "address": address,
-                        "latitude": coordinate.get("lat"),
-                        "longitude": coordinate.get("long")
+                        "lat": coordinate.get("lat"),
+                        "lon": coordinate.get("long")
                     },
                     "start_date": start_date,
                     "end_date": end_date,

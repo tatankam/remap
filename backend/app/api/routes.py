@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi import APIRouter, HTTPException, UploadFile, File, Query
 from app.services.csv_delta_service import compute_csv_delta
+from app.services.json_delta_service import compute_json_delta  # <--- NEW SERVICE IMPORT
 from app.services.ingest_service import ingest_events_into_qdrant, COLLECTION_NAME
 from app.services.openroute_service import geocode_address, get_route
 from app.services.qdrant_service import (
@@ -44,7 +45,6 @@ if Path("/app/dataset").exists():
 elif Path("/dataset").exists():
     DATASET_DIR = Path("/dataset")
 else:
-    # FIXED: .parents[3] goes from backend/app/api/routes.py up to the remap/ root
     DATASET_DIR = Path(__file__).resolve().parents[3] / "dataset"
 
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
@@ -68,43 +68,139 @@ async def get_collection_info():
         "status": str(info.status)
     }
 
-@router.post("/ingestevents")
-async def ingest_events_endpoint(file: UploadFile = File(...)):
-    """
-    ✅ RESTORED: Standard ingestion for ingest.sh
-    Delegates to service for memory-optimized processing.
-    """
-    if not file.filename.lower().endswith(".json"):
-        raise HTTPException(status_code=400, detail="Only .json files are accepted")
+# --- UNPLI SCRAPER & INGESTOR ---
 
-    save_path = DATASET_DIR / file.filename
+@router.get("/scrape_unpli_events")
+async def trigger_unpli_scrape(
+    page_no: int = Query(1), 
+    page_size: int = Query(500),
+    session_id: str = Query(None)
+):
+    """
+    Orchestrates the UNPLI scrape by calling the fetching and transformation 
+    logic defined in app/services/scrape.py.
+    """
     try:
-        with open(save_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-
-        with open(save_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        # Handle different JSON structures (list or object with 'events' key)
-        events = data if isinstance(data, list) else data.get("events", [])
+        current_session_id = session_id or UNPLI_SESSION_ID
         
-        # Use the optimized service logic
-        result = await ingest_events_into_qdrant(events)
-        return result
+        async with httpx.AsyncClient(timeout=60.0) as client:
+            # 1. Fetch raw events
+            logger.info(f"📡 Fetching UNPLI page {page_no} (size {page_size})...")
+            raw_events = await scrape.fetch_unpli_events(
+                session=client,
+                page_no=page_no,
+                page_size=page_size,
+                session_id=current_session_id
+            )
+            
+            if not raw_events:
+                return {"status": "error", "message": "No events returned from API", "events": []}
+
+            # 2. Transform events for JSON format
+            logger.info(f"⚙️ Transforming {len(raw_events)} raw events...")
+            transformed_events = await scrape.transform_events_for_json(
+                events=raw_events,
+                session_id=current_session_id
+            )
+            
+            # 3. Save to disk (updated to clean YYYY-MM-DD format)
+            output_file = DATASET_DIR / f"unpli_events_{datetime.now().strftime('%Y-%m-%d')}.json"
+            with open(output_file, "w", encoding="utf-8") as f:
+                json.dump({"events": transformed_events}, f, indent=2, ensure_ascii=False)
+
+            return {
+                "status": "success",
+                "count": len(transformed_events),
+                "file_saved": str(output_file),
+                "events": transformed_events
+            }
+            
     except Exception as e:
-        logger.error(f"Ingestion failed: {e}")
+        logger.error(f"❌ Scraping orchestration failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/ingest-unpli-delta")
+async def ingest_unpli_delta():
+    """
+    Compares unpli_current.json and unpli_last.json automatically,
+    calculates added/changed/removed via json_delta_service,
+    and ingests only the differences into Qdrant.
+    """
+    try:
+        current_path = DATASET_DIR / "unpli_current.json"
+        last_path = DATASET_DIR / "unpli_last.json"
+
+        if not current_path.exists():
+            raise HTTPException(status_code=404, detail="unpli_current.json not found in dataset folder.")
+
+        # 1. Compute delta using the external service
+        logger.info("🔍 Computing JSON Delta...")
+        delta_events = compute_json_delta(last_path, current_path)
+
+        if not delta_events:
+            return {"status": "skipped", "message": "No changes detected between files", "inserted": 0, "updated": 0, "deleted": 0}
+
+        # 2. Ingest the resulting delta list
+        logger.info(f"🚀 Ingesting {len(delta_events)} delta events into Qdrant...")
+        result = await ingest_events_into_qdrant(delta_events)
+        
+        return {"status": "success", "delta_count": len(delta_events), **result}
+    except Exception as e:
+        logger.error(f"❌ UNPLI Delta Ingestion failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# --- TICKET SQUEEZE DELTA PIPELINE ---
+
+@router.post("/compute-delta")
+async def compute_csv_delta_endpoint(old_file: UploadFile = File(...), new_file: UploadFile = File(...), keys: str = "event_id"):
+    """Computes the CSV difference for TicketSqueeze pipeline."""
+    try:
+        old_content = await old_file.read()
+        new_content = await new_file.read()
+        result = compute_csv_delta(old_csv_content=old_content, new_csv_content=new_content, keys=keys, output_path=DATASET_DIR / "delta.csv")
+        return {"status": "success", "summary": result["summary"], "csv_path": str(result["csv_path"])}
+    except Exception as e:
+        logger.error(f"Delta computation failed: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/ticketsqueeze/process-delta")
+async def process_ticketsqueeze_delta(
+    file: UploadFile = File(...), 
+    include_removed: bool = Query(True), 
+    include_changed: bool = Query(True)
+):
+    """Transforms delta CSV to JSON for TicketSqueeze."""
+    try:
+        temp_csv_path = DATASET_DIR / file.filename
+        with open(temp_csv_path, "wb") as f:
+            f.write(await file.read())
+        
+        result = await ticketsqueeze.process_ticketsqueeze_daily_delta(
+            delta_csv_path=temp_csv_path, 
+            include_removed=include_removed, 
+            include_changed=include_changed
+        )
+        
+        output_json_path = DATASET_DIR / "ts_delta_delta.json"
+        ticketsqueeze.save_events_to_json(result["events"], output_json_path)
+        
+        return {
+            "status": "success", 
+            "summary": result["summary"], 
+            "saved_path": str(output_json_path)
+        }
+    except Exception as e:
+        logger.error(f"Processing failed: {e}")
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.post("/ingestticketsqueezedelta")
 async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
-    """
-    MEMORY OPTIMIZED TICKET SQUEEZE INGESTION
-    """
+    """Final ingestion step for TicketSqueeze JSON delta."""
     if not file.filename.lower().endswith(".json"):
         raise HTTPException(status_code=400, detail="Only .json files accepted")
 
-    save_path = DATASET_DIR / file.filename
     try:
+        save_path = DATASET_DIR / file.filename
         with open(save_path, "wb") as buffer:
             shutil.copyfileobj(file.file, buffer)
 
@@ -114,14 +210,12 @@ async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
         events = data if isinstance(data, list) else data.get("events", [])
         result = await ingest_events_into_qdrant(events)
         
-        return {
-            "status": "success",
-            "filename": file.filename,
-            **result
-        }
+        return {"status": "success", "filename": file.filename, **result}
     except Exception as e:
         logger.error(f"❌ TicketSqueeze Ingestion crashed: {str(e)}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# --- CORE SEARCH & UTILITIES ---
 
 @router.post("/create_map")
 async def create_event_map(request: schemas.RouteRequest):
@@ -139,7 +233,7 @@ async def create_event_map(request: schemas.RouteRequest):
             route_geometry = routes["features"][0]["geometry"]
             route_coords = route_geometry["coordinates"]
             if len(route_coords) < 2:
-                raise HTTPException(status_code=400, detail="Route must contain two different addresses.")
+                raise HTTPException(status_code=400, detail="Route must contain two different points.")
             base_geometry = LineString(route_coords)
         else:
             base_geometry = origin_point_sh
@@ -201,42 +295,9 @@ async def sentence_to_payload(data: SentenceInput):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/scrape_unpli_events")
-async def scrape_unpli_events(page_no: int = 1, page_size: int = 10, session_id: str = None):
-    final_session_id = session_id or UNPLI_SESSION_ID
-    async with httpx.AsyncClient() as session:
-        events = await scrape.fetch_unpli_events(session, page_no=page_no, page_size=page_size, session_id=final_session_id)
-        if not events: raise HTTPException(status_code=404, detail="No events found")
-        transformed = await scrape.transform_events_for_json(events, session_id=final_session_id)
-        save_path = DATASET_DIR / f"unpli_events_{page_no}.json"
-        with open(save_path, "w", encoding="utf-8") as f:
-            json.dump({"events": transformed}, f, ensure_ascii=False, indent=4)
-        return {"events": transformed, "saved_path": str(save_path)}
-
-@router.post("/compute-delta")
-async def compute_csv_delta_endpoint(old_file: UploadFile = File(...), new_file: UploadFile = File(...), keys: str = "event_id"):
-    try:
-        old_content, new_content = await old_file.read(), await new_file.read()
-        result = compute_csv_delta(old_csv_content=old_content, new_csv_content=new_content, keys=keys, output_path=DATASET_DIR / "delta.csv")
-        return {"status": "success", "summary": result["summary"], "csv_path": str(result["csv_path"])}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-@router.post("/processticketsqueezedelta")
-async def process_ticketsqueeze_delta(file: UploadFile = File(...), include_removed: bool = False, include_changed: bool = True):
-    try:
-        temp_csv_path = DATASET_DIR / f"temp_{file.filename}"
-        with open(temp_csv_path, "wb") as f: f.write(await file.read())
-        result = await ticketsqueeze.process_ticketsqueeze_daily_delta(delta_csv_path=temp_csv_path, include_removed=include_removed, include_changed=include_changed)
-        output_json_path = DATASET_DIR / f"ts_delta_{file.filename.replace('.csv', '.json')}"
-        ticketsqueeze.save_events_to_json(result["events"], output_json_path)
-        if temp_csv_path.exists(): temp_csv_path.unlink()
-        return {"status": "success", "summary": result["summary"], "saved_path": str(output_json_path)}
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
 @router.delete("/cleanup-past-events")
-async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000, quick_delete: bool = False):
+async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000):
+    """Utility to prune old events from Qdrant."""
     client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
     today = datetime.now(timezone.utc).date()
     deleted = 0
@@ -260,6 +321,6 @@ async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000, quick
             client.delete(collection_name=COLLECTION_NAME, points_selector=models.PointIdsList(points=batch_to_del))
             deleted += len(batch_to_del)
         
-        if not offset or deleted > max_scan: break
+        if not offset or (max_scan and deleted >= max_scan): break
         
     return {"status": "success", "deleted": deleted, "dry_run": dry_run}

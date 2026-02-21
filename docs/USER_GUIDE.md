@@ -206,3 +206,8 @@ For issues or questions, please open an issue on the GitHub repository.
 ---
 
 Thank you for using **ReMap**! Happy mapping and discovery!
+
+### I introduced sqlite to save geocoding
+To check it from command line on remap folder:
+sqlite3 backend/dataset/ingest_cache.db "SELECT count(*) as total_cached FROM nominatim_cache; SELECT venue, city, lat, lon FROM nominatim_cache ORDER BY created DESC LIMIT 50;"
+

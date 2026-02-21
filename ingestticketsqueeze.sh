@@ -89,18 +89,13 @@ fi
 
 # 4. LOGICA DELTA / INITIALIZE (CREAZIONE DELTA_TYPE)
 # ------------------------------------------------------------------------------
-# Per funzionare, il backend ha bisogno della colonna 'delta_type'.
-# La otteniamo confrontando sempre due file tramite /compute-delta.
-
-# Creiamo un file template vuoto con solo l'header per le inizializzazioni
 head -n 1 "$TODAY_FILE" > "$EMPTY_TEMPLATE"
 
 OLD_FILE=""
 if [ "$INITIALIZE" = true ]; then
-    echo "⚠️ Modalità Initialize: confronto con sorgente vuota per marcare tutto come 'added'..."
+    echo "⚠️ Modalità Initialize: confronto con sorgente vuota..."
     OLD_FILE="$EMPTY_TEMPLATE"
 else
-    # Identifica i file più recenti (escluso quello appena scaricato se possibile)
     LATEST_FILES=($(ls -t "$DATASET_DIR"/${BASE_NAME}_*.csv 2>/dev/null | grep -v "$TODAY_DATE" || true))
     
     if [ "${#LATEST_FILES[@]}" -lt 1 ]; then
@@ -112,13 +107,11 @@ else
     fi
 fi
 
-# Chiamata al backend per generare delta.csv (aggiunge la colonna delta_type)
 echo "🔄 Generazione Delta CSV..."
-curl -s -X POST "http://127.0.0.1:8001/compute-delta" \
+curl -s -X POST "http://127.0.0.1:8000/compute-delta" \
      -F "old_file=@$OLD_FILE" \
      -F "new_file=@$TODAY_FILE" > /dev/null
 
-# Rimuoviamo il template temporaneo
 rm -f "$EMPTY_TEMPLATE"
 
 # 5. ELABORAZIONE JSON E INGESTIONE
@@ -126,24 +119,24 @@ rm -f "$EMPTY_TEMPLATE"
 DELTA_CSV="$DATASET_DIR/delta.csv"
 
 if [ -f "$DELTA_CSV" ] && [ $(wc -l < "$DELTA_CSV") -gt 1 ]; then
-    echo "🔄 Trasformazione Delta CSV -> JSON..."
+    echo "🔄 Trasformazione Delta CSV -> JSON (Includendo rimossi)..."
     
-    curl -s -X POST "http://127.0.0.1:8001/processticketsqueezedelta" \
-         -F "file=@$DELTA_CSV" \
-         -F "include_removed=true" \
-         -F "include_changed=true" > /dev/null
+    # ✅ FIX: Updated URL and correctly passing Boolean flags as Query Parameters
+    curl -s -X POST "http://127.0.0.1:8000/ticketsqueeze/process-delta?include_removed=true&include_changed=true" \
+         -F "file=@$DELTA_CSV" > /dev/null
 
-# non voglio cancellare  rm -f "$DELTA_CSV"
-
-    # 6. INGESTIONE FINALE IN QDRANT
-    # --------------------------------------------------------------------------
     echo "⏳ Attesa sincronizzazione volume (3s)..."
     sleep 3
 
     if [ -f "$DATASET_DIR/$JSON_FILENAME" ]; then
       echo "🚀 Ingestione JSON in Qdrant..."
       
-      INGEST_OUTPUT=$(curl -s -X POST "http://127.0.0.1:8001/ingestticketsqueezedelta" \
+      # Verifica conteggi per debug
+      JSON_COUNT=$(jq '.events | length' "$DATASET_DIR/$JSON_FILENAME")
+      CSV_COUNT=$(($(wc -l < "$DELTA_CSV") - 1))
+      echo "📊 Records in CSV: $CSV_COUNT | Events in JSON: $JSON_COUNT"
+
+      INGEST_OUTPUT=$(curl -s -X POST "http://127.0.0.1:8000/ingestticketsqueezedelta" \
         -F "file=@$DATASET_DIR/$JSON_FILENAME")
       
       if echo "$INGEST_OUTPUT" | grep -q '"inserted"'; then
@@ -159,8 +152,6 @@ if [ -f "$DELTA_CSV" ] && [ $(wc -l < "$DELTA_CSV") -gt 1 ]; then
         echo "⏭️ Unchanged:     $SKIPPED"
         echo "🗑️ Deleted:       $DELETED"
         echo "----------------------------------------"
-        
-# non voglio cancellarlo    rm -f "$DATASET_DIR/$JSON_FILENAME"
       else
         echo "❌ ERRORE: Ingestione fallita."
         echo "Dettaglio risposta: $INGEST_OUTPUT"
@@ -178,5 +169,5 @@ fi
 # 7. INFO FINALI
 # ------------------------------------------------------------------------------
 echo "📊 Final Collection Info:"
-curl -s http://127.0.0.1:8001/collection_info
+curl -s http://127.0.0.1:8000/collection_info
 echo -e "\n✅ Pipeline Terminata correttamente: $(date)\n"

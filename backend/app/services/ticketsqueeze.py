@@ -7,6 +7,7 @@ import logging
 import unicodedata
 
 # Logging Setup
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def normalize_text(text: Optional[str]) -> str:
@@ -27,9 +28,11 @@ def parse_iso_datetime(date_str: str, default_time: str = "00:00:00") -> Optiona
         return None
     
     try:
-        # Gestisce formati ISO completi o solo data
+        # Handles full ISO formats or just date strings
         if 'T' in date_str or ' ' in date_str:
-            dt = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+            # Replace common variations to ensure standard ISO
+            clean_str = date_str.replace('Z', '').replace(' ', 'T')
+            dt = datetime.fromisoformat(clean_str)
         else:
             dt = datetime.fromisoformat(f"{date_str}T{default_time}")
         return dt.isoformat() 
@@ -42,175 +45,134 @@ def parse_ticketsqueeze_csv(csv_path: Path) -> pd.DataFrame:
     if not csv_path.exists():
         raise FileNotFoundError(f"CSV file not found: {csv_path}")
     
-    # dtype=str previene la conversione automatica degli ID in float (es. .0)
+    # dtype=str prevents IDs from being turned into floats (e.g. 123.0)
     df = pd.read_csv(csv_path, dtype=str).fillna("")
     return df
 
-def extract_delta_from_csv(csv_path: Path) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    """Extract added, removed, and changed rows from a delta CSV."""
-    df = parse_ticketsqueeze_csv(csv_path)
-    
-    if "delta_type" not in df.columns:
-        raise ValueError("CSV must contain 'delta_type' column")
-    
-    added = df[df["delta_type"] == "added"].copy()
-    removed = df[df["delta_type"] == "removed"].copy()
-    changed = df[df["delta_type"] == "changed"].copy()
-    
-    return added, removed, changed
-
-def extract_original_columns(row: pd.Series, prefix: str) -> Dict[str, str]:
-    """Extract columns with a given prefix (new_ or old_) from a row."""
-    result = {}
-    for col in row.index:
-        if col.startswith(prefix):
-            key = col[len(prefix):]
-            result[key] = row[col]
-    return result
-
 def map_ticketsqueeze_to_event(row: Dict[str, str], delta_type: str) -> Dict[str, Any]:
-    """Transform a TicketSqueeze row to match ingest_service.py expected schema."""
+    """
+    Transform a TicketSqueeze row to match expected schema.
+    Defensive mapping: looks for 'new_', 'old_', or raw column names.
+    """
     
-    # Mapping campi base
-    event_id = normalize_text(row.get("event_id", ""))
-    title = normalize_text(
-        row.get("title") or 
-        row.get("name") or 
-        row.get("event_name", "")
-    )
-    category = normalize_text(row.get("category", ""))
-    description = normalize_text(row.get("description", "")) or title
-    city = normalize_text(
-        row.get("city") or 
-        row.get("venue_city", "")
-    )
-    venue = normalize_text(
-        row.get("venue") or 
-        row.get("venue_name", "")
-    )
+    def get_val(keys: List[str]) -> str:
+        """Helper to try multiple possible column names and prefixes."""
+        for k in keys:
+            # Check prefixes first (for Delta CSV compatibility)
+            for prefix in ["new_", "old_", ""]:
+                full_key = f"{prefix}{k}"
+                if full_key in row and row[full_key]:
+                    return normalize_text(row[full_key])
+        return ""
 
-    # Costruzione Indirizzo
-    venue_addr = normalize_text(row.get("address") or row.get("venue_address", ""))
-    venue_city_val = normalize_text(row.get("city") or row.get("venue_city", ""))
-    address = f"{venue_addr}, {venue_city_val}".strip(", ")
+    # 1. CORE IDENTITY
+    # Matches the key used in csv_delta_service.py
+    event_id = get_val(["event_id", "id", "Event ID"])
+    title = get_val(["title", "name", "event_name", "Event Name"])
+    category = get_val(["category", "category_name", "Category Name"])
     
-    # ✅ COORDINATE: Usiamo 'lat' e 'lon' per matchare ingest_service.py
-    lat = None
-    lon = None
+    # 2. DESCRIPTION & CITY
+    description = get_val(["description", "event_description"]) or title
+    city = get_val(["city", "venue_city", "venue_city_name", "City Name"])
+    
+    # 3. LOCATION OBJECT
+    venue = get_val(["venue", "venue_name", "Venue Name"])
+    venue_addr = get_val(["address", "venue_address", "street_address", "Address"])
+    
+    # Construct address string for search/display
+    full_address = f"{venue_addr}, {city}".strip(", ")
+
+    # COORDINATES (Parsed as floats)
+    lat, lon = None, None
     try:
-        lat_val = (row.get("latitude") or 
-                   row.get("lat") or 
-                   row.get("geolocation_latitude", ""))
-        lon_val = (row.get("longitude") or 
-                   row.get("lon") or 
-                   row.get("geolocation_longitude", ""))
-        if lat_val: lat = float(lat_val)
-        if lon_val: lon = float(lon_val)
+        lat_val = get_val(["latitude", "lat", "geolocation_latitude", "Latitude"])
+        lon_val = get_val(["longitude", "lon", "geolocation_longitude", "Longitude"])
+        if lat_val: 
+            lat = float(lat_val)
+        if lon_val: 
+            lon = float(lon_val)
     except (ValueError, TypeError):
         pass
+
+    # 4. DATE MANAGEMENT
+    # TS usually provides 'Date' and 'Time' columns
+    start_date_raw = get_val(["start_date", "event_date", "date", "Date"])
+    start_time_raw = get_val(["start_time", "event_time", "time", "Time"])
     
-    # Date management
-    start_date_raw = normalize_text(
-        row.get("start_date") or 
-        row.get("event_date") or 
-        row.get("new_event_date", "")
-    )
-    start_time_raw = normalize_text(
-        row.get("start_time") or 
-        row.get("event_time") or 
-        row.get("new_event_time", "")
-    )
-    
-    end_date_raw = normalize_text(
-        row.get("end_date") or 
-        row.get("event_date") or 
-        row.get("new_event_date", "")
-    )
-    end_time_raw = normalize_text(row.get("end_time", ""))
-    
-    start_date = None
+    end_date_raw = get_val(["end_date", "event_date", "date", "Date"])
+    end_time_raw = get_val(["end_time"])
+
+    start_date_iso = None
     if start_date_raw:
-        if start_time_raw:
-            start_date = parse_iso_datetime(f"{start_date_raw} {start_time_raw}")
+        if start_time_raw and ":" in start_time_raw:
+            start_date_iso = parse_iso_datetime(f"{start_date_raw} {start_time_raw}")
         else:
-            start_date = parse_iso_datetime(start_date_raw)
+            start_date_iso = parse_iso_datetime(start_date_raw)
     
-    end_date = None
+    end_date_iso = None
     if end_date_raw:
-        if end_time_raw:
-            end_date = parse_iso_datetime(f"{end_date_raw} {end_time_raw}")
+        if end_time_raw and ":" in end_time_raw:
+            end_date_iso = parse_iso_datetime(f"{end_date_raw} {end_time_raw}")
         else:
-            end_date = parse_iso_datetime(end_date_raw, default_time="23:59:59")
+            # Default end time to end of day if only date is present
+            end_date_iso = parse_iso_datetime(end_date_raw, default_time="23:59:59")
     
-    url = normalize_text(row.get("url") or row.get("event_url", ""))
-    
-    # Costruzione oggetto location (Schema Qdrant compatible)
-    location = {
-        "venue": venue or None,
-        "address": address or None,
-        "lat": lat,
-        "lon": lon
-    }
-    
-    # Evento finale pronto per l'ingestione
-    event = {
+    url = get_val(["url", "event_url", "ticket_url", "Ticket URL"])
+
+    return {
         "id": event_id,
         "title": title,
         "category": category,
         "description": description,
         "city": city,
-        "location": location,
-        "start_date": start_date,
-        "end_date": end_date,
+        "location": {
+            "venue": venue or None,
+            "address": full_address or None,
+            "lat": lat,
+            "lon": lon
+        },
+        "start_date": start_date_iso,
+        "end_date": end_date_iso,
         "url": url,
         "credits": "TicketSqueeze - Events Data",
         "delta_type": delta_type
     }
-    
-    return event
 
 async def transform_ticketsqueeze_delta_to_json(
     csv_path: Path,
-    include_removed: bool = False,
+    include_removed: bool = True,
     include_changed: bool = True
 ) -> List[Dict[str, Any]]:
-    """Transform delta CSV to ingest_service.py compatible events."""
-    added, removed, changed = extract_delta_from_csv(csv_path)
+    """Processes delta.csv into structured events list for Ingest Service."""
+    df = parse_ticketsqueeze_csv(csv_path)
     events = []
-    
-    # Process added (new_* columns)
-    for _, row in added.iterrows():
-        row_dict = extract_original_columns(row, "new_")
-        row_dict["event_id"] = row.get("event_id", "")
-        event = map_ticketsqueeze_to_event(row_dict, "added")
+
+    if df.empty:
+        logger.warning("Delta CSV is empty.")
+        return []
+
+    # Iterate once through the dataframe
+    for _, row in df.iterrows():
+        dtype = row.get("delta_type", "added")
+        
+        # Filter based on user preference
+        if dtype == "removed" and not include_removed: continue
+        if dtype == "changed" and not include_changed: continue
+
+        row_dict = row.to_dict()
+        event = map_ticketsqueeze_to_event(row_dict, dtype)
+        
+        # Validates that we at least have an ID and Title before adding
         if event["id"]:
             events.append(event)
-    
-    # Process removed (old_* columns)
-    if include_removed:
-        for _, row in removed.iterrows():
-            row_dict = extract_original_columns(row, "old_")
-            row_dict["event_id"] = row.get("event_id", "")
-            event = map_ticketsqueeze_to_event(row_dict, "removed")
-            if event["id"]:
-                events.append(event)
-    
-    # Process changed (new_* preferred, fallback to old_*)
-    if include_changed:
-        for _, row in changed.iterrows():
-            row_dict = extract_original_columns(row, "new_")
-            if not row_dict:
-                row_dict = extract_original_columns(row, "old_")
-            row_dict["event_id"] = row.get("event_id", "")
-            event = map_ticketsqueeze_to_event(row_dict, "changed")
-            if event["id"]:
-                events.append(event)
-    
-    logger.info(f"Transformed {len(events)} events from TicketSqueeze delta CSV")
+        else:
+            logger.debug(f"Skipping row missing ID. Raw data: {row_dict}")
+
+    logger.info(f"✅ Transformed {len(events)} events (Mode: {dtype})")
     return events
 
 def save_events_to_json(events: List[Dict[str, Any]], output_path: Path) -> None:
-    """Save events in exact format expected by ingest_service.py."""
+    """Saves the event list to the JSON format expected by the system."""
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump({"events": events}, f, indent=2, ensure_ascii=False)
@@ -219,10 +181,10 @@ def save_events_to_json(events: List[Dict[str, Any]], output_path: Path) -> None
 async def process_ticketsqueeze_daily_delta(
     delta_csv_path: Path,
     output_json_path: Optional[Path] = None,
-    include_removed: bool = False,
+    include_removed: bool = True,
     include_changed: bool = True
 ) -> Dict[str, Any]:
-    """Main entry point: process delta CSV to ingest_service.py JSON."""
+    """Main service entry point."""
     events = await transform_ticketsqueeze_delta_to_json(
         delta_csv_path,
         include_removed=include_removed,
@@ -234,9 +196,8 @@ async def process_ticketsqueeze_daily_delta(
     
     summary = {
         "total_events": len(events),
-        "delta_csv": str(delta_csv_path),
-        "output_json": str(output_json_path) if output_json_path else None,
-        "timestamp": datetime.now().isoformat()
+        "timestamp": datetime.now().isoformat(),
+        "status": "success"
     }
     
     return {"events": events, "summary": summary}
