@@ -132,3 +132,27 @@
 ----------------------------------------
 ✅ Pipeline Done Sat Feb 21 12:40:15 PM CET 2026
 
+------------------------------------------------
+🚀 Started UNPLI Delta Ingestion: Sat 21 Feb 2026 03:53:13 PM CET
+📂 Dataset Dir: /home/biso/development/my_projects/remap/dataset
+🔗 API URL: http://127.0.0.1:8000
+------------------------------------------------
+📦 Rotated current JSON to last_run
+📥 Scraping 500 events from UNPLI...
+🔍 Found 43 unique event IDs in current scrape.
+🚀 Triggering Delta Computation and Ingestion...
+{"status":"success","delta_count":2,"inserted":1,"updated":1,"deleted":0}
+----------------------------------------
+🎉 UNPLI SUCCESS: Added: 1 | Updated: 1 | Deleted: 0
+----------------------------------------
+✅ Pipeline Done Sat 21 Feb 2026 03:53:37 PM CET
+
+------------------------------------------------
+🚀 Started UNPLI Delta Ingestion: Sat 21 Feb 2026 03:56:38 PM CET
+📂 Dataset Dir: /home/biso/development/my_projects/remap/dataset
+🔗 API URL: http://127.0.0.1:8000
+------------------------------------------------
+🧹 Initialization requested. Clearing old history...
+📥 Scraping 500 events from UNPLI...
+🔍 Found 43 unique event IDs in current scrape.
+🚀 Triggering Delta Computation and Ingestion...
