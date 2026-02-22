@@ -2,6 +2,7 @@ services:
   backend1:
     build: ./backend
     restart: always
+    user: "${UID}:${GID}"
     env_file: .env
     volumes:
       - ./dataset:/app/dataset
@@ -14,6 +15,7 @@ services:
   backend2:
     build: ./backend
     restart: always
+    user: "${UID}:${GID}"
     env_file: .env
     volumes:
       - ./dataset:/app/dataset
