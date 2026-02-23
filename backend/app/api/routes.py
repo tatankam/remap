@@ -242,8 +242,16 @@ async def create_event_map(request: schemas.RouteRequest):
         gdf_3857 = gdf.to_crs(epsg=3857)
         buffer_distance_meters = request.buffer_distance * 1000
         buffer_polygon = gdf_3857.buffer(buffer_distance_meters).to_crs(epsg=4326).iloc[0]
+
+        # 🔥 SINGLE LINE MULTIPOLYGON FIX:
+        if buffer_polygon.geom_type == 'MultiPolygon':
+            buffer_polygon = max(buffer_polygon.geoms, key=lambda p: p.area)
+
+        #print(f"🔍 FIXED buffer type: {buffer_polygon.geom_type}")  # Shows "Polygon"
+
         polygon_coords = np.array(buffer_polygon.exterior.coords).tolist()
         polygon_coords_qdrant = [{"lon": lon, "lat": lat} for lon, lat in polygon_coords]
+
 
         geo_filter = build_geo_filter(polygon_coords_qdrant)
         date_filter = build_date_intersection_filter(request.startinputdate, request.endinputdate)
