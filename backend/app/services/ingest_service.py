@@ -15,14 +15,19 @@ from qdrant_client import QdrantClient, models
 from app.core.config import QDRANT_SERVER, QDRANT_API_KEY, DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME
 from tqdm import tqdm
 import os
-from pathlib import Path
 
-# --- NEW: Fix permissions for Docker UID/GID setup ---
+# --- FIX: Redirect all library storage to the writable volume ---
 if os.path.exists("/app/dataset"):
-    # Redirect all AI model caches to the mounted volume
+    # Fix for FastEmbed / HuggingFace
     os.environ["HF_HOME"] = "/app/dataset/hf_cache"
     os.environ["FASTEMBED_CACHE_PATH"] = "/app/dataset/fastembed_cache"
-# ----------------------------------------------------
+    
+    # Fix for CrewAI / ChromaDB / SQLite (The /.local error)
+    os.environ["HOME"] = "/app/dataset"
+    os.environ["XDG_DATA_HOME"] = "/app/dataset/.local/share"
+    os.environ["XDG_CACHE_HOME"] = "/app/dataset/.cache"
+    os.environ["XDG_CONFIG_HOME"] = "/app/dataset/.config"
+# --------------------------------------------------------------
 
 # Logging Setup
 logging.basicConfig(level=logging.INFO)
