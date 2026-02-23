@@ -14,6 +14,15 @@ from fastembed import TextEmbedding, SparseTextEmbedding
 from qdrant_client import QdrantClient, models
 from app.core.config import QDRANT_SERVER, QDRANT_API_KEY, DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME
 from tqdm import tqdm
+import os
+from pathlib import Path
+
+# --- NEW: Fix permissions for Docker UID/GID setup ---
+if os.path.exists("/app/dataset"):
+    # Redirect all AI model caches to the mounted volume
+    os.environ["HF_HOME"] = "/app/dataset/hf_cache"
+    os.environ["FASTEMBED_CACHE_PATH"] = "/app/dataset/fastembed_cache"
+# ----------------------------------------------------
 
 # Logging Setup
 logging.basicConfig(level=logging.INFO)
