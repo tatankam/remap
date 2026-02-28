@@ -26,7 +26,7 @@ API_URL="http://127.0.0.1:$API_PORT"
 
 
 
-COUNTRY="IT"
+#COUNTRY="IT"
 LOG_FILE="ingesttm_${COUNTRY}.log"
 
 # Rilevamento cartella dataset
