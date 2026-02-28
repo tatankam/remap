@@ -83,16 +83,19 @@ def normalize_text(text: str) -> str:
     if not text: return ""
     return unicodedata.normalize("NFKC", str(text).strip()[:1000])
 
+# In ingest_service.py (verifica che sia così)
 def sanitize_id(event: Dict) -> str:
     """
-    FIX: Creates a composite UUID from (Original ID + Start Date).
-    This ensures multiple dates for the same event create unique entries in Qdrant.
+    Crea un UUID deterministico basato su ID originale e Data di Inizio.
+    Evita collisioni se lo stesso ID evento ha più date.
     """
     raw_id = event.get("id") or event.get("event_id")
     date_str = str(event.get("start_date", "no-date"))
+    
     if not raw_id:
         return str(uuid.uuid4())
     
+    # La combinazione garantisce unicità per occorrenza
     unique_string = f"{str(raw_id).strip()}_{date_str.strip()}"
     return str(uuid.uuid5(uuid.NAMESPACE_DNS, unique_string))
 

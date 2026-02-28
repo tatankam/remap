@@ -34,6 +34,7 @@ import json
 import shutil
 import httpx
 import logging
+from app.services import tm_service 
 
 # Logging Setup
 logger = logging.getLogger(__name__)
@@ -148,6 +149,63 @@ async def ingest_unpli_delta():
     except Exception as e:
         logger.error(f"❌ UNPLI Delta Ingestion failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# --- TicketMaster ---
+@router.post("/ingest-tm-delta")
+async def ingest_tm_delta(country: str = Query("IT")):
+    """
+    Endpoint per il dump di Ticketmaster.
+    Funziona sia per --initialize che per delta giornalieri.
+    """
+    try:
+        # Percorsi file grezzi (scaricati dallo script .sh)
+        current_raw = DATASET_DIR / f"tm_current_{country}.json"
+        
+        # Percorsi file standardizzati (per il confronto delta)
+        current_std = DATASET_DIR / f"tm_std_{country}_current.json"
+        last_std = DATASET_DIR / f"tm_std_{country}_last.json"
+
+        if not current_raw.exists():
+            raise HTTPException(status_code=404, detail=f"File {current_raw.name} non trovato.")
+
+        # 1. TRASFORMAZIONE
+        logger.info(f"⚙️ Trasformazione in corso per {country}...")
+        standardized_events = tm_service.load_and_transform_tm_file(current_raw)
+        
+        with open(current_std, "w", encoding="utf-8") as f:
+            json.dump({"events": standardized_events}, f, indent=2)
+
+        # 2. CALCOLO DELTA
+        # Se last_std non esiste (es. --initialize), compute_json_delta 
+        # segnerà tutto come 'added'.
+        logger.info(f"🔍 Calcolo delta rispetto a sessione precedente...")
+        delta_events = compute_json_delta(last_std, current_std)
+
+        if not delta_events:
+            return {"status": "skipped", "message": "Nessun cambiamento rilevato."}
+
+        # 3. INGESTIONE
+        logger.info(f"🚀 Ingestione di {len(delta_events)} eventi delta in Qdrant...")
+        result = await ingest_events_into_qdrant(delta_events)
+        
+        # 4. ROTAZIONE FILE STANDARD
+        # Prepariamo il file per il confronto di domani
+        if current_std.exists():
+            import shutil
+            shutil.copy(str(current_std), str(last_std))
+
+        return {
+            "status": "success", 
+            "country": country, 
+            "total_processed": len(standardized_events),
+            "delta_applied": len(delta_events),
+            **result 
+        }
+
+    except Exception as e:
+        logger.error(f"❌ Errore pipeline TM: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # --- TICKET SQUEEZE DELTA PIPELINE ---
 

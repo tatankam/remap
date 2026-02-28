@@ -221,7 +221,7 @@ For issues or questions, please open an issue on the GitHub repository.
 Thank you for using **ReMap**! Happy mapping and discovery!
 
 ### I introduced sqlite to save geocoding
-#### To check sqlite db from command line on remap folder:
+#### To check sqlite db from command line on remap folder or rmap/backend folder, check if .db exist:
 
 sqlite3 dataset/ingest_cache.db "SELECT count(*) as total_cached FROM nominatim_cache; SELECT venue, city, lat, lon FROM nominatim_cache ORDER BY created DESC LIMIT 50;"
 

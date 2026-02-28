@@ -2,28 +2,35 @@
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 
 # --- CONFIGURATION ---
-# Setup directory and logging
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 LOG_FILE="ingestunpli.log"
 
-# PATH DETECTION: Align with ingest_service.py logic
+# Caricamento variabili dal file .env (per recuperare UNPLI_PROVIDER_PREFIX)
+if [ -f "../.env" ]; then
+    export $(grep -v '^#' ../.env | xargs)
+fi
+
+# PATH DETECTION: Allineato con la logica del backend
 if [ -d "/app/dataset" ]; then
     DATASET_DIR="/app/dataset"
 else
     DATASET_DIR="$SCRIPT_DIR/dataset"
 fi
 
-# PORT DETECTION: Default to 8001 (Docker), allow override via API_PORT=8000
+# PORT DETECTION: Default 8001, override tramite API_PORT=8000
 API_PORT=${API_PORT:-8001}
 API_URL="http://127.0.0.1:$API_PORT"
 
-# File names for the Delta Logic
+# Recupero prefisso dal .env (es. UN) o default 'UN' se vuoto
+UN_PREFIX=${UNPLI_PROVIDER_PREFIX:-"UN"}
+
+# Nomi file per la Delta Logic
 CURRENT_JSON="$DATASET_DIR/unpli_current.json"
 LAST_JSON="$DATASET_DIR/unpli_last.json"
 
 echo "------------------------------------------------" | tee -a "$LOG_FILE"
-echo "🚀 Started UNPLI Delta Ingestion: $(date)" | tee -a "$LOG_FILE"
+echo "🚀 Started UNPLI Delta Ingestion [$UN_PREFIX]: $(date)" | tee -a "$LOG_FILE"
 echo "📂 Dataset Dir: $DATASET_DIR" | tee -a "$LOG_FILE"
 echo "🔗 API URL: $API_URL" | tee -a "$LOG_FILE"
 echo "------------------------------------------------" | tee -a "$LOG_FILE"
@@ -31,7 +38,7 @@ echo "------------------------------------------------" | tee -a "$LOG_FILE"
 # STEP 0: PREPARE
 mkdir -p "$DATASET_DIR"
 
-# Check for --initialize flag
+# Controllo flag --initialize
 INITIALIZE=false
 for arg in "$@"; do
   if [ "$arg" == "--initialize" ]; then
@@ -44,17 +51,17 @@ if [ "$INITIALIZE" = true ]; then
     rm -f "$LAST_JSON"
     rm -f "$CURRENT_JSON"
 else
-    # Rotate: Today becomes the "Last" for comparison
+    # Rotazione: Il file corrente dell'ultimo run diventa il 'Last' per il confronto
     if [ -f "$CURRENT_JSON" ]; then
         mv "$CURRENT_JSON" "$LAST_JSON"
         echo "📦 Rotated current JSON to last_run" | tee -a "$LOG_FILE"
     fi
 fi
 
-# STEP 1: SCRAPE
-echo "📥 Scraping 500 events from UNPLI..." | tee -a "$LOG_FILE"
+# STEP 1: SCRAPE & PREFIXING
+echo "📥 Scraping events from UNPLI and applying prefix '$UN_PREFIX'..." | tee -a "$LOG_FILE"
 
-# Call the endpoint and capture the full JSON response
+# Chiamata all'endpoint di scraping
 SCRAPE_RESPONSE=$(curl -s -X GET \
   "$API_URL/scrape_unpli_events?page_no=1&page_size=500" \
   -H "accept: application/json")
@@ -64,19 +71,24 @@ if [ -z "$SCRAPE_RESPONSE" ]; then
     exit 1
 fi
 
-# Extract the events list and save directly to CURRENT_JSON
+# Trasformazione JSON: aggiunta prefisso all'ID prima del salvataggio
 echo "$SCRAPE_RESPONSE" | python3 -c "
 import sys, json
+prefix = '$UN_PREFIX'
 try:
     data = json.load(sys.stdin)
-    # Ensure structure is {'events': [...]}
-    if isinstance(data, dict) and 'events' in data:
-        output = {'events': data['events']}
-    else:
-        output = {'events': data}
-    print(json.dumps(output))
+    # UNPLI restituisce un dict {'events': [...]} o una lista
+    events = data.get('events', []) if isinstance(data, dict) else data
+    
+    # Applica il prefisso PROVIDER_ID ad ogni ID evento
+    for ev in events:
+        raw_id = str(ev.get('id', ''))
+        if raw_id and not raw_id.startswith(prefix + '_'):
+            ev['id'] = f'{prefix}_{raw_id}'
+            
+    print(json.dumps({'events': events}))
 except Exception as e:
-    sys.stderr.write(f'Error parsing JSON: {e}\n')
+    sys.stderr.write(f'Error processing IDs: {e}\n')
     sys.exit(1)
 " > "$CURRENT_JSON"
 
@@ -85,14 +97,10 @@ if [ ! -s "$CURRENT_JSON" ]; then
     exit 1
 fi
 
-# DEBUG: Count unique IDs
-UNIQUE_IDS=$(grep -o '"id": "[^"]*"' "$CURRENT_JSON" | sort | uniq | wc -l)
-echo "🔍 Found $UNIQUE_IDS unique event IDs in current scrape." | tee -a "$LOG_FILE"
-
 # STEP 2: INGESTION
 echo "🚀 Triggering Delta Computation and Ingestion..." | tee -a "$LOG_FILE"
 
-# Call the ingest-unpli-delta endpoint
+# Chiamata all'endpoint per processare il delta (usando i file con ID prefissati)
 INGEST_OUTPUT=$(curl -s -X POST "$API_URL/ingest-unpli-delta")
 
 echo "$INGEST_OUTPUT" >> "$LOG_FILE"
