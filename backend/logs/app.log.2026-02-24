@@ -1,0 +1,632 @@
+2026-02-24 19:01:52,632 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-24 19:01:52,633 INFO uvicorn.error Started server process [6115]
+2026-02-24 19:01:52,633 INFO uvicorn.error Waiting for application startup.
+2026-02-24 19:01:52,633 INFO uvicorn.error Application startup complete.
+2026-02-24 19:02:55,190 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.873446, 45.407717)
+2026-02-24 19:02:55,748 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-24 19:02:55,758 INFO uvicorn.access 127.0.0.1:47010 - "POST /create_map HTTP/1.1" 200
+2026-02-24 19:03:13,987 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-24 19:03:13,988 INFO uvicorn.access 127.0.0.1:57446 - "POST /create_map HTTP/1.1" 200
+2026-02-24 19:04:39,783 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-24 19:04:39,797 INFO uvicorn.access 127.0.0.1:59486 - "POST /create_map HTTP/1.1" 200
+2026-02-24 19:04:47,327 INFO uvicorn.error Shutting down
+2026-02-24 19:04:47,428 INFO uvicorn.error Waiting for application shutdown.
+2026-02-24 19:04:47,430 INFO uvicorn.error Application shutdown complete.
+2026-02-24 19:04:47,431 INFO uvicorn.error Finished server process [6115]
+2026-02-24 19:05:06,144 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-24 19:05:06,144 INFO uvicorn.error Started server process [7440]
+2026-02-24 19:05:06,144 INFO uvicorn.error Waiting for application startup.
+2026-02-24 19:05:06,145 INFO uvicorn.error Application startup complete.
+2026-02-24 19:06:07,281 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-24 19:06:07,295 INFO uvicorn.access 127.0.0.1:52422 - "POST /create_map HTTP/1.1" 200
+2026-02-24 19:16:06,471 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-24 19:16:06,480 INFO uvicorn.access 127.0.0.1:33084 - "POST /create_map HTTP/1.1" 200
+2026-02-24 19:18:27,809 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.873446, 45.407717)
+2026-02-24 19:18:32,231 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-24 19:18:34,112 INFO uvicorn.access 127.0.0.1:46130 - "POST /create_map HTTP/1.1" 200
+2026-02-24 19:30:39,811 INFO uvicorn.error Shutting down
+2026-02-24 19:30:39,912 INFO uvicorn.error Waiting for application shutdown.
+2026-02-24 19:30:39,913 INFO uvicorn.error Application shutdown complete.
+2026-02-24 19:30:39,913 INFO uvicorn.error Finished server process [7440]
+2026-02-28 14:21:23,417 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-28 14:21:23,417 INFO uvicorn.error Started server process [12556]
+2026-02-28 14:21:23,417 INFO uvicorn.error Waiting for application startup.
+2026-02-28 14:21:23,418 INFO uvicorn.error Application startup complete.
+2026-02-28 14:23:13,398 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:23:13,402 INFO uvicorn.access 127.0.0.1:44506 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:28:02,721 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-02-28 14:28:02,907 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-02-28 14:28:02,916 INFO app.api.routes 🚀 Ingestione di 1206 eventi delta in Qdrant...
+2026-02-28 14:28:02,919 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-28 14:28:02,933 INFO app.services.ingest_service 🌍 Resolving geolocations for 1206 events...
+2026-02-28 14:28:04,805 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Rendano+Arena&city=Cosenza&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:05,581 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Cosenza&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:05,606 INFO app.services.ingest_service ✅ Cached new coordinates for: Rendano Arena, Cosenza
+2026-02-28 14:28:07,249 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Palazzolo+1&city=Chiari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:07,298 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Palazzolo 1, Chiari
+2026-02-28 14:28:09,417 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Q-HUB&city=Milano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:09,825 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Milano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:09,858 INFO app.services.ingest_service ✅ Cached new coordinates for: Q-HUB, Milano
+2026-02-28 14:28:12,181 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Parco+di+Serravalle&city=Empoli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:13,205 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Empoli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:13,237 INFO app.services.ingest_service ✅ Cached new coordinates for: Parco di Serravalle, Empoli
+2026-02-28 14:28:15,252 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Lungomare+Starita+4&city=Bari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:15,282 INFO app.services.ingest_service ✅ Cached new coordinates for: Lungomare Starita 4, Bari
+2026-02-28 14:28:17,022 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Angelo+Tagliabue&city=Paderno+Dugnano+%28Milano%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:17,063 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Angelo Tagliabue, Paderno Dugnano (Milano)
+2026-02-28 14:28:19,144 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palazzo+dello+Sport+-+Roma&city=Roma&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:19,656 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Roma&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:19,694 INFO app.services.ingest_service ✅ Cached new coordinates for: Palazzo dello Sport - Roma, Roma
+2026-02-28 14:28:21,601 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Mapo+Club&city=Bellaria+%E2%80%93+Igea+Marina&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:22,420 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Bellaria+%E2%80%93+Igea+Marina&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:22,452 INFO app.services.ingest_service ✅ Cached new coordinates for: Mapo Club, Bellaria – Igea Marina
+2026-02-28 14:28:24,506 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Gino+Cervi+2&city=Casalecchio+di+Reno&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:24,542 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Gino Cervi 2, Casalecchio di Reno
+2026-02-28 14:28:26,414 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Mandela+Forum&city=Firenze&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:26,721 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Firenze&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:26,759 INFO app.services.ingest_service ✅ Cached new coordinates for: Mandela Forum, Firenze
+2026-02-28 14:28:29,283 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Fiera+Milano+Live&city=Rho&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:29,573 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Rho&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:29,604 INFO app.services.ingest_service ✅ Cached new coordinates for: Fiera Milano Live, Rho
+2026-02-28 14:28:32,458 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+San+Marco&city=Venezia&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:32,503 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza San Marco, Venezia
+2026-02-28 14:28:34,402 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Francesco+Viviani&city=Verona&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:34,444 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Francesco Viviani, Verona
+2026-02-28 14:28:36,230 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Giuseppe+di+Vittorio+6&city=Assago&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:36,273 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Giuseppe di Vittorio 6, Assago
+2026-02-28 14:28:38,293 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Viale+Enrico+Fermi+98&city=Milano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:38,334 INFO app.services.ingest_service ✅ Cached new coordinates for: Viale Enrico Fermi 98, Milano
+2026-02-28 14:28:40,101 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palapartenope&city=Napoli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:41,265 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Napoli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:41,308 INFO app.services.ingest_service ✅ Cached new coordinates for: Palapartenope, Napoli
+2026-02-28 14:28:43,106 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Vittorio+Veneto+13&city=Nonantola&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:43,140 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Vittorio Veneto 13, Nonantola
+2026-02-28 14:28:45,037 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Fabrique&city=Milano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:45,075 INFO app.services.ingest_service ✅ Cached new coordinates for: Fabrique, Milano
+2026-02-28 14:28:46,898 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Alfieri+0&city=Asti&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:47,070 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Asti&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:47,116 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Alfieri 0, Asti
+2026-02-28 14:28:49,148 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:49,455 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:49,457 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-02-28 14:28:51,503 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Parco+Delle+Cascine&city=Firenze&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:51,540 INFO app.services.ingest_service ✅ Cached new coordinates for: Parco Delle Cascine, Firenze
+2026-02-28 14:28:53,193 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=MONK+Club&city=Roma&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:53,235 INFO app.services.ingest_service ✅ Cached new coordinates for: MONK Club, Roma
+2026-02-28 14:28:55,190 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Locomotiv+Club&city=Bologna&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:55,226 INFO app.services.ingest_service ✅ Cached new coordinates for: Locomotiv Club, Bologna
+2026-02-28 14:28:57,135 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Largo+Luchino+Visconti+4&city=Cernobbio+%28Como%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:28:57,173 INFO app.services.ingest_service ✅ Cached new coordinates for: Largo Luchino Visconti 4, Cernobbio (Como)
+2026-02-28 14:28:59,698 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Villa+Bertelli+-+Forte+dei+Marmi&city=Forte+dei+Marmi&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:00,003 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Forte+dei+Marmi&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:00,048 INFO app.services.ingest_service ✅ Cached new coordinates for: Villa Bertelli - Forte dei Marmi, Forte dei Marmi
+2026-02-28 14:29:02,050 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Europa&city=La+Spezia&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:02,085 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Europa, La Spezia
+2026-02-28 14:29:03,997 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Moncada&city=Bastia+Umbra+%28Perugia%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:04,031 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Moncada, Bastia Umbra (Perugia)
+2026-02-28 14:29:05,746 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palaunical+%28Ex+Grana+Padano+Arena%29&city=Mantova&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:05,807 INFO app.services.ingest_service ✅ Cached new coordinates for: Palaunical (Ex Grana Padano Arena), Mantova
+2026-02-28 14:29:07,784 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Auditorium+Santa+Chiara&city=Trento&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:08,912 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Trento&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:08,944 INFO app.services.ingest_service ✅ Cached new coordinates for: Teatro Auditorium Santa Chiara, Trento
+2026-02-28 14:29:11,577 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Moretti&city=Sassari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:11,882 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Sassari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:11,919 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Moretti, Sassari
+2026-02-28 14:29:13,921 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Magazzini+Generali&city=Milano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:13,958 INFO app.services.ingest_service ✅ Cached new coordinates for: Magazzini Generali, Milano
+2026-02-28 14:29:15,876 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Arena+Fiera+Cagliari&city=Cagliari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:16,926 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Cagliari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:16,959 INFO app.services.ingest_service ✅ Cached new coordinates for: Arena Fiera Cagliari, Cagliari
+2026-02-28 14:29:19,152 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=viale+Buozzi+snc&city=Arezzo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:19,461 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Arezzo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:19,492 INFO app.services.ingest_service ✅ Cached new coordinates for: viale Buozzi snc, Arezzo
+2026-02-28 14:29:21,263 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+degli+Scavi&city=Fasano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:21,306 INFO app.services.ingest_service ✅ Cached new coordinates for: Via degli Scavi, Fasano
+2026-02-28 14:29:23,248 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Ippodromo+di+Arzachena&city=Arzachena&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:24,068 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Arzachena&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:24,097 INFO app.services.ingest_service ✅ Cached new coordinates for: Ippodromo di Arzachena, Arzachena
+2026-02-28 14:29:26,100 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=PalaPrometeo+Estra&city=Ancona&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:26,425 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ancona&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:26,472 INFO app.services.ingest_service ✅ Cached new coordinates for: PalaPrometeo Estra, Ancona
+2026-02-28 14:29:28,984 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=PalaFlorio&city=Bari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:29,395 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Bari&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:29,429 INFO app.services.ingest_service ✅ Cached new coordinates for: PalaFlorio, Bari
+2026-02-28 14:29:31,440 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Corso+Pastrengo+51&city=Collegno+%28Torino%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:31,467 INFO app.services.ingest_service ✅ Cached new coordinates for: Corso Pastrengo 51, Collegno (Torino)
+2026-02-28 14:29:33,387 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Lungomare+Tosti&city=Francavilla+al+Mare&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:33,695 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Francavilla+al+Mare&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:33,734 INFO app.services.ingest_service ✅ Cached new coordinates for: Lungomare Tosti, Francavilla al Mare
+2026-02-28 14:29:35,642 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Rossini&city=Civitanova+Marche&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:36,050 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Civitanova+Marche&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:36,077 INFO app.services.ingest_service ✅ Cached new coordinates for: Teatro Rossini, Civitanova Marche
+2026-02-28 14:29:37,999 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Matteotti&city=Sarzana&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:38,035 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Matteotti, Sarzana
+2026-02-28 14:29:39,943 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palaronchi&city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:40,096 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:40,097 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Palaronchi, Saronno (Varese). Skip caching to allow retry.
+2026-02-28 14:29:42,299 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Carlo+di+Borbone+0&city=Caserta&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:42,340 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Carlo di Borbone 0, Caserta
+2026-02-28 14:29:44,138 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Beky+Bay&city=Bellaria+%E2%80%93+Igea+Marina&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:44,168 INFO app.services.ingest_service ✅ Cached new coordinates for: Beky Bay, Bellaria – Igea Marina
+2026-02-28 14:29:45,881 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Enzo+Jannacci&city=Segrate&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:45,919 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Enzo Jannacci, Segrate
+2026-02-28 14:29:47,727 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Etnea+292&city=Catania&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:47,774 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Etnea 292, Catania
+2026-02-28 14:29:49,876 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=VIA+SANTA+MARIA+ASSUNTA+20&city=Padova&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:49,904 INFO app.services.ingest_service ✅ Cached new coordinates for: VIA SANTA MARIA ASSUNTA 20, Padova
+2026-02-28 14:29:52,132 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Viale+Enrico+Mattei+50&city=Fano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:52,171 INFO app.services.ingest_service ✅ Cached new coordinates for: Viale Enrico Mattei 50, Fano
+2026-02-28 14:29:53,972 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Parco+Arena+Centrale&city=Follonica&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:54,139 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Follonica&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:54,166 INFO app.services.ingest_service ✅ Cached new coordinates for: Parco Arena Centrale, Follonica
+2026-02-28 14:29:55,917 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Negri+1&city=Romano+d%27Ezzelino&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:55,955 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Negri 1, Romano d'Ezzelino
+2026-02-28 14:29:57,965 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Golden&city=Palermo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:29:57,994 INFO app.services.ingest_service ✅ Cached new coordinates for: Teatro Golden, Palermo
+2026-02-28 14:29:59,810 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Parco+San+Valentino&city=Pordenone&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:00,937 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Pordenone&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:00,977 INFO app.services.ingest_service ✅ Cached new coordinates for: Parco San Valentino, Pordenone
+2026-02-28 14:30:02,968 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Castello+1&city=Legnano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:02,996 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Castello 1, Legnano
+2026-02-28 14:30:04,789 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Diomede&city=Milano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:04,823 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Diomede, Milano
+2026-02-28 14:30:06,513 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palasele&city=Eboli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:07,695 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Eboli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:07,741 INFO app.services.ingest_service ✅ Cached new coordinates for: Palasele, Eboli
+2026-02-28 14:30:09,541 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Largo+Giorgio+Gaber+1&city=Trieste&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:09,570 INFO app.services.ingest_service ✅ Cached new coordinates for: Largo Giorgio Gaber 1, Trieste
+2026-02-28 14:30:11,422 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Arena+Flegrea&city=Napoli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:12,610 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Napoli&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:12,643 INFO app.services.ingest_service ✅ Cached new coordinates for: Arena Flegrea, Napoli
+2026-02-28 14:30:14,554 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Velodromo+Paolo+Borsellino&city=Palermo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:14,862 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Palermo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:14,905 INFO app.services.ingest_service ✅ Cached new coordinates for: Velodromo Paolo Borsellino, Palermo
+2026-02-28 14:30:16,633 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=viale+Nereo+Rocco+60&city=Padova&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:16,677 INFO app.services.ingest_service ✅ Cached new coordinates for: viale Nereo Rocco 60, Padova
+2026-02-28 14:30:18,655 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Medford&city=Alba&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:18,687 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Medford, Alba
+2026-02-28 14:30:20,700 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Enrico+Fermi+24&city=Servigliano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:20,730 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Enrico Fermi 24, Servigliano
+2026-02-28 14:30:22,644 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Aldo+Moro+0&city=Montesilvano+%28Pescara%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:22,679 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Aldo Moro 0, Montesilvano (Pescara)
+2026-02-28 14:30:24,590 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Serradifalco+25&city=Bagheria&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:30:24,616 INFO app.services.ingest_service ✅ Cached new coordinates for: Via Serradifalco 25, Bagheria
+2026-02-28 14:30:25,373 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:25,856 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:26,324 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:26,915 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:27,494 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:28,163 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:28,853 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:29,507 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:30,181 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:30,836 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:31,563 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:32,301 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:33,095 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:34,081 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:34,882 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:35,799 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:37,160 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:37,781 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:38,484 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:39,021 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:39,973 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:40,513 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:41,105 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:41,670 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:42,497 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:43,124 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:43,744 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:44,233 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:45,247 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:45,968 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:46,688 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:47,173 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:47,897 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:48,648 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:49,104 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:49,756 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:50,427 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:51,224 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:51,916 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:52,722 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:53,260 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:53,719 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:54,351 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:55,069 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:56,077 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:56,998 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:57,876 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:58,553 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:58,708 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:30:58,728 INFO uvicorn.access 127.0.0.1:44518 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-02-28 14:31:20,941 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (9.294820, 45.490735)
+2026-02-28 14:31:21,021 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:31:21,031 INFO uvicorn.access 127.0.0.1:41290 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:32:25,165 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:32:25,170 INFO uvicorn.access 127.0.0.1:59788 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:32:42,432 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:32:42,434 INFO uvicorn.access 127.0.0.1:55486 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:33:21,599 INFO app.services.openroute_service ✅ ROUTE CACHED: 423 pts
+2026-02-28 14:33:21,686 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:33:21,698 INFO uvicorn.access 127.0.0.1:49338 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:35:59,800 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (9.189635, 45.464194)
+2026-02-28 14:35:59,866 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:35:59,875 INFO uvicorn.access 127.0.0.1:45590 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:41:41,693 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (14.248768, 40.835885)
+2026-02-28 14:41:41,759 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:41:41,762 INFO uvicorn.access 127.0.0.1:58646 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:46:23,446 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-02-28 14:46:23,698 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-02-28 14:46:23,708 INFO app.api.routes 🚀 Ingestione di 1206 eventi delta in Qdrant...
+2026-02-28 14:46:23,711 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-28 14:46:23,726 INFO app.services.ingest_service 🌍 Resolving geolocations for 1206 events...
+2026-02-28 14:46:25,691 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:46:26,613 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:46:26,615 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-02-28 14:46:28,314 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palaronchi&city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:46:28,386 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 14:46:28,388 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Palaronchi, Saronno (Varese). Skip caching to allow retry.
+2026-02-28 14:46:29,090 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:29,523 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:29,941 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:30,483 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:31,023 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:31,632 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:32,212 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:32,693 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:33,216 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:33,754 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:34,243 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:34,845 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:35,430 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:36,066 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:36,594 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:37,242 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:38,013 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:38,494 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:39,057 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:39,467 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:39,959 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:40,406 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:40,832 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:41,236 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:41,844 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:42,341 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:42,848 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:43,253 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:44,077 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:44,727 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:45,360 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:45,822 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:46,367 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:47,033 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:47,409 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:47,937 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:48,530 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:49,249 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:49,859 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:50,573 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:51,011 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:51,415 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:51,921 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:52,404 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:52,917 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:53,500 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:54,229 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:54,841 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:54,950 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 14:46:54,958 INFO uvicorn.access 127.0.0.1:52720 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-02-28 14:55:54,318 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (8.315321, 40.558729)
+2026-02-28 14:55:54,374 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:55:54,377 INFO uvicorn.access 127.0.0.1:37706 - "POST /create_map HTTP/1.1" 200
+2026-02-28 14:56:43,256 INFO uvicorn.access 127.0.0.1:52872 - "POST /create_map HTTP/1.1" 422
+2026-02-28 14:56:55,740 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 14:56:55,748 INFO uvicorn.access 127.0.0.1:44934 - "POST /create_map HTTP/1.1" 200
+2026-02-28 15:08:27,143 INFO uvicorn.error Shutting down
+2026-02-28 15:08:27,244 INFO uvicorn.error Waiting for application shutdown.
+2026-02-28 15:08:27,245 INFO uvicorn.error Application shutdown complete.
+2026-02-28 15:08:27,245 INFO uvicorn.error Finished server process [12556]
+2026-02-28 15:10:30,508 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-28 15:10:30,509 INFO uvicorn.error Started server process [20064]
+2026-02-28 15:10:30,509 INFO uvicorn.error Waiting for application startup.
+2026-02-28 15:10:30,509 INFO uvicorn.error Application startup complete.
+2026-02-28 15:11:06,040 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-02-28 15:11:06,317 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-02-28 15:11:06,323 INFO app.api.routes 🚀 Ingestione di 1206 eventi delta in Qdrant...
+2026-02-28 15:11:06,326 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-28 15:11:06,345 INFO app.services.ingest_service 🌍 Resolving geolocations for 1206 events...
+2026-02-28 15:11:08,173 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:11:08,260 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:11:08,261 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-02-28 15:11:09,938 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palaronchi&city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:11:10,017 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:11:10,019 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Palaronchi, Saronno (Varese). Skip caching to allow retry.
+2026-02-28 15:11:10,783 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:11,214 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:11,634 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:12,177 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:12,698 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:13,315 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:13,889 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:14,382 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:14,901 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:15,444 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:15,929 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:16,509 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:17,168 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:17,836 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:18,361 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:18,977 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:19,673 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:20,151 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:20,710 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:21,116 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:21,607 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:22,055 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:22,475 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:22,888 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:23,480 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:23,975 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:24,470 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:24,877 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:25,701 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:26,332 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:26,980 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:27,427 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:28,022 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:28,656 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:29,044 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:29,556 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:30,151 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:30,848 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:31,441 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:32,158 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:32,597 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:33,011 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:33,511 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:33,982 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:34,517 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:35,140 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:36,026 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:36,819 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:36,980 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:11:36,989 INFO uvicorn.access 127.0.0.1:46574 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-02-28 15:14:29,407 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-02-28 15:14:29,673 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-02-28 15:14:29,685 INFO app.api.routes 🚀 Ingestione di 1206 eventi delta in Qdrant...
+2026-02-28 15:14:29,692 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-28 15:14:29,729 INFO app.services.ingest_service 🌍 Resolving geolocations for 1206 events...
+2026-02-28 15:14:31,463 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:14:31,537 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:14:31,539 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-02-28 15:14:33,216 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palaronchi&city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:14:33,305 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:14:33,307 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Palaronchi, Saronno (Varese). Skip caching to allow retry.
+2026-02-28 15:14:34,120 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:34,600 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:35,013 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:35,561 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:36,072 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:36,706 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:37,278 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:37,759 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:38,320 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:38,903 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:39,405 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:40,003 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:40,609 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:41,243 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:41,776 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:42,403 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:43,106 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:43,598 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:44,158 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:44,565 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:45,062 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:45,541 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:45,963 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:46,436 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:47,040 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:47,531 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:48,026 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:48,444 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:49,263 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:49,898 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:50,589 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:51,101 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:51,790 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:52,506 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:53,054 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:53,940 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:54,589 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:55,410 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:56,312 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:57,109 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:57,583 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:58,001 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:58,500 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:59,009 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:14:59,584 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:15:00,243 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:15:01,022 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:15:01,649 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:15:01,759 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:15:01,768 INFO uvicorn.access 127.0.0.1:54890 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-02-28 15:15:19,571 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 15:15:19,576 INFO uvicorn.access 127.0.0.1:42810 - "POST /create_map HTTP/1.1" 200
+2026-02-28 15:15:56,279 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 15:15:56,281 INFO uvicorn.access 127.0.0.1:54680 - "POST /create_map HTTP/1.1" 200
+2026-02-28 15:16:45,072 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (10.220021, 45.539802)
+2026-02-28 15:16:45,132 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 15:16:45,135 INFO uvicorn.access 127.0.0.1:34472 - "POST /create_map HTTP/1.1" 200
+2026-02-28 15:34:03,981 INFO uvicorn.error Shutting down
+2026-02-28 15:34:04,081 INFO uvicorn.error Waiting for application shutdown.
+2026-02-28 15:34:04,082 INFO uvicorn.error Application shutdown complete.
+2026-02-28 15:34:04,082 INFO uvicorn.error Finished server process [20064]
+2026-02-28 15:34:21,940 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-28 15:34:21,940 INFO uvicorn.error Started server process [23820]
+2026-02-28 15:34:21,940 INFO uvicorn.error Waiting for application startup.
+2026-02-28 15:34:21,941 INFO uvicorn.error Application startup complete.
+2026-02-28 15:35:25,898 INFO uvicorn.error Shutting down
+2026-02-28 15:35:25,998 INFO uvicorn.error Waiting for application shutdown.
+2026-02-28 15:35:25,998 INFO uvicorn.error Application shutdown complete.
+2026-02-28 15:35:25,999 INFO uvicorn.error Finished server process [23820]
+2026-02-28 15:35:40,535 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-28 15:35:40,535 INFO uvicorn.error Started server process [24071]
+2026-02-28 15:35:40,535 INFO uvicorn.error Waiting for application startup.
+2026-02-28 15:35:40,535 INFO uvicorn.error Application startup complete.
+2026-02-28 15:36:05,976 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-02-28 15:36:06,226 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-02-28 15:36:06,237 INFO app.api.routes 🚀 Ingestione di 1206 eventi delta in Qdrant...
+2026-02-28 15:36:06,242 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-28 15:36:06,264 INFO app.services.ingest_service 🌍 Resolving geolocations for 1206 events...
+2026-02-28 15:36:08,153 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:36:08,226 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:36:08,228 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-02-28 15:36:10,580 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Palaronchi&city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:36:10,886 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Saronno+%28Varese%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:36:10,889 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Palaronchi, Saronno (Varese). Skip caching to allow retry.
+2026-02-28 15:36:11,664 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:12,102 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:12,520 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:13,063 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:13,609 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:14,239 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:14,820 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:15,316 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:15,854 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:16,414 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:16,922 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:17,528 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:18,166 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:18,818 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:19,470 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:20,130 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:20,849 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:21,343 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:21,922 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:22,345 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:22,852 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:23,321 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:23,755 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:24,241 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:24,862 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:25,377 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:25,884 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:26,299 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:27,134 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:27,787 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:28,433 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:28,958 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:29,763 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:30,555 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:30,996 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:31,674 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:32,583 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:33,451 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:34,261 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:35,086 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:35,851 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:36,309 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:36,848 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:37,436 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:38,071 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:38,804 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:39,707 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:40,381 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:40,893 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:36:40,921 INFO uvicorn.access 127.0.0.1:41420 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-02-28 15:40:56,237 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 15:40:56,243 INFO uvicorn.access 127.0.0.1:38172 - "POST /create_map HTTP/1.1" 200
+2026-02-28 15:41:17,687 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-02-28 15:41:17,933 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-02-28 15:41:17,997 INFO uvicorn.access 127.0.0.1:39714 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-02-28 15:44:55,456 INFO uvicorn.error Shutting down
+2026-02-28 15:44:55,557 INFO uvicorn.error Waiting for application shutdown.
+2026-02-28 15:44:55,557 INFO uvicorn.error Application shutdown complete.
+2026-02-28 15:44:55,558 INFO uvicorn.error Finished server process [24071]
+2026-02-28 15:45:10,972 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-28 15:45:10,972 INFO uvicorn.error Started server process [25772]
+2026-02-28 15:45:10,972 INFO uvicorn.error Waiting for application startup.
+2026-02-28 15:45:10,973 INFO uvicorn.error Application startup complete.
+2026-02-28 15:54:26,001 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-02-28 15:54:26,528 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-28 15:54:26,649 INFO app.api.routes ⚙️ Transforming 47 raw events...
+2026-02-28 15:54:27,141 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-28%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:28,328 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-02-28%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:29,535 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-28%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:30,835 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-06%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:32,079 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:33,237 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:34,440 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:35,723 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:36,909 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:38,250 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:39,402 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:40,560 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:41,785 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:43,033 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:44,282 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:45,479 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:46,701 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:54:47,729 INFO uvicorn.access 127.0.0.1:40136 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-28 15:54:47,811 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-02-28 15:54:47,813 INFO app.api.routes 🚀 Ingesting 132 delta events into Qdrant...
+2026-02-28 15:54:47,818 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-02-28 15:54:47,824 INFO app.services.ingest_service 🌍 Resolving geolocations for 132 events...
+2026-02-28 15:54:50,284 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Chiesa+Camporovere&city=Roana&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:54:51,415 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Roana&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:54:51,458 INFO app.services.ingest_service ✅ Cached new coordinates for: Chiesa Camporovere, Roana
+2026-02-28 15:54:53,192 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=centro+AMO&city=Lamon&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:54:53,356 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Lamon&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:54:53,396 INFO app.services.ingest_service ✅ Cached new coordinates for: centro AMO, Lamon
+2026-02-28 15:54:55,301 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Accademico&city=Castelfranco+Veneto&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:54:55,612 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Castelfranco+Veneto&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-02-28 15:54:55,649 INFO app.services.ingest_service ✅ Cached new coordinates for: Teatro Accademico, Castelfranco Veneto
+2026-02-28 15:54:58,272 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:55:01,084 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:55:04,207 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:55:08,045 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:55:10,988 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:55:11,159 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-02-28 15:55:11,161 INFO uvicorn.access 127.0.0.1:59844 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-02-28 15:56:17,712 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.362566, 45.660464)
+2026-02-28 15:56:17,872 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-02-28 15:56:17,878 INFO uvicorn.access 127.0.0.1:36182 - "POST /create_map HTTP/1.1" 200
+2026-02-28 15:57:02,253 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-02-28 15:57:03,407 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-02-28 15:57:03,510 INFO app.api.routes ⚙️ Transforming 47 raw events...
+2026-02-28 15:57:03,946 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/69405aa4-7342-46ea-beff-b437e621609d?fields=nextOccurrences%28fromDate%3A%222026-02-28%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:05,177 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-02-28%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:06,368 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-02-28%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:07,610 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-06%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:08,845 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:10,157 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:11,350 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:12,526 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:13,678 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:14,850 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:16,032 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:17,223 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:18,552 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:19,800 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:21,011 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:22,240 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:23,395 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-02-28 15:57:24,438 INFO uvicorn.access 127.0.0.1:35974 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-02-28 15:57:24,502 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-02-28 15:57:24,506 INFO uvicorn.access 127.0.0.1:40164 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-02-28 16:36:37,382 INFO uvicorn.error Shutting down
+2026-02-28 16:36:37,483 INFO uvicorn.error Waiting for application shutdown.
+2026-02-28 16:36:37,484 INFO uvicorn.error Application shutdown complete.
+2026-02-28 16:36:37,485 INFO uvicorn.error Finished server process [25772]
+2026-02-28 16:36:58,547 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-02-28 16:36:58,547 INFO uvicorn.error Started server process [31847]
+2026-02-28 16:36:58,547 INFO uvicorn.error Waiting for application startup.
+2026-02-28 16:36:58,548 INFO uvicorn.error Application startup complete.
+2026-02-28 16:42:40,021 INFO uvicorn.error Shutting down
+2026-02-28 16:42:40,122 INFO uvicorn.error Waiting for application shutdown.
+2026-02-28 16:42:40,123 INFO uvicorn.error Application shutdown complete.
+2026-02-28 16:42:40,123 INFO uvicorn.error Finished server process [31847]

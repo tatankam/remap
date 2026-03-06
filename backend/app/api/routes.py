@@ -51,6 +51,8 @@ else:
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
 # -----------------------------------------------------
 
+
+
 # Shared AI Models (Initialized with 1 thread for memory safety)
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME, threads=1)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME, threads=1)
