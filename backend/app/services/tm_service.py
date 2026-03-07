@@ -41,6 +41,8 @@ def transform_tm_event(tm_event: Dict[str, Any]) -> Dict[str, Any]:
     # --- 3. ESTRAZIONE DATE ---
     start_dt = tm_event.get("eventStartDateTime")
     end_dt = tm_event.get("eventEndDateTime") or start_dt
+    # Nuova estrazione per l'orario locale
+    start_localtime = tm_event.get("eventStartLocalTime")
 
     # --- 4. MAPPATURA SCHEMA RE-MAP ---
     return {
@@ -56,6 +58,7 @@ def transform_tm_event(tm_event: Dict[str, Any]) -> Dict[str, Any]:
             "lon": float(venue.get("venueLongitude", 0.0)) if venue.get("venueLongitude") else 0.0
         },
         "start_date": start_dt,
+        "start_localtime": start_localtime,
         "end_date": end_dt,
         "url": affiliate_url,
         "credits": "Ticketmaster",

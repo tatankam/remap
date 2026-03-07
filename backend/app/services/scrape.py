@@ -179,8 +179,12 @@ async def transform_events_for_json(events: List[Dict], session_id: str = UNPLI_
 
                 address = ", ".join([venue, city]) if venue and city else venue or city
                 
-                # ID unico per data (determinista)
-                unique_id = f"{event.get('id', '')}_{start_date[:10]}"
+                # --- NEW: Extract Local Time to align with Ticketmaster format (HH:MM) ---
+                # From "2026-09-20T08:30:00" we take "08:30"
+                try:
+                    current_localtime = start_date.split("T")[1][:5]
+                except (IndexError, AttributeError):
+                    current_localtime = "00:00"
 
                 transformed.append({
                     "id": event.get('id', ''),
@@ -195,6 +199,7 @@ async def transform_events_for_json(events: List[Dict], session_id: str = UNPLI_
                         "lon": coordinate.get("long")
                     },
                     "start_date": start_date,
+                    "start_localtime": current_localtime, # Now ordered correctly
                     "end_date": end_date,
                     "url": event_url,
                     "credits": "Dms Veneto, il Destination Management System di Regione del Veneto"

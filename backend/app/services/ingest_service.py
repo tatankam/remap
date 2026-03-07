@@ -14,9 +14,9 @@ from fastembed import TextEmbedding, SparseTextEmbedding
 from qdrant_client import QdrantClient, models
 from app.core.config import QDRANT_SERVER, QDRANT_API_KEY, DENSE_MODEL_NAME, SPARSE_MODEL_NAME, COLLECTION_NAME
 from tqdm import tqdm
-import os
 
 # --- FIX: Redirect all library storage to the writable volume ---
+# This prevents Permission Denied [Errno 13] when running as UID 1001
 if os.path.exists("/app/dataset"):
     # Fix for FastEmbed / HuggingFace
     os.environ["HF_HOME"] = "/app/dataset/hf_cache"
@@ -205,6 +205,22 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
             loc = e.get("location", {})
             e["location"]["lat"] = loc.get("lat") or loc.get("latitude") or 0.0
             e["location"]["lon"] = loc.get("lon") or loc.get("longitude") or 0.0
+            
+            # --- SMART TIME EXTRACTION LOGIC ---
+            # 1. Check for local_time (from Ticketmaster) or start_localtime (existing)
+            l_time = e.get("local_time") or e.get("start_localtime")
+            
+            # 2. Fallback: If still None, extract from start_date ISO string
+            if not l_time and e.get("start_date") and "T" in str(e["start_date"]):
+                try:
+                    # ISO string format: "2026-07-17T20:00:00Z" -> split at T -> "20:00:00Z" -> clean Z
+                    l_time = e["start_date"].split("T")[1].replace("Z", "").split(".")[0]
+                except (IndexError, AttributeError):
+                    l_time = None
+            
+            e["start_localtime"] = l_time
+            # ------------------------------------
+            
             e["hash"] = generate_content_hash(e)
             active_events.append((q_id, e))
 
