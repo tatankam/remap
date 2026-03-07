@@ -19,8 +19,6 @@ async def fetch_unpli_events(
     page_size: int = 5,
     session_id: str = UNPLI_SESSION_ID
 ) -> Optional[List[Dict[str, Any]]]:
-    """Recupera la lista eventi principale usando l'URL e la Sessione da config."""
-    
     url = UNPLI_API_BASE_URL
     params = {
         "filterId": "",
@@ -39,22 +37,17 @@ async def fetch_unpli_events(
         "hashF": 0
     }
     headers = {
-        "DW-Source": "desklineweb",
-        "DW-SessionID": session_id,
-        "Accept": "application/json, text/plain, */*",
-        "Referer": "https://www.unpliveneto.it/",
+        "DW-Source": "desklineweb", "DW-SessionID": session_id,
+        "Accept": "application/json, text/plain, */*", "Referer": "https://www.unpliveneto.it/",
         "User-Agent": "Mozilla/5.0"
     }
-    
     try:
         response = await session.get(url, headers=headers, params=params)
         response.raise_for_status()
         data = response.json()
         return data.get("data") or data.get("events")
-    except httpx.HTTPStatusError as e:
-        print(f"Request failed with status code {e.response.status_code}: {e}")
     except Exception as e:
-        print(f"Error fetching unpli events: {e}")
+        print(f"Error: {e}")
     return None
 
 async def fetch_event_details_dates(
@@ -64,127 +57,90 @@ async def fetch_event_details_dates(
     session_id: str = UNPLI_SESSION_ID,
     from_date: Optional[str] = None,
     max_retries: int = 5
-) -> List[Tuple[str, int]]:
-    """Recupera le date ricorrenti costruendo l'URL dinamicamente."""
-    
-    if from_date is None:
-        from_date = "2020-01-01"
-    
-    # Costruzione URL dettaglio: base_url/dbCode/eventId
+) -> List[Tuple[str, str, int]]:
+    if from_date is None: from_date = "2020-01-01"
     base_api = UNPLI_API_BASE_URL.rstrip('/')
     url = f"{base_api}/{dbCode}/{event_id}"
-    
     fields_value = f'nextOccurrences(fromDate:"{from_date}",count:100){{items{{date,dayOfWeek,startTime,duration}},hasMoreItems}}'
     params = {"fields": fields_value}
     headers = {
-        "DW-Source": "desklineweb",
-        "DW-SessionID": session_id,
-        "Accept": "application/json, text/plain, */*",
-        "Referer": "https://www.unpliveneto.it/",
+        "DW-Source": "desklineweb", "DW-SessionID": session_id,
+        "Accept": "application/json, text/plain, */*", "Referer": "https://www.unpliveneto.it/",
         "User-Agent": "Mozilla/5.0"
     }
-    
     backoff = 1
     for attempt in range(max_retries):
         try:
             response = await session.get(url, headers=headers, params=params)
             if response.status_code == 429:
-                retry_after = response.headers.get("Retry-After")
-                wait_time = int(retry_after) if retry_after and retry_after.isdigit() else backoff
-                print(f"Received 429, retrying after {wait_time} (attempt {attempt + 1})...")
-                await asyncio.sleep(wait_time)
+                await asyncio.sleep(backoff)
                 backoff = min(backoff * 2, 60)
                 continue
-            
             response.raise_for_status()
             data = response.json()
             items = data.get("nextOccurrences", {}).get("items", [])
-            
-            dates_with_duration = []
+            dates_with_info = []
             for item in items:
                 if "date" in item:
-                    dates_with_duration.append((f"{item['date'][:10]}T{item.get('startTime', '00:00')}:00", item.get("duration", 0)))
-            
-            await asyncio.sleep(1)  # Gentilezza verso l'API
-            return dates_with_duration
-            
-        except httpx.RequestError as e:
-            print(f"Request error: {e}, attempt {attempt + 1} of {max_retries}")
+                    d = item['date'][:10]
+                    t = item.get('startTime', '00:00')
+                    dates_with_info.append((d, t, item.get("duration", 0)))
+            await asyncio.sleep(0.5)
+            return dates_with_info
+        except:
             await asyncio.sleep(backoff)
-            backoff = min(backoff * 2, 60)
-            
-    print("Max retries reached for event details, skipping dates.")
     return []
 
 async def transform_events_for_json(events: List[Dict], session_id: str = UNPLI_SESSION_ID) -> List[Dict]:
-    """Trasforma i dati grezzi dell'API nel formato JSON per Qdrant."""
     transformed = []
-    
     async with httpx.AsyncClient() as session:
-        total_events = len(events)
-        for i, event in enumerate(events, 1):
-            print(f"Processing event {i} of {total_events}: ID {event.get('id', '')}")
-            
+        for event in events:
             descriptions = event.get("descriptions") or []
-            long_description = ""
-            if descriptions and isinstance(descriptions, list):
-                raw_html = descriptions[0].get("description", "")
-                long_description = clean_html(raw_html)
-
+            long_description = clean_html(descriptions[0].get("description", "")) if descriptions else ""
             location = event.get("location") or {}
             coordinate = location.get("coordinate") or {}
-            venue = location.get("place", "")
-            city = location.get("town", "")
-
+            venue, city = location.get("place", ""), location.get("town", "")
             title = event.get("name", "")
-
-            category = ""
             criteria = event.get("criteria") or []
-            if criteria and isinstance(criteria, list) and len(criteria) > 0:
-                category = criteria[0].get("groupName", "") if criteria[0] else ""
+            category = criteria[0].get("groupName", "") if criteria and criteria[0] else ""
+            db_code, event_id, url_friendly = event.get("dbCode", ""), event.get("id", ""), event.get("urlFriendlyName", "")
+            event_url = f"{UNPLI_WEB_BASE_URL.rstrip('/')}/{db_code}/{event_id}/{url_friendly}" if db_code else UNPLI_WEB_BASE_URL
 
-            # Costruzione URL Web dal config
-            db_code = event.get("dbCode", "")
-            event_id = event.get("id", "")
-            url_friendly = event.get("urlFriendlyName", "")
-            
-            if db_code and event_id and url_friendly:
-                event_url = f"{UNPLI_WEB_BASE_URL.rstrip('/')}/{db_code}/{event_id}/{url_friendly}"
-            else:
-                event_url = UNPLI_WEB_BASE_URL
-
-            # Gestione Date Multiple
-            dates_with_durations = []
+            raw_occurrences = []
             if event.get("hasMoreDates", False):
-                from_date = event.get("date")[:10]
-                dates_with_durations = await fetch_event_details_dates(
-                    session, dbCode=db_code, event_id=event_id, session_id=session_id, from_date=from_date
-                )
-                if not dates_with_durations:
-                    dates_with_durations = [(event.get("date"), 0)]
-            else:
-                dates_with_durations = [(event.get("date"), 0)]
+                raw_occurrences = await fetch_event_details_dates(session, db_code, event_id, session_id, event.get("date")[:10])
+            
+            if not raw_occurrences:
+                full_date_str = event.get("date", "")
+                d_part = full_date_str[:10]
+                t_part = full_date_str.split("T")[1][:5] if "T" in full_date_str else "00:00"
+                raw_occurrences = [(d_part, t_part, 0)]
 
-            # Generazione record per ogni data trovata
-            for start_date, duration_hours in dates_with_durations:
+            for date_part, time_part, duration_hours in raw_occurrences:
+                # Local Time Extraction
+                if time_part == "00:00" or time_part == "00:00:00":
+                    current_localtime = ""
+                    final_start_date = date_part
+                else:
+                    current_localtime = time_part[:5]
+                    final_start_date = f"{date_part}T{current_localtime}:00"
+
+                # End Date Calculation
                 try:
-                    dt_start = datetime.strptime(start_date[:19], "%Y-%m-%dT%H:%M:%S")
-                    if duration_hours == 0:
-                        dt_end = dt_start.replace(hour=23, minute=59, second=59, microsecond=0)
-                    else:
+                    dt_start = datetime.strptime(f"{date_part} {time_part[:5]}", "%Y-%m-%d %H:%M")
+                    
+                    if duration_hours > 0:
                         dt_end = dt_start + timedelta(hours=duration_hours)
+                        # Rule: Capping at end of the same day even if duration is long
+                        if dt_end.date() > dt_start.date():
+                            dt_end = dt_start.replace(hour=23, minute=59, second=59)
+                    else:
+                        # FIXED: No duration means end of the start day (23:59:59)
+                        dt_end = dt_start.replace(hour=23, minute=59, second=59)
+                    
                     end_date = dt_end.isoformat()
-                except Exception:
-                    end_date = start_date
-
-                address = ", ".join([venue, city]) if venue and city else venue or city
-                
-                # --- NEW: Extract Local Time to align with Ticketmaster format (HH:MM) ---
-                # From "2026-09-20T08:30:00" we take "08:30"
-                try:
-                    current_localtime = start_date.split("T")[1][:5]
-                except (IndexError, AttributeError):
-                    current_localtime = "00:00"
+                except:
+                    end_date = f"{date_part}T23:59:59"
 
                 transformed.append({
                     "id": event.get('id', ''),
@@ -193,16 +149,13 @@ async def transform_events_for_json(events: List[Dict], session_id: str = UNPLI_
                     "description": long_description,
                     "city": city,
                     "location": {
-                        "venue": venue,
-                        "address": address,
-                        "lat": coordinate.get("lat"),
-                        "lon": coordinate.get("long")
+                        "venue": venue, "address": f"{venue}, {city}" if venue and city else venue or city,
+                        "lat": coordinate.get("lat"), "lon": coordinate.get("long")
                     },
-                    "start_date": start_date,
-                    "start_localtime": current_localtime, # Now ordered correctly
+                    "start_date": final_start_date,
+                    "start_localtime": current_localtime,
                     "end_date": end_date,
                     "url": event_url,
                     "credits": "Dms Veneto, il Destination Management System di Regione del Veneto"
                 })
-                
     return transformed
