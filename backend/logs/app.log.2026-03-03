@@ -1,0 +1,784 @@
+2026-03-07 00:18:25,872 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 00:18:25,873 INFO uvicorn.error Started server process [8057]
+2026-03-07 00:18:25,873 INFO uvicorn.error Waiting for application startup.
+2026-03-07 00:18:25,873 INFO uvicorn.error Application startup complete.
+2026-03-07 00:18:47,057 INFO uvicorn.error Shutting down
+2026-03-07 00:18:47,158 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 00:18:47,158 INFO uvicorn.error Application shutdown complete.
+2026-03-07 00:18:47,159 INFO uvicorn.error Finished server process [8057]
+2026-03-07 00:19:11,244 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 00:19:11,244 INFO uvicorn.error Started server process [8337]
+2026-03-07 00:19:11,244 INFO uvicorn.error Waiting for application startup.
+2026-03-07 00:19:11,245 INFO uvicorn.error Application startup complete.
+2026-03-07 00:21:13,771 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (10.992412, 45.438496)
+2026-03-07 00:21:14,282 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 00:21:14,301 INFO uvicorn.access 127.0.0.1:44138 - "POST /create_map HTTP/1.1" 200
+2026-03-07 00:21:33,659 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 00:21:33,662 INFO uvicorn.access 127.0.0.1:35754 - "POST /create_map HTTP/1.1" 200
+2026-03-07 00:25:42,178 INFO uvicorn.error Shutting down
+2026-03-07 00:25:42,283 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 00:25:42,284 INFO uvicorn.error Application shutdown complete.
+2026-03-07 00:25:42,287 INFO uvicorn.error Finished server process [8337]
+2026-03-07 00:25:56,789 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 00:25:56,789 INFO uvicorn.error Started server process [9634]
+2026-03-07 00:25:56,789 INFO uvicorn.error Waiting for application startup.
+2026-03-07 00:25:56,790 INFO app.api.routes 🔥 Warming up Qdrant connection and indexes...
+2026-03-07 00:25:57,067 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-03-07 00:25:57,334 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-03-07 00:25:57,354 INFO app.api.routes Collection ready: 121422 points
+2026-03-07 00:25:57,414 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/scroll "HTTP/1.1 200 OK"
+2026-03-07 00:25:57,425 INFO app.api.routes ✅ Qdrant warmup complete
+2026-03-07 00:25:57,430 INFO app.api.routes 🔥 Warming up Qdrant connection and indexes...
+2026-03-07 00:25:57,730 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-03-07 00:25:57,971 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-03-07 00:25:57,987 INFO app.api.routes Collection ready: 121422 points
+2026-03-07 00:25:58,052 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/scroll "HTTP/1.1 200 OK"
+2026-03-07 00:25:58,055 INFO app.api.routes ✅ Qdrant warmup complete
+2026-03-07 00:25:58,060 INFO uvicorn.error Application startup complete.
+2026-03-07 00:27:14,090 INFO uvicorn.error Shutting down
+2026-03-07 00:27:14,191 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 00:27:14,192 INFO uvicorn.error Application shutdown complete.
+2026-03-07 00:27:14,193 INFO uvicorn.error Finished server process [9634]
+2026-03-07 00:27:29,568 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 00:27:29,569 INFO uvicorn.error Started server process [9823]
+2026-03-07 00:27:29,569 INFO uvicorn.error Waiting for application startup.
+2026-03-07 00:27:29,569 INFO uvicorn.error Application startup complete.
+2026-03-07 00:29:26,340 INFO uvicorn.error Shutting down
+2026-03-07 00:29:26,440 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 00:29:26,441 INFO uvicorn.error Application shutdown complete.
+2026-03-07 00:29:26,441 INFO uvicorn.error Finished server process [9823]
+2026-03-07 00:29:41,370 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 00:29:41,371 INFO uvicorn.error Started server process [10034]
+2026-03-07 00:29:41,371 INFO uvicorn.error Waiting for application startup.
+2026-03-07 00:29:41,371 INFO root 🔥 Warming up Qdrant connection and indexes...
+2026-03-07 00:29:41,676 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-03-07 00:29:41,889 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-03-07 00:29:41,901 INFO root Collection ready: 121422 points
+2026-03-07 00:29:41,963 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/scroll "HTTP/1.1 200 OK"
+2026-03-07 00:29:41,975 INFO root ✅ Qdrant warmup complete
+2026-03-07 00:29:41,976 INFO uvicorn.error Application startup complete.
+2026-03-07 00:29:54,217 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 00:29:54,227 INFO uvicorn.access 127.0.0.1:42956 - "POST /create_map HTTP/1.1" 200
+2026-03-07 00:29:57,288 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 00:29:57,295 INFO uvicorn.access 127.0.0.1:42956 - "POST /create_map HTTP/1.1" 200
+2026-03-07 00:30:17,365 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (9.669873, 45.694495)
+2026-03-07 00:30:17,842 INFO app.services.openroute_service ✅ ROUTE CACHED: 362 pts
+2026-03-07 00:30:18,161 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 00:30:18,175 INFO uvicorn.access 127.0.0.1:57652 - "POST /create_map HTTP/1.1" 200
+2026-03-07 00:32:04,715 INFO uvicorn.error Shutting down
+2026-03-07 00:32:04,816 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 00:32:04,817 INFO root 🛑 Application shutdown complete
+2026-03-07 00:32:04,819 INFO uvicorn.error Application shutdown complete.
+2026-03-07 00:32:04,819 INFO uvicorn.error Finished server process [10034]
+2026-03-07 10:15:52,057 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 10:15:52,057 INFO uvicorn.error Started server process [9031]
+2026-03-07 10:15:52,057 INFO uvicorn.error Waiting for application startup.
+2026-03-07 10:15:52,057 INFO root 🔥 Warming up Qdrant connection and indexes...
+2026-03-07 10:15:52,302 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-03-07 10:15:52,718 INFO httpx HTTP Request: GET https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events "HTTP/1.1 200 OK"
+2026-03-07 10:15:52,735 INFO root Collection ready: 121870 points
+2026-03-07 10:15:53,012 INFO httpx HTTP Request: POST https://bad13d43-afc8-44b5-8b37-2fa1eb4f0236.eu-west-1-0.aws.cloud.qdrant.io:6333/collections/veneto_unpliveneto_events/points/scroll "HTTP/1.1 200 OK"
+2026-03-07 10:15:53,016 INFO root ✅ Qdrant warmup complete
+2026-03-07 10:15:53,017 INFO uvicorn.error Application startup complete.
+2026-03-07 10:17:41,730 INFO uvicorn.error Shutting down
+2026-03-07 10:17:41,833 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 10:17:41,833 INFO root 🛑 Application shutdown complete
+2026-03-07 10:17:41,834 INFO uvicorn.error Application shutdown complete.
+2026-03-07 10:17:41,834 INFO uvicorn.error Finished server process [9031]
+2026-03-07 10:17:56,366 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 10:17:56,366 INFO uvicorn.error Started server process [9314]
+2026-03-07 10:17:56,367 INFO uvicorn.error Waiting for application startup.
+2026-03-07 10:17:56,367 INFO uvicorn.error Application startup complete.
+2026-03-07 11:01:51,188 INFO uvicorn.error Shutting down
+2026-03-07 11:01:51,289 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 11:01:51,290 INFO uvicorn.error Application shutdown complete.
+2026-03-07 11:01:51,290 INFO uvicorn.error Finished server process [9314]
+2026-03-07 11:02:07,389 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:02:07,390 INFO uvicorn.error Started server process [11854]
+2026-03-07 11:02:07,390 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:02:07,390 INFO uvicorn.error Application startup complete.
+2026-03-07 11:02:16,538 INFO uvicorn.error Shutting down
+2026-03-07 11:02:16,639 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 11:02:16,640 INFO uvicorn.error Application shutdown complete.
+2026-03-07 11:02:16,640 INFO uvicorn.error Finished server process [11854]
+2026-03-07 11:02:30,639 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:02:30,640 INFO uvicorn.error Started server process [12017]
+2026-03-07 11:02:30,640 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:02:30,640 INFO uvicorn.error Application startup complete.
+2026-03-07 11:09:07,474 INFO uvicorn.error Shutting down
+2026-03-07 11:09:07,575 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 11:09:07,575 INFO uvicorn.error Application shutdown complete.
+2026-03-07 11:09:07,575 INFO uvicorn.error Finished server process [12017]
+2026-03-07 11:09:22,814 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:09:22,815 INFO uvicorn.error Started server process [12304]
+2026-03-07 11:09:22,815 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:09:22,815 INFO uvicorn.error Application startup complete.
+2026-03-07 11:10:05,720 INFO uvicorn.error Shutting down
+2026-03-07 11:10:05,821 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 11:10:05,822 INFO uvicorn.error Application shutdown complete.
+2026-03-07 11:10:05,822 INFO uvicorn.error Finished server process [12304]
+2026-03-07 11:13:46,924 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:13:46,928 INFO uvicorn.error Started server process [13136]
+2026-03-07 11:13:46,928 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:13:46,928 INFO uvicorn.error Application startup complete.
+2026-03-07 11:18:01,719 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-03-07 11:18:01,966 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-03-07 11:18:01,990 INFO app.api.routes 🚀 Ingestione di 109 eventi delta in Qdrant...
+2026-03-07 11:18:01,993 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 11:18:02,004 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/delete?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:18:02,005 INFO app.services.ingest_service 🌍 Resolving geolocations for 67 events...
+2026-03-07 11:18:03,595 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Viale+di+Porta+Ardeatina&city=Roma&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:18:03,634 INFO app.services.ingest_service ✅ Cached new coordinates for: Viale di Porta Ardeatina, Roma
+2026-03-07 11:18:04,366 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:18:04,858 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:18:05,267 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:18:05,275 INFO uvicorn.access 127.0.0.1:42988 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-03-07 11:19:08,167 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-03-07 11:19:08,429 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-03-07 11:19:08,441 INFO app.api.routes 🚀 Ingestione di 1218 eventi delta in Qdrant...
+2026-03-07 11:19:08,444 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 11:19:08,465 INFO app.services.ingest_service 🌍 Resolving geolocations for 1218 events...
+2026-03-07 11:19:10,416 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:19:10,723 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:19:10,725 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-03-07 11:19:11,549 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:12,000 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:12,552 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:13,112 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:13,624 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:14,231 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:14,795 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:15,298 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:15,815 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:16,331 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:16,870 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:17,369 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:18,010 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:18,523 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:19,162 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:19,700 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:20,136 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:20,846 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:21,339 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:22,083 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:22,676 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:23,190 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:23,943 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:24,414 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:24,920 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:25,682 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:26,260 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:26,820 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:27,445 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:28,341 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:29,036 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:29,712 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:30,300 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:30,668 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:31,338 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:31,855 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:32,380 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:33,158 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:33,694 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:34,446 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:35,312 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:35,900 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:36,412 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:36,888 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:37,395 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:37,992 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:38,725 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:39,396 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:40,133 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:19:40,147 INFO uvicorn.access 127.0.0.1:47830 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-03-07 11:20:49,412 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:20:49,420 INFO uvicorn.access 127.0.0.1:33808 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:22:23,167 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:22:23,170 INFO uvicorn.access 127.0.0.1:33258 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:24:15,288 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 11:24:15,519 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 11:24:15,588 INFO app.api.routes ⚙️ Transforming 51 raw events...
+2026-03-07 11:24:15,862 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:16,951 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:18,063 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:19,150 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:20,382 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:21,519 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:22,597 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:23,677 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:24,770 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:25,850 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:26,956 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:28,064 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:29,164 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:30,292 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:31,379 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:32,490 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:33,585 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:34,661 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:35,770 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:36,878 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:24:37,970 INFO uvicorn.access 127.0.0.1:57270 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 11:24:38,105 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 11:24:38,110 INFO app.api.routes 🚀 Ingesting 135 delta events into Qdrant...
+2026-03-07 11:24:38,116 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 11:24:38,128 INFO app.services.ingest_service 🌍 Resolving geolocations for 135 events...
+2026-03-07 11:24:39,724 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Centrale&city=Zugliano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:39,928 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Zugliano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:39,966 INFO app.services.ingest_service ✅ Cached new coordinates for: Centrale, Zugliano
+2026-03-07 11:24:41,409 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Piazza+Brugnoli&city=Asolo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:41,502 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Asolo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:41,537 INFO app.services.ingest_service ✅ Cached new coordinates for: Piazza Brugnoli, Asolo
+2026-03-07 11:24:43,524 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=In+Piazza&city=Zugliano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:43,556 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Zugliano&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:43,587 INFO app.services.ingest_service ✅ Cached new coordinates for: In Piazza, Zugliano
+2026-03-07 11:24:45,145 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Sede+Associazioni+-+Sala+8&city=Campodarsego&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:45,658 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Campodarsego&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:45,700 INFO app.services.ingest_service ✅ Cached new coordinates for: Sede Associazioni - Sala 8, Campodarsego
+2026-03-07 11:24:47,672 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Teatro+Comunale+di+Lonigo&city=Lonigo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:48,324 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Lonigo&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:24:48,371 INFO app.services.ingest_service ✅ Cached new coordinates for: Teatro Comunale di Lonigo, Lonigo
+2026-03-07 11:24:51,358 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:24:54,119 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:24:57,462 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:25:00,333 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:25:02,794 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:25:02,926 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:25:02,928 INFO uvicorn.access 127.0.0.1:46462 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 11:25:48,721 INFO uvicorn.error Shutting down
+2026-03-07 11:25:48,825 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 11:25:48,825 INFO uvicorn.error Application shutdown complete.
+2026-03-07 11:25:48,825 INFO uvicorn.error Finished server process [13136]
+2026-03-07 11:28:50,521 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:28:50,521 INFO uvicorn.error Started server process [16681]
+2026-03-07 11:28:50,521 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:28:50,522 INFO uvicorn.error Application startup complete.
+2026-03-07 11:29:05,278 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:29:05,278 INFO uvicorn.error Started server process [17096]
+2026-03-07 11:29:05,279 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:29:05,279 INFO uvicorn.error Application startup complete.
+2026-03-07 11:29:18,045 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:29:18,045 INFO uvicorn.error Started server process [17199]
+2026-03-07 11:29:18,045 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:29:18,046 INFO uvicorn.error Application startup complete.
+2026-03-07 11:33:30,209 INFO uvicorn.error Shutting down
+2026-03-07 11:33:30,311 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 11:33:30,311 INFO uvicorn.error Application shutdown complete.
+2026-03-07 11:33:30,311 INFO uvicorn.error Finished server process [17199]
+2026-03-07 11:33:44,371 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:33:44,371 INFO uvicorn.error Started server process [18075]
+2026-03-07 11:33:44,371 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:33:44,371 INFO uvicorn.error Application startup complete.
+2026-03-07 11:33:56,538 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 11:33:56,803 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 11:33:56,837 INFO app.api.routes ⚙️ Transforming 51 raw events...
+2026-03-07 11:33:57,058 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:33:58,130 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:33:59,208 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:00,285 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:01,357 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:02,441 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:03,502 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:04,680 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:05,753 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:06,815 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:07,920 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:08,992 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:10,074 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:11,140 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:12,224 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:13,292 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:14,368 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:15,431 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:16,528 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:17,607 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:34:18,656 INFO uvicorn.access 127.0.0.1:46742 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 11:34:18,718 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 11:34:18,721 INFO app.api.routes 🚀 Ingesting 135 delta events into Qdrant...
+2026-03-07 11:34:18,723 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 11:34:18,729 INFO app.services.ingest_service 🌍 Resolving geolocations for 135 events...
+2026-03-07 11:34:21,543 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:34:24,097 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:34:26,863 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:34:29,918 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:34:33,243 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:34:33,475 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:34:33,477 INFO uvicorn.access 127.0.0.1:56222 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 11:35:25,175 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-03-07 11:35:25,454 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-03-07 11:35:25,464 INFO app.api.routes 🚀 Ingestione di 1218 eventi delta in Qdrant...
+2026-03-07 11:35:25,467 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 11:35:25,481 INFO app.services.ingest_service 🌍 Resolving geolocations for 1218 events...
+2026-03-07 11:35:26,863 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:35:26,892 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:35:26,895 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-03-07 11:35:27,758 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:28,308 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:28,880 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:29,477 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:30,020 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:30,769 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:31,405 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:32,128 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:33,171 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:33,813 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:34,583 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:35,166 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:35,992 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:36,880 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:37,730 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:38,792 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:39,347 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:40,271 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:40,853 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:41,696 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:42,313 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:42,958 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:43,466 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:44,182 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:45,159 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:46,020 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:46,637 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:47,130 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:47,736 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:48,637 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:49,347 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:49,842 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:50,324 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:50,722 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:51,395 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:51,972 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:52,538 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:53,260 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:53,808 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:54,856 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:55,749 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:56,382 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:56,908 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:57,421 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:58,171 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:35:59,039 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:36:00,204 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:36:00,647 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:36:01,165 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:36:01,187 INFO uvicorn.access 127.0.0.1:44964 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-03-07 11:42:40,646 INFO uvicorn.error Shutting down
+2026-03-07 11:42:40,747 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 11:42:40,748 INFO uvicorn.error Application shutdown complete.
+2026-03-07 11:42:40,748 INFO uvicorn.error Finished server process [18075]
+2026-03-07 11:42:56,036 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 11:42:56,037 INFO uvicorn.error Started server process [19585]
+2026-03-07 11:42:56,037 INFO uvicorn.error Waiting for application startup.
+2026-03-07 11:42:56,037 INFO uvicorn.error Application startup complete.
+2026-03-07 11:43:23,486 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 11:43:23,757 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 11:43:23,810 INFO app.api.routes ⚙️ Transforming 51 raw events...
+2026-03-07 11:43:24,083 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:25,153 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:26,260 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:27,338 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:28,436 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:29,508 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:30,580 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:31,703 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:32,771 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:33,847 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:34,973 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:36,035 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:37,145 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:38,258 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:39,341 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:40,447 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:41,565 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:42,631 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:43,774 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:44,866 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 11:43:45,940 INFO uvicorn.access 127.0.0.1:55792 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 11:43:46,056 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 11:43:46,058 INFO app.api.routes 🚀 Ingesting 135 delta events into Qdrant...
+2026-03-07 11:43:46,061 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 11:43:46,068 INFO app.services.ingest_service 🌍 Resolving geolocations for 135 events...
+2026-03-07 11:43:49,137 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:43:51,981 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:43:55,019 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:43:57,819 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:44:00,288 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:44:00,426 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:44:00,427 INFO uvicorn.access 127.0.0.1:39848 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 11:44:28,773 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.604164, 45.083259)
+2026-03-07 11:44:28,942 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:44:28,946 INFO uvicorn.access 127.0.0.1:41238 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:44:49,841 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:44:49,845 INFO uvicorn.access 127.0.0.1:33438 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:45:12,366 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:45:12,369 INFO uvicorn.access 127.0.0.1:45350 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:54:13,085 INFO app.api.routes ⚙️ Trasformazione in corso per IT...
+2026-03-07 11:54:13,370 INFO app.api.routes 🔍 Calcolo delta rispetto a sessione precedente...
+2026-03-07 11:54:13,379 INFO app.api.routes 🚀 Ingestione di 1218 eventi delta in Qdrant...
+2026-03-07 11:54:13,383 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 11:54:13,406 INFO app.services.ingest_service 🌍 Resolving geolocations for 1218 events...
+2026-03-07 11:54:14,899 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?street=Via+Peppino+Orlando+0&city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:54:14,933 INFO httpx HTTP Request: GET https://nominatim.openstreetmap.org/search?city=Ostuni+%28Bari%29&format=json&limit=1 "HTTP/1.1 200 OK"
+2026-03-07 11:54:14,935 WARNING app.services.ingest_service ⚠️ Nominatim found nothing for: Via Peppino Orlando 0, Ostuni (Bari). Skip caching to allow retry.
+2026-03-07 11:54:15,884 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:16,363 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:17,078 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:17,784 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:18,346 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:18,990 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:19,763 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:20,405 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:21,076 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:21,650 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:22,253 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:22,986 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:23,632 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:24,193 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:25,063 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:25,795 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:26,358 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:27,129 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:27,639 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:28,495 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:29,127 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:29,747 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:30,271 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:30,851 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:31,417 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:32,229 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:32,958 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:33,446 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:34,015 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:34,996 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:35,957 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:36,442 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:36,977 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:37,607 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:38,699 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:39,574 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:40,308 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:41,162 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:41,835 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:42,484 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:43,358 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:44,016 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:44,535 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:45,038 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:45,568 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:46,172 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:46,924 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:47,323 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:48,188 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 11:54:48,212 INFO uvicorn.access 127.0.0.1:52040 - "POST /ingest-tm-delta?country=IT HTTP/1.1" 200
+2026-03-07 11:55:17,042 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:55:17,043 INFO uvicorn.access 127.0.0.1:54720 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:55:30,338 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:55:30,348 INFO uvicorn.access 127.0.0.1:40362 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:56:27,977 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:56:27,989 INFO uvicorn.access 127.0.0.1:40738 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:56:35,069 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:56:35,089 INFO uvicorn.access 127.0.0.1:57708 - "POST /create_map HTTP/1.1" 200
+2026-03-07 11:57:32,217 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 11:57:32,222 INFO uvicorn.access 127.0.0.1:57730 - "POST /create_map HTTP/1.1" 200
+2026-03-07 15:06:45,204 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 15:06:45,204 INFO uvicorn.error Started server process [6185]
+2026-03-07 15:06:45,205 INFO uvicorn.error Waiting for application startup.
+2026-03-07 15:06:45,205 INFO uvicorn.error Application startup complete.
+2026-03-07 15:11:48,916 INFO uvicorn.error Shutting down
+2026-03-07 15:11:49,017 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 15:11:49,018 INFO uvicorn.error Application shutdown complete.
+2026-03-07 15:11:49,018 INFO uvicorn.error Finished server process [6185]
+2026-03-07 15:12:17,179 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 15:12:17,179 INFO uvicorn.error Started server process [7269]
+2026-03-07 15:12:17,179 INFO uvicorn.error Waiting for application startup.
+2026-03-07 15:12:17,180 INFO uvicorn.error Application startup complete.
+2026-03-07 15:12:17,765 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 15:12:18,702 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 15:12:18,896 INFO app.api.routes ⚙️ Transforming 47 raw events...
+2026-03-07 15:12:19,360 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:20,632 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:22,449 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:23,547 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:24,717 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:25,807 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:26,908 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:28,031 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:29,376 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:30,531 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:31,673 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:32,790 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:33,926 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:35,265 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:36,355 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:37,467 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:38,692 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:39,821 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:41,403 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:42,529 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:12:43,609 INFO uvicorn.access 127.0.0.1:43774 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 15:12:43,714 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 15:12:43,717 INFO app.api.routes 🚀 Ingesting 131 delta events into Qdrant...
+2026-03-07 15:12:43,721 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 15:12:43,726 INFO app.services.ingest_service 🌍 Resolving geolocations for 131 events...
+2026-03-07 15:12:46,740 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:12:49,390 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:12:51,978 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:12:54,660 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:12:57,809 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:12:57,984 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:12:57,997 INFO uvicorn.access 127.0.0.1:56258 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 15:13:44,748 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (11.783580, 45.648794)
+2026-03-07 15:13:44,953 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 15:13:44,957 INFO uvicorn.access 127.0.0.1:42608 - "POST /create_map HTTP/1.1" 200
+2026-03-07 15:14:16,606 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 15:14:16,611 INFO uvicorn.access 127.0.0.1:38132 - "POST /create_map HTTP/1.1" 200
+2026-03-07 15:22:38,316 INFO uvicorn.error Shutting down
+2026-03-07 15:22:38,420 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 15:22:38,421 INFO uvicorn.error Application shutdown complete.
+2026-03-07 15:22:38,421 INFO uvicorn.error Finished server process [7269]
+2026-03-07 15:22:54,864 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 15:22:54,864 INFO uvicorn.error Started server process [10964]
+2026-03-07 15:22:54,864 INFO uvicorn.error Waiting for application startup.
+2026-03-07 15:22:54,864 INFO uvicorn.error Application startup complete.
+2026-03-07 15:23:35,505 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 15:23:36,299 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 15:23:36,337 INFO app.api.routes ⚙️ Transforming 47 raw events...
+2026-03-07 15:23:36,503 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:37,105 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:37,697 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:38,264 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:38,835 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:39,687 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:40,299 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:40,870 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:41,633 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:42,205 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:42,808 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:43,703 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:44,295 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:44,870 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:45,488 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:46,085 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:46,686 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:47,314 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:47,911 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:48,540 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:23:49,125 INFO uvicorn.access 127.0.0.1:37568 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 15:23:49,206 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 15:23:49,208 INFO app.api.routes 🚀 Ingesting 131 delta events into Qdrant...
+2026-03-07 15:23:49,212 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 15:23:49,217 INFO app.services.ingest_service 🌍 Resolving geolocations for 131 events...
+2026-03-07 15:23:52,439 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:23:54,908 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:23:57,528 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:23:59,958 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:24:03,372 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:24:03,475 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:24:03,476 INFO uvicorn.access 127.0.0.1:45182 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 15:31:23,659 INFO uvicorn.error Shutting down
+2026-03-07 15:31:23,760 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 15:31:23,760 INFO uvicorn.error Application shutdown complete.
+2026-03-07 15:31:23,760 INFO uvicorn.error Finished server process [10964]
+2026-03-07 15:31:37,499 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 15:31:37,500 INFO uvicorn.error Started server process [11992]
+2026-03-07 15:31:37,500 INFO uvicorn.error Waiting for application startup.
+2026-03-07 15:31:37,501 INFO uvicorn.error Application startup complete.
+2026-03-07 15:32:12,650 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 15:32:12,841 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 15:32:12,870 INFO app.api.routes ⚙️ Transforming 47 raw events...
+2026-03-07 15:32:13,035 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:13,740 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:14,332 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:14,895 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:15,894 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:16,473 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:17,089 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:17,746 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:18,395 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:19,475 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:20,120 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:21,970 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:22,816 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:23,509 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:24,094 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:24,674 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:25,274 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:25,951 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:26,688 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:28,342 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:32:28,881 INFO uvicorn.access 127.0.0.1:54896 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 15:32:28,974 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 15:32:28,977 INFO app.api.routes 🚀 Ingesting 131 delta events into Qdrant...
+2026-03-07 15:32:28,980 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 15:32:28,988 INFO app.services.ingest_service 🌍 Resolving geolocations for 131 events...
+2026-03-07 15:32:32,635 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:32:35,754 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:32:38,613 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:32:41,065 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:32:43,510 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:32:43,606 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:32:43,608 INFO uvicorn.access 127.0.0.1:50000 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 15:32:50,796 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 15:32:50,801 INFO uvicorn.access 127.0.0.1:57650 - "POST /create_map HTTP/1.1" 200
+2026-03-07 15:34:58,084 INFO uvicorn.error Shutting down
+2026-03-07 15:34:58,186 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 15:34:58,187 INFO uvicorn.error Application shutdown complete.
+2026-03-07 15:34:58,187 INFO uvicorn.error Finished server process [11992]
+2026-03-07 15:35:14,187 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 15:35:14,188 INFO uvicorn.error Started server process [12703]
+2026-03-07 15:35:14,188 INFO uvicorn.error Waiting for application startup.
+2026-03-07 15:35:14,188 INFO uvicorn.error Application startup complete.
+2026-03-07 15:35:42,677 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 15:35:43,830 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 15:35:43,914 INFO app.api.routes ⚙️ Transforming 47 raw events...
+2026-03-07 15:35:44,277 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:44,858 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:45,485 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:46,085 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:46,745 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:47,422 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:47,985 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:48,556 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:49,347 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:49,923 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:50,493 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:51,081 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:51,667 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:52,395 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:53,272 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:54,036 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:54,691 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:55,341 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:55,959 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:56,541 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 15:35:57,149 INFO uvicorn.access 127.0.0.1:49528 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 15:35:57,234 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 15:35:57,236 INFO app.api.routes 🚀 Ingesting 131 delta events into Qdrant...
+2026-03-07 15:35:57,239 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 15:35:57,243 INFO app.services.ingest_service 🌍 Resolving geolocations for 131 events...
+2026-03-07 15:36:00,537 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:36:03,791 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:36:06,397 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:36:09,506 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:36:12,462 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:36:12,558 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 15:36:12,560 INFO uvicorn.access 127.0.0.1:51228 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 15:37:38,879 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 15:37:38,889 INFO uvicorn.access 127.0.0.1:50826 - "POST /create_map HTTP/1.1" 200
+2026-03-07 15:38:32,972 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 15:38:32,976 INFO uvicorn.access 127.0.0.1:39712 - "POST /create_map HTTP/1.1" 200
+2026-03-07 15:39:04,954 INFO uvicorn.error Shutting down
+2026-03-07 15:39:05,056 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 15:39:05,057 INFO uvicorn.error Application shutdown complete.
+2026-03-07 15:39:05,058 INFO uvicorn.error Finished server process [12703]
+2026-03-07 18:43:52,395 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 18:43:52,396 INFO uvicorn.error Started server process [9729]
+2026-03-07 18:43:52,396 INFO uvicorn.error Waiting for application startup.
+2026-03-07 18:43:52,397 INFO uvicorn.error Application startup complete.
+2026-03-07 18:43:59,547 INFO app.services.openroute_service ✅ GEO CACHED (Photon): (12.231610, 45.973522)
+2026-03-07 18:43:59,744 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:43:59,748 INFO uvicorn.access 127.0.0.1:34310 - "POST /create_map HTTP/1.1" 200
+2026-03-07 18:53:34,533 INFO uvicorn.error Shutting down
+2026-03-07 18:53:34,634 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 18:53:34,636 INFO uvicorn.error Application shutdown complete.
+2026-03-07 18:53:34,637 INFO uvicorn.error Finished server process [9729]
+2026-03-07 18:53:50,815 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 18:53:50,816 INFO uvicorn.error Started server process [10787]
+2026-03-07 18:53:50,816 INFO uvicorn.error Waiting for application startup.
+2026-03-07 18:53:50,816 INFO uvicorn.error Application startup complete.
+2026-03-07 18:54:32,642 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 18:54:33,030 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 18:54:33,081 INFO app.api.routes ⚙️ Transforming 48 raw events...
+2026-03-07 18:54:33,418 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:33,994 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:34,581 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:35,155 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:35,749 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:36,334 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:36,961 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:37,938 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:38,530 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:39,152 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:39,729 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:40,329 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:40,906 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:41,517 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:42,100 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:42,684 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:43,264 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:43,840 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:44,451 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:45,053 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 18:54:45,672 INFO uvicorn.access 127.0.0.1:60962 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 18:54:45,768 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 18:54:45,770 INFO app.api.routes 🚀 Ingesting 132 delta events into Qdrant...
+2026-03-07 18:54:45,773 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 18:54:45,778 INFO app.services.ingest_service 🌍 Resolving geolocations for 132 events...
+2026-03-07 18:54:48,897 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 18:54:51,707 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 18:54:54,719 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 18:54:57,905 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 18:55:00,626 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 18:55:00,735 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 18:55:00,737 INFO uvicorn.access 127.0.0.1:52908 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 18:55:12,602 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:55:12,610 INFO uvicorn.access 127.0.0.1:42368 - "POST /create_map HTTP/1.1" 200
+2026-03-07 18:55:36,539 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:55:36,545 INFO uvicorn.access 127.0.0.1:60674 - "POST /create_map HTTP/1.1" 200
+2026-03-07 18:56:07,791 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:56:07,797 INFO uvicorn.access 127.0.0.1:37136 - "POST /create_map HTTP/1.1" 200
+2026-03-07 18:56:39,919 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:56:39,923 INFO uvicorn.access 127.0.0.1:36914 - "POST /create_map HTTP/1.1" 200
+2026-03-07 18:57:27,984 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:57:27,987 INFO uvicorn.access 127.0.0.1:55760 - "POST /create_map HTTP/1.1" 200
+2026-03-07 18:57:39,316 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:57:39,318 INFO uvicorn.access 127.0.0.1:47378 - "POST /create_map HTTP/1.1" 200
+2026-03-07 18:57:48,887 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 18:57:48,891 INFO uvicorn.access 127.0.0.1:50516 - "POST /create_map HTTP/1.1" 200
+2026-03-07 19:09:51,891 INFO uvicorn.error Shutting down
+2026-03-07 19:09:51,992 INFO uvicorn.error Waiting for application shutdown.
+2026-03-07 19:09:51,993 INFO uvicorn.error Application shutdown complete.
+2026-03-07 19:09:51,994 INFO uvicorn.error Finished server process [10787]
+2026-03-07 19:10:06,887 INFO root 🚀 Logs → /home/biso/development/my_projects/remap/backend/logs/app.log
+2026-03-07 19:10:06,887 INFO uvicorn.error Started server process [12457]
+2026-03-07 19:10:06,887 INFO uvicorn.error Waiting for application startup.
+2026-03-07 19:10:06,887 INFO uvicorn.error Application startup complete.
+2026-03-07 19:10:28,673 INFO app.api.routes 📡 Fetching UNPLI page 1 (size 500)...
+2026-03-07 19:10:28,979 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events?filterId=&fields=id%2Cname%2CdbCode%2Cowner%2CisTopEvent%2CvisibilityLevel%2Cdate%2ChasMoreDates%2ConlineBookable%2Clocation%7Bplace%2Ctown%2Cregions%2Ccountry%2Ccoordinate%7Bname%2Clong%2Clat%7D%7D%2CplainDescriptions%28len%3A50%29%7Bdescription%2Ctype%7D%2Cdescriptions%28types%3A%5B32%2C33%5D%29%7Bdescription%2Ctype%7D%2CdateStartTimes%2CmainCriteria%7Bid%2Cname%2Cvalue%7D%2Ccriteria%7BgroupId%2CgroupName%2Citems%7Bid%2Cname%2Cvalue%7D%7D%2CeventGroups%7Bid%2Cname%7D%2CholidayThemes%7Bid%2Cname%2Corder%7D%2Cimages%28count%3A1%2Csizes%3A%5B54%5D%29%7Bid%2Cname%2Cextension%2Ccopyright%2Cauthor%2Clicense%2Curls%2CresolutionX%2CresolutionY%2Cdescription%7D%2CurlFriendlyName%2CstartTimeDurations%7Btime%2CweekDays%2Cduration%2C%7D%2CguestCards%7Bid%2Cname%2Ctype%2ChasIcon%2CiconUrl%2CwebLink%7D&sortingFields=date%2C-topEvent%2Ctime&pageNo=1&pageSize=500&hashF=0 "HTTP/1.1 200 OK"
+2026-03-07 19:10:29,021 INFO app.api.routes ⚙️ Transforming 48 raw events...
+2026-03-07 19:10:29,232 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5a62880e-2a52-4538-97e2-63fcaebb9085?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:29,805 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/8fcfef86-a9f9-4a66-a1e0-4c8a312142ad?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:30,422 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ac8bbf0f-79ca-4d67-822e-03475c08983f?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:31,014 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/02326fef-df88-4d54-9c84-43424d4a0331?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:31,589 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/ef99afca-ab70-47f2-888b-88df6f457a05?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:32,154 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/06abceb7-1099-4348-97fe-2476497a70a8?fields=nextOccurrences%28fromDate%3A%222026-03-07%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:32,722 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1218e4d5-1097-4e84-aaff-ad1bfa1db92c?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:33,780 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/cfcb4468-9ea5-4cff-9063-a8388c70164d?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:34,363 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/b918c901-8fdb-4478-952f-f516a7f80509?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:34,948 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/0a2b9ee8-ba81-4b93-b5f2-e7845efd810e?fields=nextOccurrences%28fromDate%3A%222026-03-08%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:35,546 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5f227151-4643-41a9-b729-59c55dd64f01?fields=nextOccurrences%28fromDate%3A%222026-03-13%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:36,123 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/5aa5110a-990b-47ba-b371-d650231d44f3?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:36,686 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/a39152cf-9d9d-411f-9ae3-5a45a096532d?fields=nextOccurrences%28fromDate%3A%222026-03-14%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:37,315 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/1f6edc9a-8441-4988-913f-8f4adf0248c3?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:37,904 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/93799157-63c8-4158-bc4c-18135d0beb04?fields=nextOccurrences%28fromDate%3A%222026-03-15%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:38,478 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/9768d76c-d946-4e38-a3de-749893469033?fields=nextOccurrences%28fromDate%3A%222026-03-18%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:39,048 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2e784097-a810-40a2-bab5-012f6287bf9a?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:39,627 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/2232a5cb-68ce-421e-b913-b2b9dbd14315?fields=nextOccurrences%28fromDate%3A%222026-03-22%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:40,244 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4d539a49-eb11-4517-9c5f-f5f23039bfa0?fields=nextOccurrences%28fromDate%3A%222026-03-29%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:40,852 INFO httpx HTTP Request: GET https://webapi.deskline.net/unpliveneto/it/events/TRN/4a23dfd5-7767-43cd-b2ca-8bb87d3ac820?fields=nextOccurrences%28fromDate%3A%222026-07-10%22%2Ccount%3A100%29%7Bitems%7Bdate%2CdayOfWeek%2CstartTime%2Cduration%7D%2ChasMoreItems%7D "HTTP/1.1 200 OK"
+2026-03-07 19:10:41,470 INFO uvicorn.access 127.0.0.1:52328 - "GET /scrape_unpli_events?page_no=1&page_size=500 HTTP/1.1" 200
+2026-03-07 19:10:41,583 INFO app.api.routes 🔍 Computing JSON Delta...
+2026-03-07 19:10:41,585 INFO app.api.routes 🚀 Ingesting 132 delta events into Qdrant...
+2026-03-07 19:10:41,590 INFO httpx HTTP Request: GET http://localhost:6333/collections/veneto_unpliveneto_events/exists "HTTP/1.1 200 OK"
+2026-03-07 19:10:41,599 INFO app.services.ingest_service 🌍 Resolving geolocations for 132 events...
+2026-03-07 19:10:45,122 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 19:10:48,114 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 19:10:50,817 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 19:10:53,651 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 19:10:56,567 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 19:10:56,713 INFO httpx HTTP Request: PUT http://localhost:6333/collections/veneto_unpliveneto_events/points?wait=true "HTTP/1.1 200 OK"
+2026-03-07 19:10:56,715 INFO uvicorn.access 127.0.0.1:38296 - "POST /ingest-unpli-delta HTTP/1.1" 200
+2026-03-07 19:11:24,925 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 19:11:24,930 INFO uvicorn.access 127.0.0.1:59452 - "POST /create_map HTTP/1.1" 200
+2026-03-07 19:11:48,259 INFO httpx HTTP Request: POST http://localhost:6333/collections/veneto_unpliveneto_events/points/query "HTTP/1.1 200 OK"
+2026-03-07 19:11:48,264 INFO uvicorn.access 127.0.0.1:48716 - "POST /create_map HTTP/1.1" 200

@@ -34,7 +34,8 @@ import json
 import shutil
 import httpx
 import logging
-from app.services import tm_service 
+from app.services import tm_service
+from app.services import lombardia_service
 
 # Logging Setup
 logger = logging.getLogger(__name__)
@@ -209,6 +210,53 @@ async def ingest_tm_delta(country: str = Query("IT")):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# --- Lombardia Region ---
+@router.post("/ingest-lombardia-delta")
+async def ingest_lombardia_delta(initialize: bool = Query(False)):
+    """
+    Pipeline automatizzata per Regione Lombardia.
+    - Se initialize=True: forza una ricarica completa.
+    - Altrimenti: calcola il delta tra lo stato attuale dell'API e l'ultima ingestion.
+    """
+    try:
+        current_std = DATASET_DIR / "lombardia_std_current.json"
+        last_std = DATASET_DIR / "lombardia_std_last.json"
+
+        if initialize and last_std.exists():
+            logger.info("⚠️ Modalità Inizializzazione: eliminazione file storico.")
+            last_std.unlink()
+
+        # 1. FETCH & TRANSFORM
+        raw_data = await lombardia_service.fetch_lombardia_raw()
+        standardized_events = lombardia_service.transform_lombardia_data(raw_data)
+        
+        with open(current_std, "w", encoding="utf-8") as f:
+            json.dump({"events": standardized_events}, f, indent=2, ensure_ascii=False)
+
+        # 2. CALCOLO DELTA
+        delta_events = compute_json_delta(last_std, current_std)
+
+        if not delta_events:
+            return {"status": "skipped", "message": "Nessun cambiamento rilevato per Lombardia."}
+
+        # 3. INGESTIONE IN QDRANT
+        logger.info(f"🚀 Ingestione di {len(delta_events)} eventi delta in Qdrant...")
+        result = await ingest_events_into_qdrant(delta_events)
+        
+        # 4. ROTAZIONE FILE
+        if current_std.exists():
+            import shutil
+            shutil.copy(str(current_std), str(last_std))
+
+        return {
+            "status": "success",
+            "mode": "initialize" if initialize else "delta",
+            "delta_applied": len(delta_events),
+            **result
+        }
+    except Exception as e:
+        logger.error(f"❌ Errore Pipeline Lombardia: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 # --- TICKET SQUEEZE DELTA PIPELINE ---
 
 @router.post("/compute-delta")
