@@ -29,22 +29,21 @@ def transform_tm_event(tm_event: Dict[str, Any]) -> Dict[str, Any]:
     affiliate_url = original_url
     
     if original_url:
-        # Se l'ID membro (IMPACT_MEMBER_ID dal .env) non è già presente nell'URL, 
-        # applichiamo il wrapper di affiliazione.
         if IMPACT_MEMBER_ID and IMPACT_MEMBER_ID not in original_url:
             encoded_url = urllib.parse.quote(original_url, safe='')
             affiliate_url = f"{IMPACT_BASE_URL}{encoded_url}"
         else:
-            # Se l'ID è già presente o la configurazione manca, usiamo l'URL così com'è
             affiliate_url = original_url
 
-    # --- 3. ESTRAZIONE DATE ---
+    # --- 3. ESTRAZIONE DATE & TIME ---
     start_dt = tm_event.get("eventStartDateTime")
     end_dt = tm_event.get("eventEndDateTime") or start_dt
-    # Nuova estrazione per l'orario locale
+    
+    # Estrazione campi specifici Ticketmaster
     start_localtime = tm_event.get("eventStartLocalTime")
+    start_localdate = tm_event.get("eventStartLocalDate")
 
-    # --- 4. MAPPATURA SCHEMA RE-MAP ---
+    # --- 4. MAPPATURA SCHEMA RE-MAP (CON ORDINE RICHIESTO) ---
     return {
         "id": prefixed_id, 
         "title": tm_event.get("eventName", "Evento Ticketmaster"),
@@ -59,6 +58,7 @@ def transform_tm_event(tm_event: Dict[str, Any]) -> Dict[str, Any]:
         },
         "start_date": start_dt,
         "start_localtime": start_localtime,
+        "start_localdate": start_localdate,  # <--- AGGIUNTO QUI NELLA POSIZIONE CORRETTA
         "end_date": end_dt,
         "url": affiliate_url,
         "credits": "Ticketmaster",
@@ -78,7 +78,6 @@ def load_and_transform_tm_file(file_path: Path) -> List[Dict[str, Any]]:
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
             
-            # Gestione formati lista o dict con chiave 'events'
             if isinstance(data, list):
                 events_list = data
             elif isinstance(data, dict) and "events" in data:
