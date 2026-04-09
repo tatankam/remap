@@ -64,17 +64,17 @@ fi
 # —————————————————————————————————————————————————————————————————————
 # 4. Fetch Raw Data from Feratel
 # —————————————————————————————————————————————————————————————————————
-# echo "📥 Downloading Events..." | tee -a "$LOG_FILE"
-# curl -s -X POST -H "Content-Type: text/xml; charset=utf-8" \
-#      -H 'SOAPAction: "http://tempuri.org/GetData"' \
-#      --data-binary @"${ACTIVE_REQUEST}" \
-#      'http://interface.deskline.net/DSI/BasicData.asmx' > "${RAW_EVENTS}"
+echo "📥 Downloading Events..." | tee -a "$LOG_FILE"
+curl -s -X POST -H "Content-Type: text/xml; charset=utf-8" \
+     -H 'SOAPAction: "http://tempuri.org/GetData"' \
+     --data-binary @"${ACTIVE_REQUEST}" \
+     'http://interface.deskline.net/DSI/BasicData.asmx' > "${RAW_EVENTS}"
 
-# echo "📥 Downloading KeyValues..." | tee -a "$LOG_FILE"
-# curl -s -X POST -H "Content-Type: text/xml; charset=utf-8" \
-#      -H "SOAPAction: http://tempuri.org/GetKeyValues" \
-#      --data-binary @"${REQ_KEYVALUES}" \
-#      'http://interface.deskline.net/DSI/KeyValue.asmx' > "${RAW_KEYVALUES}"
+echo "📥 Downloading KeyValues..." | tee -a "$LOG_FILE"
+curl -s -X POST -H "Content-Type: text/xml; charset=utf-8" \
+     -H "SOAPAction: http://tempuri.org/GetKeyValues" \
+     --data-binary @"${REQ_KEYVALUES}" \
+     'http://interface.deskline.net/DSI/KeyValue.asmx' > "${RAW_KEYVALUES}"
 
 # —————————————————————————————————————————————————————————————————————
 # 5. Trigger Backend Processing
