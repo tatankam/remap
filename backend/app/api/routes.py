@@ -36,6 +36,7 @@ import httpx
 import logging
 from app.services import tm_service
 from app.services import lombardia_service
+from app.services import feratel_service  
 
 # Logging Setup
 logger = logging.getLogger(__name__)
@@ -207,6 +208,63 @@ async def ingest_tm_delta(country: str = Query("IT")):
 
     except Exception as e:
         logger.error(f"❌ Errore pipeline TM: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# --- ADD TO IMPORTS ---
+from app.services import feratel_service  # <--- New service
+
+# --- Feratel Ingestion Endpoint ---
+@router.post("/ingest-feratel")
+async def ingest_feratel():
+    """
+    Automated pipeline for Feratel DSI.
+    Uses static raw files, computes delta, and updates Qdrant.
+    """
+    try:
+        # Static file paths
+        raw_events = DATASET_DIR / "feratel_raw_events.xml"
+        raw_keyvalues = DATASET_DIR / "feratel_raw_keyvalues.xml"
+        
+        current_std = DATASET_DIR / "feratel_std_current.json"
+        last_std = DATASET_DIR / "feratel_std_last.json"
+
+        if not raw_events.exists() or not raw_keyvalues.exists():
+            raise HTTPException(
+                status_code=404, 
+                detail="Raw Feratel files not found. Run ingestferat.sh first."
+            )
+
+        # 1. PARSE & STANDARDIZE
+        logger.info("⚙️ Transforming raw Feratel XML to JSON...")
+        standardized_events = feratel_service.parse_feratel_data(raw_events, raw_keyvalues)
+        
+        with open(current_std, "w", encoding="utf-8") as f:
+            json.dump({"events": standardized_events}, f, indent=2, ensure_ascii=False)
+
+        # 2. DELTA CALCULATION (Comparing Current vs Last)
+        logger.info("🔍 Checking for updates (Delta)...")
+        delta_events = compute_json_delta(last_std, current_std)
+
+        if not delta_events:
+            return {"status": "skipped", "message": "Data is identical to previous run. No action taken."}
+
+        # 3. INGESTION
+        logger.info(f"🚀 Syncing {len(delta_events)} changes to Qdrant...")
+        result = await ingest_events_into_qdrant(delta_events)
+        
+        # 4. ROTATION (Current becomes Last for next time)
+        if current_std.exists():
+            shutil.copy(str(current_std), str(last_std))
+
+        return {
+            "status": "success",
+            "total_in_source": len(standardized_events),
+            "changes_detected": len(delta_events),
+            **result
+        }
+
+    except Exception as e:
+        logger.error(f"❌ Feratel Pipeline Failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
