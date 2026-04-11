@@ -8,38 +8,40 @@ from typing import List, Dict, Any
 
 logger = logging.getLogger(__name__)
 
-# Constants to match your standalone script logic
-DSI_NS = {"dsi": "http://interface.deskline.net/DSI/XSD"}
-NO_NS = {}
-
 def unescape_soap(raw: str) -> str:
-    """Robust SOAP unescaping from your script logic."""
-    start_tag = "<GetDataResult>"
-    end_tag = "</GetDataResult>"
-    start = raw.find(start_tag) + len(start_tag)
-    end = raw.find(end_tag, start)
-    if start == -1 or end == -1:
-        return ""
-    content = raw[start:end].strip()
+    """Estrae il contenuto XML pulito da qualsiasi wrapper SOAP Feratel."""
+    # Cerca il contenuto tra i tag Result, qualunque sia il nome (GetData o GetKeyValues)
+    match = re.search(r"<(?:Get\w+Result)>(.*?)</(?:Get\w+Result)>", raw, re.DOTALL)
+    if not match:
+        return raw # Se non c'è wrapper, restituisci l'originale
+    
+    content = match.group(1).strip()
     return (content.replace("&lt;", "<")
                .replace("&gt;", ">")
                .replace("&quot;", '"')
                .replace("&amp;", "&"))
 
-def safe_find(elem: ET.Element, path: str) -> ET.Element:
-    """Namespace-agnostic find helper."""
-    res = elem.find(path, DSI_NS)
-    if res is not None:
-        return res
-    return elem.find(path.replace("dsi:", ""), NO_NS)
+def find_agnostic(element: ET.Element, tag_name: str):
+    """Trova il PRIMO tag ignorando il namespace."""
+    for elem in element.iter():
+        if elem.tag.split('}')[-1] == tag_name:
+            return elem
+    return None
 
-def first_text_safe(elem: ET.Element, path: str) -> str:
-    """Safe text extraction from your script logic."""
-    res = safe_find(elem, path)
-    return res.text.strip() if res is not None and res.text else ""
+def find_all_agnostic(element: ET.Element, tag_name: str):
+    """Trova TUTTI i tag ignorando il namespace."""
+    results = []
+    for elem in element.iter():
+        if elem.tag.split('}')[-1] == tag_name:
+            results.append(elem)
+    return results
+
+def get_text_agnostic(element: ET.Element, tag_name: str) -> str:
+    """Estrae il testo di un tag ignorando il namespace."""
+    found = find_agnostic(element, tag_name)
+    return found.text.strip() if found is not None and found.text else ""
 
 def parse_date_time(date_str: str, time_str: str = "") -> str:
-    """ISO format generator."""
     try:
         dt = datetime.strptime(date_str, "%Y-%m-%d")
         if time_str:
@@ -50,113 +52,176 @@ def parse_date_time(date_str: str, time_str: str = "") -> str:
         return f"{date_str}T00:00:00"
 
 def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str, Any]]:
-    """Main transformation service integrating feratel_to_events.py logic."""
+    """Trasforma i dati Feratel con mapping ultra-robusto per città e categorie."""
     
-    # 1. Load Facilities/Categories
     facility_map = {}
-    try:
-        kv_tree = ET.parse(keyvalues_path)
-        kv_root = kv_tree.getroot()
-        for fac in kv_root.findall(".//Facility", NO_NS):
-            fac_id = fac.get("Id")
-            name_elem = fac.find("Name", NO_NS)
-            if fac_id and name_elem is not None:
-                it_trans = name_elem.find("Translation[@Language='it']", NO_NS)
-                facility_map[fac_id] = it_trans.text.strip() if it_trans is not None and it_trans.text else "Evento"
-    except Exception as e:
-        logger.warning(f"⚠️ Error loading facilities: {e}")
+    town_map = {}
 
-    # 2. Process Events
+    # 1. CARICAMENTO MAPPINGS (MOLTO PIÙ AGGRESSIVO)
+    try:
+        kv_raw = keyvalues_path.read_text(encoding="utf-8")
+        kv_content = unescape_soap(kv_raw)
+        if kv_content:
+            kv_root = ET.fromstring(kv_content)
+            
+            # Mappatura Categorie (Facility)
+            for fac in find_all_agnostic(kv_root, "Facility"):
+                fac_id = fac.get("Id")
+                if not fac_id: continue
+                
+                # Cerca la traduzione italiana
+                for trans in find_all_agnostic(fac, "Translation"):
+                    if trans.get("Language") == "it" and trans.text:
+                        facility_map[fac_id] = trans.text.strip()
+                        break
+            
+            # Mappatura Città (Location)
+            for loc in find_all_agnostic(kv_root, "Location"):
+                loc_id = loc.get("Id")
+                if not loc_id: continue
+                
+                for trans in find_all_agnostic(loc, "Translation"):
+                    if trans.get("Language") == "it" and trans.text:
+                        town_map[loc_id] = trans.text.strip()
+                        break
+        
+        logger.info(f"Mappature: {len(facility_map)} categorie, {len(town_map)} città caricate.")
+    except Exception as e:
+        logger.error(f"❌ Errore critico caricamento KeyValues: {e}")
+
+    # 2. PROCESSO EVENTI
     try:
         raw = events_path.read_text(encoding="utf-8")
         xml_content = unescape_soap(raw)
-        if not xml_content:
-            return []
+        if not xml_content: return []
         root = ET.fromstring(xml_content)
     except Exception as e:
-        logger.error(f"❌ XML Parse Error: {e}")
+        logger.error(f"❌ Errore parsing eventi: {e}")
         return []
 
     events_list = []
-    event_elems = root.findall(".//dsi:Event", DSI_NS) or root.findall(".//Event", NO_NS)
-
-    for event in event_elems:
+    for event in find_all_agnostic(root, "Event"):
         try:
             event_id = event.get("Id", "")
-            details = safe_find(event, "dsi:Details")
+            details = find_agnostic(event, "Details")
             if details is None: continue
 
-            # Title & Description
-            title = first_text_safe(event, "dsi:Details/dsi:Names/dsi:Translation[@Language='it']") or \
-                    first_text_safe(event, "dsi:Details/dsi:Names/dsi:Translation") or "Senza Titolo"
-            
-            description = first_text_safe(event, "dsi:Descriptions/dsi:Description[@Type='EventHeader']") or \
-                          first_text_safe(event, "dsi:Descriptions/dsi:Description[@Type='EventHeaderShort']")
+            # Titolo
+            names = find_agnostic(details, "Names")
+            title = "Senza Titolo"
+            if names is not None:
+                for trans in find_all_agnostic(names, "Translation"):
+                    if trans.get("Language") == "it" and trans.text:
+                        title = trans.text.strip()
+                        break
 
-            # Location & Coordinates
+            # Descrizione
+            description = ""
+            descriptions_node = find_agnostic(event, "Descriptions")
+            if descriptions_node is not None:
+                for desc in find_all_agnostic(descriptions_node, "Description"):
+                    if desc.get("Type") == "EventHeader" and desc.text:
+                        description = desc.text.strip()
+                        break
+
+            # Coordinate
             lat, lon = 0.0, 0.0
-            pos = safe_find(details, "dsi:Position")
+            pos = find_agnostic(details, "Position")
             if pos is not None:
-                lat, lon = float(pos.get("Latitude", 0)), float(pos.get("Longitude", 0))
+                try:
+                    lat, lon = float(pos.get("Latitude", 0)), float(pos.get("Longitude", 0))
+                except: pass
 
-            city, venue, street = "", "Sede", ""
-            addresses = event.findall("dsi:Addresses/dsi:Address", DSI_NS)
-            for addr in addresses:
-                if addr.get("Type") == "Venue":
-                    city = first_text_safe(addr, "dsi:Town")
-                    venue = first_text_safe(addr, "dsi:Company") or "Sede"
-                    street = first_text_safe(addr, "dsi:AddressLine1")
-                    break
+            # --- CITTÀ (Mapping Towns) ---
+            towns_node = find_agnostic(details, "Towns")
+            city = ""
+            if towns_node is not None:
+                item = find_agnostic(towns_node, "Item")
+                if item is not None:
+                    city = town_map.get(item.get("Id"), "")
 
-            # Image & URL extraction
+            # --- CATEGORIE (Loop Facility) ---
+            found_categories = []
+            facilities_node = find_agnostic(event, "Facilities")
+            if facilities_node is not None:
+                for f_node in find_all_agnostic(facilities_node, "Facility"):
+                    f_id = f_node.get("Id")
+                    if f_id in facility_map:
+                        found_categories.append(facility_map[f_id])
+            
+            category = ", ".join(dict.fromkeys(found_categories)) if found_categories else "Manifestazione"
+
+            # --- VENUE E INDIRIZZO ---
+            venue_from_location = ""
+            loc_tag = find_agnostic(details, "Location")
+            if loc_tag is not None:
+                for trans in find_all_agnostic(loc_tag, "Translation"):
+                    if trans.get("Language") == "it" and trans.text:
+                        venue_from_location = trans.text.strip()
+                        break
+
+            addr_venue, street, addr_city_fallback = "", "", ""
+            addresses_node = find_agnostic(event, "Addresses")
+            if addresses_node is not None:
+                for addr in find_all_agnostic(addresses_node, "Address"):
+                    if addr.get("Type") == "Venue":
+                        addr_city_fallback = get_text_agnostic(addr, "Town")
+                        addr_venue = get_text_agnostic(addr, "Company")
+                        street = get_text_agnostic(addr, "AddressLine1")
+                        break
+
+            if not city: city = addr_city_fallback
+            venue = venue_from_location or addr_venue or "Sede"
+
+            # Immagine
             image_url = ""
-            docs_node = safe_find(event, "dsi:Documents")
+            docs_node = find_agnostic(event, "Documents")
             if docs_node is not None:
-                for doc in docs_node.findall("dsi:Document", DSI_NS):
+                for doc in find_all_agnostic(docs_node, "Document"):
                     if doc.get("Class") == "Image" and doc.get("Type") == "EventHeader":
-                        u_node = safe_find(doc, "dsi:URL")
-                        if u_node is not None and u_node.text:
-                            image_url = u_node.text.strip("[]<>/ ")
-                            break
+                        image_url = get_text_agnostic(doc, "URL").strip("[]<>/ ")
+                        break
 
+            # URL
             url = ""
-            for addr in addresses:
-                u_node = safe_find(addr, "dsi:URL")
-                if u_node is not None and u_node.text:
-                    url = u_node.text.strip("[]<> ")
-                    if url: break
+            if addresses_node is not None:
+                for addr in find_all_agnostic(addresses_node, "Address"):
+                    u = get_text_agnostic(addr, "URL").strip("[]<> ")
+                    if u: 
+                        url = u
+                        break
 
-            # Category
-            fac_node = safe_find(event, "dsi:Facilities/dsi:Facility")
-            cat_id = fac_node.get("Id") if fac_node is not None else ""
-            category = facility_map.get(cat_id, "Manifestazione")
+            # Date
+            dates_node = find_agnostic(details, "Date") # Alcuni XML hanno Date diretto sotto Details
+            if dates_node is None:
+                dates_parent = find_agnostic(details, "Dates")
+                all_dates = find_all_agnostic(dates_parent, "Date") if dates_parent is not None else []
+            else:
+                all_dates = [dates_node]
 
-            # Dates Processing
-            dates_node = safe_find(details, "dsi:Dates")
-            if dates_node is not None:
-                for d_node in dates_node.findall("dsi:Date", DSI_NS):
-                    start_date = d_node.get("From", "")
-                    start_time = d_node.get("Time", "00:00")
-                    if start_date:
-                        events_list.append({
-                            "id": f"FRT_{event_id}_{start_date}_{start_time.replace(':', '')}",
-                            "title": title,
-                            "category": category,
-                            "description": description,
-                            "city": city,
-                            "location": {
-                                "venue": venue,
-                                "address": f"{street}, {city}".strip(", "),
-                                "lat": lat,
-                                "lon": lon
-                            },
-                            "start_date": parse_date_time(start_date, start_time),
-                            "start_localtime": start_time[:5],
-                            "end_date": parse_date_time(start_date, "23:59:59"),
-                            "url": url,
-                            "image_url": image_url,
-                            "credits": "Dms Veneto, il Destination Management System di Regione Veneto"
-                        })
+            for d_node in all_dates:
+                start_date = d_node.get("From", "")
+                start_time = d_node.get("Time", "00:00")
+                if start_date:
+                    events_list.append({
+                        "id": f"FRT_{event_id}_{start_date}_{start_time.replace(':', '')}",
+                        "title": title,
+                        "category": category,
+                        "description": description,
+                        "city": city,
+                        "location": {
+                            "venue": venue,
+                            "address": f"{street}, {city}".strip(", "),
+                            "lat": lat,
+                            "lon": lon
+                        },
+                        "start_date": parse_date_time(start_date, start_time),
+                        "start_localtime": start_time[:5],
+                        "end_date": parse_date_time(start_date, "23:59:59"),
+                        "url": url,
+                        "image_url": image_url,
+                        "credits": "Dms Veneto, il Destination Management System di Regione Veneto"
+                    })
         except Exception as e:
             logger.warning(f"Skipping event: {e}")
             continue
