@@ -37,6 +37,10 @@ echo "[$(date)] 📡 Starting Ticketmaster CA..." >> "$LOG_FILE"
 echo "[$(date)] 📡 Starting Ticketmaster US..." >> "$LOG_FILE"
 ./ingestticketmaster.sh US >> "$LOG_FILE" 2>&1
 
+# 6. Feratel
+echo "[$(date)] 📡 Starting Feratel..." >> "$LOG_FILE"
+./ingestferat.sh >> "$LOG_FILE" 2>&1
+
 echo "--------------------------------------------------" >> "$LOG_FILE"
 echo "[$(date)] ✅ GLOBAL INGESTION SEQUENCE COMPLETE" >> "$LOG_FILE"
 echo "--------------------------------------------------" >> "$LOG_FILE"
