@@ -60,6 +60,49 @@ dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME, threads=1)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME, threads=1)
 
 # ---------- ENDPOINTS ----------
+# --- THIS IS TO OBTAIN THE SINGLE EVENT ----
+# --- Add this to the bottom of routes.py ---
+
+@router.get("/event/{event_id}")
+async def get_event(event_id: str):
+    """
+    Fetches a single event by its custom ID from the Qdrant payload.
+    Used for deep-linking ('Viral Loop').
+    """
+    client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
+    
+    # We use scroll with a filter because the 'event_id' is stored 
+    # inside the payload 'id' field, not as the Qdrant internal point ID.
+    result, _ = client.scroll(
+        collection_name=COLLECTION_NAME,
+        scroll_filter=models.Filter(
+            must=[
+                models.FieldCondition(
+                    key="id", 
+                    match=models.MatchValue(value=event_id)
+                )
+            ]
+        ),
+        limit=1,
+        with_payload=True
+    )
+
+    if not result:
+        logger.warning(f"🔍 Event not found in Qdrant: {event_id}")
+        raise HTTPException(status_code=404, detail="Event not found")
+
+    event = result[0].payload
+    
+    # Standardize the lat/lon format to match what the Flutter app 
+    # expects (consistent with your /create_map logic)
+    loc = event.get('location', {})
+    event['lat'] = loc.get('lat')
+    event['lon'] = loc.get('lon')
+    event['address'] = loc.get('address')
+    
+    return event
+
+
 
 @router.get("/collection_info")
 async def get_collection_info():
