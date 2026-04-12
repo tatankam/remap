@@ -42,6 +42,7 @@ def get_text_agnostic(element: ET.Element, tag_name: str) -> str:
     return found.text.strip() if found is not None and found.text else ""
 
 def parse_date_time(date_str: str, time_str: str = "") -> str:
+    """Genera un timestamp ISO 8601."""
     try:
         dt = datetime.strptime(date_str, "%Y-%m-%d")
         if time_str:
@@ -52,12 +53,12 @@ def parse_date_time(date_str: str, time_str: str = "") -> str:
         return f"{date_str}T00:00:00"
 
 def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str, Any]]:
-    """Trasforma i dati Feratel con mapping ultra-robusto per città e categorie."""
+    """Trasforma i dati Feratel con ID semplificato e mapping per città e categorie."""
     
     facility_map = {}
     town_map = {}
 
-    # 1. CARICAMENTO MAPPINGS (MOLTO PIÙ AGGRESSIVO)
+    # 1. CARICAMENTO MAPPINGS
     try:
         kv_raw = keyvalues_path.read_text(encoding="utf-8")
         kv_content = unescape_soap(kv_raw)
@@ -69,7 +70,6 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                 fac_id = fac.get("Id")
                 if not fac_id: continue
                 
-                # Cerca la traduzione italiana
                 for trans in find_all_agnostic(fac, "Translation"):
                     if trans.get("Language") == "it" and trans.text:
                         facility_map[fac_id] = trans.text.strip()
@@ -85,9 +85,9 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                         town_map[loc_id] = trans.text.strip()
                         break
         
-        logger.info(f"Mappature: {len(facility_map)} categorie, {len(town_map)} città caricate.")
+        logger.info(f"Mappature caricate: {len(facility_map)} categorie, {len(town_map)} città.")
     except Exception as e:
-        logger.error(f"❌ Errore critico caricamento KeyValues: {e}")
+        logger.error(f"❌ Errore caricamento KeyValues: {e}")
 
     # 2. PROCESSO EVENTI
     try:
@@ -107,8 +107,8 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
             if details is None: continue
 
             # Titolo
-            names = find_agnostic(details, "Names")
             title = "Senza Titolo"
+            names = find_agnostic(details, "Names")
             if names is not None:
                 for trans in find_all_agnostic(names, "Translation"):
                     if trans.get("Language") == "it" and trans.text:
@@ -132,7 +132,7 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                     lat, lon = float(pos.get("Latitude", 0)), float(pos.get("Longitude", 0))
                 except: pass
 
-            # --- CITTÀ (Mapping Towns) ---
+            # --- CITTÀ ---
             towns_node = find_agnostic(details, "Towns")
             city = ""
             if towns_node is not None:
@@ -140,7 +140,7 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                 if item is not None:
                     city = town_map.get(item.get("Id"), "")
 
-            # --- CATEGORIE (Loop Facility) ---
+            # --- CATEGORIE ---
             found_categories = []
             facilities_node = find_agnostic(event, "Facilities")
             if facilities_node is not None:
@@ -192,19 +192,20 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                         break
 
             # Date
-            dates_node = find_agnostic(details, "Date") # Alcuni XML hanno Date diretto sotto Details
-            if dates_node is None:
-                dates_parent = find_agnostic(details, "Dates")
-                all_dates = find_all_agnostic(dates_parent, "Date") if dates_parent is not None else []
-            else:
-                all_dates = [dates_node]
+            dates_parent = find_agnostic(details, "Dates")
+            all_dates = find_all_agnostic(dates_parent, "Date") if dates_parent is not None else []
+            if not all_dates:
+                # Prova a cercare un tag 'Date' singolo se 'Dates' manca
+                single_date = find_agnostic(details, "Date")
+                if single_date is not None:
+                    all_dates = [single_date]
 
             for d_node in all_dates:
                 start_date = d_node.get("From", "")
                 start_time = d_node.get("Time", "00:00")
                 if start_date:
                     events_list.append({
-                        "id": f"FRT_{event_id}_{start_date}_{start_time.replace(':', '')}",
+                        "id": f"FRT_{event_id}",  # ID pulito senza suffissi
                         "title": title,
                         "category": category,
                         "description": description,
@@ -223,7 +224,7 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                         "credits": "Dms Veneto, il Destination Management System di Regione Veneto"
                     })
         except Exception as e:
-            logger.warning(f"Skipping event: {e}")
+            logger.warning(f"Salto evento {event.get('Id')}: {e}")
             continue
 
     return events_list
