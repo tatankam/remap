@@ -10,10 +10,9 @@ logger = logging.getLogger(__name__)
 
 def unescape_soap(raw: str) -> str:
     """Estrae il contenuto XML pulito da qualsiasi wrapper SOAP Feratel."""
-    # Cerca il contenuto tra i tag Result, qualunque sia il nome (GetData o GetKeyValues)
     match = re.search(r"<(?:Get\w+Result)>(.*?)</(?:Get\w+Result)>", raw, re.DOTALL)
     if not match:
-        return raw # Se non c'è wrapper, restituisci l'originale
+        return raw
     
     content = match.group(1).strip()
     return (content.replace("&lt;", "<")
@@ -53,7 +52,7 @@ def parse_date_time(date_str: str, time_str: str = "") -> str:
         return f"{date_str}T00:00:00"
 
 def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str, Any]]:
-    """Trasforma i dati Feratel con ID semplificato e mapping per città e categorie."""
+    """Trasforma i dati Feratel con ID univoco per data (ID_STARTDATE)."""
     
     facility_map = {}
     town_map = {}
@@ -64,28 +63,20 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
         kv_content = unescape_soap(kv_raw)
         if kv_content:
             kv_root = ET.fromstring(kv_content)
-            
-            # Mappatura Categorie (Facility)
             for fac in find_all_agnostic(kv_root, "Facility"):
                 fac_id = fac.get("Id")
                 if not fac_id: continue
-                
                 for trans in find_all_agnostic(fac, "Translation"):
                     if trans.get("Language") == "it" and trans.text:
                         facility_map[fac_id] = trans.text.strip()
                         break
-            
-            # Mappatura Città (Location)
             for loc in find_all_agnostic(kv_root, "Location"):
                 loc_id = loc.get("Id")
                 if not loc_id: continue
-                
                 for trans in find_all_agnostic(loc, "Translation"):
                     if trans.get("Language") == "it" and trans.text:
                         town_map[loc_id] = trans.text.strip()
                         break
-        
-        logger.info(f"Mappature caricate: {len(facility_map)} categorie, {len(town_map)} città.")
     except Exception as e:
         logger.error(f"❌ Errore caricamento KeyValues: {e}")
 
@@ -132,7 +123,7 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                     lat, lon = float(pos.get("Latitude", 0)), float(pos.get("Longitude", 0))
                 except: pass
 
-            # --- CITTÀ ---
+            # Città
             towns_node = find_agnostic(details, "Towns")
             city = ""
             if towns_node is not None:
@@ -140,7 +131,7 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                 if item is not None:
                     city = town_map.get(item.get("Id"), "")
 
-            # --- CATEGORIE ---
+            # Categorie
             found_categories = []
             facilities_node = find_agnostic(event, "Facilities")
             if facilities_node is not None:
@@ -148,10 +139,9 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                     f_id = f_node.get("Id")
                     if f_id in facility_map:
                         found_categories.append(facility_map[f_id])
-            
             category = ", ".join(dict.fromkeys(found_categories)) if found_categories else "Manifestazione"
 
-            # --- VENUE E INDIRIZZO ---
+            # Venue e Indirizzo
             venue_from_location = ""
             loc_tag = find_agnostic(details, "Location")
             if loc_tag is not None:
@@ -169,7 +159,6 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                         addr_venue = get_text_agnostic(addr, "Company")
                         street = get_text_agnostic(addr, "AddressLine1")
                         break
-
             if not city: city = addr_city_fallback
             venue = venue_from_location or addr_venue or "Sede"
 
@@ -195,17 +184,18 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
             dates_parent = find_agnostic(details, "Dates")
             all_dates = find_all_agnostic(dates_parent, "Date") if dates_parent is not None else []
             if not all_dates:
-                # Prova a cercare un tag 'Date' singolo se 'Dates' manca
                 single_date = find_agnostic(details, "Date")
-                if single_date is not None:
-                    all_dates = [single_date]
+                if single_date is not None: all_dates = [single_date]
 
             for d_node in all_dates:
                 start_date = d_node.get("From", "")
                 start_time = d_node.get("Time", "00:00")
                 if start_date:
+                    # MODIFICA: Appendiamo la data all'ID per rendere ogni punto univoco
+                    unique_id = f"FRT_{event_id}_{start_date}"
+                    
                     events_list.append({
-                        "id": f"FRT_{event_id}",  # ID pulito senza suffissi
+                        "id": unique_id,
                         "title": title,
                         "category": category,
                         "description": description,
