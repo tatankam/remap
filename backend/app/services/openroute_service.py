@@ -7,14 +7,14 @@ import logging
 import os
 import json
 from pathlib import Path
-from app.core.config import OPENROUTE_API_KEY
+from app.core.config import OPENROUTE_API_KEY, OPENROUTE_BASE_URL
 from app.core import config
 from typing import Tuple, Dict, Any, List, Optional
 from contextlib import contextmanager
 import atexit
 
 logger = logging.getLogger(__name__)
-ors_client = openrouteservice.Client(key=OPENROUTE_API_KEY)
+ors_client = openrouteservice.Client(key=OPENROUTE_API_KEY, base_url=OPENROUTE_BASE_URL)
 
 # GLOBAL HTTP SESSION
 _photon_session = requests.Session()
