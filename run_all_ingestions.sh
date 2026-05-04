@@ -18,8 +18,8 @@ echo "[$(date)] 🚀 STARTING GLOBAL INGESTION SEQUENCE" >> "$LOG_FILE"
 echo "--------------------------------------------------" >> "$LOG_FILE"
 
 # 1. UNPLI
-echo "[$(date)] 📡 Starting UNPLI..." >> "$LOG_FILE"
-./ingestunpli.sh >> "$LOG_FILE" 2>&1
+#echo "[$(date)] 📡 Starting UNPLI..." >> "$LOG_FILE"
+#./ingestunpli.sh >> "$LOG_FILE" 2>&1
 
 # 2. Lombardia (LO)
 echo "[$(date)] 📡 Starting Lombardia..." >> "$LOG_FILE"
