@@ -104,8 +104,10 @@ async def async_geocode_structured(venue: str, city: str, street: str = "") -> O
             logger.error(f"❌ Geocoding error: {e}")
     return None
 
+
 async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: int = 25):
-    if not events: return {"inserted": 0, "updated": 0, "deleted": 0}
+    if not events: 
+        return {"inserted": 0, "updated": 0, "deleted": 0}
 
     if not client.collection_exists(COLLECTION_NAME):
         client.create_collection(
@@ -114,12 +116,30 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
             sparse_vectors_config={SPARSE_VECTOR_NAME: models.SparseVectorParams(index=models.SparseIndexParams(on_disk=True))}
         )
 
+    # 1. SEPARAZIONE DEGLI EVENTI IN BASE AL DELTA_TYPE
+    events_to_delete = [e for e in events if e.get("delta_type") == "removed"]
+    events_to_upsert = [e for e in events if e.get("delta_type") != "removed"]
+
+    # 2. CANCELLAZIONE FISICA DA QDRANT
+    deleted_count = 0
+    if events_to_delete:
+        ids_to_delete = [sanitize_id(e) for e in events_to_delete]
+        client.delete(
+            collection_name=COLLECTION_NAME,
+            points_selector=models.PointIdsList(points=ids_to_delete)
+        )
+        deleted_count = len(ids_to_delete)
+        logger.info(f"🗑️ Eliminati {deleted_count} punti obsoleti da Qdrant.")
+
+    if not events_to_upsert:
+        return {"inserted": 0, "updated": 0, "deleted": deleted_count}
+
+    # 3. GEOCODING E PREPARAZIONE SOLO PER EVENTI ATTIVI
     processed_events = []
-    for e in events:
+    for e in events_to_upsert:
         l_date = e.get("start_localdate") or (str(e["start_date"])[:10] if e.get("start_date") else None)
         l_time = e.get("start_localtime") or e.get("local_time")
         
-        # --- CRUCIALE: CONVERSIONE FLOAT ---
         loc = e.get("location", {}).copy()
         try:
             lat = float(loc.get("lat") or 0.0)
@@ -133,11 +153,10 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
         e["start_localdate"] = l_date
         processed_events.append((sanitize_id(e), e))
 
-    logger.info(f"🌍 Analisi di {len(processed_events)} eventi...")
+    logger.info(f"🌍 Analisi di {len(processed_events)} eventi attivi...")
     for qid, ev in tqdm(processed_events, desc="Geocoding"):
         loc = ev.get("location", {})
         
-        # SKIP se lat/lon sono già validi (> 0.001)
         if abs(loc.get("lat", 0.0)) > 0.001 and abs(loc.get("lon", 0.0)) > 0.001:
             continue
         
@@ -149,6 +168,7 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
             if coords:
                 ev["location"].update(coords)
 
+    # 4. UPSERT IN BATCH DEI PUNTI ATTIVI
     inserted = 0
     for start in tqdm(range(0, len(processed_events), batch_size), desc="Qdrant Upsert"):
         batch = processed_events[start : start + batch_size]
@@ -173,4 +193,4 @@ async def ingest_events_into_qdrant(events: List[Dict[str, Any]], batch_size: in
             ))
         client.upsert(collection_name=COLLECTION_NAME, points=points)
 
-    return {"inserted": inserted, "updated": 0, "deleted": 0}
+    return {"inserted": inserted, "updated": 0, "deleted": deleted_count}
