@@ -8,17 +8,29 @@ from typing import List, Dict, Any
 
 logger = logging.getLogger(__name__)
 
+def sanitize_xml_string(raw_str: str) -> str:
+    """Rimuove caratteri di controllo ed entità numeriche non valide per XML 1.0."""
+    # Rimuove entità numeriche decimali (es. &#0;, &#8;, ecc.)
+    text = re.sub(r'&#(0?[0-8]|1[124-9]|2[0-9]|3[01]);', '', raw_str)
+    # Rimuove entità numeriche esadecimali (es. &#x00;, &#x1f;, ecc.)
+    text = re.sub(r'&#x(0?[0-8A-Fa-f]|1[124-9A-Fa-f]|2[0-9A-Fa-f]|3[01A-Fa-f]);', '', text)
+    # Rimuove caratteri di controllo ASCII non stampabili diretti
+    text = re.sub(r'[\x00-\x08\x0B\x0C\x0E-\x1F]', '', text)
+    return text
+
 def unescape_soap(raw: str) -> str:
     """Estrae il contenuto XML pulito da qualsiasi wrapper SOAP Feratel."""
     match = re.search(r"<(?:Get\w+Result)>(.*?)</(?:Get\w+Result)>", raw, re.DOTALL)
     if not match:
-        return raw
+        content = raw
+    else:
+        content = match.group(1).strip()
     
-    content = match.group(1).strip()
-    return (content.replace("&lt;", "<")
-               .replace("&gt;", ">")
-               .replace("&quot;", '"')
-               .replace("&amp;", "&"))
+    cleaned = (content.replace("&lt;", "<")
+                      .replace("&gt;", ">")
+                      .replace("&quot;", '"')
+                      .replace("&amp;", "&"))
+    return sanitize_xml_string(cleaned)
 
 def find_agnostic(element: ET.Element, tag_name: str):
     """Trova il PRIMO tag ignorando il namespace."""
@@ -58,37 +70,40 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
     town_map = {}
 
     # 1. CARICAMENTO MAPPINGS
-    try:
-        kv_raw = keyvalues_path.read_text(encoding="utf-8")
-        kv_content = unescape_soap(kv_raw)
-        if kv_content:
-            kv_root = ET.fromstring(kv_content)
-            for fac in find_all_agnostic(kv_root, "Facility"):
-                fac_id = fac.get("Id")
-                if not fac_id: continue
-                for trans in find_all_agnostic(fac, "Translation"):
-                    if trans.get("Language") == "it" and trans.text:
-                        facility_map[fac_id] = trans.text.strip()
-                        break
-            for loc in find_all_agnostic(kv_root, "Location"):
-                loc_id = loc.get("Id")
-                if not loc_id: continue
-                for trans in find_all_agnostic(loc, "Translation"):
-                    if trans.get("Language") == "it" and trans.text:
-                        town_map[loc_id] = trans.text.strip()
-                        break
-    except Exception as e:
-        logger.error(f"❌ Errore caricamento KeyValues: {e}")
+    if keyvalues_path.exists():
+        try:
+            kv_raw = keyvalues_path.read_text(encoding="utf-8", errors="replace")
+            kv_content = unescape_soap(kv_raw)
+            if kv_content:
+                kv_root = ET.fromstring(kv_content)
+                for fac in find_all_agnostic(kv_root, "Facility"):
+                    fac_id = fac.get("Id")
+                    if not fac_id: continue
+                    for trans in find_all_agnostic(fac, "Translation"):
+                        if trans.get("Language") == "it" and trans.text:
+                            facility_map[fac_id] = trans.text.strip()
+                            break
+                for loc in find_all_agnostic(kv_root, "Location"):
+                    loc_id = loc.get("Id")
+                    if not loc_id: continue
+                    for trans in find_all_agnostic(loc, "Translation"):
+                        if trans.get("Language") == "it" and trans.text:
+                            town_map[loc_id] = trans.text.strip()
+                            break
+        except Exception as e:
+            logger.warning(f"⚠️ Impossibile caricare alcune Mappings KeyValues: {e}")
 
     # 2. PROCESSO EVENTI
     try:
-        raw = events_path.read_text(encoding="utf-8")
+        raw = events_path.read_text(encoding="utf-8", errors="replace")
         xml_content = unescape_soap(raw)
-        if not xml_content: return []
+        if not xml_content.strip():
+            raise ValueError("Il contenuto XML di Feratel è vuoto dopo la pulizia.")
         root = ET.fromstring(xml_content)
     except Exception as e:
-        logger.error(f"❌ Errore parsing eventi: {e}")
-        return []
+        logger.error(f"❌ Errore fatale parsing eventi Feratel: {e}")
+        # Rilancia l'eccezione per attivare il Circuit Breaker ed evitare cancellazioni su Qdrant
+        raise RuntimeError(f"Parsing XML Feratel fallito: {e}") from e
 
     events_list = []
     for event in find_all_agnostic(root, "Event"):
@@ -191,7 +206,6 @@ def parse_feratel_data(events_path: Path, keyvalues_path: Path) -> List[Dict[str
                 start_date = d_node.get("From", "")
                 start_time = d_node.get("Time", "00:00")
                 if start_date:
-                    # MODIFICA: Appendiamo la data all'ID per rendere ogni punto univoco
                     unique_id = f"FRT_{event_id}_{start_date}"
                     
                     events_list.append({

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File, Query
 from app.services.csv_delta_service import compute_csv_delta
-from app.services.json_delta_service import compute_json_delta  # <--- NEW SERVICE IMPORT
+from app.services.json_delta_service import compute_json_delta
 from app.services.ingest_service import ingest_events_into_qdrant, COLLECTION_NAME
 from app.services.openroute_service import geocode_address, get_route
 from app.services.qdrant_service import (
@@ -36,7 +36,7 @@ import httpx
 import logging
 from app.services import tm_service
 from app.services import lombardia_service
-from app.services import feratel_service  
+from app.services import feratel_service
 
 # Logging Setup
 logger = logging.getLogger(__name__)
@@ -53,15 +53,11 @@ else:
 DATASET_DIR.mkdir(parents=True, exist_ok=True)
 # -----------------------------------------------------
 
-
-
 # Shared AI Models (Initialized with 1 thread for memory safety)
 dense_embedding_model = TextEmbedding(DENSE_MODEL_NAME, threads=1)
 sparse_embedding_model = SparseTextEmbedding(SPARSE_MODEL_NAME, threads=1)
 
 # ---------- ENDPOINTS ----------
-# --- THIS IS TO OBTAIN THE SINGLE EVENT ----
-# --- Add this to the bottom of routes.py ---
 
 @router.get("/event/{event_id}")
 async def get_event(event_id: str):
@@ -71,8 +67,6 @@ async def get_event(event_id: str):
     """
     client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
     
-    # We use scroll with a filter because the 'event_id' is stored 
-    # inside the payload 'id' field, not as the Qdrant internal point ID.
     result, _ = client.scroll(
         collection_name=COLLECTION_NAME,
         scroll_filter=models.Filter(
@@ -93,15 +87,12 @@ async def get_event(event_id: str):
 
     event = result[0].payload
     
-    # Standardize the lat/lon format to match what the Flutter app 
-    # expects (consistent with your /create_map logic)
     loc = event.get('location', {})
     event['lat'] = loc.get('lat')
     event['lon'] = loc.get('lon')
     event['address'] = loc.get('address')
     
     return event
-
 
 
 @router.get("/collection_info")
@@ -124,15 +115,10 @@ async def trigger_unpli_scrape(
     page_size: int = Query(500),
     session_id: str = Query(None)
 ):
-    """
-    Orchestrates the UNPLI scrape by calling the fetching and transformation 
-    logic defined in app/services/scrape.py.
-    """
     try:
         current_session_id = session_id or UNPLI_SESSION_ID
         
         async with httpx.AsyncClient(timeout=60.0) as client:
-            # 1. Fetch raw events
             logger.info(f"📡 Fetching UNPLI page {page_no} (size {page_size})...")
             raw_events = await scrape.fetch_unpli_events(
                 session=client,
@@ -144,14 +130,12 @@ async def trigger_unpli_scrape(
             if not raw_events:
                 return {"status": "error", "message": "No events returned from API", "events": []}
 
-            # 2. Transform events for JSON format
             logger.info(f"⚙️ Transforming {len(raw_events)} raw events...")
             transformed_events = await scrape.transform_events_for_json(
                 events=raw_events,
                 session_id=current_session_id
             )
             
-            # 3. Save to disk (updated to clean YYYY-MM-DD format)
             output_file = DATASET_DIR / f"unpli_events_{datetime.now().strftime('%Y-%m-%d')}.json"
             with open(output_file, "w", encoding="utf-8") as f:
                 json.dump({"events": transformed_events}, f, indent=2, ensure_ascii=False)
@@ -169,11 +153,6 @@ async def trigger_unpli_scrape(
 
 @router.post("/ingest-unpli-delta")
 async def ingest_unpli_delta():
-    """
-    Compares unpli_current.json and unpli_last.json automatically,
-    calculates added/changed/removed via json_delta_service,
-    and ingests only the differences into Qdrant.
-    """
     try:
         current_path = DATASET_DIR / "unpli_current.json"
         last_path = DATASET_DIR / "unpli_last.json"
@@ -181,18 +160,18 @@ async def ingest_unpli_delta():
         if not current_path.exists():
             raise HTTPException(status_code=404, detail="unpli_current.json not found in dataset folder.")
 
-        # 1. Compute delta using the external service
         logger.info("🔍 Computing JSON Delta...")
         delta_events = compute_json_delta(last_path, current_path)
 
         if not delta_events:
             return {"status": "skipped", "message": "No changes detected between files", "inserted": 0, "updated": 0, "deleted": 0}
 
-        # 2. Ingest the resulting delta list
         logger.info(f"🚀 Ingesting {len(delta_events)} delta events into Qdrant...")
         result = await ingest_events_into_qdrant(delta_events)
         
         return {"status": "success", "delta_count": len(delta_events), **result}
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"❌ UNPLI Delta Ingestion failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -200,45 +179,30 @@ async def ingest_unpli_delta():
 # --- TicketMaster ---
 @router.post("/ingest-tm-delta")
 async def ingest_tm_delta(country: str = Query("IT")):
-    """
-    Endpoint per il dump di Ticketmaster.
-    Funziona sia per --initialize che per delta giornalieri.
-    """
     try:
-        # Percorsi file grezzi (scaricati dallo script .sh)
         current_raw = DATASET_DIR / f"tm_current_{country}.json"
-        
-        # Percorsi file standardizzati (per il confronto delta)
         current_std = DATASET_DIR / f"tm_std_{country}_current.json"
         last_std = DATASET_DIR / f"tm_std_{country}_last.json"
 
         if not current_raw.exists():
             raise HTTPException(status_code=404, detail=f"File {current_raw.name} non trovato.")
 
-        # 1. TRASFORMAZIONE
         logger.info(f"⚙️ Trasformazione in corso per {country}...")
         standardized_events = tm_service.load_and_transform_tm_file(current_raw)
         
         with open(current_std, "w", encoding="utf-8") as f:
             json.dump({"events": standardized_events}, f, indent=2)
 
-        # 2. CALCOLO DELTA
-        # Se last_std non esiste (es. --initialize), compute_json_delta 
-        # segnerà tutto come 'added'.
         logger.info(f"🔍 Calcolo delta rispetto a sessione precedente...")
         delta_events = compute_json_delta(last_std, current_std)
 
         if not delta_events:
             return {"status": "skipped", "message": "Nessun cambiamento rilevato."}
 
-        # 3. INGESTIONE
         logger.info(f"🚀 Ingestione di {len(delta_events)} eventi delta in Qdrant...")
         result = await ingest_events_into_qdrant(delta_events)
         
-        # 4. ROTAZIONE FILE STANDARD
-        # Prepariamo il file per il confronto di domani
         if current_std.exists():
-            import shutil
             shutil.copy(str(current_std), str(last_std))
 
         return {
@@ -249,12 +213,12 @@ async def ingest_tm_delta(country: str = Query("IT")):
             **result 
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"❌ Errore pipeline TM: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-# --- ADD TO IMPORTS ---
-from app.services import feratel_service  # <--- New service
 
 # --- Feratel Ingestion Endpoint ---
 @router.post("/ingest-feratel")
@@ -262,9 +226,9 @@ async def ingest_feratel():
     """
     Automated pipeline for Feratel DSI.
     Uses static raw files, computes delta, and updates Qdrant.
+    Includes Circuit Breaker protection against corrupt or empty feeds.
     """
     try:
-        # Static file paths
         raw_events = DATASET_DIR / "feratel_raw_events.xml"
         raw_keyvalues = DATASET_DIR / "feratel_raw_keyvalues.xml"
         
@@ -281,6 +245,14 @@ async def ingest_feratel():
         logger.info("⚙️ Transforming raw Feratel XML to JSON...")
         standardized_events = feratel_service.parse_feratel_data(raw_events, raw_keyvalues)
         
+        # 🛡️ CIRCUIT BREAKER: Se il parser restituisce 0 eventi, BLOCCA TUTTO!
+        if not standardized_events:
+            logger.error("🚨 ERRORE CRITICO: Feratel ha restituito 0 eventi! Annullamento per proteggere il DB.")
+            raise HTTPException(
+                status_code=500, 
+                detail="Parsing Feratel fallito o vuoto. Ingestione annullata per evitare cancellazioni massive su Qdrant."
+            )
+
         with open(current_std, "w", encoding="utf-8") as f:
             json.dump({"events": standardized_events}, f, indent=2, ensure_ascii=False)
 
@@ -306,6 +278,8 @@ async def ingest_feratel():
             **result
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"❌ Feratel Pipeline Failed: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -314,11 +288,6 @@ async def ingest_feratel():
 # --- Lombardia Region ---
 @router.post("/ingest-lombardia-delta")
 async def ingest_lombardia_delta(initialize: bool = Query(False)):
-    """
-    Pipeline automatizzata per Regione Lombardia.
-    - Se initialize=True: forza una ricarica completa.
-    - Altrimenti: calcola il delta tra lo stato attuale dell'API e l'ultima ingestion.
-    """
     try:
         current_std = DATASET_DIR / "lombardia_std_current.json"
         last_std = DATASET_DIR / "lombardia_std_last.json"
@@ -327,26 +296,21 @@ async def ingest_lombardia_delta(initialize: bool = Query(False)):
             logger.info("⚠️ Modalità Inizializzazione: eliminazione file storico.")
             last_std.unlink()
 
-        # 1. FETCH & TRANSFORM
         raw_data = await lombardia_service.fetch_lombardia_raw()
         standardized_events = lombardia_service.transform_lombardia_data(raw_data)
         
         with open(current_std, "w", encoding="utf-8") as f:
             json.dump({"events": standardized_events}, f, indent=2, ensure_ascii=False)
 
-        # 2. CALCOLO DELTA
         delta_events = compute_json_delta(last_std, current_std)
 
         if not delta_events:
             return {"status": "skipped", "message": "Nessun cambiamento rilevato per Lombardia."}
 
-        # 3. INGESTIONE IN QDRANT
         logger.info(f"🚀 Ingestione di {len(delta_events)} eventi delta in Qdrant...")
         result = await ingest_events_into_qdrant(delta_events)
         
-        # 4. ROTAZIONE FILE
         if current_std.exists():
-            import shutil
             shutil.copy(str(current_std), str(last_std))
 
         return {
@@ -355,14 +319,17 @@ async def ingest_lombardia_delta(initialize: bool = Query(False)):
             "delta_applied": len(delta_events),
             **result
         }
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"❌ Errore Pipeline Lombardia: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+
 # --- TICKET SQUEEZE DELTA PIPELINE ---
 
 @router.post("/compute-delta")
 async def compute_csv_delta_endpoint(old_file: UploadFile = File(...), new_file: UploadFile = File(...), keys: str = "event_id"):
-    """Computes the CSV difference for TicketSqueeze pipeline."""
     try:
         old_content = await old_file.read()
         new_content = await new_file.read()
@@ -378,7 +345,6 @@ async def process_ticketsqueeze_delta(
     include_removed: bool = Query(True), 
     include_changed: bool = Query(True)
 ):
-    """Transforms delta CSV to JSON for TicketSqueeze."""
     try:
         temp_csv_path = DATASET_DIR / file.filename
         with open(temp_csv_path, "wb") as f:
@@ -404,7 +370,6 @@ async def process_ticketsqueeze_delta(
 
 @router.post("/ingestticketsqueezedelta")
 async def ingest_ticketsqueeze_delta(file: UploadFile = File(...)):
-    """Final ingestion step for TicketSqueeze JSON delta."""
     if not file.filename.lower().endswith(".json"):
         raise HTTPException(status_code=400, detail="Only .json files accepted")
 
@@ -452,15 +417,11 @@ async def create_event_map(request: schemas.RouteRequest):
         buffer_distance_meters = request.buffer_distance * 1000
         buffer_polygon = gdf_3857.buffer(buffer_distance_meters).to_crs(epsg=4326).iloc[0]
 
-        # 🔥 SINGLE LINE MULTIPOLYGON FIX:
         if buffer_polygon.geom_type == 'MultiPolygon':
             buffer_polygon = max(buffer_polygon.geoms, key=lambda p: p.area)
 
-        #print(f"🔍 FIXED buffer type: {buffer_polygon.geom_type}")  # Shows "Polygon"
-
         polygon_coords = np.array(buffer_polygon.exterior.coords).tolist()
         polygon_coords_qdrant = [{"lon": lon, "lat": lat} for lon, lat in polygon_coords]
-
 
         geo_filter = build_geo_filter(polygon_coords_qdrant)
         date_filter = build_date_intersection_filter(request.startinputdate, request.endinputdate)
@@ -500,6 +461,8 @@ async def create_event_map(request: schemas.RouteRequest):
             "mode": "route" if request.destination_address else "point",
             "message": "No events found" if not payloads else None
         }
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Error in create_map: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -514,7 +477,6 @@ async def sentence_to_payload(data: SentenceInput):
 
 @router.delete("/cleanup-past-events")
 async def cleanup_past_events(dry_run: bool = True, max_scan: int = 50000):
-    """Utility to prune old events from Qdrant."""
     client = QdrantClient(url=QDRANT_SERVER, api_key=QDRANT_API_KEY)
     today = datetime.now(timezone.utc).date()
     deleted = 0
