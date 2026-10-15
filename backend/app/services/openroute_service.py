@@ -133,7 +133,7 @@ def photon_geocode(address: str) -> Optional[Tuple[float, float]]:
             'limit': '1',
             'osm_tag': ['place:city', 'place:town', 'place:village'],
         }
-        response = _photon_session.get(config.PHOTON_BASE_URL, params=params, timeout=10)
+        response = _photon_session.get(config.PHOTON_BASE_URL, params=params, timeout=30)
         response.raise_for_status()
         
         data = response.json()
